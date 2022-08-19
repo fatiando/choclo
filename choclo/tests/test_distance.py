@@ -7,8 +7,8 @@
 import numpy.testing as npt
 import pytest
 
-from .utils import dumb_spherical_distance
 from .._distance import distance_cartesian, distance_spherical, distance_spherical_core
+from .utils import dumb_spherical_distance
 
 
 @pytest.mark.parametrize(
