@@ -4,3 +4,6 @@
 #
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
+"""
+Test suite for Choclo code
+"""
