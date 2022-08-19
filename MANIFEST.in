@@ -1,0 +1,13 @@
+# Exclude these files from source distributions.
+# setuptools_scm includes everything else by default.
+prune .github
+prune env
+prune doc
+prune tools
+exclude .*.yml
+exclude .*rc
+exclude .gitignore
+exclude CONTRIBUTING.md
+exclude CODE_OF_CONDUCT.md
+exclude environment.yml
+exclude Makefile
