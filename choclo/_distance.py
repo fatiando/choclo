@@ -7,8 +7,8 @@
 """
 Compute the distance between two points in different coordinate systems
 """
-from numba import jit
 import numpy as np
+from numba import jit
 
 
 @jit(nopython=True)
