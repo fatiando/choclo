@@ -53,4 +53,4 @@ class TestDistanceSpherical:
         Test if distance_spherical works as expected
         """
         expected_value = 100
-        npt.assert_allclose(distance_cartesian(point_a, point_b), expected_value)
+        npt.assert_allclose(distance_spherical(point_a, point_b), expected_value)
