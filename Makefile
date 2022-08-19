@@ -2,6 +2,7 @@
 PROJECT=choclo
 TESTDIR=tmp-test-dir-with-unique-name
 PYTEST_ARGS=--cov-config=../.coveragerc --cov-report=term-missing --cov=$(PROJECT) --doctest-modules -v --pyargs
+NUMBATEST_ARGS=--doctest-modules -v --pyargs
 CHECK_STYLE=$(PROJECT) doc tools
 
 help:
@@ -21,12 +22,20 @@ build:
 install:
 	python -m pip install --no-deps -e .
 
-test:
+test: test_coverage test_numba
+
+test_coverage:
 	# Run a tmp folder to make sure the tests are run on the installed version
 	mkdir -p $(TESTDIR)
-	cd $(TESTDIR); pytest $(PYTEST_ARGS) $(PROJECT)
+	cd $(TESTDIR); NUMBA_DISABLE_JIT=1 pytest $(PYTEST_ARGS) $(PROJECT)
 	cp $(TESTDIR)/.coverage* .
-	rm -r $(TESTDIR)
+	rm -rvf $(TESTDIR)
+
+test_numba:
+	# Run a tmp folder to make sure the tests are run on the installed version
+	mkdir -p $(TESTDIR)
+	cd $(TESTDIR); NUMBA_DISABLE_JIT=0 pytest $(NUMBATEST_ARGS) $(PROJECT)
+	rm -rvf $(TESTDIR)
 
 format: license isort black
 
