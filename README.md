@@ -31,11 +31,13 @@ word _chuqllu_.
 
 ## Project goals
 
-* Provide kernel functions for gravity and magnetic forward and inverse models
-  that can be easily harnessed by different geophysical libraries.
-* Optimize the computation of the kernel functions through
-  [Numba](https://numba.pydata.org/) and provide an easy installation and setup
-  across different operating systems.
+* Provide optimized kernel functions for gravity and magnetic forward and
+  inverse models that can be easily harnessed by different geophysical
+  libraries.
+* Generate a pure-Python library that could be easily distributed and installed
+  on any operating system.
+* Rely on [Numba](https://numba.pydata.org/) for just-in-time compilations and
+  optional parallelization.
 * Keep the dependencies to the bare minimum to encourage other libraries to
   depend on Choclo.
 
