@@ -1,0 +1,40 @@
+name: choclo
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.9
+  - pip
+  - make
+  # Run
+  - numpy
+  - numba
+  # Build
+  - build
+  - twine
+  # Test
+  - pytest
+  - pytest-cov
+  - coverage
+  # Documentation
+  - sphinx==4.5.*
+  - sphinx-book-theme==0.3.*
+  - sphinx-copybutton==0.5.*
+  - jupyter-sphinx==0.3.*
+  - sphinx-design==0.1.*
+  # Style
+  - black
+  - pathspec
+  - isort
+  - flake8
+  - flake8-bugbear
+  - flake8-builtins
+  - flake8-functions
+  - flake8-mutable
+  - flake8-rst-docstrings
+  - flake8-simplify
+  - pep8-naming
+  - pip:
+      # Install flake8-unused-arguments through pip
+      # (not available through conda yet)
+      - flake8-unused-arguments
