@@ -7,6 +7,12 @@ List of functions and classes (API)
 
 .. currentmodule:: choclo
 
+Euclidean distances
+-------------------
+
+Use these functions to compute Euclidean distance in Cartesian and spherical
+coordinates:
+
 .. autosummary::
    :toctree: generated/
 
