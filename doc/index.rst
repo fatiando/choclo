@@ -31,6 +31,17 @@ originated from the `quechua
 <https://en.wikipedia.org/wiki/Quechuan_languages>`__
 word *chuqllu*.
 
+
+.. toctree::
+    :maxdepth: 2
+    :hidden:
+    :caption: Reference Documentation
+
+    api/index.rst
+    citing.rst
+    references.rst
+
+
 .. toctree::
     :maxdepth: 2
     :hidden:
