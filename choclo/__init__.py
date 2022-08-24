@@ -6,3 +6,4 @@
 #
 # Import functions/classes to make the public API
 from ._distance import distance_cartesian, distance_spherical, distance_spherical_core
+from ._version import __version__
