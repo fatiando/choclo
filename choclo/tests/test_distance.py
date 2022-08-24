@@ -7,7 +7,7 @@
 import numpy.testing as npt
 import pytest
 
-from .._distance import distance_cartesian, distance_spherical, distance_spherical_core
+from .._distance import distance_cartesian, distance_spherical
 from .utils import dumb_spherical_distance
 
 
