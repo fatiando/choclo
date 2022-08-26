@@ -7,7 +7,12 @@
 """
 Define utility functions for running the tests
 """
+import os
+
 import numpy as np
+
+# Determine if Numba just-in-time compilation is disabled
+NUMBA_IS_DISABLED = os.environ.get("NUMBA_DISABLE_JIT", default="0") != "0"
 
 
 def spherical_to_geocentric_cartesian(longitude, latitude, radius):
