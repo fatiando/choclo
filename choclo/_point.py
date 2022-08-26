@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Kernel functions for point mass gravity forward modelling
+Kernel functions for point sources
 """
 from numba import jit
 
@@ -17,11 +17,11 @@ def kernel_point_potential(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Kernel for the potential field of a point mass
+    Kernel for the potential field of a point source
 
     .. important ::
 
-        The observation point and the location of the point mass must be in
+        The observation point and the location of the point source must be in
         Cartesian coordinates and have the same units.
 
     Parameters
@@ -33,23 +33,23 @@ def kernel_point_potential(
     upward_p : float
         Upward coordinate of the observation point.
     easting_q : float
-        Easting coordinate of the point mass location.
+        Easting coordinate of the point source location.
     northing_q : float
-        Northing coordinate of the point mass location.
+        Northing coordinate of the point source location.
     upward_q : float
-        Upward coordinate of the point mass location.
+        Upward coordinate of the point source location.
 
     Returns
     -------
     kernel : float
-        Value of the kernel function for the potential field of a point mass.
+        Value of the kernel function for the potential field of a point source.
 
     Notes
     -----
     Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
-    and a point mass located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
     a Cartesian coordinate system, compute the kernel function for the
-    potential field that the point mass generates on the observation point:
+    potential field that the point source generates on the observation point:
 
     .. math::
 
@@ -74,11 +74,11 @@ def kernel_point_g_easting(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Kernel for easting component of the gradient of the field of a point mass
+    Kernel for easting component of the gradient of the field of a point source
 
     .. important ::
 
-        The observation point and the location of the point mass must be in
+        The observation point and the location of the point source must be in
         Cartesian coordinates and have the same units.
 
     Parameters
@@ -90,24 +90,24 @@ def kernel_point_g_easting(
     upward_p : float
         Upward coordinate of the observation point.
     easting_q : float
-        Easting coordinate of the point mass location.
+        Easting coordinate of the point source location.
     northing_q : float
-        Northing coordinate of the point mass location.
+        Northing coordinate of the point source location.
     upward_q : float
-        Upward coordinate of the point mass location.
+        Upward coordinate of the point source location.
 
     Returns
     -------
     kernel : float
         Value of the kernel function for the easting component of the
-        gradient of the potential field of a point mass.
+        gradient of the potential field of a point source.
 
     Notes
     -----
     Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
-    and a point mass located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
     a Cartesian coordinate system, compute the kernel function for the easting
-    component of the gradient of the potential field that the point mass
+    component of the gradient of the potential field that the point source
     generates on the observation point:
 
     .. math::
@@ -133,11 +133,11 @@ def kernel_point_g_northing(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Kernel for northing component of the gradient of the field of a point mass
+    Kernel for northing component of the gradient of the field of a point source
 
     .. important ::
 
-        The observation point and the location of the point mass must be in
+        The observation point and the location of the point source must be in
         Cartesian coordinates
 
     Parameters
@@ -149,24 +149,24 @@ def kernel_point_g_northing(
     upward_p : float
         Upward coordinate of the observation point.
     easting_q : float
-        Easting coordinate of the point mass location.
+        Easting coordinate of the point source location.
     northing_q : float
-        Northing coordinate of the point mass location.
+        Northing coordinate of the point source location.
     upward_q : float
-        Upward coordinate of the point mass location.
+        Upward coordinate of the point source location.
 
     Returns
     -------
     kernel : float
         Value of the kernel function for the northing component of the
-        gradient of the potential field of a point mass.
+        gradient of the potential field of a point source.
 
     Notes
     -----
     Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
-    and a point mass located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
     a Cartesian coordinate system, compute the kernel function for the northing
-    component of the gradient of the potential field that the point mass
+    component of the gradient of the potential field that the point source
     generates on the observation point:
 
     .. math::
@@ -192,11 +192,11 @@ def kernel_point_g_upward(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Kernel for upward component of the gradient of the field of a point mass
+    Kernel for upward component of the gradient of the field of a point source
 
     .. important ::
 
-        The observation point and the location of the point mass must be in
+        The observation point and the location of the point source must be in
         Cartesian coordinates and have the same units.
 
     .. warning ::
@@ -214,24 +214,24 @@ def kernel_point_g_upward(
     upward_p : float
         Upward coordinate of the observation point.
     easting_q : float
-        Easting coordinate of the point mass location.
+        Easting coordinate of the point source location.
     northing_q : float
-        Northing coordinate of the point mass location.
+        Northing coordinate of the point source location.
     upward_q : float
-        Upward coordinate of the point mass location.
+        Upward coordinate of the point source location.
 
     Returns
     -------
     kernel : float
         Value of the kernel function for the upward component of the gradient
-        of the potential field of a point mass.
+        of the potential field of a point source.
 
     Notes
     -----
     Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
-    and a point mass located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
     a Cartesian coordinate system, compute the kernel function for the upward
-    component of the gradient of the potential field that the point mass
+    component of the gradient of the potential field that the point source
     generates on the observation point:
 
     .. math::
