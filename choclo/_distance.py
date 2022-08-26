@@ -16,15 +16,6 @@ def distance_cartesian(point_p, point_q):
     r"""
     Euclidean distance between two points given in Cartesian coordinates
 
-    Given two points :math:`\mathbf{p} = (x_p, y_p, z_p)` and
-    :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in a Cartesian coordinate
-    system :math:`(x, y, z)`, return the Euclidean (L2) distance between
-    them:
-
-    .. math:
-
-        d = \sqrt{(x_p - x_q)^2 + (y_p - y_q)^2 + (z_p - z_q)^2}
-
     Parameters
     ----------
     point_p : tuple or 1d-array
@@ -40,6 +31,18 @@ def distance_cartesian(point_p, point_q):
     -------
     distance : float
         Euclidean distance between ``point_p`` and ``point_q``.
+
+    Notes
+    -----
+    Given two points :math:`\mathbf{p} = (x_p, y_p, z_p)` and
+    :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in a Cartesian coordinate
+    system :math:`(x, y, z)`, return the Euclidean (L2) distance between
+    them:
+
+    .. math::
+
+        d = \sqrt{(x_p - x_q)^2 + (y_p - y_q)^2 + (z_p - z_q)^2}
+
     """
     easting_p, northing_p, upward_p = point_p[:]
     easting_q, northing_q, upward_q = point_q[:]
@@ -56,29 +59,9 @@ def distance_spherical(point_p, point_q):
     r"""
     Euclidean distance between two points in spherical coordinates
 
-    .. important:
+    .. important::
 
         All angles must be in degrees and radii in meters.
-
-    Given two points :math:`\mathbf{p} = (\lambda_p, \phi_p, r_p)` and
-    :math:`\mathbf{q} = (\lambda_q, \phi_q, r_q)` defined in a spherical
-    coordinate system :math:`(\lambda, \phi, r)`, return the Euclidean (L2)
-    distance between them:
-
-    .. math:
-
-        d = \sqrt{ (r_p - r_q) ** 2 + 2 * r_p * r_q * (1 - \cos\psi)}
-
-    where
-
-    .. math:
-
-        \cos\psi =
-        \sin\phi_p * \sin\phi_q
-        + \cos\phi_p * \cos\phi_q * \cos(\lambda_p - \lambda_q)
-
-    and :math:`\lambda` is the longitude angle, :math:`\phi` the spherical
-    latitude angle an :math:`r` is the radial coordinate.
 
     Parameters
     ----------
@@ -97,6 +80,28 @@ def distance_spherical(point_p, point_q):
     -------
     distance : float
         Euclidean distance between ``point_p`` and ``point_q``.
+
+    Notes
+    -----
+    Given two points :math:`\mathbf{p} = (\lambda_p, \phi_p, r_p)` and
+    :math:`\mathbf{q} = (\lambda_q, \phi_q, r_q)` defined in a spherical
+    coordinate system :math:`(\lambda, \phi, r)`, return the Euclidean (L2)
+    distance between them:
+
+    .. math::
+
+        d = \sqrt{ (r_p - r_q) ^ 2 + 2 r_p r_q (1 - \cos\psi)}
+
+    where
+
+    .. math::
+
+        \cos\psi =
+        \sin\phi_p \sin\phi_q
+        + \cos\phi_p \cos\phi_q \cos(\lambda_p - \lambda_q)
+
+    and :math:`\lambda` is the longitude angle, :math:`\phi` the spherical
+    latitude angle an :math:`r` is the radial coordinate.
     """
     # Get coordinates of the two points
     longitude_p, latitude_p, radius_p = point_p[:]
@@ -129,6 +134,10 @@ def distance_spherical_core(
     """
     Core computation of distance between two points in spherical coordinates
 
+    .. important::
+
+        All longitudinal angles must be in degrees.
+
     It computes the Euclidean distance between two points defined in spherical
     coordinates given precomputed quantities related to the coordinates of both
     points: the ``longitude`` in radians, the sine and cosine of the
@@ -137,16 +146,22 @@ def distance_spherical_core(
 
     Parameters
     ----------
-    longitude_p, cosphi_p, sinphi_p, radius_p : floats
-        Quantities related to the coordinates of the first point. ``cosphi_p``
-        and ``sinphi`_p` are the cosine and sine of the latitude coordinate of
-        the first point, respectively. ``longitude_p`` must be in radians and
-        ``radius_p`` in meters.
-    longitude_q, cosphi_q, sinphi_q, radius_q : floats
-        Quantities related to the coordinates of the second point. ``cosphi_q``
-        and ``sinphi_q`` are the cosine and sine of the latitude coordinate of
-        the second point, respectively. ``longitude_q`` must be in radians and
-        ``radius_q`` in meters.
+    longitude_p : float
+        Longitude coordinate of the first point. Must be in radians.
+    cosphi_p : float
+        Cosine of the latitude coordinate of the first point.
+    sinphi_p : float
+        Sine of the latitude coordinate of the first point.
+    radius_p : float
+        Radial coordinate of the first point.
+    longitude_q : float
+        Longitude coordinate of the second point. Must be in radians.
+    cosphi_q : float
+        Cosine of the latitude coordinate of the second point.
+    sinphi_q : float
+        Sine of the latitude coordinate of the second point.
+    radius_q : float
+        Radial coordinate of the second point.
 
     Returns
     -------
