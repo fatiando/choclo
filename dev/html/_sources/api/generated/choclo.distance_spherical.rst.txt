@@ -1,0 +1,10 @@
+choclo.distance\_spherical
+==========================
+
+.. currentmodule:: choclo
+
+.. autofunction:: distance_spherical
+
+.. raw:: html
+
+     <div style='clear:both'></div>
