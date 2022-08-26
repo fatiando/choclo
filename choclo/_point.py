@@ -47,8 +47,8 @@ def kernel_point_potential(
     Notes
     -----
     Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
-    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
-    a Cartesian coordinate system, compute the kernel function for the
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined
+    in a Cartesian coordinate system, compute the kernel function for the
     potential field that the point source generates on the observation point:
 
     .. math::
@@ -74,7 +74,7 @@ def kernel_point_g_easting(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Kernel for easting component of the gradient of the field of a point source
+    Kernel for easting component of the gradient due to a point source
 
     .. important ::
 
@@ -105,10 +105,10 @@ def kernel_point_g_easting(
     Notes
     -----
     Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
-    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
-    a Cartesian coordinate system, compute the kernel function for the easting
-    component of the gradient of the potential field that the point source
-    generates on the observation point:
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined
+    in a Cartesian coordinate system, compute the kernel function for the
+    easting component of the gradient of the potential field that the point
+    source generates on the observation point:
 
     .. math::
 
@@ -133,7 +133,7 @@ def kernel_point_g_northing(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Kernel for northing component of the gradient of the field of a point source
+    Kernel for northing component of the gradient due to a point source
 
     .. important ::
 
@@ -164,10 +164,10 @@ def kernel_point_g_northing(
     Notes
     -----
     Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
-    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
-    a Cartesian coordinate system, compute the kernel function for the northing
-    component of the gradient of the potential field that the point source
-    generates on the observation point:
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined
+    in a Cartesian coordinate system, compute the kernel function for the
+    northing component of the gradient of the potential field that the point
+    source generates on the observation point:
 
     .. math::
 
@@ -192,7 +192,7 @@ def kernel_point_g_upward(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Kernel for upward component of the gradient of the field of a point source
+    Kernel for upward component of the gradient due to a point source
 
     .. important ::
 
@@ -229,10 +229,10 @@ def kernel_point_g_upward(
     Notes
     -----
     Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
-    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined in
-    a Cartesian coordinate system, compute the kernel function for the upward
-    component of the gradient of the potential field that the point source
-    generates on the observation point:
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined
+    in a Cartesian coordinate system, compute the kernel function for the
+    upward component of the gradient of the potential field that the point
+    source generates on the observation point:
 
     .. math::
 
