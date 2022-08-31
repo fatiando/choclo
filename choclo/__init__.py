@@ -18,4 +18,5 @@ from ._point import (
     kernel_point_g_zz,
     kernel_point_potential,
 )
+from ._prism import kernel_prism_potential, kernel_prism_g_upward
 from ._version import __version__

@@ -50,6 +50,26 @@ Tensor components
     kernel_point_g_nz
 
 
+Rectangular Prisms
+~~~~~~~~~~~~~~~~~~
+
+Potential field
+^^^^^^^^^^^^^^^
+
+.. autosummary::
+   :toctree: generated/
+
+    kernel_prism_potential
+
+Gradient components
+^^^^^^^^^^^^^^^^^^^
+
+.. autosummary::
+   :toctree: generated/
+
+    kernel_prism_g_upward
+
+
 Euclidean distances
 -------------------
 
