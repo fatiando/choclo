@@ -131,7 +131,7 @@ def distance_spherical(point_p, point_q):
 def distance_spherical_core(
     longitude_p, cosphi_p, sinphi_p, radius_p, longitude_q, cosphi_q, sinphi_q, radius_q
 ):
-    """
+    r"""
     Core computation of distance between two points in spherical coordinates
 
     .. important::
@@ -171,6 +171,35 @@ def distance_spherical_core(
         Cosine of the psi angle.
     coslambda : float
         Cosine of the diference between the longitudes of both points.
+
+    Notes
+    -----
+    Given two points :math:`\mathbf{p} = (\lambda_p, \phi_p, r_p)` and
+    :math:`\mathbf{q} = (\lambda_q, \phi_q, r_q)` defined in a spherical
+    coordinate system :math:`(\lambda, \phi, r)`, return the Euclidean (L2)
+    distance between them:
+
+    .. math::
+
+        d = \sqrt{ (r_p - r_q) ^ 2 + 2 r_p r_q (1 - \cos\psi)},
+
+    the cosine of the :math:`\psi` angle:
+
+    .. math::
+
+        \cos\psi =
+        \sin\phi_p \sin\phi_q
+        + \cos\phi_p \cos\phi_q \cos(\lambda_p - \lambda_q)
+
+    and the cosine of the difference between the longitude angles of the
+    observation and source points:
+
+    .. math::
+
+        \cos(\lambda_p - \lambda_q),
+
+    where :math:`\lambda` is the longitude angle, :math:`\phi` the spherical
+    latitude angle an :math:`r` is the radial coordinate.
     """
     coslambda = np.cos(longitude_q - longitude_p)
     cospsi = sinphi_q * sinphi_p + cosphi_q * cosphi_p * coslambda
