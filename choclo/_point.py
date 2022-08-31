@@ -17,7 +17,7 @@ def kernel_point_potential(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Kernel for the potential field of a point source
+    Kernel for the potential field due to a point source
 
     .. important ::
 
