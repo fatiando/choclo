@@ -14,5 +14,8 @@ from ._point import (
     kernel_point_g_upward,
     kernel_point_g_zz,
     kernel_point_potential,
+    kernel_point_g_en,
+    kernel_point_g_ez,
+    kernel_point_g_nz,
 )
 from ._version import __version__
