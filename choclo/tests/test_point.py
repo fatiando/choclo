@@ -12,13 +12,13 @@ import numpy.testing as npt
 import pytest
 
 from .._point import (
-    kernel_point_potential,
     kernel_point_g_easting,
-    kernel_point_g_northing,
-    kernel_point_g_upward,
     kernel_point_g_ee,
     kernel_point_g_nn,
+    kernel_point_g_northing,
+    kernel_point_g_upward,
     kernel_point_g_zz,
+    kernel_point_potential,
 )
 from .utils import NUMBA_IS_DISABLED
 
