@@ -255,7 +255,7 @@ def kernel_point_g_upward(
 @jit(nopython=True)
 def kernel_point_g_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
     r"""
-    Kernel for G_ee component of potential field tensor due to a point source
+    Kernel for the :math:`G_\text{ee}` tensor component due to a point source
 
     .. important ::
 
@@ -322,7 +322,7 @@ def kernel_point_g_ee(easting_p, northing_p, upward_p, easting_q, northing_q, up
 @jit(nopython=True)
 def kernel_point_g_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
     r"""
-    Kernel for G_nn component of potential field tensor due to a point source
+    Kernel for the :math:`G_\text{nn}` tensor component due to a point source
 
     .. important ::
 
@@ -389,7 +389,7 @@ def kernel_point_g_nn(easting_p, northing_p, upward_p, easting_q, northing_q, up
 @jit(nopython=True)
 def kernel_point_g_zz(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
     r"""
-    Kernel for G_zz component of potential field tensor due to a point source
+    Kernel for the :math:`G_\text{zz}` tensor component due to a point source
 
     .. important ::
 
@@ -456,7 +456,7 @@ def kernel_point_g_zz(easting_p, northing_p, upward_p, easting_q, northing_q, up
 @jit(nopython=True)
 def kernel_point_g_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
     r"""
-    Kernel for G_en component of potential field tensor due to a point source
+    Kernel for the :math:`G_\text{en}` tensor component due to a point source
 
     .. important ::
 
@@ -523,7 +523,7 @@ def kernel_point_g_en(easting_p, northing_p, upward_p, easting_q, northing_q, up
 @jit(nopython=True)
 def kernel_point_g_ez(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
     r"""
-    Kernel for G_ez component of potential field tensor due to a point source
+    Kernel for the :math:`G_\text{ez}` tensor component due to a point source
 
     .. important ::
 
@@ -590,7 +590,7 @@ def kernel_point_g_ez(easting_p, northing_p, upward_p, easting_q, northing_q, up
 @jit(nopython=True)
 def kernel_point_g_nz(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
     r"""
-    Kernel for G_nz component of potential field tensor due to a point source
+    Kernel for the :math:`G_\text{ez}` tensor component due to a point source
 
     .. important ::
 
