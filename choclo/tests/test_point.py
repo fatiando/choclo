@@ -337,3 +337,104 @@ class TestSymmetryGradientUpward:
             ]
         )
         npt.assert_allclose(g_upward_1, -g_upward_2)
+
+
+class TestGradientFiniteDifferences:
+    """
+    Test gradient kernels against finite-differences approximations of the
+    potential
+    """
+
+    @pytest.fixture
+    def sample_coordinate(self):
+        """
+        Define a sample observation point
+        """
+        return 16.7, 43.2, 7.8
+
+    @pytest.fixture
+    def finite_diff_g_easting(self, sample_coordinate, sample_point_source):
+        """
+        Compute g_easting through finite differences of the potential
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        easting_q, _, _ = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_easting = 1e-8 * (easting_p - easting_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
+        # Calculate g_easting through finite differences
+        g_easting = (
+            kernel_point_potential(*shifted_coordinate, *sample_point_source)
+            - kernel_point_potential(*sample_coordinate, *sample_point_source)
+        ) / d_easting
+        return g_easting
+
+    @pytest.fixture
+    def finite_diff_g_northing(self, sample_coordinate, sample_point_source):
+        """
+        Compute g_northing through finite differences of the potential
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        _, northing_q, _ = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_northing = 1e-8 * (northing_p - northing_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
+        # Calculate g_easting through finite differences
+        g_northing = (
+            kernel_point_potential(*shifted_coordinate, *sample_point_source)
+            - kernel_point_potential(*sample_coordinate, *sample_point_source)
+        ) / d_northing
+        return g_northing
+
+    @pytest.fixture
+    def finite_diff_g_upward(self, sample_coordinate, sample_point_source):
+        """
+        Compute g_upward through finite differences of the potential
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        _, _, upward_q = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_upward = 1e-8 * (upward_p - upward_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
+        # Calculate g_easting through finite differences
+        g_upward = (
+            kernel_point_potential(*shifted_coordinate, *sample_point_source)
+            - kernel_point_potential(*sample_coordinate, *sample_point_source)
+        ) / d_upward
+        return g_upward
+
+    def test_g_easting(
+        self, sample_coordinate, sample_point_source, finite_diff_g_easting
+    ):
+        """
+        Test kernel of g_easting against finite differences of the potential
+        """
+        npt.assert_allclose(
+            finite_diff_g_easting,
+            kernel_point_g_easting(*sample_coordinate, *sample_point_source),
+        )
+
+    def test_g_northing(
+        self, sample_coordinate, sample_point_source, finite_diff_g_northing
+    ):
+        """
+        Test kernel of g_northing against finite differences of the potential
+        """
+        npt.assert_allclose(
+            finite_diff_g_northing,
+            kernel_point_g_northing(*sample_coordinate, *sample_point_source),
+        )
+
+    def test_g_upward(
+        self, sample_coordinate, sample_point_source, finite_diff_g_upward
+    ):
+        """
+        Test kernel of g_upward against finite differences of the potential
+        """
+        npt.assert_allclose(
+            finite_diff_g_upward,
+            kernel_point_g_upward(*sample_coordinate, *sample_point_source),
+        )
