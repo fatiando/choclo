@@ -5,64 +5,89 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Forward modelling functions for prisms
+Kernel functions for rectangular prisms
 """
 import numpy as np
-from numba import jit, prange
+from numba import jit
 
 
-def prism_gravity(coordinates, prisms, density, kernel, out, progress_proxy=None):
-    """
-    Compute gravitational field of prisms on computations points
+@jit(nopython=True)
+def prism_kernel_evaluation(easting, northing, upward, prism, kernel):
+    r"""
+    Evaluate a numerical kernel on every vertex of a prism
+
+    Use one of the following kernels:
+    * :func:`choclo.kernel_prism_potential`
+    * :func:`choclo.kernel_prism_g_upward`
 
     Parameters
     ----------
-    coordinates : tuple
-        Tuple containing ``easting``, ``northing`` and ``upward`` of the
-        computation points as arrays, all defined on a Cartesian coordinate
-        system and in meters.
-    prisms : 2d-array
-        Two dimensional array containing the coordinates of the prism(s) in the
-        following order: west, east, south, north, bottom, top in a Cartesian
-        coordinate system.
+    easting : float
+        Easting coordinate of the observation point. Must be in meters.
+    northing : float
+        Northing coordinate of the observation point. Must be in meters.
+    upward : float
+        Upward coordinate of the observation point. Must be in meters.
+    prism : 1d-array
+        One dimensional array containing the coordinates of the prism in the
+        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
+        ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
-    density : 1d-array
-        Array containing the density of each prism in kg/m^3. Must have the
-        same size as the number of prisms.
-    kernel : func
-        Kernel function that will be used to compute the desired field.
-    out : 1d-array
-        Array where the resulting field values will be stored.
-        Must have the same size as the arrays contained on ``coordinates``.
+    kernel : callable
+        Kernel function that will be evaluated on each one of the vertices of
+        the prism.
+
+    Returns
+    -------
+    result : float
+        Evaluation of the kernel function on each one of the vertices of the
+        prism.
+
+    Notes
+    -----
+    This function evaluates a numerical kernel :math:`k(x, y, z)` on each one
+    of the vertices of the prism:
+
+    .. math::
+
+        v(\mathbf{p}) =
+            \lVert \lVert \lVert
+            k(x, y, z)
+            \lVert\limits_{x_1}^{x_2}
+            \lVert\limits_{y_1}^{y_2}
+            \lVert\limits_{z_1}^{z_2}
+
+    where :math:`x_1`, :math:`x_2`, :math:`y_1`, :math:`y_2`, :math:`z_1` and
+    :math:`z_2` are boundaries of the rectangular prism in the *shifted
+    coordinates* defined by the Cartesian coordinate system with its origin
+    located on the observation point :math:`\mathbf{p}`.
+
+    References
+    ----------
+    - [Nagy2000]_
+    - [Nagy2002]_
+    - [Fukushima2020]_
     """
-    # Check if we need to update the progressbar on each iteration
-    update_progressbar = progress_proxy is not None
-    # Iterate over computation points and prisms
-    for l in prange(coordinates[0].size):
-        for m in range(prisms.shape[0]):
-            # Iterate over the prism boundaries to compute the result of the
-            # integration (see Nagy et al., 2000)
-            for i in range(2):
-                for j in range(2):
-                    for k in range(2):
-                        shift_east = prisms[m, 1 - i]
-                        shift_north = prisms[m, 3 - j]
-                        shift_upward = prisms[m, 5 - k]
-                        # If i, j or k is 1, the shift_* will refer to the
-                        # lower boundary, meaning the corresponding term should
-                        # have a minus sign
-                        out[l] += (
-                            density[m]
-                            * (-1) ** (i + j + k)
-                            * kernel(
-                                shift_east - coordinates[0][l],
-                                shift_north - coordinates[1][l],
-                                shift_upward - coordinates[2][l],
-                            )
-                        )
-        # Update progress bar if called
-        if update_progressbar:
-            progress_proxy.update(1)
+    # Initialize result float to zero
+    result = 0
+    # Iterate over the vertices of the prism
+    for i in range(2):
+        # Compute shifted easting coordinate
+        shift_east = prism[1 - i] - easting
+        for j in range(2):
+            # Compute shifted northing coordinate
+            shift_north = prism[3 - j] - northing
+            for k in range(2):
+                # Compute shifted upward coordinate
+                shift_upward = prism[5 - k] - upward
+                # If i, j or k is 1, the corresponding shifted
+                # coordinate will refer to the lower boundary,
+                # meaning the corresponding term should have a minus
+                # sign.
+                result += (-1) ** (i + j + k) * kernel(
+                    shift_east, shift_north, shift_upward
+                )
+    return result
 
 
 @jit(nopython=True)
