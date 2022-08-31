@@ -112,7 +112,7 @@ def kernel_point_g_easting(
 
     .. math::
 
-        k_{g_\text{upward}}(\mathbf{p}, \mathbf{q}) =
+        k_{g_x}(\mathbf{p}, \mathbf{q}) =
         - \frac{
             x_p - x_q
         }{
@@ -171,7 +171,7 @@ def kernel_point_g_northing(
 
     .. math::
 
-        k_{g_\text{upward}}(\mathbf{p}, \mathbf{q}) =
+        k_{g_y}(\mathbf{p}, \mathbf{q}) =
         - \frac{
             y_p - y_q
         }{
@@ -236,7 +236,7 @@ def kernel_point_g_upward(
 
     .. math::
 
-        k_{g_\text{upward}}(\mathbf{p}, \mathbf{q}) =
+        k_{g_z}(\mathbf{p}, \mathbf{q}) =
         - \frac{
             z_p - z_q
         }{
