@@ -113,8 +113,8 @@ def kernel_point_g_easting(
     .. math::
 
         k_{g_\text{upward}}(\mathbf{p}, \mathbf{q}) =
-        \frac{
-            - (x_p - x_q)
+        - \frac{
+            x_p - x_q
         }{
             \lVert \mathbf{p} - \mathbf{q} \rVert_2
         }
@@ -172,8 +172,8 @@ def kernel_point_g_northing(
     .. math::
 
         k_{g_\text{upward}}(\mathbf{p}, \mathbf{q}) =
-        \frac{
-            - (y_p - y_q)
+        - \frac{
+            y_p - y_q
         }{
             \lVert \mathbf{p} - \mathbf{q} \rVert_2
         }
@@ -237,8 +237,8 @@ def kernel_point_g_upward(
     .. math::
 
         k_{g_\text{upward}}(\mathbf{p}, \mathbf{q}) =
-        \frac{
-            - (z_p - z_q)
+        - \frac{
+            z_p - z_q
         }{
             \lVert \mathbf{p} - \mathbf{q} \rVert_2
         }
@@ -294,8 +294,8 @@ def kernel_point_g_ee(easting_p, northing_p, upward_p, easting_q, northing_q, up
     .. math::
 
         k_{G_\text{ee}}(\mathbf{p}, \mathbf{q}) =
-        3 \frac{
-            (x_p - x_q)^2
+        \frac{
+            3 (x_p - x_q)^2
         }{
             \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
         }
@@ -361,8 +361,8 @@ def kernel_point_g_nn(easting_p, northing_p, upward_p, easting_q, northing_q, up
     .. math::
 
         k_{G_\text{nn}}(\mathbf{p}, \mathbf{q}) =
-        3 \frac{
-            (y_p - y_q)^2
+        \frac{
+            3 (y_p - y_q)^2
         }{
             \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
         }
@@ -428,8 +428,8 @@ def kernel_point_g_zz(easting_p, northing_p, upward_p, easting_q, northing_q, up
     .. math::
 
         k_{G_\text{zz}}(\mathbf{p}, \mathbf{q}) =
-        3 \frac{
-            (z_p - z_q)^2
+        \frac{
+            3 (z_p - z_q)^2
         }{
             \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
         }
