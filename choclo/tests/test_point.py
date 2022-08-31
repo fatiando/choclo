@@ -12,9 +12,10 @@ import numpy.testing as npt
 import pytest
 
 from .._point import (
-    kernel_point_g_easting,
     kernel_point_potential,
+    kernel_point_g_easting,
     kernel_point_g_northing,
+    kernel_point_g_upward,
 )
 from .utils import NUMBA_IS_DISABLED
 
@@ -259,3 +260,80 @@ class TestSymmetryGradientNorthing:
             ]
         )
         npt.assert_allclose(g_northing_1, -g_northing_2)
+
+
+class TestSymmetryGradientUpward:
+    """
+    Test symmetry of the kernel for the g_upward component of a point source
+    """
+
+    @pytest.fixture
+    def coords_easting_northing_plane(self, sample_point_source):
+        """
+        Define set of observation points in the easting-northing plane
+        """
+        # Define easting and northing coordinates (avoid the zero, that's where
+        # the sample_point_source is located)
+        easting = np.linspace(-11, 11, 12)
+        northing = np.linspace(-7, 7, 8)
+        # Generate meshgrid
+        easting, northing = np.meshgrid(easting, northing)
+        # Compute upward
+        upward = np.zeros_like(easting)
+        # Add the coordinates of the sample point source
+        easting += sample_point_source[0]
+        northing += sample_point_source[1]
+        upward += sample_point_source[2]
+        return easting, northing, upward
+
+    @pytest.fixture
+    def mirrored_points(self, sample_point_source):
+        """
+        Define two set of mirrored points across the easting-northing plane
+        """
+        # Define the easting and upward coordinates of the points
+        easting = np.linspace(-11, 11, 27)
+        northing = np.linspace(-38, 38, 23)
+        # Define the northing coordinates for the first set
+        upward_1 = np.linspace(1, 15, 15)
+        # And mirror it for the second set
+        upward_2 = -upward_1
+        # Shift the coordinates to the sample_point_source
+        easting += sample_point_source[0]
+        northing += sample_point_source[1]
+        upward_1 += sample_point_source[2]
+        upward_2 += sample_point_source[2]
+        return (easting, northing, upward_1), (easting, northing, upward_2)
+
+    def test_zero_in_easting_northing(
+        self, sample_point_source, coords_easting_northing_plane
+    ):
+        """
+        Test if g_upward is zero in the easting-upward plane
+        """
+        g_upward = np.array(
+            [
+                kernel_point_g_upward(easting, northing, upward, *sample_point_source)
+                for easting, northing, upward in zip(*coords_easting_northing_plane)
+            ]
+        )
+        assert (g_upward <= 1e-30).all()
+
+    def test_mirror_symmetry(self, sample_point_source, mirrored_points):
+        """
+        Test points with opposite upward coordinate
+        """
+        coords_1, coords_2 = mirrored_points
+        g_upward_1 = np.array(
+            [
+                kernel_point_g_upward(easting, northing, upward, *sample_point_source)
+                for easting, northing, upward in zip(*coords_1)
+            ]
+        )
+        g_upward_2 = np.array(
+            [
+                kernel_point_g_upward(easting, northing, upward, *sample_point_source)
+                for easting, northing, upward in zip(*coords_2)
+            ]
+        )
+        npt.assert_allclose(g_upward_1, -g_upward_2)
