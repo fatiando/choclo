@@ -25,6 +25,9 @@ For point sources and observation points defined in **Cartesian coordinates**:
     kernel_point_g_easting
     kernel_point_g_northing
     kernel_point_g_upward
+    kernel_point_g_ee
+    kernel_point_g_nn
+    kernel_point_g_zz
 
 
 Euclidean distances
