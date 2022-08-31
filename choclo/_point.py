@@ -383,7 +383,7 @@ def kernel_point_g_nn(easting_p, northing_p, upward_p, easting_q, northing_q, up
     distance = distance_cartesian(
         (easting_p, northing_p, upward_p), (easting_q, northing_q, upward_q)
     )
-    return 3 * (upward_p - upward_q) ** 2 / distance**5 - 1 / distance**3
+    return 3 * (northing_p - northing_q) ** 2 / distance**5 - 1 / distance**3
 
 
 @jit(nopython=True)

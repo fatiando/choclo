@@ -16,6 +16,9 @@ from .._point import (
     kernel_point_g_easting,
     kernel_point_g_northing,
     kernel_point_g_upward,
+    kernel_point_g_ee,
+    kernel_point_g_nn,
+    kernel_point_g_zz,
 )
 from .utils import NUMBA_IS_DISABLED
 
@@ -26,6 +29,14 @@ def fixture_sample_point_source():
     Return a sample point source
     """
     return (3.7, 4.3, -5.8)
+
+
+@pytest.fixture(name="sample_coordinate")
+def fixture_sample_coordinate():
+    """
+    Define a sample observation point
+    """
+    return 16.7, 13.2, 7.8
 
 
 class TestSymmetryPotential:
@@ -346,13 +357,6 @@ class TestGradientFiniteDifferences:
     """
 
     @pytest.fixture
-    def sample_coordinate(self):
-        """
-        Define a sample observation point
-        """
-        return 16.7, 43.2, 7.8
-
-    @pytest.fixture
     def finite_diff_g_easting(self, sample_coordinate, sample_point_source):
         """
         Compute g_easting through finite differences of the potential
@@ -438,3 +442,13 @@ class TestGradientFiniteDifferences:
             finite_diff_g_upward,
             kernel_point_g_upward(*sample_coordinate, *sample_point_source),
         )
+
+
+def test_laplacian(sample_coordinate, sample_point_source):
+    """
+    Test if diagonal tensor components satisfy Laplace equation
+    """
+    g_ee = kernel_point_g_ee(*sample_coordinate, *sample_point_source)
+    g_nn = kernel_point_g_nn(*sample_coordinate, *sample_point_source)
+    g_zz = kernel_point_g_zz(*sample_coordinate, *sample_point_source)
+    npt.assert_allclose(-g_zz, g_ee + g_nn)
