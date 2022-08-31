@@ -182,10 +182,17 @@ def kernel_prism_g_upward(easting, northing, upward):
 
     .. math::
 
-        k_{g_z}(x, y, z) =
+        k_{g_z}(x, y, z) = - \left[
             x \, \text{ln2} (y + r)
             + y \, \text{ln2} (x + r)
             - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
+            \right]
+
+    .. important::
+
+        In the previous equation a minus sign has been added to the one
+        obtained by [Nagy2000]_ in order to compute the numerical kernel for
+        the **upward** component instead for the downward one.
 
     where
 
@@ -216,7 +223,9 @@ def kernel_prism_g_upward(easting, northing, upward):
     - [Fukushima2020]_
     """
     radius = np.sqrt(easting**2 + northing**2 + upward**2)
-    kernel = (
+    # The minus sign is to return the kernel for the upward component instead
+    # of the downward one.
+    kernel = -(
         easting * _safe_log(northing + radius)
         + northing * _safe_log(easting + radius)
         - upward * _safe_atan2(easting * northing, upward * radius)
