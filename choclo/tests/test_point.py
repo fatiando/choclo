@@ -14,6 +14,9 @@ import pytest
 from .._point import (
     kernel_point_g_easting,
     kernel_point_g_ee,
+    kernel_point_g_en,
+    kernel_point_g_ez,
+    kernel_point_g_nz,
     kernel_point_g_nn,
     kernel_point_g_northing,
     kernel_point_g_upward,
@@ -519,6 +522,60 @@ class TestTensorFiniteDifferences:
         ) / d_upward
         return g_zz
 
+    @pytest.fixture
+    def finite_diff_g_en(self, sample_coordinate, sample_point_source):
+        """
+        Compute g_en through finite differences of the g_easting
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        _, northing_q, _ = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_northing = self.delta_percentage * (northing_p - northing_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
+        # Calculate g_easting through finite differences
+        g_en = (
+            kernel_point_g_easting(*shifted_coordinate, *sample_point_source)
+            - kernel_point_g_easting(*sample_coordinate, *sample_point_source)
+        ) / d_northing
+        return g_en
+
+    @pytest.fixture
+    def finite_diff_g_ez(self, sample_coordinate, sample_point_source):
+        """
+        Compute g_ez through finite differences of the g_easting
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        _, _, upward_q = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_upward = self.delta_percentage * (upward_p - upward_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
+        # Calculate g_easting through finite differences
+        g_ez = (
+            kernel_point_g_easting(*shifted_coordinate, *sample_point_source)
+            - kernel_point_g_easting(*sample_coordinate, *sample_point_source)
+        ) / d_upward
+        return g_ez
+
+    @pytest.fixture
+    def finite_diff_g_nz(self, sample_coordinate, sample_point_source):
+        """
+        Compute g_nz through finite differences of the g_northing
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        _, _, upward_q = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_upward = self.delta_percentage * (upward_p - upward_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
+        # Calculate g_easting through finite differences
+        g_nz = (
+            kernel_point_g_northing(*shifted_coordinate, *sample_point_source)
+            - kernel_point_g_northing(*sample_coordinate, *sample_point_source)
+        ) / d_upward
+        return g_nz
+
     def test_g_ee(self, sample_coordinate, sample_point_source, finite_diff_g_ee):
         """
         Test kernel of g_ee against finite differences of the g_easting
@@ -546,6 +603,36 @@ class TestTensorFiniteDifferences:
         npt.assert_allclose(
             finite_diff_g_zz,
             kernel_point_g_zz(*sample_coordinate, *sample_point_source),
+            rtol=self.rtol,
+        )
+
+    def test_g_en(self, sample_coordinate, sample_point_source, finite_diff_g_en):
+        """
+        Test kernel of g_en against finite differences of the g_easting
+        """
+        npt.assert_allclose(
+            finite_diff_g_en,
+            kernel_point_g_en(*sample_coordinate, *sample_point_source),
+            rtol=self.rtol,
+        )
+
+    def test_g_ez(self, sample_coordinate, sample_point_source, finite_diff_g_ez):
+        """
+        Test kernel of g_ez against finite differences of the g_easting
+        """
+        npt.assert_allclose(
+            finite_diff_g_ez,
+            kernel_point_g_ez(*sample_coordinate, *sample_point_source),
+            rtol=self.rtol,
+        )
+
+    def test_g_nz(self, sample_coordinate, sample_point_source, finite_diff_g_nz):
+        """
+        Test kernel of g_nz against finite differences of the g_northing
+        """
+        npt.assert_allclose(
+            finite_diff_g_nz,
+            kernel_point_g_nz(*sample_coordinate, *sample_point_source),
             rtol=self.rtol,
         )
 

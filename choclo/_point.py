@@ -451,3 +451,204 @@ def kernel_point_g_zz(easting_p, northing_p, upward_p, easting_q, northing_q, up
         (easting_p, northing_p, upward_p), (easting_q, northing_q, upward_q)
     )
     return 3 * (upward_p - upward_q) ** 2 / distance**5 - 1 / distance**3
+
+
+@jit(nopython=True)
+def kernel_point_g_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
+    r"""
+    Kernel for G_en component of potential field tensor due to a point source
+
+    .. important ::
+
+        The observation point and the location of the point source must be in
+        Cartesian coordinates and have the same units.
+
+    Parameters
+    ----------
+    easting_p : float
+        Easting coordinate of the observation point.
+    northing_p : float
+        Northing coordinate of the observation point.
+    upward_p : float
+        Upward coordinate of the observation point.
+    easting_q : float
+        Easting coordinate of the point source location.
+    northing_q : float
+        Northing coordinate of the point source location.
+    upward_q : float
+        Upward coordinate of the point source location.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the ``G_en`` component of the
+        potential field tensor due to a point source.
+
+    Notes
+    -----
+    Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined
+    in a Cartesian coordinate system, compute the kernel function for the
+    non-diagonal :math:`G_\text{en}` component of the potential field tensor
+    that the point source generates on the observation point:
+
+    .. math::
+
+        k_{G_\text{en}}(\mathbf{p}, \mathbf{q}) =
+        \frac{
+            3 (x_p - x_q) * (y_p - y_q)
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
+        }
+
+    where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
+    Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`) and
+    :math:`G_\text{en}` is defined as:
+
+    .. math::
+
+        G_\text{en}(\mathbf{p}) =
+        \frac{
+            \partial^2 V(\mathbf{p})
+        }{
+            \partial x \partial y
+        }
+    """
+    distance = distance_cartesian(
+        (easting_p, northing_p, upward_p), (easting_q, northing_q, upward_q)
+    )
+    return 3 * (easting_p - easting_q) * (northing_p - northing_q) / distance**5
+
+
+@jit(nopython=True)
+def kernel_point_g_ez(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
+    r"""
+    Kernel for G_ez component of potential field tensor due to a point source
+
+    .. important ::
+
+        The observation point and the location of the point source must be in
+        Cartesian coordinates and have the same units.
+
+    Parameters
+    ----------
+    easting_p : float
+        Easting coordinate of the observation point.
+    northing_p : float
+        Northing coordinate of the observation point.
+    upward_p : float
+        Upward coordinate of the observation point.
+    easting_q : float
+        Easting coordinate of the point source location.
+    northing_q : float
+        Northing coordinate of the point source location.
+    upward_q : float
+        Upward coordinate of the point source location.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the ``G_ez`` component of the
+        potential field tensor due to a point source.
+
+    Notes
+    -----
+    Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined
+    in a Cartesian coordinate system, compute the kernel function for the
+    non-diagonal :math:`G_\text{ez}` component of the potential field tensor
+    that the point source generates on the observation point:
+
+    .. math::
+
+        k_{G_\text{ez}}(\mathbf{p}, \mathbf{q}) =
+        \frac{
+            3 (x_p - x_q) * (z_p - z_q)
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
+        }
+
+    where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
+    Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`) and
+    :math:`G_\text{en}` is defined as:
+
+    .. math::
+
+        G_\text{ez}(\mathbf{p}) =
+        \frac{
+            \partial^2 V(\mathbf{p})
+        }{
+            \partial x \partial z
+        }
+    """
+    distance = distance_cartesian(
+        (easting_p, northing_p, upward_p), (easting_q, northing_q, upward_q)
+    )
+    return 3 * (easting_p - easting_q) * (upward_p - upward_q) / distance**5
+
+
+@jit(nopython=True)
+def kernel_point_g_nz(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
+    r"""
+    Kernel for G_nz component of potential field tensor due to a point source
+
+    .. important ::
+
+        The observation point and the location of the point source must be in
+        Cartesian coordinates and have the same units.
+
+    Parameters
+    ----------
+    easting_p : float
+        Easting coordinate of the observation point.
+    northing_p : float
+        Northing coordinate of the observation point.
+    upward_p : float
+        Upward coordinate of the observation point.
+    easting_q : float
+        Easting coordinate of the point source location.
+    northing_q : float
+        Northing coordinate of the point source location.
+    upward_q : float
+        Upward coordinate of the point source location.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the ``G_nz`` component of the
+        potential field tensor due to a point source.
+
+    Notes
+    -----
+    Given an observation point located in :math:`\mathbf{p} = (x_p, y_p, z_p)`
+    and a point source located in :math:`\mathbf{q} = (x_q, y_q, z_q)` defined
+    in a Cartesian coordinate system, compute the kernel function for the
+    non-diagonal :math:`G_\text{nz}` component of the potential field tensor
+    that the point source generates on the observation point:
+
+    .. math::
+
+        k_{G_\text{nz}}(\mathbf{p}, \mathbf{q}) =
+        \frac{
+            3 (y_p - y_q) * (z_p - z_q)
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
+        }
+
+    where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
+    Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`) and
+    :math:`G_\text{en}` is defined as:
+
+    .. math::
+
+        G_\text{nz}(\mathbf{p}) =
+        \frac{
+            \partial^2 V(\mathbf{p})
+        }{
+            \partial y \partial z
+        }
+    """
+    distance = distance_cartesian(
+        (easting_p, northing_p, upward_p), (easting_q, northing_q, upward_q)
+    )
+    return 3 * (northing_p - northing_q) * (upward_p - upward_q) / distance**5
