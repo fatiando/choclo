@@ -446,7 +446,7 @@ class TestGradientFiniteDifferences:
 
 def test_laplacian(sample_coordinate, sample_point_source):
     """
-    Test if diagonal tensor components satisfy Laplace equation
+    Test if diagonal tensor components satisfy Laplace's equation
     """
     g_ee = kernel_point_g_ee(*sample_coordinate, *sample_point_source)
     g_nn = kernel_point_g_nn(*sample_coordinate, *sample_point_source)
