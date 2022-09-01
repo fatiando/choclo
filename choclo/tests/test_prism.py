@@ -44,23 +44,36 @@ class TestSymmetryPotential:
     Test the symmetry of the kernel for the potential of a rectangular prism
     """
 
-    @pytest.fixture
-    def coords_in_vertices(self, sample_prism):
+    scalers = [0.8, 1.0, 1.2]
+    ids = ["inside", "surface", "outside"]
+
+    @pytest.fixture(params=scalers, ids=ids)
+    def coords_in_vertices(self, sample_prism_center, sample_prism_dimensions, request):
         """
         Return observation points located in the vertices of the prism
         """
-        west, east, south, north, bottom, top = sample_prism[:]
+        # Get the coordinates of the sample prism center
+        easting, northing, upward = sample_prism_center
+        # Get the dimensions of the sample prism
+        d_easting, d_northing, d_upward = sample_prism_dimensions
+        # Get scaler
+        scaler = request.param
+        # Build the vertices
         vertices = list(
-            [easting, northing, upward]
-            for easting in (west, east)
-            for northing in (south, north)
-            for upward in (bottom, top)
+            [
+                easting + i * scaler * d_easting / 2,
+                northing + j * scaler * d_northing / 2,
+                upward + k * scaler * d_upward / 2,
+            ]
+            for i in (-1, 1)
+            for j in (-1, 1)
+            for k in (-1, 1)
         )
         return vertices
 
-    @pytest.fixture
+    @pytest.fixture(params=scalers, ids=ids)
     def coords_in_centers_of_easting_edges(
-        self, sample_prism_center, sample_prism_dimensions
+        self, sample_prism_center, sample_prism_dimensions, request
     ):
         """
         Return observation points located in the center of the prism edges
@@ -70,18 +83,23 @@ class TestSymmetryPotential:
         easting, northing, upward = sample_prism_center
         # Get the dimensions of the sample prism
         d_easting, _, d_upward = sample_prism_dimensions
+        # Get scaler
+        scaler = request.param
         # Get the points in the symmetry group
-        edges_easting = [
-            [easting - d_easting / 2, northing, upward - d_upward / 2],
-            [easting - d_easting / 2, northing, upward + d_upward / 2],
-            [easting + d_easting / 2, northing, upward - d_upward / 2],
-            [easting + d_easting / 2, northing, upward + d_upward / 2],
-        ]
+        edges_easting = list(
+            [
+                easting + i * scaler * d_easting / 2,
+                northing,
+                upward + k * scaler * d_upward / 2,
+            ]
+            for i in (-1, 1)
+            for k in (-1, 1)
+        )
         return edges_easting
 
-    @pytest.fixture
+    @pytest.fixture(params=scalers, ids=ids)
     def coords_in_centers_of_northing_edges(
-        self, sample_prism_center, sample_prism_dimensions
+        self, sample_prism_center, sample_prism_dimensions, request
     ):
         """
         Return observation points located in the center of the prism edges
@@ -91,18 +109,23 @@ class TestSymmetryPotential:
         easting, northing, upward = sample_prism_center
         # Get the dimensions of the sample prism
         _, d_northing, d_upward = sample_prism_dimensions
+        # Get scaler
+        scaler = request.param
         # Get the points in the symmetry group
-        edges_northing = [
-            [easting, northing - d_northing / 2, upward - d_upward / 2],
-            [easting, northing - d_northing / 2, upward + d_upward / 2],
-            [easting, northing + d_northing / 2, upward - d_upward / 2],
-            [easting, northing + d_northing / 2, upward + d_upward / 2],
-        ]
+        edges_northing = list(
+            [
+                easting,
+                northing + j * scaler * d_northing / 2,
+                upward + k * scaler * d_upward / 2,
+            ]
+            for j in (-1, 1)
+            for k in (-1, 1)
+        )
         return edges_northing
 
-    @pytest.fixture
+    @pytest.fixture(params=scalers, ids=ids)
     def coords_in_centers_of_upward_edges(
-        self, sample_prism_center, sample_prism_dimensions
+        self, sample_prism_center, sample_prism_dimensions, request
     ):
         """
         Return observation points located in the center of the prism edges
@@ -112,18 +135,23 @@ class TestSymmetryPotential:
         easting, northing, upward = sample_prism_center
         # Get the dimensions of the sample prism
         d_easting, d_northing, _ = sample_prism_dimensions
+        # Get scaler
+        scaler = request.param
         # Get the points in the symmetry group
-        edges_upward = [
-            [easting - d_easting / 2, northing - d_northing / 2, upward],
-            [easting + d_easting / 2, northing - d_northing / 2, upward],
-            [easting - d_easting / 2, northing + d_northing / 2, upward],
-            [easting + d_easting / 2, northing + d_northing / 2, upward],
-        ]
+        edges_upward = list(
+            [
+                easting + i * scaler * d_easting / 2,
+                northing + j * scaler * d_northing / 2,
+                upward,
+            ]
+            for i in (-1, 1)
+            for j in (-1, 1)
+        )
         return edges_upward
 
-    @pytest.fixture
+    @pytest.fixture(params=scalers, ids=ids)
     def coords_in_centers_of_easting_faces(
-        self, sample_prism_center, sample_prism_dimensions
+        self, sample_prism_center, sample_prism_dimensions, request
     ):
         """
         Return observation points located in the center of the faces normal to
@@ -133,16 +161,18 @@ class TestSymmetryPotential:
         easting, northing, upward = sample_prism_center
         # Get the dimensions of the sample prism
         d_easting, _, _ = sample_prism_dimensions
+        # Get scaler
+        scaler = request.param
         # Get the points in the symmetry group
         faces_normal_to_easting = [
-            [easting - d_easting / 2, northing, upward],
-            [easting + d_easting / 2, northing, upward],
+            [easting - scaler * d_easting / 2, northing, upward],
+            [easting + scaler * d_easting / 2, northing, upward],
         ]
         return faces_normal_to_easting
 
-    @pytest.fixture
+    @pytest.fixture(params=scalers, ids=ids)
     def coords_in_centers_of_northing_faces(
-        self, sample_prism_center, sample_prism_dimensions
+        self, sample_prism_center, sample_prism_dimensions, request
     ):
         """
         Return observation points located in the center of the faces normal to
@@ -152,16 +182,18 @@ class TestSymmetryPotential:
         easting, northing, upward = sample_prism_center
         # Get the dimensions of the sample prism
         _, d_northing, _ = sample_prism_dimensions
+        # Get scaler
+        scaler = request.param
         # Get the points in the symmetry group
         faces_normal_to_northing = [
-            [easting, northing - d_northing / 2, upward],
-            [easting, northing + d_northing / 2, upward],
+            [easting, northing - scaler * d_northing / 2, upward],
+            [easting, northing + scaler * d_northing / 2, upward],
         ]
         return faces_normal_to_northing
 
-    @pytest.fixture
+    @pytest.fixture(params=scalers, ids=ids)
     def coords_in_centers_of_upward_faces(
-        self, sample_prism_center, sample_prism_dimensions
+        self, sample_prism_center, sample_prism_dimensions, request
     ):
         """
         Return observation points located in the center of the faces normal to
@@ -171,41 +203,106 @@ class TestSymmetryPotential:
         easting, northing, upward = sample_prism_center
         # Get the dimensions of the sample prism
         _, _, d_upward = sample_prism_dimensions
+        # Get scaler
+        scaler = request.param
         # Get the points in the symmetry group
         faces_normal_to_upward = [
-            [easting, northing, upward - d_upward / 2],
-            [easting, northing, upward + d_upward / 2],
+            [easting, northing, upward - scaler * d_upward / 2],
+            [easting, northing, upward + scaler * d_upward / 2],
         ]
         return faces_normal_to_upward
 
-    @pytest.mark.parametrize(
-        "coords",
-        (
-            "coords_in_vertices",
-            "coords_in_centers_of_easting_edges",
-            "coords_in_centers_of_northing_edges",
-            "coords_in_centers_of_upward_edges",
-            "coords_in_centers_of_easting_faces",
-            "coords_in_centers_of_northing_faces",
-            "coords_in_centers_of_upward_faces",
-        ),
-    )
-    def test_symmetry(self, coords, sample_prism, request):
+    def test_vertices(self, coords_in_vertices, sample_prism):
         """
-        Test if kernel function for  potential field satisfies symmetry
-
-        The test is run over a set of symmetry groups. Each symmetry group is
-        composed by a set of observation points where the kernel function must
-        have the same value.
+        Test if kernel for potential satisfies symmetry on vertices
         """
-        # Get the coordinates of the symmetry group through its corresponding
-        # fixture (use pytest request fixture to do so)
-        coords = request.getfixturevalue(coords)
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
-            prism_kernel_evaluation(
-                easting, northing, upward, sample_prism, kernel_prism_potential
-            )
-            for easting, northing, upward in coords
+            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            for e, n, u in coords_in_vertices
+        )
+        npt.assert_allclose(kernel[0], kernel)
+
+    def test_centers_of_easting_edges(
+        self, coords_in_centers_of_easting_edges, sample_prism
+    ):
+        """
+        Test if kernel for potential satisfies symmetry on centers of the edges
+        parallel to the easting direction
+        """
+        # Compute the kernel on every observation point of the symmetry group
+        kernel = list(
+            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            for e, n, u in coords_in_centers_of_easting_edges
+        )
+        npt.assert_allclose(kernel[0], kernel)
+
+    def test_centers_of_northing_edges(
+        self, coords_in_centers_of_northing_edges, sample_prism
+    ):
+        """
+        Test if kernel for potential satisfies symmetry on centers of the edges
+        parallel to the northing direction
+        """
+        # Compute the kernel on every observation point of the symmetry group
+        kernel = list(
+            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            for e, n, u in coords_in_centers_of_northing_edges
+        )
+        npt.assert_allclose(kernel[0], kernel)
+
+    def test_centers_of_upward_edges(
+        self, coords_in_centers_of_upward_edges, sample_prism
+    ):
+        """
+        Test if kernel for potential satisfies symmetry on centers of the edges
+        parallel to the upward direction
+        """
+        # Compute the kernel on every observation point of the symmetry group
+        kernel = list(
+            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            for e, n, u in coords_in_centers_of_upward_edges
+        )
+        npt.assert_allclose(kernel[0], kernel)
+
+    def test_centers_of_easting_faces(
+        self, coords_in_centers_of_easting_faces, sample_prism
+    ):
+        """
+        Test if kernel for potential satisfies symmetry on centers of the
+        centers of the faces normal to the easting direction
+        """
+        # Compute the kernel on every observation point of the symmetry group
+        kernel = list(
+            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            for e, n, u in coords_in_centers_of_easting_faces
+        )
+        npt.assert_allclose(kernel[0], kernel)
+
+    def test_centers_of_northing_faces(
+        self, coords_in_centers_of_northing_faces, sample_prism
+    ):
+        """
+        Test if kernel for potential satisfies symmetry on centers of the
+        centers of the faces normal to the northing direction
+        """
+        # Compute the kernel on every observation point of the symmetry group
+        kernel = list(
+            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            for e, n, u in coords_in_centers_of_northing_faces
+        )
+        npt.assert_allclose(kernel[0], kernel)
+
+    def test_centers_of_upward_faces(
+        self, coords_in_centers_of_upward_faces, sample_prism
+    ):
+        """
+        Test if kernel for potential satisfies symmetry on centers of the
+        centers of the faces normal to the northing direction
+        """
+        # Compute the kernel on every observation point of the symmetry group
+        kernel = list(
+            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            for e, n, u in coords_in_centers_of_upward_faces
         )
         npt.assert_allclose(kernel[0], kernel)
