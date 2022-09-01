@@ -298,7 +298,7 @@ class TestSymmetryPotential:
     ):
         """
         Test if kernel for potential satisfies symmetry on centers of the
-        centers of the faces normal to the northing direction
+        centers of the faces normal to the upward direction
         """
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
