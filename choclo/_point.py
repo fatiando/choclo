@@ -590,7 +590,7 @@ def kernel_point_g_ez(easting_p, northing_p, upward_p, easting_q, northing_q, up
 @jit(nopython=True)
 def kernel_point_g_nz(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q):
     r"""
-    Kernel for the :math:`G_\text{ez}` tensor component due to a point source
+    Kernel for the :math:`G_\text{nz}` tensor component due to a point source
 
     .. important ::
 
