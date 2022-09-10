@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Compute the distance between two points in different coordinate systems
+Utility functions for the kernel and forward modelling functions
 """
 import numpy as np
 from numba import jit

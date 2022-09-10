@@ -11,19 +11,41 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from .._point import (
-    kernel_point_g_easting,
-    kernel_point_g_ee,
-    kernel_point_g_en,
-    kernel_point_g_ez,
-    kernel_point_g_nn,
-    kernel_point_g_northing,
-    kernel_point_g_nz,
-    kernel_point_g_upward,
-    kernel_point_g_zz,
-    kernel_point_potential,
+from ..point import (
+    kernel_e,
+    kernel_ee,
+    kernel_en,
+    kernel_eu,
+    kernel_nn,
+    kernel_n,
+    kernel_nu,
+    kernel_u,
+    kernel_uu,
+    kernel_pot,
 )
+from ..utils import distance_cartesian
 from .utils import NUMBA_IS_DISABLED
+
+
+def evaluate_kernel(coordinates, source, kernel):
+    """
+    Evaluate kernel on a set of observation points using a single source
+
+    Parameters
+    ----------
+    coordinates : list
+        Coordinates of the observation points in the following order:
+            ``easting``, ``northing``, ``upward``
+    source : tuple
+        Tuple containing the coordinates of the point source
+    kernel : func
+        Kernel function that wants to be evaluated
+    """
+    result = []
+    for coords in zip(*coordinates):
+        distance = distance_cartesian(coords, source)
+        result.append(kernel(*coords, *source, distance))
+    return np.array(result)
 
 
 @pytest.fixture(name="sample_point_source")
@@ -69,11 +91,10 @@ class TestSymmetryPotential:
         """
         radius = 3.5
         observation_points = self.build_points_in_sphere(radius, sample_point_source)
-        kernel_potential = [
-            kernel_point_potential(*coords, *sample_point_source)
-            for coords in zip(*observation_points)
-        ]
-        npt.assert_allclose(kernel_potential[0], kernel_potential)
+        # Evaluate kernel_pot on every observation point
+        kernel = evaluate_kernel(observation_points, sample_point_source, kernel_pot)
+        # Check if all values are equal
+        npt.assert_allclose(kernel[0], kernel)
 
     def test_potential_between_two_spheres(self, sample_point_source):
         """
@@ -82,21 +103,11 @@ class TestSymmetryPotential:
         radius_1, radius_2 = 3.5, 8.7
         sphere_1 = self.build_points_in_sphere(radius_1, sample_point_source)
         sphere_2 = self.build_points_in_sphere(radius_2, sample_point_source)
-        kernel_potential_1 = np.array(
-            [
-                kernel_point_potential(*coords, *sample_point_source)
-                for coords in zip(*sphere_1)
-            ]
-        )
-        kernel_potential_2 = np.array(
-            [
-                kernel_point_potential(*coords, *sample_point_source)
-                for coords in zip(*sphere_2)
-            ]
-        )
-        npt.assert_allclose(
-            kernel_potential_1, radius_2 / radius_1 * kernel_potential_2
-        )
+        # Evaluate kernel_pot on every observation point
+        kernel_1 = evaluate_kernel(sphere_1, sample_point_source, kernel_pot)
+        kernel_2 = evaluate_kernel(sphere_2, sample_point_source, kernel_pot)
+        # Check if all values are equal
+        npt.assert_allclose(kernel_1, radius_2 / radius_1 * kernel_2)
 
     @pytest.mark.skipif(not NUMBA_IS_DISABLED, reason="Numba is not disabled")
     def test_infinite_potential(self):
@@ -107,7 +118,8 @@ class TestSymmetryPotential:
         This test should be run only with Numba disabled.
         """
         point = (4.6, -8.9, -50.3)
-        assert np.isinf(kernel_point_potential(*point, *point))
+        distance = distance_cartesian(point, point)
+        assert np.isinf(kernel_pot(*point, *point, distance))
 
     @pytest.mark.skipif(NUMBA_IS_DISABLED, reason="Numba is disabled")
     def test_division_by_zero(self):
@@ -118,13 +130,14 @@ class TestSymmetryPotential:
         This test should be run only with Numba enabled.
         """
         point = (4.6, -8.9, -50.3)
+        distance = distance_cartesian(point, point)
         with pytest.raises(ZeroDivisionError):
-            kernel_point_potential(*point, *point)
+            kernel_pot(*point, *point, distance)
 
 
-class TestSymmetryGradientEasting:
+class TestSymmetryKernelE:
     """
-    Test symmetry of the kernel for the g_easting component of a point source
+    Test symmetry of the kernel_e
     """
 
     @pytest.fixture
@@ -169,39 +182,26 @@ class TestSymmetryGradientEasting:
         self, sample_point_source, coords_northing_upward_plane
     ):
         """
-        Test if g_easting is zero in the northing-upward plane
+        Test if kernel_e is zero in the northing-upward plane
         """
-        g_easting = np.array(
-            [
-                kernel_point_g_easting(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_northing_upward_plane)
-            ]
+        kernel = evaluate_kernel(
+            coords_northing_upward_plane, sample_point_source, kernel_e
         )
-        assert (g_easting <= 1e-30).all()
+        assert (kernel <= 1e-30).all()
 
     def test_mirror_symmetry(self, sample_point_source, mirrored_points):
         """
         Test points with opposite easting coordinate
         """
         coords_1, coords_2 = mirrored_points
-        g_easting_1 = np.array(
-            [
-                kernel_point_g_easting(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_1)
-            ]
-        )
-        g_easting_2 = np.array(
-            [
-                kernel_point_g_easting(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_2)
-            ]
-        )
-        npt.assert_allclose(g_easting_1, -g_easting_2)
+        kernel_1 = evaluate_kernel(coords_1, sample_point_source, kernel_e)
+        kernel_2 = evaluate_kernel(coords_2, sample_point_source, kernel_e)
+        npt.assert_allclose(kernel_1, -kernel_2)
 
 
-class TestSymmetryGradientNorthing:
+class TestSymmetryKernelN:
     """
-    Test symmetry of the kernel for the g_northing component of a point source
+    Test symmetry of the kernel_n
     """
 
     @pytest.fixture
@@ -246,39 +246,26 @@ class TestSymmetryGradientNorthing:
         self, sample_point_source, coords_easting_upward_plane
     ):
         """
-        Test if g_northing is zero in the easting-upward plane
+        Test if kernel_n is zero in the easting-upward plane
         """
-        g_northing = np.array(
-            [
-                kernel_point_g_northing(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_easting_upward_plane)
-            ]
+        kernel = evaluate_kernel(
+            coords_easting_upward_plane, sample_point_source, kernel_n
         )
-        assert (g_northing <= 1e-30).all()
+        assert (kernel <= 1e-30).all()
 
     def test_mirror_symmetry(self, sample_point_source, mirrored_points):
         """
         Test points with opposite northing coordinate
         """
         coords_1, coords_2 = mirrored_points
-        g_northing_1 = np.array(
-            [
-                kernel_point_g_northing(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_1)
-            ]
-        )
-        g_northing_2 = np.array(
-            [
-                kernel_point_g_northing(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_2)
-            ]
-        )
-        npt.assert_allclose(g_northing_1, -g_northing_2)
+        kernel_1 = evaluate_kernel(coords_1, sample_point_source, kernel_n)
+        kernel_2 = evaluate_kernel(coords_2, sample_point_source, kernel_n)
+        npt.assert_allclose(kernel_1, -kernel_2)
 
 
-class TestSymmetryGradientUpward:
+class TestSymmetryKernelU:
     """
-    Test symmetry of the kernel for the g_upward component of a point source
+    Test symmetry of the kernel_u
     """
 
     @pytest.fixture
@@ -323,34 +310,21 @@ class TestSymmetryGradientUpward:
         self, sample_point_source, coords_easting_northing_plane
     ):
         """
-        Test if g_upward is zero in the easting-upward plane
+        Test if kernel_u is zero in the easting-upward plane
         """
-        g_upward = np.array(
-            [
-                kernel_point_g_upward(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_easting_northing_plane)
-            ]
+        kernel = evaluate_kernel(
+            coords_easting_northing_plane, sample_point_source, kernel_u
         )
-        assert (g_upward <= 1e-30).all()
+        assert (kernel <= 1e-30).all()
 
     def test_mirror_symmetry(self, sample_point_source, mirrored_points):
         """
         Test points with opposite upward coordinate
         """
         coords_1, coords_2 = mirrored_points
-        g_upward_1 = np.array(
-            [
-                kernel_point_g_upward(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_1)
-            ]
-        )
-        g_upward_2 = np.array(
-            [
-                kernel_point_g_upward(easting, northing, upward, *sample_point_source)
-                for easting, northing, upward in zip(*coords_2)
-            ]
-        )
-        npt.assert_allclose(g_upward_1, -g_upward_2)
+        kernel_1 = evaluate_kernel(coords_1, sample_point_source, kernel_u)
+        kernel_2 = evaluate_kernel(coords_2, sample_point_source, kernel_u)
+        npt.assert_allclose(kernel_1, -kernel_2)
 
 
 class TestGradientFiniteDifferences:
@@ -366,9 +340,9 @@ class TestGradientFiniteDifferences:
     rtol = 1e-5
 
     @pytest.fixture
-    def finite_diff_g_easting(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_e(self, sample_coordinate, sample_point_source):
         """
-        Compute g_easting through finite differences of the potential
+        Compute kernel_e through finite differences of the kernel_pot
         """
         easting_p, northing_p, upward_p = sample_coordinate
         easting_q, _, _ = sample_point_source
@@ -377,16 +351,18 @@ class TestGradientFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_easting = (
-            kernel_point_potential(*shifted_coordinate, *sample_point_source)
-            - kernel_point_potential(*sample_coordinate, *sample_point_source)
+            kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_pot(*sample_coordinate, *sample_point_source, distance)
         ) / d_easting
         return g_easting
 
     @pytest.fixture
-    def finite_diff_g_northing(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_n(self, sample_coordinate, sample_point_source):
         """
-        Compute g_northing through finite differences of the potential
+        Compute kernel_n through finite differences of the kernel_pot
         """
         easting_p, northing_p, upward_p = sample_coordinate
         _, northing_q, _ = sample_point_source
@@ -395,16 +371,18 @@ class TestGradientFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_northing = (
-            kernel_point_potential(*shifted_coordinate, *sample_point_source)
-            - kernel_point_potential(*sample_coordinate, *sample_point_source)
+            kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_pot(*sample_coordinate, *sample_point_source, distance)
         ) / d_northing
         return g_northing
 
     @pytest.fixture
-    def finite_diff_g_upward(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_u(self, sample_coordinate, sample_point_source):
         """
-        Compute g_upward through finite differences of the potential
+        Compute kernel_u through finite differences of the kernel_pot
         """
         easting_p, northing_p, upward_p = sample_coordinate
         _, _, upward_q = sample_point_source
@@ -413,45 +391,50 @@ class TestGradientFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_upward = (
-            kernel_point_potential(*shifted_coordinate, *sample_point_source)
-            - kernel_point_potential(*sample_coordinate, *sample_point_source)
+            kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_pot(*sample_coordinate, *sample_point_source, distance)
         ) / d_upward
         return g_upward
 
-    def test_g_easting(
-        self, sample_coordinate, sample_point_source, finite_diff_g_easting
+    def test_kernel_e(
+        self, sample_coordinate, sample_point_source, finite_diff_kernel_e
     ):
         """
-        Test kernel of g_easting against finite differences of the potential
+        Test kernel of kernel_e against finite differences of the kernel_pot
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_easting,
-            kernel_point_g_easting(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_e,
+            kernel_e(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
-    def test_g_northing(
-        self, sample_coordinate, sample_point_source, finite_diff_g_northing
+    def test_kernel_n(
+        self, sample_coordinate, sample_point_source, finite_diff_kernel_n
     ):
         """
-        Test kernel of g_northing against finite differences of the potential
+        Test kernel of kernel_n against finite differences of the kernel_pot
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_northing,
-            kernel_point_g_northing(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_n,
+            kernel_n(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
-    def test_g_upward(
-        self, sample_coordinate, sample_point_source, finite_diff_g_upward
+    def test_kernel_u(
+        self, sample_coordinate, sample_point_source, finite_diff_kernel_u
     ):
         """
-        Test kernel of g_upward against finite differences of the potential
+        Test kernel of kernel_u against finite differences of the kernel_pot
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_upward,
-            kernel_point_g_upward(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_u,
+            kernel_u(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
@@ -469,9 +452,9 @@ class TestTensorFiniteDifferences:
     rtol = 1e-5
 
     @pytest.fixture
-    def finite_diff_g_ee(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_ee(self, sample_coordinate, sample_point_source):
         """
-        Compute g_ee through finite differences of the g_easting
+        Compute kernel_ee through finite differences of the kernel_e
         """
         easting_p, northing_p, upward_p = sample_coordinate
         easting_q, _, _ = sample_point_source
@@ -480,16 +463,18 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_ee = (
-            kernel_point_g_easting(*shifted_coordinate, *sample_point_source)
-            - kernel_point_g_easting(*sample_coordinate, *sample_point_source)
+            kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_e(*sample_coordinate, *sample_point_source, distance)
         ) / d_easting
         return g_ee
 
     @pytest.fixture
-    def finite_diff_g_nn(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_nn(self, sample_coordinate, sample_point_source):
         """
-        Compute g_nn through finite differences of the g_northing
+        Compute kernel_nn through finite differences of the kernel_n
         """
         easting_p, northing_p, upward_p = sample_coordinate
         _, northing_q, _ = sample_point_source
@@ -498,16 +483,18 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_nn = (
-            kernel_point_g_northing(*shifted_coordinate, *sample_point_source)
-            - kernel_point_g_northing(*sample_coordinate, *sample_point_source)
+            kernel_n(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_n(*sample_coordinate, *sample_point_source, distance)
         ) / d_northing
         return g_nn
 
     @pytest.fixture
-    def finite_diff_g_zz(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_uu(self, sample_coordinate, sample_point_source):
         """
-        Compute g_zz through finite differences of the g_upward
+        Compute kernel_uu through finite differences of the kernel_u
         """
         easting_p, northing_p, upward_p = sample_coordinate
         _, _, upward_q = sample_point_source
@@ -516,16 +503,18 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_zz = (
-            kernel_point_g_upward(*shifted_coordinate, *sample_point_source)
-            - kernel_point_g_upward(*sample_coordinate, *sample_point_source)
+            kernel_u(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_u(*sample_coordinate, *sample_point_source, distance)
         ) / d_upward
         return g_zz
 
     @pytest.fixture
-    def finite_diff_g_en(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_en(self, sample_coordinate, sample_point_source):
         """
-        Compute g_en through finite differences of the g_easting
+        Compute kernel_en through finite differences of the kernel_e
         """
         easting_p, northing_p, upward_p = sample_coordinate
         _, northing_q, _ = sample_point_source
@@ -534,16 +523,18 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_en = (
-            kernel_point_g_easting(*shifted_coordinate, *sample_point_source)
-            - kernel_point_g_easting(*sample_coordinate, *sample_point_source)
+            kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_e(*sample_coordinate, *sample_point_source, distance)
         ) / d_northing
         return g_en
 
     @pytest.fixture
-    def finite_diff_g_ez(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_eu(self, sample_coordinate, sample_point_source):
         """
-        Compute g_ez through finite differences of the g_easting
+        Compute kernel_eu through finite differences of the kernel_e
         """
         easting_p, northing_p, upward_p = sample_coordinate
         _, _, upward_q = sample_point_source
@@ -552,16 +543,18 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_ez = (
-            kernel_point_g_easting(*shifted_coordinate, *sample_point_source)
-            - kernel_point_g_easting(*sample_coordinate, *sample_point_source)
+            kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_e(*sample_coordinate, *sample_point_source, distance)
         ) / d_upward
         return g_ez
 
     @pytest.fixture
-    def finite_diff_g_nz(self, sample_coordinate, sample_point_source):
+    def finite_diff_kernel_nu(self, sample_coordinate, sample_point_source):
         """
-        Compute g_nz through finite differences of the g_northing
+        Test kernel_nu against finite differences of the kernel_n
         """
         easting_p, northing_p, upward_p = sample_coordinate
         _, _, upward_q = sample_point_source
@@ -570,69 +563,77 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
         # Calculate g_easting through finite differences
+        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         g_nz = (
-            kernel_point_g_northing(*shifted_coordinate, *sample_point_source)
-            - kernel_point_g_northing(*sample_coordinate, *sample_point_source)
+            kernel_n(*shifted_coordinate, *sample_point_source, distance_shifted)
+            - kernel_n(*sample_coordinate, *sample_point_source, distance)
         ) / d_upward
         return g_nz
 
-    def test_g_ee(self, sample_coordinate, sample_point_source, finite_diff_g_ee):
+    def test_g_ee(self, sample_coordinate, sample_point_source, finite_diff_kernel_ee):
         """
-        Test kernel of g_ee against finite differences of the g_easting
+        Test kernel_ee against finite differences of the kernel_e
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_ee,
-            kernel_point_g_ee(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_ee,
+            kernel_ee(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
-    def test_g_nn(self, sample_coordinate, sample_point_source, finite_diff_g_nn):
+    def test_g_nn(self, sample_coordinate, sample_point_source, finite_diff_kernel_nn):
         """
-        Test kernel of g_nn against finite differences of the g_northing
+        Test kernel_nn against finite differences of the kernel_n
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_nn,
-            kernel_point_g_nn(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_nn,
+            kernel_nn(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
-    def test_g_zz(self, sample_coordinate, sample_point_source, finite_diff_g_zz):
+    def test_g_zz(self, sample_coordinate, sample_point_source, finite_diff_kernel_uu):
         """
-        Test kernel of g_zz against finite differences of the g_upward
+        Test kernel_uu against finite differences of the kernel_u
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_zz,
-            kernel_point_g_zz(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_uu,
+            kernel_uu(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
-    def test_g_en(self, sample_coordinate, sample_point_source, finite_diff_g_en):
+    def test_g_en(self, sample_coordinate, sample_point_source, finite_diff_kernel_en):
         """
-        Test kernel of g_en against finite differences of the g_easting
+        Test kernel_en against finite differences of the kernel_e
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_en,
-            kernel_point_g_en(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_en,
+            kernel_en(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
-    def test_g_ez(self, sample_coordinate, sample_point_source, finite_diff_g_ez):
+    def test_g_ez(self, sample_coordinate, sample_point_source, finite_diff_kernel_eu):
         """
-        Test kernel of g_ez against finite differences of the g_easting
+        Test kernel_eu against finite differences of the kernel_e
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_ez,
-            kernel_point_g_ez(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_eu,
+            kernel_eu(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
-    def test_g_nz(self, sample_coordinate, sample_point_source, finite_diff_g_nz):
+    def test_g_nz(self, sample_coordinate, sample_point_source, finite_diff_kernel_nu):
         """
-        Test kernel of g_nz against finite differences of the g_northing
+        Test kernel_nu against finite differences of the kernel_n
         """
+        distance = distance_cartesian(sample_coordinate, sample_point_source)
         npt.assert_allclose(
-            finite_diff_g_nz,
-            kernel_point_g_nz(*sample_coordinate, *sample_point_source),
+            finite_diff_kernel_nu,
+            kernel_nu(*sample_coordinate, *sample_point_source, distance),
             rtol=self.rtol,
         )
 
@@ -641,7 +642,8 @@ def test_laplacian(sample_coordinate, sample_point_source):
     """
     Test if diagonal tensor components satisfy Laplace's equation
     """
-    g_ee = kernel_point_g_ee(*sample_coordinate, *sample_point_source)
-    g_nn = kernel_point_g_nn(*sample_coordinate, *sample_point_source)
-    g_zz = kernel_point_g_zz(*sample_coordinate, *sample_point_source)
+    distance = distance_cartesian(sample_coordinate, sample_point_source)
+    g_ee = kernel_ee(*sample_coordinate, *sample_point_source, distance)
+    g_nn = kernel_nn(*sample_coordinate, *sample_point_source, distance)
+    g_zz = kernel_uu(*sample_coordinate, *sample_point_source, distance)
     npt.assert_allclose(-g_zz, g_ee + g_nn)
