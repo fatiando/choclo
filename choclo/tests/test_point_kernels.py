@@ -640,7 +640,7 @@ class TestTensorFiniteDifferences:
 
 def test_laplacian(sample_coordinate, sample_point_source):
     """
-    Test if diagonal tensor components satisfy Laplace's equation
+    Test if diagonal tensor kernels satisfy Laplace's equation
     """
     distance = distance_cartesian(*sample_coordinate, *sample_point_source)
     g_ee = kernel_ee(*sample_coordinate, *sample_point_source, distance)
