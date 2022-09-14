@@ -15,7 +15,7 @@ def kernel_pot(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    The reciprocal of the distance between the two points
+    The inverse of the distance between the two points
 
     .. important ::
 
@@ -71,7 +71,7 @@ def kernel_e(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Easting component of the gradient of the reciprocal of the distance
+    Easting component of the gradient of the inverse of the distance
 
     .. important ::
 
@@ -132,7 +132,7 @@ def kernel_n(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Northing component of the gradient of the reciprocal of the distance
+    Northing component of the gradient of the inverse of the distance
 
     .. important ::
 
@@ -193,7 +193,7 @@ def kernel_u(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Upward component of the gradient of the reciprocal of the distance
+    Upward component of the gradient of the inverse of the distance
 
     .. important ::
 
@@ -254,7 +254,7 @@ def kernel_ee(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the reciprocal of the distance along easting-easting
+    Second derivative of the inverse of the distance along easting-easting
 
     .. important ::
 
@@ -293,7 +293,7 @@ def kernel_ee(
     .. math::
 
         k_{xx}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial^2}{\partial^2 x}
+        \frac{\partial^2}{\partial x^2}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -320,7 +320,7 @@ def kernel_nn(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the reciprocal of the distance along northing-northing
+    Second derivative of the inverse of the distance along northing-northing
 
     .. important ::
 
@@ -359,7 +359,7 @@ def kernel_nn(
     .. math::
 
         k_{yy}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial^2}{\partial^2 y}
+        \frac{\partial^2}{\partial y^2}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -386,7 +386,7 @@ def kernel_uu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the reciprocal of the distance along upward-upward
+    Second derivative of the inverse of the distance along upward-upward
 
     .. important ::
 
@@ -425,7 +425,7 @@ def kernel_uu(
     .. math::
 
         k_{zz}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial^2}{\partial^2 z}
+        \frac{\partial^2}{\partial z^2}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -452,7 +452,7 @@ def kernel_en(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the reciprocal of the distance along easting-northing
+    Second derivative of the inverse of the distance along easting-northing
 
     .. important ::
 
@@ -513,7 +513,7 @@ def kernel_eu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the reciprocal of the distance along easting-upward
+    Second derivative of the inverse of the distance along easting-upward
 
     .. important ::
 
@@ -574,7 +574,7 @@ def kernel_nu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the reciprocal of the distance along northing-upward
+    Second derivative of the inverse of the distance along northing-upward
 
     .. important ::
 
