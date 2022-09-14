@@ -12,20 +12,30 @@ from numba import jit
 
 
 @jit(nopython=True)
-def distance_cartesian(point_p, point_q):
+def distance_cartesian(
+    easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
+):
     r"""
     Euclidean distance between two points given in Cartesian coordinates
 
+    .. warning::
+
+        All coordinates should be in the same units.
+
     Parameters
     ----------
-    point_p : tuple or 1d-array
-        Tuple or array containing the coordinates of the first point in the
-        following order: (``easting``, ``northing`` and ``upward``)
-        All coordinates must be in the same units.
-    point_q : tuple or 1d-array
-        Tuple or array containing the coordinates of the second point in the
-        following order: (``easting``, ``northing`` and ``upward``)
-        All coordinates must be in the same units.
+    easting_p : float
+        Easting coordinate of point :math:`\mathbf{p}`.
+    northing_p : float
+        Northing coordinate of point :math:`\mathbf{p}`.
+    upward_p : float
+        Upward coordinate of point :math:`\mathbf{p}`.
+    easting_q : float
+        Easting coordinate of point :math:`\mathbf{q}`.
+    northing_q : float
+        Northing coordinate of point :math:`\mathbf{q}`.
+    upward_q : float
+        Upward coordinate of point :math:`\mathbf{q}`.
 
     Returns
     -------
@@ -44,8 +54,6 @@ def distance_cartesian(point_p, point_q):
         d = \sqrt{(x_p - x_q)^2 + (y_p - y_q)^2 + (z_p - z_q)^2}
 
     """
-    easting_p, northing_p, upward_p = point_p[:]
-    easting_q, northing_q, upward_q = point_q[:]
     distance = np.sqrt(
         (easting_p - easting_q) ** 2
         + (northing_p - northing_q) ** 2
@@ -55,7 +63,9 @@ def distance_cartesian(point_p, point_q):
 
 
 @jit(nopython=True)
-def distance_spherical(point_p, point_q):
+def distance_spherical(
+    longitude_p, latitude_p, radius_p, longitude_q, latitude_q, radius_q
+):
     r"""
     Euclidean distance between two points in spherical coordinates
 
@@ -65,16 +75,18 @@ def distance_spherical(point_p, point_q):
 
     Parameters
     ----------
-    point_p : tuple or 1d-array
-        Tuple or array containing the coordinates of the first point in the
-        following order: (``longitude``, ``latitude`` and ``radius``).
-        Both ``longitude`` and ``latitude`` must be in degrees, while
-        ``radius`` in meters.
-    point_q : tuple or 1d-array
-        Tuple or array containing the coordinates of the second point in the
-        following order: (``longitude``, ``latitude`` and ``radius``).
-        Both ``longitude`` and ``latitude`` must be in degrees, while
-        ``radius`` in meters.
+    longitude_p : float
+        Longitude coordinate of point :math:`\mathbf{p}` in degrees.
+    latitude_p : float
+        Latitude coordinate of point :math:`\mathbf{p}` in degrees.
+    radius_p : float
+        Radial coordinate of point :math:`\mathbf{p}` in meters.
+    longitude_q : float
+        Longitude coordinate of point :math:`\mathbf{q}` in degrees.
+    latitude_q : float
+        Latitude coordinate of point :math:`\mathbf{q}` in degrees.
+    radius_q : float
+        Radial coordinate of point :math:`\mathbf{q}` in meters.
 
     Returns
     -------
@@ -103,9 +115,6 @@ def distance_spherical(point_p, point_q):
     and :math:`\lambda` is the longitude angle, :math:`\phi` the spherical
     latitude angle an :math:`r` is the radial coordinate.
     """
-    # Get coordinates of the two points
-    longitude_p, latitude_p, radius_p = point_p[:]
-    longitude_q, latitude_q, radius_q = point_q[:]
     # Convert angles to radians
     longitude_p, latitude_p = np.radians(longitude_p), np.radians(latitude_p)
     longitude_q, latitude_q = np.radians(longitude_q), np.radians(latitude_q)

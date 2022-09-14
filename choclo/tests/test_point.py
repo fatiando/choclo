@@ -43,7 +43,7 @@ def evaluate_kernel(coordinates, source, kernel):
     """
     result = []
     for coords in zip(*coordinates):
-        distance = distance_cartesian(coords, source)
+        distance = distance_cartesian(*coords, *source)
         result.append(kernel(*coords, *source, distance))
     return np.array(result)
 
@@ -118,7 +118,7 @@ class TestSymmetryPotential:
         This test should be run only with Numba disabled.
         """
         point = (4.6, -8.9, -50.3)
-        distance = distance_cartesian(point, point)
+        distance = distance_cartesian(*point, *point)
         assert np.isinf(kernel_pot(*point, *point, distance))
 
     @pytest.mark.skipif(NUMBA_IS_DISABLED, reason="Numba is disabled")
@@ -130,7 +130,7 @@ class TestSymmetryPotential:
         This test should be run only with Numba enabled.
         """
         point = (4.6, -8.9, -50.3)
-        distance = distance_cartesian(point, point)
+        distance = distance_cartesian(*point, *point)
         with pytest.raises(ZeroDivisionError):
             kernel_pot(*point, *point, distance)
 
@@ -351,8 +351,8 @@ class TestGradientFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_easting = (
             kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_pot(*sample_coordinate, *sample_point_source, distance)
@@ -371,8 +371,8 @@ class TestGradientFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_northing = (
             kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_pot(*sample_coordinate, *sample_point_source, distance)
@@ -391,8 +391,8 @@ class TestGradientFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_upward = (
             kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_pot(*sample_coordinate, *sample_point_source, distance)
@@ -405,7 +405,7 @@ class TestGradientFiniteDifferences:
         """
         Test kernel of kernel_e against finite differences of the kernel_pot
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_e,
             kernel_e(*sample_coordinate, *sample_point_source, distance),
@@ -418,7 +418,7 @@ class TestGradientFiniteDifferences:
         """
         Test kernel of kernel_n against finite differences of the kernel_pot
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_n,
             kernel_n(*sample_coordinate, *sample_point_source, distance),
@@ -431,7 +431,7 @@ class TestGradientFiniteDifferences:
         """
         Test kernel of kernel_u against finite differences of the kernel_pot
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_u,
             kernel_u(*sample_coordinate, *sample_point_source, distance),
@@ -463,8 +463,8 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_ee = (
             kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_e(*sample_coordinate, *sample_point_source, distance)
@@ -483,8 +483,8 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_nn = (
             kernel_n(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_n(*sample_coordinate, *sample_point_source, distance)
@@ -503,8 +503,8 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_zz = (
             kernel_u(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_u(*sample_coordinate, *sample_point_source, distance)
@@ -523,8 +523,8 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_en = (
             kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_e(*sample_coordinate, *sample_point_source, distance)
@@ -543,8 +543,8 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_ez = (
             kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_e(*sample_coordinate, *sample_point_source, distance)
@@ -563,8 +563,8 @@ class TestTensorFiniteDifferences:
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
         # Calculate g_easting through finite differences
-        distance_shifted = distance_cartesian(shifted_coordinate, sample_point_source)
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_nz = (
             kernel_n(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_n(*sample_coordinate, *sample_point_source, distance)
@@ -575,7 +575,7 @@ class TestTensorFiniteDifferences:
         """
         Test kernel_ee against finite differences of the kernel_e
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_ee,
             kernel_ee(*sample_coordinate, *sample_point_source, distance),
@@ -586,7 +586,7 @@ class TestTensorFiniteDifferences:
         """
         Test kernel_nn against finite differences of the kernel_n
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_nn,
             kernel_nn(*sample_coordinate, *sample_point_source, distance),
@@ -597,7 +597,7 @@ class TestTensorFiniteDifferences:
         """
         Test kernel_uu against finite differences of the kernel_u
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_uu,
             kernel_uu(*sample_coordinate, *sample_point_source, distance),
@@ -608,7 +608,7 @@ class TestTensorFiniteDifferences:
         """
         Test kernel_en against finite differences of the kernel_e
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_en,
             kernel_en(*sample_coordinate, *sample_point_source, distance),
@@ -619,7 +619,7 @@ class TestTensorFiniteDifferences:
         """
         Test kernel_eu against finite differences of the kernel_e
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_eu,
             kernel_eu(*sample_coordinate, *sample_point_source, distance),
@@ -630,7 +630,7 @@ class TestTensorFiniteDifferences:
         """
         Test kernel_nu against finite differences of the kernel_n
         """
-        distance = distance_cartesian(sample_coordinate, sample_point_source)
+        distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
             finite_diff_kernel_nu,
             kernel_nu(*sample_coordinate, *sample_point_source, distance),
@@ -642,7 +642,7 @@ def test_laplacian(sample_coordinate, sample_point_source):
     """
     Test if diagonal tensor components satisfy Laplace's equation
     """
-    distance = distance_cartesian(sample_coordinate, sample_point_source)
+    distance = distance_cartesian(*sample_coordinate, *sample_point_source)
     g_ee = kernel_ee(*sample_coordinate, *sample_point_source, distance)
     g_nn = kernel_nn(*sample_coordinate, *sample_point_source, distance)
     g_zz = kernel_uu(*sample_coordinate, *sample_point_source, distance)
