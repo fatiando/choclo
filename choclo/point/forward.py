@@ -12,16 +12,16 @@ from numba import jit
 from ..constants import GRAVITATIONAL_CONST
 from ..utils import distance_cartesian
 from .kernels import (
-    kernel_pot,
     kernel_e,
-    kernel_n,
-    kernel_u,
     kernel_ee,
-    kernel_nn,
-    kernel_uu,
     kernel_en,
     kernel_eu,
+    kernel_n,
+    kernel_nn,
     kernel_nu,
+    kernel_pot,
+    kernel_u,
+    kernel_uu,
 )
 
 

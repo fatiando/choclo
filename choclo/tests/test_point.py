@@ -16,12 +16,12 @@ from ..point import (
     kernel_ee,
     kernel_en,
     kernel_eu,
-    kernel_nn,
     kernel_n,
+    kernel_nn,
     kernel_nu,
+    kernel_pot,
     kernel_u,
     kernel_uu,
-    kernel_pot,
 )
 from ..utils import distance_cartesian
 from .utils import NUMBA_IS_DISABLED
