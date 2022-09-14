@@ -66,7 +66,7 @@ def fixture_sample_coordinate():
 
 class TestSymmetryPotential:
     """
-    Test the symmetry of the kernel for the potential of a point source
+    Test the symmetry of kernel_pot
     """
 
     def build_points_in_sphere(self, radius, point):
@@ -87,7 +87,7 @@ class TestSymmetryPotential:
 
     def test_symmetry_on_sphere(self, sample_point_source):
         """
-        Test the symmetry of the potential in points of a sphere
+        Test the symmetry of kernel_pot in points of a sphere
         """
         radius = 3.5
         observation_points = self.build_points_in_sphere(radius, sample_point_source)
@@ -98,7 +98,7 @@ class TestSymmetryPotential:
 
     def test_potential_between_two_spheres(self, sample_point_source):
         """
-        Test the potential between observation points in two spheres
+        Test kernel_pot between observation points in two spheres
         """
         radius_1, radius_2 = 3.5, 8.7
         sphere_1 = self.build_points_in_sphere(radius_1, sample_point_source)
@@ -112,7 +112,7 @@ class TestSymmetryPotential:
     @pytest.mark.skipif(not NUMBA_IS_DISABLED, reason="Numba is not disabled")
     def test_infinite_potential(self):
         """
-        Test if we get an infinite kernel if the computation point is in the
+        Test if we get an infinite kernel_pot the computation point is in the
         same location as the observation point.
 
         This test should be run only with Numba disabled.
