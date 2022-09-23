@@ -4,5 +4,8 @@
 #
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
-# Import functions/classes to make the public API
-from ._version import __version__
+"""
+Define universal constants
+"""
+#: The gravitational constant in SI units :math:`m^3 kg^{-1} s^{-1}`
+GRAVITATIONAL_CONST = 0.00000000006673

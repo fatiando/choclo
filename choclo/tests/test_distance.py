@@ -7,7 +7,7 @@
 import numpy.testing as npt
 import pytest
 
-from .._distance import distance_cartesian, distance_spherical
+from ..utils import distance_cartesian, distance_spherical
 from .utils import dumb_spherical_distance
 
 
@@ -24,7 +24,7 @@ def test_distance_cartesian(point_a, point_b, expected_distance):
     """
     Test if distance_cartesian works as expected
     """
-    npt.assert_allclose(distance_cartesian(point_a, point_b), expected_distance)
+    npt.assert_allclose(distance_cartesian(*point_a, *point_b), expected_distance)
 
 
 class TestDistanceSpherical:
@@ -67,7 +67,7 @@ class TestDistanceSpherical:
         """
         expected_distance = 2 ** (3 / 2)
         npt.assert_allclose(
-            distance_spherical(point_equator, point_pole), expected_distance
+            distance_spherical(*point_equator, *point_pole), expected_distance
         )
 
     def test_sample_points(self, point_a, point_b):
@@ -75,6 +75,6 @@ class TestDistanceSpherical:
         Test spherical distance using two sample points
         """
         npt.assert_allclose(
-            distance_spherical(point_a, point_b),
+            distance_spherical(*point_a, *point_b),
             dumb_spherical_distance(point_a, point_b),
         )
