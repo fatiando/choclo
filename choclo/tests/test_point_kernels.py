@@ -350,14 +350,14 @@ class TestGradientFiniteDifferences:
         d_easting = self.delta_percentage * (easting_p - easting_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
-        # Calculate g_easting through finite differences
+        # Calculate kernel_e through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_easting = (
+        k_easting = (
             kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_pot(*sample_coordinate, *sample_point_source, distance)
         ) / d_easting
-        return g_easting
+        return k_easting
 
     @pytest.fixture
     def finite_diff_kernel_n(self, sample_coordinate, sample_point_source):
@@ -370,14 +370,14 @@ class TestGradientFiniteDifferences:
         d_northing = self.delta_percentage * (northing_p - northing_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
-        # Calculate g_northing through finite differences
+        # Calculate kernel_n through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_northing = (
+        k_northing = (
             kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_pot(*sample_coordinate, *sample_point_source, distance)
         ) / d_northing
-        return g_northing
+        return k_northing
 
     @pytest.fixture
     def finite_diff_kernel_u(self, sample_coordinate, sample_point_source):
@@ -390,14 +390,14 @@ class TestGradientFiniteDifferences:
         d_upward = self.delta_percentage * (upward_p - upward_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
-        # Calculate g_upward through finite differences
+        # Calculate kernel_u through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_upward = (
+        k_upward = (
             kernel_pot(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_pot(*sample_coordinate, *sample_point_source, distance)
         ) / d_upward
-        return g_upward
+        return k_upward
 
     def test_kernel_e(
         self, sample_coordinate, sample_point_source, finite_diff_kernel_e
@@ -462,14 +462,14 @@ class TestTensorFiniteDifferences:
         d_easting = self.delta_percentage * (easting_p - easting_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
-        # Calculate g_ee through finite differences
+        # Calculate kernel_ee through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_ee = (
+        kernel_ee = (
             kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_e(*sample_coordinate, *sample_point_source, distance)
         ) / d_easting
-        return g_ee
+        return kernel_ee
 
     @pytest.fixture
     def finite_diff_kernel_nn(self, sample_coordinate, sample_point_source):
@@ -482,14 +482,14 @@ class TestTensorFiniteDifferences:
         d_northing = self.delta_percentage * (northing_p - northing_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
-        # Calculate g_nn through finite differences
+        # Calculate kernel_nn through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_nn = (
+        kernel_nn = (
             kernel_n(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_n(*sample_coordinate, *sample_point_source, distance)
         ) / d_northing
-        return g_nn
+        return kernel_nn
 
     @pytest.fixture
     def finite_diff_kernel_uu(self, sample_coordinate, sample_point_source):
@@ -502,14 +502,14 @@ class TestTensorFiniteDifferences:
         d_upward = self.delta_percentage * (upward_p - upward_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
-        # Calculate g_zz through finite differences
+        # Calculate kernel_uu through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_zz = (
+        k_uu = (
             kernel_u(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_u(*sample_coordinate, *sample_point_source, distance)
         ) / d_upward
-        return g_zz
+        return k_uu
 
     @pytest.fixture
     def finite_diff_kernel_en(self, sample_coordinate, sample_point_source):
@@ -522,14 +522,14 @@ class TestTensorFiniteDifferences:
         d_northing = self.delta_percentage * (northing_p - northing_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
-        # Calculate g_en through finite differences
+        # Calculate kernel_en through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_en = (
+        k_en = (
             kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_e(*sample_coordinate, *sample_point_source, distance)
         ) / d_northing
-        return g_en
+        return k_en
 
     @pytest.fixture
     def finite_diff_kernel_eu(self, sample_coordinate, sample_point_source):
@@ -542,14 +542,14 @@ class TestTensorFiniteDifferences:
         d_upward = self.delta_percentage * (upward_p - upward_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
-        # Calculate g_ez through finite differences
+        # Calculate kernel_eu through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_ez = (
+        k_eu = (
             kernel_e(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_e(*sample_coordinate, *sample_point_source, distance)
         ) / d_upward
-        return g_ez
+        return k_eu
 
     @pytest.fixture
     def finite_diff_kernel_nu(self, sample_coordinate, sample_point_source):
@@ -562,14 +562,14 @@ class TestTensorFiniteDifferences:
         d_upward = self.delta_percentage * (upward_p - upward_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
-        # Calculate g_nz through finite differences
+        # Calculate k_nu through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-        g_nz = (
+        k_nu = (
             kernel_n(*shifted_coordinate, *sample_point_source, distance_shifted)
             - kernel_n(*sample_coordinate, *sample_point_source, distance)
         ) / d_upward
-        return g_nz
+        return k_nu
 
     def test_g_ee(self, sample_coordinate, sample_point_source, finite_diff_kernel_ee):
         """
