@@ -88,6 +88,36 @@ def gravity_pot(easting, northing, upward, prism, density):
 
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
+
+    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as
+    follows:
+
+    .. math::
+
+        \text{ln2}(x) =
+        \begin{cases}
+            0 & |x| < 10^{-10} \\
+            \ln (x)
+        \end{cases}
+
+    .. math::
+
+        \text{arctan2} \left( \frac{y}{x} \right) =
+        \begin{cases}
+            \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
+            \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
+            -\frac{\pi}{2} & x = 0 \quad \text{and} \quad y < 0 \\
+            0 & x = 0 \quad \text{and} \quad y = 0 \\
+        \end{cases}
+
+    These were defined after [Fukushima2020]_ and guarantee a good accuracy on
+    any observation point.
+
+    References
+    ----------
+    - [Nagy2000]_
+    - [Nagy2002]_
+    - [Fukushima2020]_
     """
     return (
         GRAVITATIONAL_CONST
@@ -139,7 +169,7 @@ def gravity_u(easting, northing, upward, prism, density):
             G
             \rho \,\,
             \Bigg\lvert \Bigg\lvert \Bigg\lvert
-            k_V(x, y, z)
+            k_u(x, y, z)
             \Bigg\rvert_{X_1}^{X_2}
             \Bigg\rvert_{Y_1}^{Y_2}
             \Bigg\rvert_{Z_1}^{Z_2}
@@ -148,13 +178,12 @@ def gravity_u(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_V(x, y, z) &=
-            x y \, \text{ln2} (z + r)
-            + y z \, \text{ln2} (x + r)
-            + z x \, \text{ln2} (y + r) \\
-            - \frac{x^2}{2} &\text{arctan2} \left( \frac{yz}{xr} \right)
-            - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
-            - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right),
+        k_u(x, y, z) =
+            - \left[
+            x \, \text{ln2} (y + r)
+            + y \, \text{ln2} (x + r)
+            - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
+            \right]
 
     .. math::
 
@@ -173,6 +202,36 @@ def gravity_u(easting, northing, upward, prism, density):
 
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
+
+    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as
+    follows:
+
+    .. math::
+
+        \text{ln2}(x) =
+        \begin{cases}
+            0 & |x| < 10^{-10} \\
+            \ln (x)
+        \end{cases}
+
+    .. math::
+
+        \text{arctan2} \left( \frac{y}{x} \right) =
+        \begin{cases}
+            \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
+            \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
+            -\frac{\pi}{2} & x = 0 \quad \text{and} \quad y < 0 \\
+            0 & x = 0 \quad \text{and} \quad y = 0 \\
+        \end{cases}
+
+    These were defined after [Fukushima2020]_ and guarantee a good accuracy on
+    any observation point.
+
+    References
+    ----------
+    - [Nagy2000]_
+    - [Nagy2002]_
+    - [Fukushima2020]_
     """
     return (
         GRAVITATIONAL_CONST
@@ -232,7 +291,6 @@ def _evaluate_kernel(easting, northing, upward, prism, kernel):
     ----------
     - [Nagy2000]_
     - [Nagy2002]_
-    - [Fukushima2020]_
     """
     # Initialize result float to zero
     result = 0

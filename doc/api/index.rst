@@ -73,6 +73,7 @@ Gravity
    :toctree: generated/
 
     prism.gravity_pot
+    prism.gravity_u
 
 Kernels
 ^^^^^^^
@@ -81,6 +82,7 @@ Kernels
    :toctree: generated/
 
     prism.kernel_pot
+    prism.kernel_u
 
 
 Utilities
