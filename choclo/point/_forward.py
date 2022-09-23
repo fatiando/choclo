@@ -145,8 +145,8 @@ def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     r"""
     Northing component of the gravitational acceleration due to a point source
 
-    Returns the northing component of the gravitational acceleration produced by
-    a single point source on a single computation point
+    Returns the northing component of the gravitational acceleration produced
+    by a single point source on a single computation point
 
     Parameters
     ----------
