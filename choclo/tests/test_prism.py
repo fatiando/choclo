@@ -332,75 +332,53 @@ class TestSymmetryGravityU:
     Test the symmetry of gravity_u of a rectangular prism
     """
 
-    scalers = {
-        "inside": 0.8,
-        "surface": 1.0,
-        "outside": 1.2,
-    }
-
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
+    @pytest.fixture()
     def coords_in_easting_northing_plane(
-        self, sample_prism_center, sample_prism_dimensions, request
+        self, sample_prism_center, sample_prism_dimensions
     ):
         """
         Return observation points located in the easting-northing plane that
         pass along the center of the prism.
         """
         # Get the coordinates of the sample prism center
-        easting, northing, upward = sample_prism_center
+        center_easting, center_northing, center_upward = sample_prism_center
         # Get the dimensions of the sample prism
-        d_easting, d_northing, d_upward = sample_prism_dimensions
-        # Get scaler
-        scaler = request.param
+        d_easting, d_northing, _ = sample_prism_dimensions
         # Build the points
-        points = list(
-            [
-                easting + i * scaler * d_easting / 2,
-                northing + j * scaler * d_northing / 2,
-                upward,
-            ]
-            for i in (-1, 0, 1)
-            for j in (-1, 0, 1)
-            if i != 0 and j != 0
-        )
-        return points
+        n_per_side = 5
+        west, east = -n_per_side * d_easting, n_per_side * d_easting
+        south, north = -n_per_side * d_northing, n_per_side * d_northing
+        easting = np.linspace(west, east, 2 * n_per_side + 1)
+        northing = np.linspace(south, north, 2 * n_per_side + 1)
+        # Shift coordinates
+        easting -= center_easting
+        northing -= center_northing
+        upward = np.zeros_like(easting) - center_upward
+        return easting, northing, upward
 
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
-    def coords_in_top_and_bottom_planes(
-        self, sample_prism_center, sample_prism_dimensions, request
-    ):
+    @pytest.fixture
+    def mirrored_points(self, sample_prism_center, sample_prism_dimensions):
         """
-        Return observation points located in top and bottom easting-northing
-        planes symmetrical to the prism center.
+        Define two set of mirrored points in a top and bottom easting-northing
+        planes
         """
         # Get the coordinates of the sample prism center
-        easting, northing, upward = sample_prism_center
+        center_easting, center_northing, center_upward = sample_prism_center
         # Get the dimensions of the sample prism
         d_easting, d_northing, d_upward = sample_prism_dimensions
-        # Get scaler
-        scaler = request.param
-        # Build the bottom and top points
-        bottom_points = list(
-            [
-                easting + i * scaler * d_easting / 2,
-                northing + j * scaler * d_northing / 2,
-                upward - scaler * d_upward / 2,
-            ]
-            for i in (-1, 0, 1)
-            for j in (-1, 0, 1)
-            if i != 0 and j != 0
-        )
-        top_points = list(
-            [
-                easting + i * scaler * d_easting / 2,
-                northing + j * scaler * d_northing / 2,
-                upward + scaler * d_upward / 2,
-            ]
-            for i in (-1, 0, 1)
-            for j in (-1, 0, 1)
-            if i != 0 and j != 0
-        )
-        return bottom_points, top_points
+        # Build the points
+        n_per_side = 5
+        west, east = -n_per_side * d_easting, n_per_side * d_easting
+        south, north = -n_per_side * d_northing, n_per_side * d_northing
+        easting = np.linspace(west, east, 2 * n_per_side + 1)
+        northing = np.linspace(south, north, 2 * n_per_side + 1)
+        # Shift coordinates
+        easting -= center_easting
+        northing -= center_northing
+        # Define the upward coordinates for the two sets
+        upward_top = np.zeros_like(easting) + center_upward + d_upward
+        upward_bottom = np.zeros_like(easting) + center_upward - d_upward
+        return (easting, northing, upward_top), (easting, northing, upward_bottom)
 
     def test_easting_northing_plane(
         self, coords_in_easting_northing_plane, sample_prism, sample_density
@@ -413,32 +391,40 @@ class TestSymmetryGravityU:
         g_u = np.array(
             list(
                 gravity_u(e, n, u, sample_prism, sample_density)
-                for e, n, u in coords_in_easting_northing_plane
+                for e, n, u in zip(*coords_in_easting_northing_plane)
             )
         )
         assert (g_u < 1e-32).all()
 
-    def test_bottom_top_planes(
-        self, coords_in_top_and_bottom_planes, sample_prism, sample_density
-    ):
+    def test_mirrored_points(self, mirrored_points, sample_prism, sample_density):
         """
         Test if gravity_u is opposite in points of the top and bottom
         easting-northing planes.
         """
-        bottom, top = coords_in_top_and_bottom_planes
+        top, bottom = mirrored_points
         # Compute gravity_u on every observation point of the two planes
         g_u_bottom = np.array(
-            list(gravity_u(e, n, u, sample_prism, sample_density) for e, n, u in bottom)
+            list(
+                gravity_u(e, n, u, sample_prism, sample_density)
+                for e, n, u in zip(*bottom)
+            )
         )
         g_u_top = np.array(
-            list(gravity_u(e, n, u, sample_prism, sample_density) for e, n, u in top)
+            list(
+                gravity_u(e, n, u, sample_prism, sample_density)
+                for e, n, u in zip(*top)
+            )
         )
         npt.assert_allclose(g_u_bottom, -g_u_top)
 
-    def test_sign(self, sample_prism_center, sample_prism, sample_density):
+    @pytest.mark.parametrize(
+        "density", (-200, 200), ids=("negative_density", "positive_density")
+    )
+    def test_sign(self, sample_prism_center, sample_prism, density):
         """
         Test that gravity_u has the correct sign on top and bottom points
         """
+        # Get upward dimension of the prism
         d_upward = sample_prism[5] - sample_prism[4]
         # Define an observation point on top of the prism
         point = (
@@ -447,11 +433,32 @@ class TestSymmetryGravityU:
             sample_prism_center[2] + d_upward,
         )
         # Compute gravity_u
-        g_u = gravity_u(*point, sample_prism, sample_density)
+        g_u = gravity_u(*point, sample_prism, density)
         # Check if g_u has the opposite sign as its density (the acceleration
         # will point downwards for a positive density, therefore negative
         # upward component)
-        assert np.sign(g_u) != np.sign(sample_density)
+        assert np.sign(g_u) != np.sign(density)
+
+    def test_on_vertices(self, sample_prism, sample_density):
+        """
+        Test g_u on the vertices
+        """
+        # Get boundaries of the prism
+        west, east, south, north, bottom, top = sample_prism
+        # Split the vertices of the prism between the ones in the top and
+        # bottom faces
+        top_vertices = [[e, n, top] for e in (west, east) for n in (south, north)]
+        bottom_vertices = [[e, n, bottom] for e in (west, east) for n in (south, north)]
+        g_u_top = np.array(
+            [gravity_u(*point, sample_prism, sample_density) for point in top_vertices]
+        )
+        g_u_bottom = np.array(
+            [
+                gravity_u(*point, sample_prism, sample_density)
+                for point in bottom_vertices
+            ]
+        )
+        npt.assert_allclose(g_u_top, -g_u_bottom)
 
 
 class TestAccelerationFiniteDifferences:
