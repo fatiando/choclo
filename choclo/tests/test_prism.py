@@ -5,7 +5,8 @@ import pytest
 import numpy as np
 import numpy.testing as npt
 
-from .. import prism_kernel_evaluation, kernel_prism_potential
+from ..prism import kernel_pot
+from ..prism._forward import _evaluate_kernel
 
 
 @pytest.fixture(name="sample_prism_center")
@@ -218,7 +219,7 @@ class TestSymmetryPotential:
         """
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
-            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
             for e, n, u in coords_in_vertices
         )
         npt.assert_allclose(kernel[0], kernel)
@@ -232,7 +233,7 @@ class TestSymmetryPotential:
         """
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
-            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
             for e, n, u in coords_in_centers_of_easting_edges
         )
         npt.assert_allclose(kernel[0], kernel)
@@ -246,7 +247,7 @@ class TestSymmetryPotential:
         """
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
-            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
             for e, n, u in coords_in_centers_of_northing_edges
         )
         npt.assert_allclose(kernel[0], kernel)
@@ -260,7 +261,7 @@ class TestSymmetryPotential:
         """
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
-            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
             for e, n, u in coords_in_centers_of_upward_edges
         )
         npt.assert_allclose(kernel[0], kernel)
@@ -274,7 +275,7 @@ class TestSymmetryPotential:
         """
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
-            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
             for e, n, u in coords_in_centers_of_easting_faces
         )
         npt.assert_allclose(kernel[0], kernel)
@@ -288,7 +289,7 @@ class TestSymmetryPotential:
         """
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
-            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
             for e, n, u in coords_in_centers_of_northing_faces
         )
         npt.assert_allclose(kernel[0], kernel)
@@ -302,7 +303,7 @@ class TestSymmetryPotential:
         """
         # Compute the kernel on every observation point of the symmetry group
         kernel = list(
-            prism_kernel_evaluation(e, n, u, sample_prism, kernel_prism_potential)
+            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
             for e, n, u in coords_in_centers_of_upward_faces
         )
         npt.assert_allclose(kernel[0], kernel)
