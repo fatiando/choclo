@@ -79,3 +79,13 @@ coordinates:
     utils.distance_spherical
     utils.distance_spherical_core
 
+
+Universal Constants
+~~~~~~~~~~~~~~~~~~~
+
+Access universal physical constants given in SI units:
+
+.. autosummary::
+   :toctree: generated/
+
+    constants.GRAVITATIONAL_CONST
