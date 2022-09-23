@@ -7,8 +7,9 @@
 """
 Kernels and forward modelling functions for rectangular prisms
 """
-from ._forward import gravity_pot, gravity_u
+from ._forward import gravity_pot, gravity_u, gravity_e
 from ._kernels import (
     kernel_pot,
     kernel_u,
+    kernel_e,
 )
