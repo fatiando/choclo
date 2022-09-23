@@ -66,21 +66,21 @@ Kernels
 Rectangular Prisms
 ~~~~~~~~~~~~~~~~~~
 
-Potential field
-^^^^^^^^^^^^^^^
+Gravity
+^^^^^^^
 
 .. autosummary::
    :toctree: generated/
 
-    kernel_prism_potential
+    prism.gravity_pot
 
-Gradient components
-^^^^^^^^^^^^^^^^^^^
+Kernels
+^^^^^^^
 
 .. autosummary::
    :toctree: generated/
 
-    kernel_prism_g_upward
+    prism.kernel_pot
 
 
 Utilities

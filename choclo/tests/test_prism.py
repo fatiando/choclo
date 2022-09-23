@@ -1,12 +1,11 @@
 """
-Test kernel functions for rectangular prisms
+Test forward modelling functions for rectangular prisms
 """
 import pytest
 import numpy as np
 import numpy.testing as npt
 
-from ..prism import kernel_pot
-from ..prism._forward import _evaluate_kernel
+from ..prism import gravity_pot
 
 
 @pytest.fixture(name="sample_prism_center")
@@ -15,6 +14,14 @@ def fixture_sample_prism_center():
     Return the geometric center of the sample prism
     """
     return 30.5, 21.3, -43.5
+
+
+@pytest.fixture(name="sample_density")
+def fixture_sample_density():
+    """
+    Return the density for the sample prism
+    """
+    return 400
 
 
 @pytest.fixture(name="sample_prism_dimensions")
@@ -42,7 +49,7 @@ def fixture_sample_prism(sample_prism_center, sample_prism_dimensions):
 
 class TestSymmetryPotential:
     """
-    Test the symmetry of the kernel for the potential of a rectangular prism
+    Test the symmetry of gravity_pot of a rectangular prism
     """
 
     scalers = [0.8, 1.0, 1.2]
@@ -213,97 +220,97 @@ class TestSymmetryPotential:
         ]
         return faces_normal_to_upward
 
-    def test_vertices(self, coords_in_vertices, sample_prism):
+    def test_vertices(self, coords_in_vertices, sample_prism, sample_density):
         """
-        Test if kernel for potential satisfies symmetry on vertices
+        Test if gravity_pot satisfies symmetry on vertices
         """
-        # Compute the kernel on every observation point of the symmetry group
-        kernel = list(
-            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
+        # Compute gravity_pot on every observation point of the symmetry group
+        potential = list(
+            gravity_pot(e, n, u, sample_prism, sample_density)
             for e, n, u in coords_in_vertices
         )
-        npt.assert_allclose(kernel[0], kernel)
+        npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_easting_edges(
-        self, coords_in_centers_of_easting_edges, sample_prism
+        self, coords_in_centers_of_easting_edges, sample_prism, sample_density
     ):
         """
-        Test if kernel for potential satisfies symmetry on centers of the edges
+        Test if gravity_pot satisfies symmetry on centers of the edges
         parallel to the easting direction
         """
-        # Compute the kernel on every observation point of the symmetry group
-        kernel = list(
-            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
+        # Compute gravity_pot on every observation point of the symmetry group
+        potential = list(
+            gravity_pot(e, n, u, sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_easting_edges
         )
-        npt.assert_allclose(kernel[0], kernel)
+        npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_northing_edges(
-        self, coords_in_centers_of_northing_edges, sample_prism
+        self, coords_in_centers_of_northing_edges, sample_prism, sample_density
     ):
         """
-        Test if kernel for potential satisfies symmetry on centers of the edges
+        Test if gravity_pot satisfies symmetry on centers of the edges
         parallel to the northing direction
         """
-        # Compute the kernel on every observation point of the symmetry group
-        kernel = list(
-            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
+        # Compute gravity_pot on every observation point of the symmetry group
+        potential = list(
+            gravity_pot(e, n, u, sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_northing_edges
         )
-        npt.assert_allclose(kernel[0], kernel)
+        npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_upward_edges(
-        self, coords_in_centers_of_upward_edges, sample_prism
+        self, coords_in_centers_of_upward_edges, sample_prism, sample_density
     ):
         """
-        Test if kernel for potential satisfies symmetry on centers of the edges
+        Test if gravity_pot satisfies symmetry on centers of the edges
         parallel to the upward direction
         """
-        # Compute the kernel on every observation point of the symmetry group
-        kernel = list(
-            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
+        # Compute gravity_pot on every observation point of the symmetry group
+        potential = list(
+            gravity_pot(e, n, u, sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_upward_edges
         )
-        npt.assert_allclose(kernel[0], kernel)
+        npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_easting_faces(
-        self, coords_in_centers_of_easting_faces, sample_prism
+        self, coords_in_centers_of_easting_faces, sample_prism, sample_density
     ):
         """
-        Test if kernel for potential satisfies symmetry on centers of the
+        Test if gravity_pot satisfies symmetry on centers of the
         centers of the faces normal to the easting direction
         """
-        # Compute the kernel on every observation point of the symmetry group
-        kernel = list(
-            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
+        # Compute gravity_pot on every observation point of the symmetry group
+        potential = list(
+            gravity_pot(e, n, u, sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_easting_faces
         )
-        npt.assert_allclose(kernel[0], kernel)
+        npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_northing_faces(
-        self, coords_in_centers_of_northing_faces, sample_prism
+        self, coords_in_centers_of_northing_faces, sample_prism, sample_density
     ):
         """
-        Test if kernel for potential satisfies symmetry on centers of the
+        Test if gravity_pot satisfies symmetry on centers of the
         centers of the faces normal to the northing direction
         """
-        # Compute the kernel on every observation point of the symmetry group
-        kernel = list(
-            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
+        # Compute gravity_pot on every observation point of the symmetry group
+        potential = list(
+            gravity_pot(e, n, u, sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_northing_faces
         )
-        npt.assert_allclose(kernel[0], kernel)
+        npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_upward_faces(
-        self, coords_in_centers_of_upward_faces, sample_prism
+        self, coords_in_centers_of_upward_faces, sample_prism, sample_density
     ):
         """
-        Test if kernel for potential satisfies symmetry on centers of the
+        Test if gravity_pot satisfies symmetry on centers of the
         centers of the faces normal to the upward direction
         """
-        # Compute the kernel on every observation point of the symmetry group
-        kernel = list(
-            _evaluate_kernel(e, n, u, sample_prism, kernel_pot)
+        # Compute gravity_pot on every observation point of the symmetry group
+        potential = list(
+            gravity_pot(e, n, u, sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_upward_faces
         )
-        npt.assert_allclose(kernel[0], kernel)
+        npt.assert_allclose(potential[0], potential)

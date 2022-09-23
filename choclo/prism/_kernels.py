@@ -51,13 +51,13 @@ def kernel_pot(easting, northing, upward):
 
     .. math::
 
-            k_V(x, y, z) &=
-                x y \, \text{ln2} (z + r)
-                + y z \, \text{ln2} (x + r)
-                + z x \, \text{ln2} (y + r) \\
-                & - \frac{x^2}{2} \text{arctan2} \left( \frac{yz}{xr} \right)
-                - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
-                - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right)
+        k_V(x, y, z) &=
+            x y \, \text{ln2} (z + r)
+            + y z \, \text{ln2} (x + r)
+            + z x \, \text{ln2} (y + r) \\
+            & - \frac{x^2}{2} \text{arctan2} \left( \frac{yz}{xr} \right)
+            - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
+            - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right)
 
     where
 
