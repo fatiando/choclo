@@ -301,6 +301,7 @@ def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     .. math::
 
         g_{xx}(\mathbf{p}) = G m
+            \left[
             \frac{
                 3 (x_p - x_q)^2
             }{
@@ -311,6 +312,7 @@ def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
             }{
                 \lVert \mathbf{p} - \mathbf{q} \rVert_2^3
             }
+            \right]
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`)
@@ -367,6 +369,7 @@ def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     .. math::
 
         g_{yy}(\mathbf{p}) = G m
+            \left[
             \frac{
                 3 (y_p - y_q)^2
             }{
@@ -377,6 +380,7 @@ def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
             }{
                 \lVert \mathbf{p} - \mathbf{q} \rVert_2^3
             }
+            \right]
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`)
@@ -433,6 +437,7 @@ def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     .. math::
 
         g_{zz}(\mathbf{p}) = G m
+            \left[
             \frac{
                 3 (z_p - z_q)^2
             }{
@@ -443,6 +448,7 @@ def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
             }{
                 \lVert \mathbf{p} - \mathbf{q} \rVert_2^3
             }
+            \right]
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`)
@@ -499,11 +505,13 @@ def gravity_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     .. math::
 
         g_{xy}(\mathbf{p}) = G m
+            \left[
             \frac{
                 3 (x_p - x_q) (y_p - y_q)
             }{
                 \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
             }
+            \right]
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`)
@@ -560,11 +568,13 @@ def gravity_eu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     .. math::
 
         g_{xz}(\mathbf{p}) = G m
+            \left[
             \frac{
                 3 (x_p - x_q) (z_p - z_q)
             }{
                 \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
             }
+            \right]
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`)
@@ -620,11 +630,13 @@ def gravity_nu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     .. math::
 
         g_{yz}(\mathbf{p}) = G m
+            \left[
             \frac{
                 3 (y_p - y_q) (z_p - z_q)
             }{
                 \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
             }
+            \right]
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`)
