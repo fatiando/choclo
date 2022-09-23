@@ -65,7 +65,7 @@ def gravity_pot(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 
     .. math::
 
-        V(\mathbf{p}) = G m \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert^2}
+        V(\mathbf{p}) = G m \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2^2}
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`)
@@ -124,7 +124,7 @@ def gravity_e(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
             \frac{
                 x_p - x_q
             }{
-                \lVert \mathbf{p} - \mathbf{q} \rVert^2
+                \lVert \mathbf{p} - \mathbf{q} \rVert_2^2
             }
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
@@ -184,7 +184,7 @@ def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
             \frac{
                 y_p - y_q
             }{
-                \lVert \mathbf{p} - \mathbf{q} \rVert^2
+                \lVert \mathbf{p} - \mathbf{q} \rVert_2^2
             }
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
@@ -244,7 +244,7 @@ def gravity_u(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
             \frac{
                 z_p - z_q
             }{
-                \lVert \mathbf{p} - \mathbf{q} \rVert^2
+                \lVert \mathbf{p} - \mathbf{q} \rVert_2^2
             }
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
