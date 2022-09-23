@@ -6,3 +6,5 @@
 #
 # Import functions/classes to make the public API
 from ._version import __version__
+from . import point
+from . import prism
