@@ -370,7 +370,7 @@ class TestGradientFiniteDifferences:
         d_northing = self.delta_percentage * (northing_p - northing_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
-        # Calculate g_easting through finite differences
+        # Calculate g_northing through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_northing = (
@@ -390,7 +390,7 @@ class TestGradientFiniteDifferences:
         d_upward = self.delta_percentage * (upward_p - upward_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
-        # Calculate g_easting through finite differences
+        # Calculate g_upward through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_upward = (
@@ -403,7 +403,7 @@ class TestGradientFiniteDifferences:
         self, sample_coordinate, sample_point_source, finite_diff_kernel_e
     ):
         """
-        Test kernel of kernel_e against finite differences of the kernel_pot
+        Test kernel_e against finite differences of the kernel_pot
         """
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
@@ -416,7 +416,7 @@ class TestGradientFiniteDifferences:
         self, sample_coordinate, sample_point_source, finite_diff_kernel_n
     ):
         """
-        Test kernel of kernel_n against finite differences of the kernel_pot
+        Test kernel_n against finite differences of the kernel_pot
         """
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
@@ -429,7 +429,7 @@ class TestGradientFiniteDifferences:
         self, sample_coordinate, sample_point_source, finite_diff_kernel_u
     ):
         """
-        Test kernel of kernel_u against finite differences of the kernel_pot
+        Test kernel_u against finite differences of the kernel_pot
         """
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         npt.assert_allclose(
@@ -462,7 +462,7 @@ class TestTensorFiniteDifferences:
         d_easting = self.delta_percentage * (easting_p - easting_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
-        # Calculate g_easting through finite differences
+        # Calculate g_ee through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_ee = (
@@ -482,7 +482,7 @@ class TestTensorFiniteDifferences:
         d_northing = self.delta_percentage * (northing_p - northing_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
-        # Calculate g_easting through finite differences
+        # Calculate g_nn through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_nn = (
@@ -502,7 +502,7 @@ class TestTensorFiniteDifferences:
         d_upward = self.delta_percentage * (upward_p - upward_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
-        # Calculate g_easting through finite differences
+        # Calculate g_zz through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_zz = (
@@ -522,7 +522,7 @@ class TestTensorFiniteDifferences:
         d_northing = self.delta_percentage * (northing_p - northing_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
-        # Calculate g_easting through finite differences
+        # Calculate g_en through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_en = (
@@ -542,7 +542,7 @@ class TestTensorFiniteDifferences:
         d_upward = self.delta_percentage * (upward_p - upward_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
-        # Calculate g_easting through finite differences
+        # Calculate g_ez through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_ez = (
@@ -562,7 +562,7 @@ class TestTensorFiniteDifferences:
         d_upward = self.delta_percentage * (upward_p - upward_q)
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
-        # Calculate g_easting through finite differences
+        # Calculate g_nz through finite differences
         distance_shifted = distance_cartesian(*shifted_coordinate, *sample_point_source)
         distance = distance_cartesian(*sample_coordinate, *sample_point_source)
         g_nz = (
