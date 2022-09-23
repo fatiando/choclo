@@ -13,15 +13,15 @@ import pytest
 
 from ..point import (
     gravity_e,
-    gravity_n,
-    gravity_u,
-    gravity_pot,
     gravity_ee,
-    gravity_nn,
-    gravity_uu,
     gravity_en,
     gravity_eu,
+    gravity_n,
+    gravity_nn,
     gravity_nu,
+    gravity_pot,
+    gravity_u,
+    gravity_uu,
 )
 from .utils import NUMBA_IS_DISABLED
 
