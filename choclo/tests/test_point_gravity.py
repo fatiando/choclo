@@ -340,3 +340,112 @@ class TestSymmetryGravityU:
             )
         )
         npt.assert_allclose(g_u_1, -g_u_2)
+
+
+class TestAccelerationFiniteDifferences:
+    """
+    Test acceleration components against finite-differences approximations of
+    the gravity potential
+    """
+
+    # Define percentage for the finite difference displacement
+    delta_percentage = 1e-8
+
+    # Define expected relative error tolerance in the comparisons
+    rtol = 1e-5
+
+    @pytest.fixture
+    def finite_diff_gravity_e(
+        self, sample_coordinate, sample_point_source, sample_mass
+    ):
+        """
+        Compute gravity_e through finite differences of the gravity_pot
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        easting_q, _, _ = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_easting = self.delta_percentage * (easting_p - easting_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p + d_easting, northing_p, upward_p)
+        # Calculate g_e through finite differences
+        g_e = (
+            gravity_pot(*shifted_coordinate, *sample_point_source, sample_mass)
+            - gravity_pot(*sample_coordinate, *sample_point_source, sample_mass)
+        ) / d_easting
+        return g_e
+
+    @pytest.fixture
+    def finite_diff_gravity_n(
+        self, sample_coordinate, sample_point_source, sample_mass
+    ):
+        """
+        Compute gravity_n through finite differences of the gravity_pot
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        _, northing_q, _ = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_northing = self.delta_percentage * (northing_p - northing_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
+        # Calculate g_n through finite differences
+        g_n = (
+            gravity_pot(*shifted_coordinate, *sample_point_source, sample_mass)
+            - gravity_pot(*sample_coordinate, *sample_point_source, sample_mass)
+        ) / d_northing
+        return g_n
+
+    @pytest.fixture
+    def finite_diff_gravity_u(
+        self, sample_coordinate, sample_point_source, sample_mass
+    ):
+        """
+        Compute gravity_u through finite differences of the gravity_pot
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        _, _, upward_q = sample_point_source
+        # Compute a small increment in the easting coordinate
+        d_upward = self.delta_percentage * (upward_p - upward_q)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p, upward_p + d_upward)
+        # Calculate g_u through finite differences
+        g_u = (
+            gravity_pot(*shifted_coordinate, *sample_point_source, sample_mass)
+            - gravity_pot(*sample_coordinate, *sample_point_source, sample_mass)
+        ) / d_upward
+        return g_u
+
+    def test_gravity_e(
+        self, sample_coordinate, sample_point_source, finite_diff_gravity_e, sample_mass
+    ):
+        """
+        Test gravity_e against finite differences of the gravity_pot
+        """
+        npt.assert_allclose(
+            finite_diff_gravity_e,
+            gravity_e(*sample_coordinate, *sample_point_source, sample_mass),
+            rtol=self.rtol,
+        )
+
+    def test_gravity_n(
+        self, sample_coordinate, sample_point_source, finite_diff_gravity_n, sample_mass
+    ):
+        """
+        Test gravity_n against finite differences of the gravity_pot
+        """
+        npt.assert_allclose(
+            finite_diff_gravity_n,
+            gravity_n(*sample_coordinate, *sample_point_source, sample_mass),
+            rtol=self.rtol,
+        )
+
+    def test_gravity_u(
+        self, sample_coordinate, sample_point_source, finite_diff_gravity_u, sample_mass
+    ):
+        """
+        Test gravity_u against finite differences of the gravity_pot
+        """
+        npt.assert_allclose(
+            finite_diff_gravity_u,
+            gravity_u(*sample_coordinate, *sample_point_source, sample_mass),
+            rtol=self.rtol,
+        )
