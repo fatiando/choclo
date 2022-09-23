@@ -203,6 +203,12 @@ def gravity_u(easting, northing, upward, prism, density):
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
 
+    .. important
+
+        The minus sign in the :math:`k_x(x, y, z)` function is needed to return
+        the **upward** component of the acceleration. [Nagy2000]_ and
+        [Nagy2002]_ equation corresponds to the *downward* coordinate.
+
     The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as
     follows:
 
