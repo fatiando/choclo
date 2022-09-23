@@ -52,10 +52,13 @@ class TestSymmetryPotential:
     Test the symmetry of gravity_pot of a rectangular prism
     """
 
-    scalers = [0.8, 1.0, 1.2]
-    ids = ["inside", "surface", "outside"]
+    scalers = {
+        "inside": 0.8,
+        "surface": 1.0,
+        "outside": 1.2,
+    }
 
-    @pytest.fixture(params=scalers, ids=ids)
+    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
     def coords_in_vertices(self, sample_prism_center, sample_prism_dimensions, request):
         """
         Return observation points located in the vertices of the prism
@@ -79,7 +82,7 @@ class TestSymmetryPotential:
         )
         return vertices
 
-    @pytest.fixture(params=scalers, ids=ids)
+    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
     def coords_in_centers_of_easting_edges(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -105,7 +108,7 @@ class TestSymmetryPotential:
         )
         return edges_easting
 
-    @pytest.fixture(params=scalers, ids=ids)
+    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
     def coords_in_centers_of_northing_edges(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -131,7 +134,7 @@ class TestSymmetryPotential:
         )
         return edges_northing
 
-    @pytest.fixture(params=scalers, ids=ids)
+    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
     def coords_in_centers_of_upward_edges(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -157,7 +160,7 @@ class TestSymmetryPotential:
         )
         return edges_upward
 
-    @pytest.fixture(params=scalers, ids=ids)
+    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
     def coords_in_centers_of_easting_faces(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -178,7 +181,7 @@ class TestSymmetryPotential:
         ]
         return faces_normal_to_easting
 
-    @pytest.fixture(params=scalers, ids=ids)
+    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
     def coords_in_centers_of_northing_faces(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -199,7 +202,7 @@ class TestSymmetryPotential:
         ]
         return faces_normal_to_northing
 
-    @pytest.fixture(params=scalers, ids=ids)
+    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
     def coords_in_centers_of_upward_faces(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
