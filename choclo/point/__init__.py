@@ -7,8 +7,8 @@
 """
 Kernels and forward modelling functions for point sources
 """
-from .forward import gravity_e, gravity_n, gravity_pot
-from .kernels import (
+from ._forward import gravity_e, gravity_n, gravity_pot
+from ._kernels import (
     kernel_e,
     kernel_ee,
     kernel_en,
