@@ -388,25 +388,36 @@ class TestSymmetryGravityU:
         return (easting, northing, upward_top), (easting, northing, upward_bottom)
 
     def test_easting_northing_plane(
-        self, coords_in_easting_northing_plane, sample_prism, sample_density
+        self,
+        coords_in_easting_northing_plane,
+        sample_prism,
+        sample_prism_dimensions,
+        sample_prism_center,
+        sample_density,
     ):
         """
         Test if gravity_u is null in points of the easting-northing plane that
         passes through its center.
         """
-        # Compute gravity_u on every observation point of the symmetry group
-        g_u = np.array(
-            list(
-                gravity_u(e, n, u, sample_prism, sample_density)
-                for e, n, u in zip(*coords_in_easting_northing_plane)
-            )
+        # Compute gravity_u on every observation point of the easting-northing
+        # plane
+        g_u = list(
+            gravity_u(e, n, u, sample_prism, sample_density)
+            for e, n, u in zip(*coords_in_easting_northing_plane)
         )
-        assert (g_u < 1e-32).all()
+        # Compute gravity_u on a point slightly shifted from the prism center
+        # (it will be our control for non-zero field)
+        easting, northing, upward = sample_prism_center
+        d_upward = sample_prism_dimensions[2]
+        non_zero_g_u = gravity_u(
+            easting, northing, upward + 0.001 * d_upward, sample_prism, sample_density
+        )
+        assert (np.abs(g_u) < 1e-8 * np.abs(non_zero_g_u)).all()
 
     def test_mirrored_points(self, mirrored_points, sample_prism, sample_density):
         """
-        Test if gravity_u is opposite in points of the top and bottom
-        easting-northing planes.
+        Test if gravity_u is opposite in mirrored points across the
+        easting-northing plane
         """
         top, bottom = mirrored_points
         # Compute gravity_u on every observation point of the two planes
