@@ -5,6 +5,5 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 # Import functions/classes to make the public API
+from . import point, prism
 from ._version import __version__
-from . import point
-from . import prism

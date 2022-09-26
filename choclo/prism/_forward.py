@@ -10,7 +10,7 @@ Forward modelling function for rectangular prisms
 from numba import jit
 
 from ..constants import GRAVITATIONAL_CONST
-from ._kernels import kernel_pot, kernel_u, kernel_e, kernel_n
+from ._kernels import kernel_e, kernel_n, kernel_pot, kernel_u
 
 
 @jit(nopython=True)

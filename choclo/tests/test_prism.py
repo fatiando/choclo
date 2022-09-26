@@ -1,11 +1,17 @@
+# Copyright (c) 2022 The Choclo Developers.
+# Distributed under the terms of the BSD 3-Clause License.
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# This code is part of the Fatiando a Terra project (https://www.fatiando.org)
+#
 """
 Test forward modelling functions for rectangular prisms
 """
-import pytest
 import numpy as np
 import numpy.testing as npt
+import pytest
 
-from ..prism import gravity_pot, gravity_u, gravity_e, gravity_n
+from ..prism import gravity_e, gravity_n, gravity_pot, gravity_u
 
 
 @pytest.fixture(name="sample_prism_center")
