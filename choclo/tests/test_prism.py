@@ -346,10 +346,10 @@ class TestSymmetryGravityU:
         d_easting, d_northing, _ = sample_prism_dimensions
         # Build the points
         n_per_side = 5
-        west, east = -n_per_side * d_easting, n_per_side * d_easting
-        south, north = -n_per_side * d_northing, n_per_side * d_northing
-        easting = np.linspace(west, east, 2 * n_per_side + 1)
-        northing = np.linspace(south, north, 2 * n_per_side + 1)
+        max_easting = d_easting / 2 * n_per_side
+        max_northing = d_northing / 2 * n_per_side
+        easting = np.linspace(-max_easting, max_easting, 2 * n_per_side + 1)
+        northing = np.linspace(-max_northing, max_northing, 2 * n_per_side + 1)
         # Shift coordinates
         easting += center_easting
         northing += center_northing
