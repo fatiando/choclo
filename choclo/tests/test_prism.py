@@ -813,6 +813,25 @@ class TestAccelerationFiniteDifferences:
         return g_e
 
     @pytest.fixture
+    def finite_diff_gravity_n(self, sample_coordinate, sample_prism, sample_density):
+        """
+        Compute gravity_n through finite differences of the gravity_pot
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        south, north = sample_prism[2:4]
+        # Compute a small increment in the northing coordinate
+        center_northing = (south + north) / 2  # northing coord of the prism center
+        d_northing = self.delta_percentage * (northing_p - center_northing)
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p + d_northing, upward_p)
+        # Calculate g_n through finite differences
+        g_n = (
+            gravity_pot(*shifted_coordinate, *sample_prism, sample_density)
+            - gravity_pot(*sample_coordinate, *sample_prism, sample_density)
+        ) / d_northing
+        return g_n
+
+    @pytest.fixture
     def finite_diff_gravity_u(self, sample_coordinate, sample_prism, sample_density):
         """
         Compute gravity_u through finite differences of the gravity_pot
