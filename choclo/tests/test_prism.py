@@ -351,33 +351,40 @@ class TestSymmetryGravityU:
         easting = np.linspace(west, east, 2 * n_per_side + 1)
         northing = np.linspace(south, north, 2 * n_per_side + 1)
         # Shift coordinates
-        easting -= center_easting
-        northing -= center_northing
-        upward = np.zeros_like(easting) - center_upward
+        easting += center_easting
+        northing += center_northing
+        upward = np.zeros_like(easting) + center_upward
         return easting, northing, upward
 
     @pytest.fixture
     def mirrored_points(self, sample_prism_center, sample_prism_dimensions):
         """
-        Define two set of mirrored points in a top and bottom easting-northing
-        planes
+        Define two set of mirrored points across the easting-northing plane
+        that passes through the prism center
         """
         # Get the coordinates of the sample prism center
         center_easting, center_northing, center_upward = sample_prism_center
         # Get the dimensions of the sample prism
         d_easting, d_northing, d_upward = sample_prism_dimensions
         # Build the points
-        n_per_side = 5
-        west, east = -n_per_side * d_easting, n_per_side * d_easting
-        south, north = -n_per_side * d_northing, n_per_side * d_northing
-        easting = np.linspace(west, east, 2 * n_per_side + 1)
-        northing = np.linspace(south, north, 2 * n_per_side + 1)
+        n_per_side = 4
+        max_easting = d_easting / 2 * n_per_side
+        max_northing = d_northing / 2 * n_per_side
+        max_upward = d_upward / 2 * n_per_side
+        easting = np.linspace(-max_easting, max_easting, 2 * n_per_side + 1)
+        northing = np.linspace(-max_northing, max_northing, 2 * n_per_side + 1)
+        upward_top = np.linspace(d_upward / 2, max_upward, n_per_side)
+        # Meshgrid
+        easting, northing, upward_top = (
+            array.ravel() for array in np.meshgrid(easting, northing, upward_top)
+        )
+        # Define upward bottom
+        upward_bottom = -upward_top
         # Shift coordinates
-        easting -= center_easting
-        northing -= center_northing
-        # Define the upward coordinates for the two sets
-        upward_top = np.zeros_like(easting) + center_upward + d_upward
-        upward_bottom = np.zeros_like(easting) + center_upward - d_upward
+        easting += center_easting
+        northing += center_northing
+        upward_top += center_upward
+        upward_bottom += center_upward
         return (easting, northing, upward_top), (easting, northing, upward_bottom)
 
     def test_easting_northing_plane(
