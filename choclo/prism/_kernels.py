@@ -12,7 +12,7 @@ from numba import jit
 
 
 @jit(nopython=True)
-def kernel_pot(easting, northing, upward):
+def kernel_pot(easting, northing, upward, radius):
     r"""
     Kernel for the potential field due to a rectangular prism
 
@@ -37,6 +37,9 @@ def kernel_pot(easting, northing, upward):
     upward : float
         Shifted upward coordinate of the vertex of the prism. Must be in
         meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
 
     Returns
     -------
@@ -87,7 +90,6 @@ def kernel_pot(easting, northing, upward):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    radius = np.sqrt(easting**2 + northing**2 + upward**2)
     kernel = (
         easting * northing * _safe_log(upward + radius)
         + northing * upward * _safe_log(easting + radius)
@@ -100,7 +102,7 @@ def kernel_pot(easting, northing, upward):
 
 
 @jit(nopython=True)
-def kernel_e(easting, northing, upward):
+def kernel_e(easting, northing, upward, radius):
     r"""
     Kernel for easting component of the gradient due to a rectangular prism
 
@@ -125,6 +127,9 @@ def kernel_e(easting, northing, upward):
     upward : float
         Shifted upward coordinate of the vertex of the prism. Must be in
         meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
 
     Returns
     -------
@@ -175,7 +180,6 @@ def kernel_e(easting, northing, upward):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    radius = np.sqrt(easting**2 + northing**2 + upward**2)
     kernel = -(
         northing * _safe_log(upward + radius)
         + upward * _safe_log(northing + radius)
@@ -185,7 +189,7 @@ def kernel_e(easting, northing, upward):
 
 
 @jit(nopython=True)
-def kernel_n(easting, northing, upward):
+def kernel_n(easting, northing, upward, radius):
     r"""
     Kernel for northing component of the gradient due to a rectangular prism
 
@@ -210,6 +214,9 @@ def kernel_n(easting, northing, upward):
     upward : float
         Shifted upward coordinate of the vertex of the prism. Must be in
         meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
 
     Returns
     -------
@@ -260,7 +267,6 @@ def kernel_n(easting, northing, upward):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    radius = np.sqrt(easting**2 + northing**2 + upward**2)
     kernel = -(
         upward * _safe_log(easting + radius)
         + easting * _safe_log(upward + radius)
@@ -270,7 +276,7 @@ def kernel_n(easting, northing, upward):
 
 
 @jit(nopython=True)
-def kernel_u(easting, northing, upward):
+def kernel_u(easting, northing, upward, radius):
     r"""
     Kernel for upward component of the gradient due to a rectangular prism
 
@@ -295,6 +301,9 @@ def kernel_u(easting, northing, upward):
     upward : float
         Shifted upward coordinate of the vertex of the prism. Must be in
         meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
 
     Returns
     -------
@@ -351,7 +360,6 @@ def kernel_u(easting, northing, upward):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    radius = np.sqrt(easting**2 + northing**2 + upward**2)
     # The minus sign is to return the kernel for the upward component instead
     # of the downward one.
     kernel = -(

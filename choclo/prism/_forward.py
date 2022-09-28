@@ -7,6 +7,7 @@
 """
 Forward modelling function for rectangular prisms
 """
+import numpy as np
 from numba import jit
 
 from ..constants import GRAVITATIONAL_CONST
@@ -538,11 +539,13 @@ def _evaluate_kernel(easting, northing, upward, prism, kernel):
             for k in range(2):
                 # Compute shifted upward coordinate
                 shift_upward = prism[5 - k] - upward
+                # Compute the radius
+                radius = np.sqrt(shift_east**2 + shift_north**2 + shift_upward**2)
                 # If i, j or k is 1, the corresponding shifted
                 # coordinate will refer to the lower boundary,
                 # meaning the corresponding term should have a minus
                 # sign.
                 result += (-1) ** (i + j + k) * kernel(
-                    shift_east, shift_north, shift_upward
+                    shift_east, shift_north, shift_upward, radius
                 )
     return result
