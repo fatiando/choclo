@@ -533,14 +533,17 @@ def _evaluate_kernel(easting, northing, upward, prism, kernel):
     for i in range(2):
         # Compute shifted easting coordinate
         shift_east = prism[1 - i] - easting
+        shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
             shift_north = prism[3 - j] - northing
+            shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
                 shift_upward = prism[5 - k] - upward
+                shift_upward_sq = shift_upward**2
                 # Compute the radius
-                radius = np.sqrt(shift_east**2 + shift_north**2 + shift_upward**2)
+                radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
                 # If i, j or k is 1, the corresponding shifted
                 # coordinate will refer to the lower boundary,
                 # meaning the corresponding term should have a minus
