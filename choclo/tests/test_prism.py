@@ -17,10 +17,10 @@ from ..prism import (
     gravity_en,
     gravity_eu,
     gravity_n,
-    gravity_pot,
-    gravity_u,
     gravity_nn,
     gravity_nu,
+    gravity_pot,
+    gravity_u,
     gravity_uu,
 )
 
