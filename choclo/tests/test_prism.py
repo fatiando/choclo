@@ -1047,3 +1047,13 @@ class TestTensorFiniteDifferences:
         """
         g_nu = gravity_nu(*sample_coordinate, sample_prism, sample_density)
         npt.assert_allclose(g_nu, finite_diff_gravity_nu, rtol=self.rtol)
+
+
+def test_laplacian(sample_coordinate, sample_prism, sample_density):
+    """
+    Test if diagonal tensor functions satisfy Laplace's equation
+    """
+    g_ee = gravity_ee(*sample_coordinate, sample_prism, sample_density)
+    g_nn = gravity_nn(*sample_coordinate, sample_prism, sample_density)
+    g_uu = gravity_uu(*sample_coordinate, sample_prism, sample_density)
+    npt.assert_allclose(-g_uu, g_ee + g_nn)
