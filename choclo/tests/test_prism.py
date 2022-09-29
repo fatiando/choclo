@@ -413,11 +413,11 @@ class TestSymmetryGravityE:
         # Compute gravity_e on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
         easting, northing, upward = sample_prism_center
-        d_easting = sample_prism_dimensions[0]
         non_zero_g_e = gravity_e(
-            easting + 0.001 * d_easting, northing, upward, sample_prism, sample_density
+            easting + 1e-10, northing, upward, sample_prism, sample_density
         )
-        assert (np.abs(g_e) < 1e-8 * np.abs(non_zero_g_e)).all()
+        atol = np.abs(non_zero_g_e).max()
+        npt.assert_allclose(g_e, 0, atol=atol)
 
     def test_mirrored_points(self, mirrored_points, sample_prism, sample_density):
         """
@@ -561,11 +561,11 @@ class TestSymmetryGravityN:
         # Compute gravity_n on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
         easting, northing, upward = sample_prism_center
-        d_northing = sample_prism_dimensions[1]
         non_zero_g_n = gravity_n(
-            easting, northing + 0.001 * d_northing, upward, sample_prism, sample_density
+            easting, northing + 1e-10, upward, sample_prism, sample_density
         )
-        assert (np.abs(g_n) < 1e-8 * np.abs(non_zero_g_n)).all()
+        atol = np.abs(non_zero_g_n).max()
+        npt.assert_allclose(g_n, 0, atol=atol)
 
     def test_mirrored_points(self, mirrored_points, sample_prism, sample_density):
         """
@@ -716,11 +716,11 @@ class TestSymmetryGravityU:
         # Compute gravity_u on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
         easting, northing, upward = sample_prism_center
-        d_upward = sample_prism_dimensions[2]
         non_zero_g_u = gravity_u(
-            easting, northing, upward + 0.001 * d_upward, sample_prism, sample_density
+            easting, northing, upward + 1e-10, sample_prism, sample_density
         )
-        assert (np.abs(g_u) < 1e-8 * np.abs(non_zero_g_u)).all()
+        atol = np.abs(non_zero_g_u).max()
+        npt.assert_allclose(g_u, 0, atol=atol)
 
     def test_mirrored_points(self, mirrored_points, sample_prism, sample_density):
         """
