@@ -146,7 +146,7 @@ def kernel_e(easting, northing, upward, radius):
     .. math::
 
         k_x(x, y, z) =
-            \left[
+            -\left[
             y \, \text{ln2} (z + r)
             + z \, \text{ln2} (y + r)
             - x \, \text{arctan2} \left( \frac{yz}{xr} \right)
@@ -173,6 +173,12 @@ def kernel_e(easting, northing, upward, radius):
             -\frac{\pi}{2} & x = 0 \quad \text{and} \quad y < 0 \\
             0 & x = 0 \quad \text{and} \quad y = 0 \\
         \end{cases}
+
+    .. important::
+
+        In the first equation a minus sign has been added to the one obtained
+        by [Nagy2000]_ in order to compute the numerical kernel for the
+        **eastward** component instead for the westward one.
 
     References
     ----------
@@ -233,7 +239,7 @@ def kernel_n(easting, northing, upward, radius):
     .. math::
 
         k_y(x, y, z) =
-            \left[
+            -\left[
             z \, \text{ln2} (x + r)
             + x \, \text{ln2} (z + r)
             - y \, \text{arctan2} \left( \frac{zx}{yr} \right)
@@ -260,6 +266,12 @@ def kernel_n(easting, northing, upward, radius):
             -\frac{\pi}{2} & x = 0 \quad \text{and} \quad y < 0 \\
             0 & x = 0 \quad \text{and} \quad y = 0 \\
         \end{cases}
+
+    .. important::
+
+        In the first equation a minus sign has been added to the one obtained
+        by [Nagy2000]_ in order to compute the numerical kernel for the
+        **northward** component instead for the southward one.
 
     References
     ----------
@@ -319,7 +331,8 @@ def kernel_u(easting, northing, upward, radius):
 
     .. math::
 
-        k_{u}(x, y, z) = - \left[
+        k_z(x, y, z) =
+            - \left[
             x \, \text{ln2} (y + r)
             + y \, \text{ln2} (x + r)
             - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
