@@ -11,7 +11,15 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..prism import gravity_e, gravity_ee, gravity_n, gravity_pot, gravity_u, gravity_nn
+from ..prism import (
+    gravity_e,
+    gravity_ee,
+    gravity_n,
+    gravity_pot,
+    gravity_u,
+    gravity_nn,
+    gravity_uu,
+)
 
 
 @pytest.fixture(name="sample_prism_center")
@@ -930,8 +938,8 @@ class TestTensorFiniteDifferences:
         shifted_coordinate = (easting_p, northing_p, upward_p + self.delta)
         # Calculate g_u through finite differences
         g_uu = (
-            gravity_pot(*shifted_coordinate, sample_prism, sample_density)
-            - gravity_pot(*sample_coordinate, sample_prism, sample_density)
+            gravity_u(*shifted_coordinate, sample_prism, sample_density)
+            - gravity_u(*sample_coordinate, sample_prism, sample_density)
         ) / self.delta
         return g_uu
 
@@ -984,3 +992,12 @@ class TestTensorFiniteDifferences:
         """
         g_nn = gravity_nn(*sample_coordinate, sample_prism, sample_density)
         npt.assert_allclose(g_nn, finite_diff_gravity_nn, rtol=self.rtol)
+
+    def test_gravity_uu(
+        self, sample_coordinate, sample_prism, sample_density, finite_diff_gravity_uu
+    ):
+        """
+        Test gravity_uu against finite differences of the gravity_u
+        """
+        g_uu = gravity_uu(*sample_coordinate, sample_prism, sample_density)
+        npt.assert_allclose(g_uu, finite_diff_gravity_uu, rtol=self.rtol)
