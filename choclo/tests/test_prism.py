@@ -1049,11 +1049,67 @@ class TestTensorFiniteDifferences:
         npt.assert_allclose(g_nu, finite_diff_gravity_nu, rtol=self.rtol)
 
 
-def test_laplacian(sample_coordinate, sample_prism, sample_density):
-    """
-    Test if diagonal tensor functions satisfy Laplace's equation
-    """
-    g_ee = gravity_ee(*sample_coordinate, sample_prism, sample_density)
-    g_nn = gravity_nn(*sample_coordinate, sample_prism, sample_density)
-    g_uu = gravity_uu(*sample_coordinate, sample_prism, sample_density)
-    npt.assert_allclose(-g_uu, g_ee + g_nn)
+class TestLaplacian:
+    @pytest.fixture
+    def sample_observation_points(self, sample_prism_center, sample_prism_dimensions):
+        """
+        Return a 3D grid of observation points around the sample prism.
+        The grid doesn't have points on edges and vertices (where the tensor
+        components are not defined) and doesn't include the prism center where
+        the fields will be zero.
+        """
+        # Get the coordinates of the sample prism center
+        center_easting, center_northing, center_upward = sample_prism_center
+        # Get the dimensions of the sample prism
+        d_easting, d_northing, d_upward = sample_prism_dimensions
+        # Build the points (avoid points in edges or vertices where the tensor
+        # components are not defined)
+        n_per_side = 4
+        max_easting = 2 / 3 * d_easting * n_per_side
+        max_northing = 2 / 3 * d_northing * n_per_side
+        max_upward = 2 / 3 * d_upward * n_per_side
+        easting = np.linspace(-max_easting, max_easting, 2 * n_per_side + 1)
+        northing = np.linspace(-max_northing, max_northing, 2 * n_per_side + 1)
+        upward = np.linspace(-max_upward, max_upward, 2 * n_per_side + 1)
+        # Remove the center of the prism
+        easting = easting[easting != 0]
+        northing = northing[northing != 0]
+        upward = upward[upward != 0]
+        # Get the meshgrid
+        easting, northing, upward = tuple(
+            a.ravel() for a in np.meshgrid(easting, northing, upward)
+        )
+        # Shift the coordinates
+        easting += center_easting
+        northing += center_northing
+        upward += center_upward
+        return easting, northing, upward
+
+    def test_laplacian(
+        self,
+        sample_observation_points,
+        sample_prism,
+        sample_density,
+    ):
+        """
+        Test if diagonal tensor functions satisfy Laplace's equation
+        """
+        g_ee = np.array(
+            [
+                gravity_ee(e, n, u, sample_prism, sample_density)
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        g_nn = np.array(
+            [
+                gravity_nn(e, n, u, sample_prism, sample_density)
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        g_uu = np.array(
+            [
+                gravity_uu(e, n, u, sample_prism, sample_density)
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        npt.assert_allclose(-g_uu, g_ee + g_nn)
