@@ -408,7 +408,6 @@ class TestSymmetryGravityE:
         self,
         coords_in_northing_upward_plane,
         sample_prism,
-        sample_prism_dimensions,
         sample_prism_center,
         sample_density,
     ):
@@ -556,7 +555,6 @@ class TestSymmetryGravityN:
         self,
         coords_in_easting_upward_plane,
         sample_prism,
-        sample_prism_dimensions,
         sample_prism_center,
         sample_density,
     ):
@@ -710,7 +708,6 @@ class TestSymmetryGravityU:
         self,
         coords_in_easting_northing_plane,
         sample_prism,
-        sample_prism_dimensions,
         sample_prism_center,
         sample_density,
     ):
