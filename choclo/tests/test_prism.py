@@ -11,7 +11,7 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..prism import gravity_e, gravity_n, gravity_pot, gravity_u
+from ..prism import gravity_e, gravity_ee, gravity_n, gravity_pot, gravity_u
 
 
 @pytest.fixture(name="sample_prism_center")
@@ -873,3 +873,41 @@ class TestAccelerationFiniteDifferences:
         """
         g_u = gravity_u(*sample_coordinate, sample_prism, sample_density)
         npt.assert_allclose(g_u, finite_diff_gravity_u, rtol=self.rtol)
+
+
+class TestTensorFiniteDifferences:
+    """
+    Test tensor components against finite-differences approximations of
+    the gravity gradient
+    """
+
+    # Define a small displacement for computing the finite differences
+    delta = 0.0001  # 0.1 mm
+
+    # Define expected relative error tolerance in the comparisons
+    rtol = 1e-5
+
+    @pytest.fixture
+    def finite_diff_gravity_ee(self, sample_coordinate, sample_prism, sample_density):
+        """
+        Compute gravity_ee through finite differences of the gravity_e
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        west, east = sample_prism[:2]
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p + self.delta, northing_p, upward_p)
+        # Calculate g_ee through finite differences
+        g_ee = (
+            gravity_e(*shifted_coordinate, sample_prism, sample_density)
+            - gravity_e(*sample_coordinate, sample_prism, sample_density)
+        ) / self.delta
+        return g_ee
+
+    def test_gravity_ee(
+        self, sample_coordinate, sample_prism, sample_density, finite_diff_gravity_ee
+    ):
+        """
+        Test gravity_ee against finite differences of the gravity_e
+        """
+        g_ee = gravity_ee(*sample_coordinate, sample_prism, sample_density)
+        npt.assert_allclose(g_ee, finite_diff_gravity_ee, rtol=self.rtol)
