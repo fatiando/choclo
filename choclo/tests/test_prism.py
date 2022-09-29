@@ -14,10 +14,13 @@ import pytest
 from ..prism import (
     gravity_e,
     gravity_ee,
+    gravity_en,
+    gravity_eu,
     gravity_n,
     gravity_pot,
     gravity_u,
     gravity_nn,
+    gravity_nu,
     gravity_uu,
 )
 
@@ -975,6 +978,22 @@ class TestTensorFiniteDifferences:
         ) / self.delta
         return g_eu
 
+    @pytest.fixture
+    def finite_diff_gravity_nu(self, sample_coordinate, sample_prism, sample_density):
+        """
+        Compute gravity_nu through finite differences of the gravity_n
+        """
+        easting_p, northing_p, upward_p = sample_coordinate
+        west, east = sample_prism[:2]
+        # Compute shifted coordinate
+        shifted_coordinate = (easting_p, northing_p, upward_p + self.delta)
+        # Calculate g_en through finite differences
+        g_nu = (
+            gravity_n(*shifted_coordinate, sample_prism, sample_density)
+            - gravity_n(*sample_coordinate, sample_prism, sample_density)
+        ) / self.delta
+        return g_nu
+
     def test_gravity_ee(
         self, sample_coordinate, sample_prism, sample_density, finite_diff_gravity_ee
     ):
@@ -1001,3 +1020,30 @@ class TestTensorFiniteDifferences:
         """
         g_uu = gravity_uu(*sample_coordinate, sample_prism, sample_density)
         npt.assert_allclose(g_uu, finite_diff_gravity_uu, rtol=self.rtol)
+
+    def test_gravity_en(
+        self, sample_coordinate, sample_prism, sample_density, finite_diff_gravity_en
+    ):
+        """
+        Test gravity_en against finite differences of the gravity_e
+        """
+        g_en = gravity_en(*sample_coordinate, sample_prism, sample_density)
+        npt.assert_allclose(g_en, finite_diff_gravity_en, rtol=self.rtol)
+
+    def test_gravity_eu(
+        self, sample_coordinate, sample_prism, sample_density, finite_diff_gravity_eu
+    ):
+        """
+        Test gravity_eu against finite differences of the gravity_e
+        """
+        g_eu = gravity_eu(*sample_coordinate, sample_prism, sample_density)
+        npt.assert_allclose(g_eu, finite_diff_gravity_eu, rtol=self.rtol)
+
+    def test_gravity_nu(
+        self, sample_coordinate, sample_prism, sample_density, finite_diff_gravity_nu
+    ):
+        """
+        Test gravity_nu against finite differences of the gravity_n
+        """
+        g_nu = gravity_nu(*sample_coordinate, sample_prism, sample_density)
+        npt.assert_allclose(g_nu, finite_diff_gravity_nu, rtol=self.rtol)

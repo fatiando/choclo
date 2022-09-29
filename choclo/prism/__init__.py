@@ -10,8 +10,11 @@ Kernels and forward modelling functions for rectangular prisms
 from ._forward import (
     gravity_e,
     gravity_ee,
+    gravity_en,
+    gravity_eu,
     gravity_n,
     gravity_nn,
+    gravity_nu,
     gravity_pot,
     gravity_u,
     gravity_uu,
@@ -19,8 +22,11 @@ from ._forward import (
 from ._kernels import (
     kernel_e,
     kernel_ee,
+    kernel_en,
+    kernel_eu,
     kernel_n,
     kernel_nn,
+    kernel_nu,
     kernel_pot,
     kernel_u,
     kernel_uu,
