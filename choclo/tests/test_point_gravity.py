@@ -691,11 +691,67 @@ class TestTensorFiniteDifferences:
         )
 
 
-def test_laplacian(sample_coordinate, sample_point_source, sample_mass):
-    """
-    Test if diagonal tensor functions satisfy Laplace's equation
-    """
-    g_ee = gravity_ee(*sample_coordinate, *sample_point_source, sample_mass)
-    g_nn = gravity_nn(*sample_coordinate, *sample_point_source, sample_mass)
-    g_zz = gravity_uu(*sample_coordinate, *sample_point_source, sample_mass)
-    npt.assert_allclose(-g_zz, g_ee + g_nn)
+class TestLaplacian:
+    @pytest.fixture
+    def sample_observation_points(self, sample_point_source):
+        """
+        Define a 3D grid of observation points around the sample point source.
+        The grid doesn't contain an observation point located in the same
+        location as the point source.
+        """
+        # Build the observation points
+        easting = np.linspace(-10, 10, 21)
+        northing = np.linspace(-10, 10, 21)
+        upward = np.linspace(-10, 10, 21)
+        easting, northing, upward = tuple(
+            a.ravel() for a in np.meshgrid(easting, northing, upward)
+        )
+        # Remove the location of the sample point source
+        point_source_location = (easting == 0) & (northing == 0) & (upward == 0)
+        easting, northing, upward = tuple(
+            a[np.logical_not(point_source_location)]
+            for a in (easting, northing, upward)
+        )
+        # Shift the coordinates
+        easting += sample_point_source[0]
+        northing += sample_point_source[1]
+        upward += sample_point_source[2]
+        return (easting, northing, upward)
+
+    @pytest.mark.parametrize("first_component", ("g_ee", "g_nn", "g_uu"))
+    def test_laplacian(
+        self,
+        sample_observation_points,
+        sample_point_source,
+        sample_mass,
+        first_component,
+    ):
+        """
+        Test if diagonal tensor functions satisfy Laplace's equation
+        """
+        g_ee = np.array(
+            [
+                gravity_ee(e, n, u, *sample_point_source, sample_mass)
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        g_nn = np.array(
+            [
+                gravity_nn(e, n, u, *sample_point_source, sample_mass)
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        g_uu = np.array(
+            [
+                gravity_uu(e, n, u, *sample_point_source, sample_mass)
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        # Set an atol to avoid getting failures when comparing values close to
+        # zero
+        if first_component == "g_ee":
+            npt.assert_allclose(-g_ee, g_nn + g_uu, rtol=1e-7, atol=1e-21)
+        if first_component == "g_nn":
+            npt.assert_allclose(-g_nn, g_ee + g_uu, rtol=1e-7, atol=1e-21)
+        if first_component == "g_uu":
+            npt.assert_allclose(-g_uu, g_ee + g_nn, rtol=1e-7, atol=1e-21)
