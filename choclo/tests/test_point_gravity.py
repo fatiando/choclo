@@ -749,9 +749,11 @@ class TestLaplacian:
         )
         # Set an atol to avoid getting failures when comparing values close to
         # zero
+        atol = 1e-21
+        rtol = 1e-7
         if first_component == "g_ee":
-            npt.assert_allclose(-g_ee, g_nn + g_uu, rtol=1e-7, atol=1e-21)
+            npt.assert_allclose(-g_ee, g_nn + g_uu, rtol=rtol, atol=atol)
         if first_component == "g_nn":
-            npt.assert_allclose(-g_nn, g_ee + g_uu, rtol=1e-7, atol=1e-21)
+            npt.assert_allclose(-g_nn, g_ee + g_uu, rtol=rtol, atol=atol)
         if first_component == "g_uu":
-            npt.assert_allclose(-g_uu, g_ee + g_nn, rtol=1e-7, atol=1e-21)
+            npt.assert_allclose(-g_uu, g_ee + g_nn, rtol=rtol, atol=atol)

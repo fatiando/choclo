@@ -638,12 +638,59 @@ class TestTensorFiniteDifferences:
         )
 
 
-def test_laplacian(sample_coordinate, sample_point_source):
-    """
-    Test if diagonal tensor kernels satisfy Laplace's equation
-    """
-    distance = distance_cartesian(*sample_coordinate, *sample_point_source)
-    g_ee = kernel_ee(*sample_coordinate, *sample_point_source, distance)
-    g_nn = kernel_nn(*sample_coordinate, *sample_point_source, distance)
-    g_zz = kernel_uu(*sample_coordinate, *sample_point_source, distance)
-    npt.assert_allclose(-g_zz, g_ee + g_nn)
+class TestLaplacian:
+    @pytest.fixture
+    def sample_observation_points(self, sample_point_source):
+        """
+        Define a 3D grid of observation points around the sample point source.
+        The grid doesn't contain an observation point located in the same
+        location as the point source.
+        """
+        # Build the observation points
+        easting = np.linspace(-10, 10, 21)
+        northing = np.linspace(-10, 10, 21)
+        upward = np.linspace(-10, 10, 21)
+        easting, northing, upward = tuple(
+            a.ravel() for a in np.meshgrid(easting, northing, upward)
+        )
+        # Remove the location of the sample point source
+        point_source_location = (easting == 0) & (northing == 0) & (upward == 0)
+        easting, northing, upward = tuple(
+            a[np.logical_not(point_source_location)]
+            for a in (easting, northing, upward)
+        )
+        # Shift the coordinates
+        easting += sample_point_source[0]
+        northing += sample_point_source[1]
+        upward += sample_point_source[2]
+        return (easting, northing, upward)
+
+    @pytest.mark.parametrize("first_component", ("kernel_ee", "kernel_nn", "kernel_uu"))
+    def test_laplacian(
+        self,
+        sample_observation_points,
+        sample_point_source,
+        first_component,
+    ):
+        """
+        Test if diagonal tensor kernels satisfy Laplace's equation
+        """
+        k_ee = evaluate_kernel(
+            sample_observation_points, sample_point_source, kernel_ee
+        )
+        k_nn = evaluate_kernel(
+            sample_observation_points, sample_point_source, kernel_nn
+        )
+        k_uu = evaluate_kernel(
+            sample_observation_points, sample_point_source, kernel_uu
+        )
+        # Set an atol to avoid getting failures when comparing values close to
+        # zero
+        atol = 1e-15
+        rtol = 1e-7
+        if first_component == "kernel_ee":
+            npt.assert_allclose(-k_ee, k_nn + k_uu, rtol=rtol, atol=atol)
+        if first_component == "kernel_nn":
+            npt.assert_allclose(-k_nn, k_ee + k_uu, rtol=rtol, atol=atol)
+        if first_component == "kernel_uu":
+            npt.assert_allclose(-k_uu, k_ee + k_nn, rtol=rtol, atol=atol)
