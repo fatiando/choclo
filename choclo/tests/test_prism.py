@@ -1068,13 +1068,14 @@ class TestLaplacian:
         easting = np.linspace(-max_easting, max_easting, 2 * n_per_side + 1)
         northing = np.linspace(-max_northing, max_northing, 2 * n_per_side + 1)
         upward = np.linspace(-max_upward, max_upward, 2 * n_per_side + 1)
-        # Remove the center of the prism
-        easting = easting[easting != 0]
-        northing = northing[northing != 0]
-        upward = upward[upward != 0]
         # Get the meshgrid
         easting, northing, upward = tuple(
             a.ravel() for a in np.meshgrid(easting, northing, upward)
+        )
+        # Remove the center of the prism
+        is_prism_center = (easting == 0) & (northing == 0) & (upward == 0)
+        easting, northing, upward = tuple(
+            a[np.logical_not(is_prism_center)] for a in (easting, northing, upward)
         )
         # Shift the coordinates
         easting += center_easting
@@ -1082,11 +1083,9 @@ class TestLaplacian:
         upward += center_upward
         return easting, northing, upward
 
+    @pytest.mark.parametrize("left_component", ("g_ee", "g_nn", "g_uu"))
     def test_laplacian(
-        self,
-        sample_observation_points,
-        sample_prism,
-        sample_density,
+        self, sample_observation_points, sample_prism, sample_density, left_component
     ):
         """
         Test if diagonal tensor functions satisfy Laplace's equation
@@ -1109,4 +1108,9 @@ class TestLaplacian:
                 for e, n, u in zip(*sample_observation_points)
             ]
         )
-        npt.assert_allclose(-g_uu, g_ee + g_nn)
+        if left_component == "g_ee":
+            npt.assert_allclose(-g_ee, g_nn + g_uu)
+        if left_component == "g_nn":
+            npt.assert_allclose(-g_nn, g_ee + g_uu)
+        if left_component == "g_uu":
+            npt.assert_allclose(-g_uu, g_ee + g_nn)
