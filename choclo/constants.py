@@ -9,3 +9,6 @@ Define universal constants
 """
 #: The gravitational constant in SI units :math:`m^3 kg^{-1} s^{-1}`
 GRAVITATIONAL_CONST = 0.00000000006673
+
+#: The vacuum magnetic permeability (:math:`\mu_0`:) in SI units :math:`NA^{-2}`
+VACUUM_MAGNETIC_PERMEABILITY = 1.25663706212e-06
