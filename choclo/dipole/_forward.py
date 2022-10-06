@@ -79,7 +79,11 @@ def magnetic_field(
         )
     )
     distance = np.sqrt(np.sum(r_vector**2))
-    dotproduct = magnetic_moment @ r_vector
+    dotproduct = (
+        magnetic_moment[0] * r_vector[0]
+        + magnetic_moment[1] * r_vector[1]
+        + magnetic_moment[2] * r_vector[2]
+    )
     result = 3 * dotproduct * r_vector / distance**5 - magnetic_moment / distance**3
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
 
@@ -157,7 +161,11 @@ def magnetic_e(
         )
     )
     distance = np.sqrt(np.sum(r_vector**2))
-    dotproduct = magnetic_moment @ r_vector
+    dotproduct = (
+        magnetic_moment[0] * r_vector[0]
+        + magnetic_moment[1] * r_vector[1]
+        + magnetic_moment[2] * r_vector[2]
+    )
     result = (
         3 * dotproduct * r_vector[0] / distance**5
         - magnetic_moment[0] / distance**3
@@ -238,7 +246,11 @@ def magnetic_n(
         )
     )
     distance = np.sqrt(np.sum(r_vector**2))
-    dotproduct = magnetic_moment @ r_vector
+    dotproduct = (
+        magnetic_moment[0] * r_vector[0]
+        + magnetic_moment[1] * r_vector[1]
+        + magnetic_moment[2] * r_vector[2]
+    )
     result = (
         3 * dotproduct * r_vector[1] / distance**5
         - magnetic_moment[1] / distance**3
@@ -319,7 +331,11 @@ def magnetic_u(
         )
     )
     distance = np.sqrt(np.sum(r_vector**2))
-    dotproduct = magnetic_moment @ r_vector
+    dotproduct = (
+        magnetic_moment[0] * r_vector[0]
+        + magnetic_moment[1] * r_vector[1]
+        + magnetic_moment[2] * r_vector[2]
+    )
     result = (
         3 * dotproduct * r_vector[2] / distance**5
         - magnetic_moment[2] / distance**3
