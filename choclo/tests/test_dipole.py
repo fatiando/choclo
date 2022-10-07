@@ -44,10 +44,6 @@ def fixture_sample_3d_grid(sample_dipole):
     easting += sample_dipole[0]
     northing += sample_dipole[1]
     upward += sample_dipole[2]
-    # Ravel the arrays
-    easting = easting.ravel()
-    northing = northing.ravel()
-    upward = upward.ravel()
     return easting, northing, upward
 
 
@@ -56,7 +52,17 @@ class TestSymmetryBu:
     Test symmetry of upward component of the magnetic field
     """
 
-    @pytest.mark.parametrize("magnetic_moment", [(0, 0, 500), (0, 0, -500)])
+    @pytest.mark.parametrize(
+        "magnetic_moment",
+        [
+            (500, 0, 0),
+            (-500, 0, 0),
+            (0, 500, 0),
+            (0, -500, 0),
+            (0, 0, 500),
+            (0, 0, -500),
+        ],
+    )
     def test_symmetry_across_easting_northing(
         self, sample_3d_grid, sample_dipole, magnetic_moment
     ):
@@ -65,35 +71,49 @@ class TestSymmetryBu:
         passes through the location of the dipole
         """
         easting, northing, upward = sample_3d_grid
-        # Split the observation points between top and bottom
+        # Keep only the observation points that are above the dipole
         is_top = upward > sample_dipole[2]
-        easting_top = easting[is_top]
-        northing_top = northing[is_top]
+        easting = easting[is_top]
+        northing = northing[is_top]
         upward_top = upward[is_top]
-        # Reverse the order of the bottoms to match the order of the top points
-        is_bottom = upward < sample_dipole[2]
-        easting_bottom = easting[is_bottom][::-1]
-        northing_bottom = northing[is_bottom][::-1]
-        upward_bottom = upward[is_bottom][::-1]
+        # Create a symmetrical upward coordinate for points below the dipole
+        upward_bottom = 2 * sample_dipole[2] - upward_top
         # Compute magnetic_u on every observation point
         magnetic_moment = np.array(magnetic_moment)
         b_u_top = np.array(
             list(
                 magnetic_u(e, n, u, *sample_dipole, magnetic_moment)
-                for e, n, u in zip(easting_top, northing_top, upward_top)
+                for e, n, u in zip(
+                    easting.ravel(), northing.ravel(), upward_top.ravel()
+                )
             )
         )
         b_u_bottom = np.array(
             list(
                 magnetic_u(e, n, u, *sample_dipole, magnetic_moment)
-                for e, n, u in zip(easting_bottom, northing_bottom, upward_bottom)
+                for e, n, u in zip(
+                    easting.ravel(), northing.ravel(), upward_bottom.ravel()
+                )
             )
         )
         # Check symmetry between top and bottom
         atol = 1e-22  # absolute tolerance for values near zero
-        npt.assert_allclose(b_u_top, b_u_bottom, atol=atol)
+        if magnetic_moment[2] != 0:
+            npt.assert_allclose(b_u_top, b_u_bottom, atol=atol)
+        else:
+            npt.assert_allclose(b_u_top, -b_u_bottom, atol=atol)
 
-    @pytest.mark.parametrize("magnetic_moment", [(0, 0, 500), (0, 0, -500)])
+    @pytest.mark.parametrize(
+        "magnetic_moment",
+        [
+            (500, 0, 0),
+            (-500, 0, 0),
+            (0, 500, 0),
+            (0, -500, 0),
+            (0, 0, 500),
+            (0, 0, -500),
+        ],
+    )
     def test_symmetry_across_easting_upward(
         self, sample_3d_grid, sample_dipole, magnetic_moment
     ):
@@ -102,36 +122,51 @@ class TestSymmetryBu:
         passes through the location of the dipole
         """
         easting, northing, upward = sample_3d_grid
-        # Split the observation points between south and north
+        # Keep only the observation points that are north the dipole
         is_north = northing > sample_dipole[1]
-        easting_north = easting[is_north]
+        easting = easting[is_north]
         northing_north = northing[is_north]
-        upward_north = upward[is_north]
-        # Reverse the order of the south points to match the order of the
-        # north ones
-        is_south = northing < sample_dipole[1]
-        easting_south = easting[is_south][::-1]
-        northing_south = northing[is_south][::-1]
-        upward_south = upward[is_south][::-1]
+        upward = upward[is_north]
+        # Create a symmetrical upward coordinate for points south the dipole
+        northing_south = 2 * sample_dipole[1] - northing_north
+        print(northing_north)
+        print(northing_south)
         # Compute magnetic_u on every observation point
         magnetic_moment = np.array(magnetic_moment)
         b_u_north = np.array(
             list(
                 magnetic_u(e, n, u, *sample_dipole, magnetic_moment)
-                for e, n, u in zip(easting_north, northing_north, upward_north)
+                for e, n, u in zip(
+                    easting.ravel(), northing_north.ravel(), upward.ravel()
+                )
             )
         )
         b_u_south = np.array(
             list(
                 magnetic_u(e, n, u, *sample_dipole, magnetic_moment)
-                for e, n, u in zip(easting_south, northing_south, upward_south)
+                for e, n, u in zip(
+                    easting.ravel(), northing_south.ravel(), upward.ravel()
+                )
             )
         )
-        # Check symmetry between top and bottom
+        # Check symmetry between south and north
         atol = 1e-22  # absolute tolerance for values near zero
-        npt.assert_allclose(b_u_north, b_u_south, atol=atol)
+        if magnetic_moment[1] != 0:
+            npt.assert_allclose(b_u_north, -b_u_south, atol=atol)
+        else:
+            npt.assert_allclose(b_u_north, b_u_south, atol=atol)
 
-    @pytest.mark.parametrize("magnetic_moment", [(0, 0, 500), (0, 0, -500)])
+    @pytest.mark.parametrize(
+        "magnetic_moment",
+        [
+            (500, 0, 0),
+            (-500, 0, 0),
+            (0, 500, 0),
+            (0, -500, 0),
+            (0, 0, 500),
+            (0, 0, -500),
+        ],
+    )
     def test_symmetry_across_northing_upward(
         self, sample_3d_grid, sample_dipole, magnetic_moment
     ):
@@ -140,34 +175,37 @@ class TestSymmetryBu:
         passes through the location of the dipole
         """
         easting, northing, upward = sample_3d_grid
-        # Split the observation points between west and east
+        # Keep only the observation points that are east the dipole
         is_east = easting > sample_dipole[0]
         easting_east = easting[is_east]
-        northing_east = northing[is_east]
-        upward_east = upward[is_east]
-        # Reverse the order of the south points to match the order of the
-        # north ones
-        is_west = easting < sample_dipole[0]
-        easting_west = easting[is_west][::-1]
-        northing_west = northing[is_west][::-1]
-        upward_west = upward[is_west][::-1]
+        northing = northing[is_east]
+        upward = upward[is_east]
+        # Create a symmetrical upward coordinate for points west the dipole
+        easting_west = 2 * sample_dipole[0] - easting_east
         # Compute magnetic_u on every observation point
         magnetic_moment = np.array(magnetic_moment)
         b_u_east = np.array(
             list(
                 magnetic_u(e, n, u, *sample_dipole, magnetic_moment)
-                for e, n, u in zip(easting_east, northing_east, upward_east)
+                for e, n, u in zip(
+                    easting_east.ravel(), northing.ravel(), upward.ravel()
+                )
             )
         )
         b_u_west = np.array(
             list(
                 magnetic_u(e, n, u, *sample_dipole, magnetic_moment)
-                for e, n, u in zip(easting_west, northing_west, upward_west)
+                for e, n, u in zip(
+                    easting_west.ravel(), northing.ravel(), upward.ravel()
+                )
             )
         )
         # Check symmetry between top and bottom
         atol = 1e-22  # absolute tolerance for values near zero
-        npt.assert_allclose(b_u_east, b_u_west, atol=atol)
+        if magnetic_moment[0] != 0:
+            npt.assert_allclose(b_u_east, -b_u_west, atol=atol)
+        else:
+            npt.assert_allclose(b_u_east, b_u_west, atol=atol)
 
     def test_symmetry_when_flipping(self, sample_3d_grid, sample_dipole):
         """
