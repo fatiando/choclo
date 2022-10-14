@@ -91,3 +91,4 @@ Access universal physical constants given in SI units:
    :toctree: generated/
 
     constants.GRAVITATIONAL_CONST
+    constants.VACUUM_MAGNETIC_PERMEABILITY
