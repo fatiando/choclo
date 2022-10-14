@@ -61,7 +61,7 @@ def magnetic_field(
             \frac{\mu_0}{4\pi}
             \left[
             \frac{
-                3 (\mathbf{m} \dot \mathbf{r}) \mathbf{r}
+                3 (\mathbf{m} \cdot \mathbf{r}) \mathbf{r}
             }{
                 \lVert r \rVert^5
             }
@@ -143,7 +143,7 @@ def magnetic_e(
             \frac{\mu_0}{4\pi}
             \left[
             \frac{
-                3 x (\mathbf{m} \dot \mathbf{r})
+                3 (\mathbf{m} \cdot \mathbf{r}) x
             }{
                 \lVert r \rVert^5
             }
@@ -228,7 +228,7 @@ def magnetic_n(
             \frac{\mu_0}{4\pi}
             \left[
             \frac{
-                3 y (\mathbf{m} \dot \mathbf{r})
+                3 (\mathbf{m} \cdot \mathbf{r}) y
             }{
                 \lVert r \rVert^5
             }
@@ -313,7 +313,7 @@ def magnetic_u(
             \frac{\mu_0}{4\pi}
             \left[
             \frac{
-                3 (\mathbf{m} \dot \mathbf{r}) z
+                3 (\mathbf{m} \cdot \mathbf{r}) z
             }{
                 \lVert r \rVert^5
             }
