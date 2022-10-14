@@ -7,7 +7,7 @@
 """
 Kernels and forward modelling functions for rectangular prisms
 """
-from ._forward import (
+from ._gravity import (
     gravity_e,
     gravity_ee,
     gravity_en,
