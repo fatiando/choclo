@@ -41,9 +41,10 @@ Magnetic
 .. autosummary::
    :toctree: generated/
 
-    point.magnetic_e
-    point.magnetic_n
-    point.magnetic_u
+    dipole.magnetic_e
+    dipole.magnetic_n
+    dipole.magnetic_u
+    dipole.magnetic_field
 
 Kernels
 ^^^^^^^
