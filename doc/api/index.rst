@@ -65,6 +65,44 @@ Kernels
     point.kernel_nu
 
 
+Rectangular Prisms
+~~~~~~~~~~~~~~~~~~
+
+Gravity
+^^^^^^^
+
+.. autosummary::
+   :toctree: generated/
+
+    prism.gravity_pot
+    prism.gravity_e
+    prism.gravity_n
+    prism.gravity_u
+    prism.gravity_ee
+    prism.gravity_nn
+    prism.gravity_uu
+    prism.gravity_en
+    prism.gravity_eu
+    prism.gravity_nu
+
+Kernels
+^^^^^^^
+
+.. autosummary::
+   :toctree: generated/
+
+    prism.kernel_pot
+    prism.kernel_e
+    prism.kernel_n
+    prism.kernel_u
+    prism.kernel_ee
+    prism.kernel_nn
+    prism.kernel_uu
+    prism.kernel_en
+    prism.kernel_eu
+    prism.kernel_nu
+
+
 Utilities
 ---------
 
