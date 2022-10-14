@@ -18,7 +18,14 @@ def magnetic_field(
     Magnetic field due to a dipole
 
     Returns the three components of the magnetic field due to a single dipole
-    a single computation point
+    a single computation point.
+
+    .. note::
+
+        Use this function when all the three component of the magnetic fields
+        are needed. Running this function is faster than computing each
+        component separately. Use one of :func:`magnetic_e`,
+        :func:`magnetic_n`, :func:`magnetic_u` if you need only one of them.
 
     Parameters
     ----------
