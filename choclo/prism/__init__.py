@@ -31,3 +31,6 @@ from ._kernels import (
     kernel_u,
     kernel_uu,
 )
+from ._magnetic import (
+    magnetic_field,
+)

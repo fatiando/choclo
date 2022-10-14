@@ -85,6 +85,14 @@ Gravity
     prism.gravity_eu
     prism.gravity_nu
 
+Magnetic
+^^^^^^^^
+
+.. autosummary::
+   :toctree: generated/
+
+    prism.magnetic_field
+
 Kernels
 ^^^^^^^
 
