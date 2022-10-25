@@ -75,8 +75,6 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
     """
     # Initialize magnetic field vector
     b = np.zeros(3, dtype=np.float64)
-    # Precompute the volume of the prism
-    volume = (prism[1] - prism[0]) * (prism[3] - prism[2]) * (prism[5] - prism[4])
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
@@ -118,5 +116,5 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
                     + magnetization[1] * k_nu
                     + magnetization[2] * k_uu
                 )
-    b *= VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi / volume
+    b *= VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
     return b
