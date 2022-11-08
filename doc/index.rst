@@ -1,39 +1,32 @@
 .. title:: Home
 
-.. grid::
-    :gutter: 2 3 3 3
-    :margin: 5 5 0 0
-    :padding: 0 0 0 0
+.. raw:: html
 
-    .. grid-item::
-        :columns: 12 8 8 8
+    <h1 class="display-1">Choclo</h1>
 
-        .. raw:: html
+    <div class="sd-fs-3 sd-mb-4">
+    Kernel functions for your geophysical models
+    </div>
 
-            <h1 class="display-1">Choclo</h1>
+**Choclo** is a Python library that hosts optimized forward modelling and
+kernel functions for running geophysical forward and inverse models, intended
+to be used by other libraries as the underlying layer of their computation.
 
-        .. div:: sd-fs-3
-
-            Kernel functions for your geophysical models
-
-    .. grid-item::
-        :columns: 12 4 4 4
-
-        .. image:: ./_static/choclo-logo.svg
-            :width: 200px
-            :class: sd-m-auto
-
-**Choclo** is a Python library that hosts optimized kernel functions for
-running geophysical forward and inverse models, intended to be used by other
-libraries as the underlying layer of their computation.
 "Choclo" is a term used in some countries of South America to refer to corn,
 originated from the `quechua
 <https://en.wikipedia.org/wiki/Quechuan_languages>`__
 word *chuqllu*.
 
+.. seealso::
+
+    Choclo is a part of the
+    `Fatiando a Terra <https://www.fatiando.org/>`__ project.
+
+
+
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :hidden:
     :caption: Reference Documentation
 
@@ -43,7 +36,7 @@ word *chuqllu*.
 
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :hidden:
     :caption: Community
 
