@@ -73,7 +73,7 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    # Initialize magnetic field vector
+    # Initialize magnetic field vector components
     b_e, b_n, b_u = 0.0, 0.0, 0.0
     # Iterate over the vertices of the prism
     for i in range(2):
@@ -116,7 +116,8 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
                     + magnetization[1] * k_nu
                     + magnetization[2] * k_uu
                 )
-    b_e *= VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
-    b_n *= VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
-    b_u *= VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
+    c_m = VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
+    b_e *= c_m
+    b_n *= c_m
+    b_u *= c_m
     return b_e, b_n, b_u
