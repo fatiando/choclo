@@ -11,7 +11,7 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..prism import magnetic_e, magnetic_n, magnetic_u
+from ..prism import magnetic_e, magnetic_field, magnetic_n, magnetic_u
 
 
 @pytest.fixture(name="sample_prism")
@@ -651,3 +651,48 @@ class TestSymmetryBu:
         )
         # Check if the sign gets inverted
         npt.assert_allclose(b_u_up, -b_u_down)
+
+
+class TestMagneticField:
+    """
+    Test magnetic_field against magnetic_easting, magnetic_northing and
+    magnetic_upward
+
+    Check if the components returned by magnetic_field match the individual
+    ones computed by each one of the other functions.
+    """
+
+    def test_magnetic_field(self, sample_3d_grid, sample_prism, sample_magnetization):
+        """
+        Test magnetic_field against each one of the other functions
+        """
+        # Compute all components of B using magnetic_field
+        b = np.array(
+            list(
+                magnetic_field(e, n, u, sample_prism, sample_magnetization)
+                for e, n, u in zip(*sample_3d_grid)
+            )
+        )
+        b_e, b_n, b_u = tuple(b[:, i] for i in range(3))
+        # Computed the individual fields
+        b_e_expected = np.array(
+            list(
+                magnetic_e(e, n, u, sample_prism, sample_magnetization)
+                for e, n, u in zip(*sample_3d_grid)
+            )
+        )
+        b_n_expected = np.array(
+            list(
+                magnetic_n(e, n, u, sample_prism, sample_magnetization)
+                for e, n, u in zip(*sample_3d_grid)
+            )
+        )
+        b_u_expected = np.array(
+            list(
+                magnetic_u(e, n, u, sample_prism, sample_magnetization)
+                for e, n, u in zip(*sample_3d_grid)
+            )
+        )
+        npt.assert_allclose(b_e, b_e_expected)
+        npt.assert_allclose(b_n, b_n_expected)
+        npt.assert_allclose(b_u, b_u_expected)
