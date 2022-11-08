@@ -696,3 +696,103 @@ class TestMagneticField:
         npt.assert_allclose(b_e, b_e_expected)
         npt.assert_allclose(b_n, b_n_expected)
         npt.assert_allclose(b_u, b_u_expected)
+
+
+class TestDivergenceOfB:
+    """
+    Test if the divergence of the magnetic field is equal to zero
+
+    Compute the derivatives of B through finite differences
+    """
+
+    # Displacement used in the finite differences
+    delta = 1e-6
+
+    def get_b_ee_finite_differences(self, coordinates, prism, magnetization):
+        """
+        Compute b_ee using finite differences
+        """
+        # Get original coordinates
+        easting, northing, upward = coordinates
+        # Shift coordinates using delta
+        easting_shifted = easting + self.delta
+        # Compute b_e on original and shifted coordinates
+        b_e = np.array(
+            list(
+                magnetic_e(e, n, u, prism, magnetization)
+                for e, n, u in zip(easting, northing, upward)
+            )
+        )
+        b_e_shifted = np.array(
+            list(
+                magnetic_e(e, n, u, prism, magnetization)
+                for e, n, u in zip(easting_shifted, northing, upward)
+            )
+        )
+        # Compute b_ee
+        b_ee = (b_e_shifted - b_e) / self.delta
+        return b_ee
+
+    def get_b_nn_finite_differences(self, coordinates, prism, magnetization):
+        """
+        Compute b_nn using finite differences
+        """
+        # Get original coordinates
+        easting, northing, upward = coordinates
+        # Shift coordinates using delta
+        northing_shifted = northing + self.delta
+        # Compute b_e on original and shifted coordinates
+        b_n = np.array(
+            list(
+                magnetic_n(e, n, u, prism, magnetization)
+                for e, n, u in zip(easting, northing, upward)
+            )
+        )
+        b_n_shifted = np.array(
+            list(
+                magnetic_n(e, n, u, prism, magnetization)
+                for e, n, u in zip(easting, northing_shifted, upward)
+            )
+        )
+        # Compute b_nn
+        b_nn = (b_n_shifted - b_n) / self.delta
+        return b_nn
+
+    def get_b_uu_finite_differences(self, coordinates, prism, magnetization):
+        """
+        Compute b_uu using finite differences
+        """
+        # Get original coordinates
+        easting, northing, upward = coordinates
+        # Shift coordinates using delta
+        upward_shifted = upward + self.delta
+        # Compute b_e on original and shifted coordinates
+        b_u = np.array(
+            list(
+                magnetic_u(e, n, u, prism, magnetization)
+                for e, n, u in zip(easting, northing, upward)
+            )
+        )
+        b_u_shifted = np.array(
+            list(
+                magnetic_u(e, n, u, prism, magnetization)
+                for e, n, u in zip(easting, northing, upward_shifted)
+            )
+        )
+        # Compute b_uu
+        b_uu = (b_u_shifted - b_u) / self.delta
+        return b_uu
+
+    def test_divergence_of_b(self, sample_3d_grid, sample_prism, sample_magnetization):
+        # Compute b_ee, b_nn and b_uu using finite differences
+        b_ee = self.get_b_ee_finite_differences(
+            sample_3d_grid, sample_prism, sample_magnetization
+        )
+        b_nn = self.get_b_nn_finite_differences(
+            sample_3d_grid, sample_prism, sample_magnetization
+        )
+        b_uu = self.get_b_uu_finite_differences(
+            sample_3d_grid, sample_prism, sample_magnetization
+        )
+        # Check if the divergence of B is zero
+        npt.assert_allclose(-b_uu, b_ee + b_nn, atol=1e-11)
