@@ -66,6 +66,8 @@ class TestSymmetryBu:
     Test symmetry of upward component of the magnetic field
     """
 
+    atol = 1e-22  # absolute tolerance for values near zero
+
     @pytest.mark.parametrize(
         "magnetic_moment",
         [
@@ -111,11 +113,10 @@ class TestSymmetryBu:
             )
         )
         # Check symmetry between top and bottom
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[2] != 0:
-            npt.assert_allclose(b_u_top, b_u_bottom, atol=atol)
+            npt.assert_allclose(b_u_top, b_u_bottom, atol=self.atol)
         else:
-            npt.assert_allclose(b_u_top, -b_u_bottom, atol=atol)
+            npt.assert_allclose(b_u_top, -b_u_bottom, atol=self.atol)
 
     @pytest.mark.parametrize(
         "magnetic_moment",
@@ -162,11 +163,10 @@ class TestSymmetryBu:
             )
         )
         # Check symmetry between south and north
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[1] != 0:
-            npt.assert_allclose(b_u_north, -b_u_south, atol=atol)
+            npt.assert_allclose(b_u_north, -b_u_south, atol=self.atol)
         else:
-            npt.assert_allclose(b_u_north, b_u_south, atol=atol)
+            npt.assert_allclose(b_u_north, b_u_south, atol=self.atol)
 
     @pytest.mark.parametrize(
         "magnetic_moment",
@@ -213,11 +213,10 @@ class TestSymmetryBu:
             )
         )
         # Check symmetry between east and west
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[0] != 0:
-            npt.assert_allclose(b_u_east, -b_u_west, atol=atol)
+            npt.assert_allclose(b_u_east, -b_u_west, atol=self.atol)
         else:
-            npt.assert_allclose(b_u_east, b_u_west, atol=atol)
+            npt.assert_allclose(b_u_east, b_u_west, atol=self.atol)
 
     def test_symmetry_when_flipping(self, sample_3d_grid, sample_dipole):
         """
@@ -254,6 +253,8 @@ class TestSymmetryBe:
     """
     Test symmetry of easting component of the magnetic field
     """
+
+    atol = 1e-22  # absolute tolerance for values near zero
 
     @pytest.mark.parametrize(
         "magnetic_moment",
@@ -300,11 +301,10 @@ class TestSymmetryBe:
             )
         )
         # Check symmetry between top and bottom
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[2] != 0:
-            npt.assert_allclose(b_e_top, -b_e_bottom, atol=atol)
+            npt.assert_allclose(b_e_top, -b_e_bottom, atol=self.atol)
         else:
-            npt.assert_allclose(b_e_top, b_e_bottom, atol=atol)
+            npt.assert_allclose(b_e_top, b_e_bottom, atol=self.atol)
 
     @pytest.mark.parametrize(
         "magnetic_moment",
@@ -351,11 +351,10 @@ class TestSymmetryBe:
             )
         )
         # Check symmetry between south and north
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[1] != 0:
-            npt.assert_allclose(b_e_north, -b_e_south, atol=atol)
+            npt.assert_allclose(b_e_north, -b_e_south, atol=self.atol)
         else:
-            npt.assert_allclose(b_e_north, b_e_south, atol=atol)
+            npt.assert_allclose(b_e_north, b_e_south, atol=self.atol)
 
     @pytest.mark.parametrize(
         "magnetic_moment",
@@ -402,11 +401,10 @@ class TestSymmetryBe:
             )
         )
         # Check symmetry between west and east
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[0] != 0:
-            npt.assert_allclose(b_e_east, b_e_west, atol=atol)
+            npt.assert_allclose(b_e_east, b_e_west, atol=self.atol)
         else:
-            npt.assert_allclose(b_e_east, -b_e_west, atol=atol)
+            npt.assert_allclose(b_e_east, -b_e_west, atol=self.atol)
 
     def test_symmetry_when_flipping(self, sample_3d_grid, sample_dipole):
         """
@@ -443,6 +441,8 @@ class TestSymmetryBn:
     """
     Test symmetry of easting component of the magnetic field
     """
+
+    atol = 1e-22  # absolute tolerance for values near zero
 
     @pytest.mark.parametrize(
         "magnetic_moment",
@@ -489,11 +489,10 @@ class TestSymmetryBn:
             )
         )
         # Check symmetry between top and bottom
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[2] != 0:
-            npt.assert_allclose(b_n_top, -b_n_bottom, atol=atol)
+            npt.assert_allclose(b_n_top, -b_n_bottom, atol=self.atol)
         else:
-            npt.assert_allclose(b_n_top, b_n_bottom, atol=atol)
+            npt.assert_allclose(b_n_top, b_n_bottom, atol=self.atol)
 
     @pytest.mark.parametrize(
         "magnetic_moment",
@@ -540,11 +539,10 @@ class TestSymmetryBn:
             )
         )
         # Check symmetry between south and north
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[1] != 0:
-            npt.assert_allclose(b_n_north, b_n_south, atol=atol)
+            npt.assert_allclose(b_n_north, b_n_south, atol=self.atol)
         else:
-            npt.assert_allclose(b_n_north, -b_n_south, atol=atol)
+            npt.assert_allclose(b_n_north, -b_n_south, atol=self.atol)
 
     @pytest.mark.parametrize(
         "magnetic_moment",
@@ -591,11 +589,10 @@ class TestSymmetryBn:
             )
         )
         # Check symmetry between west and east
-        atol = 1e-22  # absolute tolerance for values near zero
         if magnetic_moment[0] != 0:
-            npt.assert_allclose(b_n_east, -b_n_west, atol=atol)
+            npt.assert_allclose(b_n_east, -b_n_west, atol=self.atol)
         else:
-            npt.assert_allclose(b_n_east, b_n_west, atol=atol)
+            npt.assert_allclose(b_n_east, b_n_west, atol=self.atol)
 
     def test_symmetry_when_flipping(self, sample_3d_grid, sample_dipole):
         """
