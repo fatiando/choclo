@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Gravity forward modelling function for rectangular prisms
+Gravity forward modelling functions for rectangular prisms
 """
 import numpy as np
 from numba import jit
