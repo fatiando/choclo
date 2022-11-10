@@ -84,21 +84,24 @@ def magnetic_field(
     :math:`\lVert \cdot \rVert` refer to the :math:`L_2` norm
     and :math:`\mu_0` is the vacuum magnetic permeability.
     """
-    r_vector = np.array(
-        (
-            easting_p - easting_q,
-            northing_p - northing_q,
-            upward_p - upward_q,
-        )
-    )
-    distance = np.sqrt(np.sum(r_vector**2))
+    r_e = easting_p - easting_q
+    r_n = northing_p - northing_q
+    r_u = upward_p - upward_q
+    distance = np.sqrt(r_e**2 + r_n**2 + r_u**2)
     dotproduct = (
-        magnetic_moment[0] * r_vector[0]
-        + magnetic_moment[1] * r_vector[1]
-        + magnetic_moment[2] * r_vector[2]
+        magnetic_moment[0] * r_e + magnetic_moment[1] * r_n + magnetic_moment[2] * r_u
     )
-    result = 3 * dotproduct * r_vector / distance**5 - magnetic_moment / distance**3
-    return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
+    c_m = VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
+    b_e = c_m * (
+        3 * dotproduct * r_e / distance**5 - magnetic_moment[0] / distance**3
+    )
+    b_n = c_m * (
+        3 * dotproduct * r_n / distance**5 - magnetic_moment[1] / distance**3
+    )
+    b_u = c_m * (
+        3 * dotproduct * r_u / distance**5 - magnetic_moment[2] / distance**3
+    )
+    return b_e, b_n, b_u
 
 
 @jit(nopython=True)
@@ -166,23 +169,14 @@ def magnetic_e(
     :math:`\lVert \cdot \rVert` refer to the :math:`L_2` norm
     and :math:`\mu_0` is the vacuum magnetic permeability.
     """
-    r_vector = np.array(
-        (
-            easting_p - easting_q,
-            northing_p - northing_q,
-            upward_p - upward_q,
-        )
-    )
-    distance = np.sqrt(np.sum(r_vector**2))
+    r_e = easting_p - easting_q
+    r_n = northing_p - northing_q
+    r_u = upward_p - upward_q
+    distance = np.sqrt(r_e**2 + r_n**2 + r_u**2)
     dotproduct = (
-        magnetic_moment[0] * r_vector[0]
-        + magnetic_moment[1] * r_vector[1]
-        + magnetic_moment[2] * r_vector[2]
+        magnetic_moment[0] * r_e + magnetic_moment[1] * r_n + magnetic_moment[2] * r_u
     )
-    result = (
-        3 * dotproduct * r_vector[0] / distance**5
-        - magnetic_moment[0] / distance**3
-    )
+    result = 3 * dotproduct * r_e / distance**5 - magnetic_moment[0] / distance**3
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
 
 
@@ -251,23 +245,14 @@ def magnetic_n(
     :math:`\lVert \cdot \rVert` refer to the :math:`L_2` norm
     and :math:`\mu_0` is the vacuum magnetic permeability.
     """
-    r_vector = np.array(
-        (
-            easting_p - easting_q,
-            northing_p - northing_q,
-            upward_p - upward_q,
-        )
-    )
-    distance = np.sqrt(np.sum(r_vector**2))
+    r_e = easting_p - easting_q
+    r_n = northing_p - northing_q
+    r_u = upward_p - upward_q
+    distance = np.sqrt(r_e**2 + r_n**2 + r_u**2)
     dotproduct = (
-        magnetic_moment[0] * r_vector[0]
-        + magnetic_moment[1] * r_vector[1]
-        + magnetic_moment[2] * r_vector[2]
+        magnetic_moment[0] * r_e + magnetic_moment[1] * r_n + magnetic_moment[2] * r_u
     )
-    result = (
-        3 * dotproduct * r_vector[1] / distance**5
-        - magnetic_moment[1] / distance**3
-    )
+    result = 3 * dotproduct * r_n / distance**5 - magnetic_moment[1] / distance**3
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
 
 
@@ -336,21 +321,12 @@ def magnetic_u(
     :math:`\lVert \cdot \rVert` refer to the :math:`L_2` norm
     and :math:`\mu_0` is the vacuum magnetic permeability.
     """
-    r_vector = np.array(
-        (
-            easting_p - easting_q,
-            northing_p - northing_q,
-            upward_p - upward_q,
-        )
-    )
-    distance = np.sqrt(np.sum(r_vector**2))
+    r_e = easting_p - easting_q
+    r_n = northing_p - northing_q
+    r_u = upward_p - upward_q
+    distance = np.sqrt(r_e**2 + r_n**2 + r_u**2)
     dotproduct = (
-        magnetic_moment[0] * r_vector[0]
-        + magnetic_moment[1] * r_vector[1]
-        + magnetic_moment[2] * r_vector[2]
+        magnetic_moment[0] * r_e + magnetic_moment[1] * r_n + magnetic_moment[2] * r_u
     )
-    result = (
-        3 * dotproduct * r_vector[2] / distance**5
-        - magnetic_moment[2] / distance**3
-    )
+    result = 3 * dotproduct * r_u / distance**5 - magnetic_moment[2] / distance**3
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
