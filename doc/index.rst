@@ -306,6 +306,7 @@ lowering the computation time by a few more factors.
     api/index.rst
     citing.rst
     references.rst
+    compatibility.rst
 
 
 .. toctree::
