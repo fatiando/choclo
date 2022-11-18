@@ -31,6 +31,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx_design",
     "sphinx_copybutton",
+    "jupyter_sphinx",
 ]
 
 # Configuration to include links to other project docs when referencing
