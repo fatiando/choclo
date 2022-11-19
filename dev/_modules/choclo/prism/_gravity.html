@@ -1,0 +1,1750 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <title>choclo.prism._gravity | Choclo v0.0.post27</title>
+    
+
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference Documentation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../api/index.html">
+   List of functions and classes (API)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_pot.html">
+     choclo.point.gravity_pot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_e.html">
+     choclo.point.gravity_e
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_n.html">
+     choclo.point.gravity_n
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_u.html">
+     choclo.point.gravity_u
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_ee.html">
+     choclo.point.gravity_ee
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_nn.html">
+     choclo.point.gravity_nn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_uu.html">
+     choclo.point.gravity_uu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_en.html">
+     choclo.point.gravity_en
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_eu.html">
+     choclo.point.gravity_eu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.gravity_nu.html">
+     choclo.point.gravity_nu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.dipole.magnetic_e.html">
+     choclo.dipole.magnetic_e
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.dipole.magnetic_n.html">
+     choclo.dipole.magnetic_n
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.dipole.magnetic_u.html">
+     choclo.dipole.magnetic_u
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.dipole.magnetic_field.html">
+     choclo.dipole.magnetic_field
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_pot.html">
+     choclo.point.kernel_pot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_e.html">
+     choclo.point.kernel_e
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_n.html">
+     choclo.point.kernel_n
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_u.html">
+     choclo.point.kernel_u
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_ee.html">
+     choclo.point.kernel_ee
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_nn.html">
+     choclo.point.kernel_nn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_uu.html">
+     choclo.point.kernel_uu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_en.html">
+     choclo.point.kernel_en
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_eu.html">
+     choclo.point.kernel_eu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_nu.html">
+     choclo.point.kernel_nu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_pot.html">
+     choclo.prism.gravity_pot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_e.html">
+     choclo.prism.gravity_e
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_n.html">
+     choclo.prism.gravity_n
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_u.html">
+     choclo.prism.gravity_u
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_ee.html">
+     choclo.prism.gravity_ee
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_nn.html">
+     choclo.prism.gravity_nn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_uu.html">
+     choclo.prism.gravity_uu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_en.html">
+     choclo.prism.gravity_en
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_eu.html">
+     choclo.prism.gravity_eu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.gravity_nu.html">
+     choclo.prism.gravity_nu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_field.html">
+     choclo.prism.magnetic_field
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_e.html">
+     choclo.prism.magnetic_e
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_n.html">
+     choclo.prism.magnetic_n
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_u.html">
+     choclo.prism.magnetic_u
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_pot.html">
+     choclo.prism.kernel_pot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_e.html">
+     choclo.prism.kernel_e
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_n.html">
+     choclo.prism.kernel_n
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_u.html">
+     choclo.prism.kernel_u
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_ee.html">
+     choclo.prism.kernel_ee
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_nn.html">
+     choclo.prism.kernel_nn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_uu.html">
+     choclo.prism.kernel_uu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_en.html">
+     choclo.prism.kernel_en
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_eu.html">
+     choclo.prism.kernel_eu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.prism.kernel_nu.html">
+     choclo.prism.kernel_nu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.utils.distance_cartesian.html">
+     choclo.utils.distance_cartesian
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.utils.distance_spherical.html">
+     choclo.utils.distance_spherical
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.utils.distance_spherical_core.html">
+     choclo.utils.distance_spherical_core
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.constants.GRAVITATIONAL_CONST.html">
+     choclo.constants.GRAVITATIONAL_CONST
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../api/generated/choclo.constants.VACUUM_MAGNETIC_PERMEABILITY.html">
+     choclo.constants.VACUUM_MAGNETIC_PERMEABILITY
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../citing.html">
+   Citing Choclo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../compatibility.html">
+   Version compatibility
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Community
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="http://contact.fatiando.org">
+   Join the community
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/fatiando/choclo/blob/main/CONTRIBUTING.md">
+   How to contribute
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/fatiando/choclo/blob/main/CODE_OF_CONDUCT.md">
+   Code of Conduct
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/fatiando/choclo">
+   Source code on GitHub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://www.fatiando.org">
+   The Fatiando a Terra project
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/fatiando/choclo"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/fatiando/choclo/issues/new?title=Issue%20on%20page%20%2F_modules/choclo/prism/_gravity.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <h1>Source code for choclo.prism._gravity</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 The Choclo Developers.</span>
+<span class="c1"># Distributed under the terms of the BSD 3-Clause License.</span>
+<span class="c1"># SPDX-License-Identifier: BSD-3-Clause</span>
+<span class="c1">#</span>
+<span class="c1"># This code is part of the Fatiando a Terra project (https://www.fatiando.org)</span>
+<span class="c1">#</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Gravity forward modelling functions for rectangular prisms</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+
+<span class="kn">from</span> <span class="nn">..constants</span> <span class="kn">import</span> <span class="n">GRAVITATIONAL_CONST</span>
+<span class="kn">from</span> <span class="nn">._kernels</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">kernel_e</span><span class="p">,</span>
+    <span class="n">kernel_ee</span><span class="p">,</span>
+    <span class="n">kernel_en</span><span class="p">,</span>
+    <span class="n">kernel_eu</span><span class="p">,</span>
+    <span class="n">kernel_n</span><span class="p">,</span>
+    <span class="n">kernel_nn</span><span class="p">,</span>
+    <span class="n">kernel_nu</span><span class="p">,</span>
+    <span class="n">kernel_pot</span><span class="p">,</span>
+    <span class="n">kernel_u</span><span class="p">,</span>
+    <span class="n">kernel_uu</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="gravity_pot"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_pot.html#choclo.prism.gravity_pot">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_pot</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gravitational potential field due to a rectangular prism</span>
+
+<span class="sd">    Returns the gravitational potential field produced by a single rectangular</span>
+<span class="sd">    prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    potential : float</span>
+<span class="sd">        Gravitational potential field generated by the rectangular prism on the</span>
+<span class="sd">        observation point in :math:`\text{J}/\text{kg}`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the gravitational potential field :math:`V(\mathbf{p})` on the</span>
+<span class="sd">    observation point :math:`\mathbf{p} = (x_p, y_p, z_p)` generated by</span>
+<span class="sd">    a single rectangular prism defined by its boundaries :math:`x_1, x_2, y_1,</span>
+<span class="sd">    y_2, z_1, z_2` and with a density :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        V(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_V(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_V(x, y, z) &amp;=</span>
+<span class="sd">            x y \, \text{ln2} (z + r)</span>
+<span class="sd">            + y z \, \text{ln2} (x + r)</span>
+<span class="sd">            + z x \, \text{ln2} (y + r) \\</span>
+<span class="sd">            - \frac{x^2}{2} &amp;\text{arctan2} \left( \frac{yz}{xr} \right)</span>
+<span class="sd">            - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)</span>
+<span class="sd">            - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right),</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as</span>
+<span class="sd">    follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
+<span class="sd">            \ln (x)</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
+<span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
+<span class="sd">            -\frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &lt; 0 \\</span>
+<span class="sd">            0 &amp; x = 0 \quad \text{and} \quad y = 0 \\</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    These were defined after [Fukushima2020]_ and guarantee a good accuracy on</span>
+<span class="sd">    any observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_pot</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_e"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_e.html#choclo.prism.gravity_e">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_e</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting component of the gravitational acceleration due to a prism</span>
+
+<span class="sd">    Returns the easting component of the gravitational acceleration produced by</span>
+<span class="sd">    a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_e : float</span>
+<span class="sd">        Easting component of the gravitational acceleration generated by the</span>
+<span class="sd">        rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the easting component :math:`g_x(\mathbf{p})` of the gravitational</span>
+<span class="sd">    acceleration :math:`\mathbf{g}` on the observation point :math:`\mathbf{p}</span>
+<span class="sd">    = (x_p, y_p, z_p)` generated by a single rectangular prism defined by its</span>
+<span class="sd">    boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and with a density</span>
+<span class="sd">    :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_x(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_x(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_x(x, y, z) =</span>
+<span class="sd">            \left[</span>
+<span class="sd">            y \, \text{ln2} (z + r)</span>
+<span class="sd">            + z \, \text{ln2} (y + r)</span>
+<span class="sd">            - x \, \text{arctan2} \left( \frac{yz}{xr} \right)</span>
+<span class="sd">            \right]</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as</span>
+<span class="sd">    follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
+<span class="sd">            \ln (x)</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
+<span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
+<span class="sd">            -\frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &lt; 0 \\</span>
+<span class="sd">            0 &amp; x = 0 \quad \text{and} \quad y = 0 \\</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    These were defined after [Fukushima2020]_ and guarantee a good accuracy on</span>
+<span class="sd">    any observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_e</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_n"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_n.html#choclo.prism.gravity_n">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_n</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Northing component of the gravitational acceleration due to a prism</span>
+
+<span class="sd">    Returns the northing component of the gravitational acceleration produced</span>
+<span class="sd">    by a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_n : float</span>
+<span class="sd">        Northing component of the gravitational acceleration generated by the</span>
+<span class="sd">        rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the northing component :math:`g_y(\mathbf{p})` of the gravitational</span>
+<span class="sd">    acceleration :math:`\mathbf{g}` on the observation point :math:`\mathbf{p}</span>
+<span class="sd">    = (x_p, y_p, z_p)` generated by a single rectangular prism defined by its</span>
+<span class="sd">    boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and with a density</span>
+<span class="sd">    :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_y(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_y(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_y(x, y, z) =</span>
+<span class="sd">            \left[</span>
+<span class="sd">            z \, \text{ln2} (x + r)</span>
+<span class="sd">            + x \, \text{ln2} (z + r)</span>
+<span class="sd">            - y \, \text{arctan2} \left( \frac{zx}{yr} \right)</span>
+<span class="sd">            \right]</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as</span>
+<span class="sd">    follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
+<span class="sd">            \ln (x)</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
+<span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
+<span class="sd">            -\frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &lt; 0 \\</span>
+<span class="sd">            0 &amp; x = 0 \quad \text{and} \quad y = 0 \\</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    These were defined after [Fukushima2020]_ and guarantee a good accuracy on</span>
+<span class="sd">    any observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_n</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_u"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_u.html#choclo.prism.gravity_u">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_u</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Upward component of the gravitational acceleration due to a prism</span>
+
+<span class="sd">    Returns the upward component of the gravitational acceleration produced by</span>
+<span class="sd">    a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_u : float</span>
+<span class="sd">        Upward component of the gravitational acceleration generated by the</span>
+<span class="sd">        rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the upward component :math:`g_z(\mathbf{p})` of the gravitational</span>
+<span class="sd">    acceleration :math:`\mathbf{g}` on the observation point :math:`\mathbf{p}</span>
+<span class="sd">    = (x_p, y_p, z_p)` generated by a single rectangular prism defined by its</span>
+<span class="sd">    boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and with a density</span>
+<span class="sd">    :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_z(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_z(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_z(x, y, z) =</span>
+<span class="sd">            - \left[</span>
+<span class="sd">            x \, \text{ln2} (y + r)</span>
+<span class="sd">            + y \, \text{ln2} (x + r)</span>
+<span class="sd">            - z \, \text{arctan2} \left( \frac{xy}{zr} \right)</span>
+<span class="sd">            \right]</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    .. important</span>
+
+<span class="sd">        The minus sign in the :math:`k_x(x, y, z)` function is needed to return</span>
+<span class="sd">        the **upward** component of the acceleration. [Nagy2000]_ and</span>
+<span class="sd">        [Nagy2002]_ equation corresponds to the *downward* coordinate.</span>
+
+<span class="sd">    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as</span>
+<span class="sd">    follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
+<span class="sd">            \ln (x)</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
+<span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
+<span class="sd">            -\frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &lt; 0 \\</span>
+<span class="sd">            0 &amp; x = 0 \quad \text{and} \quad y = 0 \\</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    These were defined after [Fukushima2020]_ and guarantee a good accuracy on</span>
+<span class="sd">    any observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_u</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_ee"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_ee.html#choclo.prism.gravity_ee">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_ee</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-easting component of the gravitational tensor due to a prism</span>
+
+<span class="sd">    Returns the easting-easting component of the gravitational tensor produced</span>
+<span class="sd">    by a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_ee : float</span>
+<span class="sd">        Easting-easting component of the gravitational tensor generated by the</span>
+<span class="sd">        rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the easting-easting component :math:`g_{xx}(\mathbf{p})` of the</span>
+<span class="sd">    gravitational tensor :math:`\mathbf{T}` on the observation point</span>
+<span class="sd">    :math:`\mathbf{p} = (x_p, y_p, z_p)` generated by a single rectangular</span>
+<span class="sd">    prism defined by its boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and</span>
+<span class="sd">    with a density :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_{xx}(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_{xx}(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xx}(x, y, z) = - \text{arctan2} \left( \frac{yz}{xr} \right),</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{arctan2}` function is defined as follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
+<span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
+<span class="sd">            -\frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &lt; 0 \\</span>
+<span class="sd">            0 &amp; x = 0 \quad \text{and} \quad y = 0 \\</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
+<span class="sd">    observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_ee</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_nn"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_nn.html#choclo.prism.gravity_nn">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_nn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Northing-northing component of the gravitational tensor due to a prism</span>
+
+<span class="sd">    Returns the northing-northing component of the gravitational tensor</span>
+<span class="sd">    produced by a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_nn : float</span>
+<span class="sd">        Northing-northing component of the gravitational tensor generated by</span>
+<span class="sd">        the rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the northing-northing component :math:`g_{yy}(\mathbf{p})` of the</span>
+<span class="sd">    gravitational tensor :math:`\mathbf{T}` on the observation point</span>
+<span class="sd">    :math:`\mathbf{p} = (x_p, y_p, z_p)` generated by a single rectangular</span>
+<span class="sd">    prism defined by its boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and</span>
+<span class="sd">    with a density :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_{yy}(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_{yy}(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{yy}(x, y, z) = - \text{arctan2} \left( \frac{zx}{yr} \right),</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{arctan2}` function is defined as follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
+<span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
+<span class="sd">            -\frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &lt; 0 \\</span>
+<span class="sd">            0 &amp; x = 0 \quad \text{and} \quad y = 0 \\</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
+<span class="sd">    observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_nn</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_uu"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_uu.html#choclo.prism.gravity_uu">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_uu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Upward-upward component of the gravitational tensor due to a prism</span>
+
+<span class="sd">    Returns the northing-northing component of the gravitational tensor</span>
+<span class="sd">    produced by a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_uu : float</span>
+<span class="sd">        Upward-upward component of the gravitational tensor generated by</span>
+<span class="sd">        the rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the upward-upward component :math:`g_{zz}(\mathbf{p})` of the</span>
+<span class="sd">    gravitational tensor :math:`\mathbf{T}` on the observation point</span>
+<span class="sd">    :math:`\mathbf{p} = (x_p, y_p, z_p)` generated by a single rectangular</span>
+<span class="sd">    prism defined by its boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and</span>
+<span class="sd">    with a density :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_{zz}(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_{zz}(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{zz}(x, y, z) = - \text{arctan2} \left( \frac{xy}{zr} \right),</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{arctan2}` function is defined as follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
+<span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
+<span class="sd">            -\frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &lt; 0 \\</span>
+<span class="sd">            0 &amp; x = 0 \quad \text{and} \quad y = 0 \\</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
+<span class="sd">    observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_uu</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_en"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_en.html#choclo.prism.gravity_en">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_en</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-northing component of the gravitational tensor due to a prism</span>
+
+<span class="sd">    Returns the northing-northing component of the gravitational tensor</span>
+<span class="sd">    produced by a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_en : float</span>
+<span class="sd">        Easting-northing component of the gravitational tensor generated by the</span>
+<span class="sd">        rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the easting-northing component :math:`g_{xy}(\mathbf{p})` of the</span>
+<span class="sd">    gravitational tensor :math:`\mathbf{T}` on the observation point</span>
+<span class="sd">    :math:`\mathbf{p} = (x_p, y_p, z_p)` generated by a single rectangular</span>
+<span class="sd">    prism defined by its boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and</span>
+<span class="sd">    with a density :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_{xy}(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_{xy}(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xy}(x, y, z) = \text{ln2} \left( z + r \right),</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{ln2}` function is defined as follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
+<span class="sd">            \ln (x)</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
+<span class="sd">    observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_en</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_eu"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_eu.html#choclo.prism.gravity_eu">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_eu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-upward component of the gravitational tensor due to a prism</span>
+
+<span class="sd">    Returns the easting-upward component of the gravitational tensor</span>
+<span class="sd">    produced by a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_eu : float</span>
+<span class="sd">        Easting-upward component of the gravitational tensor generated by the</span>
+<span class="sd">        rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the easting-upward component :math:`g_{xz}(\mathbf{p})` of the</span>
+<span class="sd">    gravitational tensor :math:`\mathbf{T}` on the observation point</span>
+<span class="sd">    :math:`\mathbf{p} = (x_p, y_p, z_p)` generated by a single rectangular</span>
+<span class="sd">    prism defined by its boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and</span>
+<span class="sd">    with a density :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_{xz}(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_{xz}(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xz}(x, y, z) = \text{ln2} \left( y + r \right),</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{ln2}` function is defined as follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
+<span class="sd">            \ln (x)</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
+<span class="sd">    observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_eu</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="gravity_nu"><a class="viewcode-back" href="../../../api/generated/choclo.prism.gravity_nu.html#choclo.prism.gravity_nu">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gravity_nu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Northing-upward component of the gravitational tensor due to a prism</span>
+
+<span class="sd">    Returns the northing-upward component of the gravitational tensor</span>
+<span class="sd">    produced by a single rectangular prism on a single computation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    g_nu : float</span>
+<span class="sd">        Northing-upward component of the gravitational tensor generated by the</span>
+<span class="sd">        rectangular prism on the observation point in</span>
+<span class="sd">        :math:`\text{m}/\text{s}^2`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Returns the northing-upward component :math:`g_{yz}(\mathbf{p})` of the</span>
+<span class="sd">    gravitational tensor :math:`\mathbf{T}` on the observation point</span>
+<span class="sd">    :math:`\mathbf{p} = (x_p, y_p, z_p)` generated by a single rectangular</span>
+<span class="sd">    prism defined by its boundaries :math:`x_1, x_2, y_1, y_2, z_1, z_2` and</span>
+<span class="sd">    with a density :math:`\rho`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        g_{yz}(\mathbf{p}) =</span>
+<span class="sd">            G</span>
+<span class="sd">            \rho \,\,</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k_{yz}(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{yz}(x, y, z) = \text{ln2} \left( x + r \right),</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r = \sqrt{x^2 + y^2 + z^2},</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        X_1 = x_1 - x_p \\</span>
+<span class="sd">        X_2 = x_2 - x_p \\</span>
+<span class="sd">        Y_1 = y_1 - y_p \\</span>
+<span class="sd">        Y_2 = y_2 - y_p \\</span>
+<span class="sd">        Z_1 = z_1 - z_p \\</span>
+<span class="sd">        Z_2 = z_2 - z_p</span>
+
+<span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
+<span class="sd">    Universal Gravitational Constant.</span>
+
+<span class="sd">    The :math:`\text{ln2}` function is defined as follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
+<span class="sd">            \ln (x)</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
+<span class="sd">    observation point.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">GRAVITATIONAL_CONST</span>
+        <span class="o">*</span> <span class="n">density</span>
+        <span class="o">*</span> <span class="n">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel_nu</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_evaluate_kernel</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluate a kernel function on every shifted vertex of a prism</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Easting coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
+<span class="sd">    prism : 1d-array</span>
+<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
+<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
+<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
+<span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    kernel : callable</span>
+<span class="sd">        Kernel function that will be evaluated on each one of the shifted</span>
+<span class="sd">        vertices of the prism.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : float</span>
+<span class="sd">        Evaluation of the kernel function on each one of the vertices of the</span>
+<span class="sd">        prism.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function evaluates a numerical kernel :math:`k(x, y, z)` on each one</span>
+<span class="sd">    of the vertices of the prism:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v(\mathbf{p}) =</span>
+<span class="sd">            \Bigg\lvert \Bigg\lvert \Bigg\lvert</span>
+<span class="sd">            k(x, y, z)</span>
+<span class="sd">            \Bigg\rvert_{X_1}^{X_2}</span>
+<span class="sd">            \Bigg\rvert_{Y_1}^{Y_2}</span>
+<span class="sd">            \Bigg\rvert_{Z_1}^{Z_2}</span>
+
+<span class="sd">    where :math:`X_1`, :math:`X_2`, :math:`Y_1`, :math:`Y_2`, :math:`Z_1` and</span>
+<span class="sd">    :math:`Z_2` are boundaries of the rectangular prism in the *shifted</span>
+<span class="sd">    coordinates* defined by the Cartesian coordinate system with its origin</span>
+<span class="sd">    located on the observation point :math:`\mathbf{p}`.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Nagy2002]_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initialize result float to zero</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Iterate over the vertices of the prism</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># Compute shifted easting coordinate</span>
+        <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="n">shift_east_sq</span> <span class="o">=</span> <span class="n">shift_east</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="c1"># Compute shifted northing coordinate</span>
+            <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">3</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="n">shift_north_sq</span> <span class="o">=</span> <span class="n">shift_north</span><span class="o">**</span><span class="mi">2</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1"># Compute shifted upward coordinate</span>
+                <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">5</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="n">shift_upward_sq</span> <span class="o">=</span> <span class="n">shift_upward</span><span class="o">**</span><span class="mi">2</span>
+                <span class="c1"># Compute the radius</span>
+                <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">shift_east_sq</span> <span class="o">+</span> <span class="n">shift_north_sq</span> <span class="o">+</span> <span class="n">shift_upward_sq</span><span class="p">)</span>
+                <span class="c1"># If i, j or k is 1, the corresponding shifted</span>
+                <span class="c1"># coordinate will refer to the lower boundary,</span>
+                <span class="c1"># meaning the corresponding term should have a minus</span>
+                <span class="c1"># sign.</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">kernel</span><span class="p">(</span>
+                    <span class="n">shift_east</span><span class="p">,</span> <span class="n">shift_north</span><span class="p">,</span> <span class="n">shift_upward</span><span class="p">,</span> <span class="n">radius</span>
+                <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+      &copy; Copyright 2022, The Choclo Developers.<br/>
+    Last updated on Nov 19, 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
