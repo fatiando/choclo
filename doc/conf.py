@@ -31,6 +31,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx_design",
     "sphinx_copybutton",
+    "jupyter_sphinx",
 ]
 
 # Configuration to include links to other project docs when referencing
@@ -63,7 +64,7 @@ add_function_parentheses = False
 # HTML output configuration
 # -----------------------------------------------------------------------------
 html_title = f'{project} <span class="project-version">{version}</span>'
-html_logo = "_static/choclo-logo.png"
+# html_logo = "_static/choclo-logo.png"
 html_favicon = "_static/favicon.png"
 html_last_updated_fmt = "%b %d, %Y"
 html_copy_source = True
