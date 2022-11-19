@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Test forward modelling functions for rectangular prisms
+Test gravity forward modelling functions for rectangular prisms
 """
 import numpy as np
 import numpy.testing as npt
