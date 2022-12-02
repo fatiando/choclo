@@ -91,9 +91,9 @@ def kernel_pot(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = (
-        easting * northing * _safe_log(upward + radius)
-        + northing * upward * _safe_log(easting + radius)
-        + easting * upward * _safe_log(northing + radius)
+        easting * northing * _safe_log(upward, radius)
+        + northing * upward * _safe_log(easting, radius)
+        + easting * upward * _safe_log(northing, radius)
         - 0.5 * easting**2 * _safe_atan2(upward * northing, easting * radius)
         - 0.5 * northing**2 * _safe_atan2(upward * easting, northing * radius)
         - 0.5 * upward**2 * _safe_atan2(easting * northing, upward * radius)
@@ -187,8 +187,8 @@ def kernel_e(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = -(
-        northing * _safe_log(upward + radius)
-        + upward * _safe_log(northing + radius)
+        northing * _safe_log(upward, radius)
+        + upward * _safe_log(northing, radius)
         - easting * _safe_atan2(northing * upward, easting * radius)
     )
     return kernel
@@ -280,8 +280,8 @@ def kernel_n(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = -(
-        upward * _safe_log(easting + radius)
-        + easting * _safe_log(upward + radius)
+        upward * _safe_log(easting, radius)
+        + easting * _safe_log(upward, radius)
         - northing * _safe_atan2(easting * upward, northing * radius)
     )
     return kernel
@@ -376,8 +376,8 @@ def kernel_u(easting, northing, upward, radius):
     # The minus sign is to return the kernel for the upward component instead
     # of the downward one.
     kernel = -(
-        easting * _safe_log(northing + radius)
-        + northing * _safe_log(easting + radius)
+        easting * _safe_log(northing, radius)
+        + northing * _safe_log(easting, radius)
         - upward * _safe_atan2(easting * northing, upward * radius)
     )
     return kernel
@@ -638,7 +638,7 @@ def kernel_en(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(upward + radius)
+    return _safe_log(upward, radius)
 
 
 @jit(nopython=True)
@@ -701,7 +701,7 @@ def kernel_eu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(northing + radius)
+    return _safe_log(northing, radius)
 
 
 @jit(nopython=True)
@@ -764,7 +764,7 @@ def kernel_nu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(easting + radius)
+    return _safe_log(easting, radius)
 
 
 @jit(nopython=True)
@@ -808,30 +808,41 @@ def _safe_atan2(y, x):
 
 
 @jit(nopython=True)
-def _safe_log(x):
+def _safe_log(x, r):
     r"""
-    Modified log to return zero for values of x close to zero
+    Safe log function to use in the prism kernels
 
-    This modified version of the log function makes the computations to agree
-    with the limits of the integral (see [Nagy2000]_).
+    Evaluates the :math:`\ln{x + r}` where :math:`x` is one of the shifted
+    coordinate of the prism vertex and :math:`r` is the Euclidean distance
+    (always non-negative) from the vertex to the observation point.
 
-    Notes
-    -----
+    Evaluating :math:`\ln{x + r}` when :math:`x<0` and :math:`r` is really
+    close to :math:`|x|` could lead to high numerical errors. For those cases
+    this function returns a modified version to reduce those numerical errors:
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{safe_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x > 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            \ln(10^{-10}\text{m} / (r - x)) & x < 0, r = -x
         \end{cases}
+
+    This modified function is based on the one proposed by [Fukushima2020]_.
 
     References
     ----------
-    - [Nagy2000]_
+    - [Fukushima2020]_
     """
-    if np.abs(x) < 1e-10:
-        result = 0
-    else:
-        result = np.log(x)
-    return result
+    if x == 0 and r == 0:
+        return 0
+    if x < 0:
+        if r == -x:
+            # approximate zero length by a 1 Angstrom
+            diff_squares = 1e-10
+        else:
+            diff_squares = r**2 - x**2
+        return np.log(diff_squares / (r - x))
+    return np.log(x + r)
