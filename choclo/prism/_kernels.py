@@ -825,7 +825,7 @@ def _safe_log(x, r):
         \text{safe_ln}(x, r) =
         \begin{cases}
             0 & x = 0, r = 0 \\
-            \ln(x + r) & x > 0 \\
+            \ln(x + r) & x \ge 0 \\
             \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
             \ln(10^{-10}\text{m} / (r - x)) & x < 0, r = -x
         \end{cases}
