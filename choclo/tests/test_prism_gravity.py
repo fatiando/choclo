@@ -1114,3 +1114,74 @@ class TestLaplacian:
             npt.assert_allclose(-g_nn, g_ee + g_uu)
         if left_component == "g_uu":
             npt.assert_allclose(-g_uu, g_ee + g_nn)
+
+
+class TestNonDiagonalTensor:
+    """
+    Test if non diagonal tensor components misbehave on some regions
+    """
+
+    @pytest.fixture(name="prism")
+    def prism(self):
+        prism = [-10, 10, -20, 20, -50, -15]
+        return np.array(prism, dtype=np.float64)
+
+    @pytest.fixture(name="density")
+    def density(self):
+        return 400.0
+
+    @pytest.mark.parametrize("easting_boundary", (0, 1))
+    @pytest.mark.parametrize("northing_boundary", (2, 3))
+    def test_g_en_above_vertices_easting_direction(
+        self, prism, density, easting_boundary, northing_boundary
+    ):
+        """
+        Test values of g_en on observation points above the nodes
+
+        If the safe_log function is not properly defined, the values of g_en
+        above the nodes (but with different upward coordinate) are wrong: they
+        even have a different sign.
+
+        This function runs the test with a set of coordinates along the easting
+        direction.
+        """
+        vertex_easting = prism[easting_boundary]
+        vertex_northing = prism[northing_boundary]
+        # Define an easting linspace that contains the coordinate of one of the
+        # nodes of the prism
+        easting = np.linspace(vertex_easting - 3, vertex_easting + 3, 61)
+        upward = 0
+        g_en = np.array(
+            [gravity_en(e, vertex_northing, upward, prism, density) for e in easting]
+        )
+        # Check if all values in g_en have the same sign
+        signs = np.sign(g_en)
+        npt.assert_allclose(signs[0], signs)
+
+    @pytest.mark.parametrize("easting_boundary", (0, 1))
+    @pytest.mark.parametrize("northing_boundary", (2, 3))
+    def test_g_en_above_vertices_northing_direction(
+        self, prism, density, easting_boundary, northing_boundary
+    ):
+        """
+        Test values of g_en on observation points above the nodes
+
+        If the safe_log function is not properly defined, the values of g_en
+        above the nodes (but with different upward coordinate) are wrong: they
+        even have a different sign.
+
+        This function runs the test with a set of coordinates along the
+        northing direction.
+        """
+        vertex_easting = prism[easting_boundary]
+        vertex_northing = prism[northing_boundary]
+        # Define an easting linspace that contains the coordinate of one of the
+        # nodes of the prism
+        northing = np.linspace(vertex_northing - 3, vertex_northing + 3, 61)
+        upward = 0
+        g_en = np.array(
+            [gravity_en(vertex_easting, n, upward, prism, density) for n in northing]
+        )
+        # Check if all values in g_en have the same sign
+        signs = np.sign(g_en)
+        npt.assert_allclose(signs[0], signs)
