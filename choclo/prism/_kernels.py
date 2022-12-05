@@ -840,9 +840,8 @@ def _safe_log(x, r):
         return 0
     if x < 0:
         if r == -x:
-            # approximate zero length by a 1 Angstrom
-            diff_squares = 1e-10
+            result = -np.log(np.abs(x))
         else:
-            diff_squares = r**2 - x**2
-        return np.log(diff_squares / (r - x))
+            result = np.log((r**2 - x**2) / (r - x))
+        return result
     return np.log(x + r)
