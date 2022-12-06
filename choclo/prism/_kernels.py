@@ -836,7 +836,7 @@ def _safe_log(x, r):
     ----------
     - [Fukushima2020]_
     """
-    if x == 0 and r == 0:
+    if r == 0:
         return 0
     if x < 0:
         if r == -x:
