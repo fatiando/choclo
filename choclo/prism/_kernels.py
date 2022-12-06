@@ -840,7 +840,7 @@ def _safe_log(x, r):
         return 0
     if x < 0:
         if r == -x:
-            result = -np.log(np.abs(x))
+            result = -np.log(-2 * x)
         else:
             result = np.log((r**2 - x**2) / (r - x))
         return result
