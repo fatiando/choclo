@@ -795,16 +795,15 @@ def _safe_atan2(y, x):
     ----------
     - [Fukushima2020]_
     """
-    if x != 0:
-        result = np.arctan(y / x)
-    else:
+    if x == 0:
         if y > 0:
             result = np.pi / 2
         elif y < 0:
             result = -np.pi / 2
         else:
             result = 0
-    return result
+        return result
+    return np.arctan(y / x)
 
 
 @jit(nopython=True)
