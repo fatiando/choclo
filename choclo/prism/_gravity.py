@@ -76,9 +76,9 @@ def gravity_pot(easting, northing, upward, prism, density):
     .. math::
 
         k_V(x, y, z) &=
-            x y \, \text{ln2} (z + r)
-            + y z \, \text{ln2} (x + r)
-            + z x \, \text{ln2} (y + r) \\
+            x y \, \text{ln2} (z, r)
+            + y z \, \text{ln2} (x, r)
+            + z x \, \text{ln2} (y, r) \\
             - \frac{x^2}{2} &\text{arctan2} \left( \frac{yz}{xr} \right)
             - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
             - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right),
@@ -194,8 +194,8 @@ def gravity_e(easting, northing, upward, prism, density):
 
         k_x(x, y, z) =
             \left[
-            y \, \text{ln2} (z + r)
-            + z \, \text{ln2} (y + r)
+            y \, \text{ln2} (z, r)
+            + z \, \text{ln2} (y, r)
             - x \, \text{arctan2} \left( \frac{yz}{xr} \right)
             \right]
 
@@ -310,8 +310,8 @@ def gravity_n(easting, northing, upward, prism, density):
 
         k_y(x, y, z) =
             \left[
-            z \, \text{ln2} (x + r)
-            + x \, \text{ln2} (z + r)
+            z \, \text{ln2} (x, r)
+            + x \, \text{ln2} (z, r)
             - y \, \text{arctan2} \left( \frac{zx}{yr} \right)
             \right]
 
@@ -426,8 +426,8 @@ def gravity_u(easting, northing, upward, prism, density):
 
         k_z(x, y, z) =
             - \left[
-            x \, \text{ln2} (y + r)
-            + y \, \text{ln2} (x + r)
+            x \, \text{ln2} (y, r)
+            + y \, \text{ln2} (x, r)
             - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
             \right]
 
@@ -846,7 +846,7 @@ def gravity_en(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{xy}(x, y, z) = \text{ln2} \left( z + r \right),
+        k_{xy}(x, y, z) = \text{ln2} \left( z, r \right),
 
     .. math::
 
@@ -946,7 +946,7 @@ def gravity_eu(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{xz}(x, y, z) = \text{ln2} \left( y + r \right),
+        k_{xz}(x, y, z) = \text{ln2} \left( y, r \right),
 
     .. math::
 
@@ -1046,7 +1046,7 @@ def gravity_nu(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{yz}(x, y, z) = \text{ln2} \left( x + r \right),
+        k_{yz}(x, y, z) = \text{ln2} \left( x, r \right),
 
     .. math::
 
