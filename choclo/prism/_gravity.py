@@ -106,10 +106,12 @@ def gravity_pot(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{ln2}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
 
     .. math::
@@ -220,10 +222,12 @@ def gravity_e(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{ln2}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
 
     .. math::
@@ -334,10 +338,12 @@ def gravity_n(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{ln2}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
 
     .. math::
@@ -454,10 +460,12 @@ def gravity_u(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{ln2}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
 
     .. math::
@@ -862,10 +870,12 @@ def gravity_en(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{ln2}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
 
     It was defined after [Fukushima2020]_ and guarantee a good accuracy on any
@@ -960,10 +970,12 @@ def gravity_eu(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{ln2}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
 
     It was defined after [Fukushima2020]_ and guarantee a good accuracy on any
@@ -1058,10 +1070,12 @@ def gravity_nu(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{ln2}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
 
     It was defined after [Fukushima2020]_ and guarantee a good accuracy on any
