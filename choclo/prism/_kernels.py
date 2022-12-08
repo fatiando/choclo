@@ -815,10 +815,6 @@ def _safe_log(x, r):
     coordinate of the prism vertex and :math:`r` is the Euclidean distance
     (always non-negative) from the vertex to the observation point.
 
-    Evaluating :math:`\ln{x + r}` when :math:`x<0` and :math:`r` is really
-    close to :math:`|x|` could lead to high numerical errors. For those cases
-    this function returns a modified version to reduce those numerical errors:
-
     .. math::
 
         \text{safe_ln}(x, r) =
@@ -826,10 +822,16 @@ def _safe_log(x, r):
             0 & x = 0, r = 0 \\
             \ln(x + r) & x \ge 0 \\
             \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
-            \ln(10^{-10}\text{m} / (r - x)) & x < 0, r = -x
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
 
-    This modified function is based on the one proposed by [Fukushima2020]_.
+    This function returns 0 when the observation point is located on the vertex
+    of the prism (:math:`r=0`); and two modified versions in case that
+    :math:`x` is negative: if :math:`x = -r` then the :math:`\ln{x + r}` can be
+    replaced by :math:`-\ln{|x| + r} = -\ln(-2x)`, and for any other negative
+    value of :math:`x` it returns :math:`\ln((r^2 - x^2) / (r - x))` which
+    helps by reducing the floating point errors ([Fukushima2020_]).
+    This modified version was inspired by [Nagy2000] and [Fukushima2020_]:
 
     References
     ----------
