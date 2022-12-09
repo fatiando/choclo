@@ -1132,55 +1132,30 @@ class TestNonDiagonalTensor:
 
     @pytest.mark.parametrize("easting_boundary", (0, 1))
     @pytest.mark.parametrize("northing_boundary", (2, 3))
-    def test_g_en_above_vertices_easting_direction(
+    def test_g_en_above_vertices(
         self, prism, density, easting_boundary, northing_boundary
     ):
         """
         Test values of g_en on observation points above the nodes
 
         If the safe_log function is not properly defined, the values of g_en
-        above the nodes (but with different upward coordinate) are wrong: they
-        even have a different sign.
-
-        This function runs the test with a set of coordinates along the easting
-        direction.
+        above the nodes (but with different upward coordinate) should be wrong:
+        they will have a different sign.
         """
         vertex_easting = prism[easting_boundary]
         vertex_northing = prism[northing_boundary]
-        # Define an easting linspace that contains the coordinate of one of the
-        # nodes of the prism
+        # Consider an observation point above one of the vertex of the prism
+        # and define a few observation points around it
         easting = np.linspace(vertex_easting - 3, vertex_easting + 3, 61)
-        upward = 0
-        g_en = np.array(
-            [gravity_en(e, vertex_northing, upward, prism, density) for e in easting]
-        )
-        # Check if all values in g_en have the same sign
-        signs = np.sign(g_en)
-        npt.assert_allclose(signs[0], signs)
-
-    @pytest.mark.parametrize("easting_boundary", (0, 1))
-    @pytest.mark.parametrize("northing_boundary", (2, 3))
-    def test_g_en_above_vertices_northing_direction(
-        self, prism, density, easting_boundary, northing_boundary
-    ):
-        """
-        Test values of g_en on observation points above the nodes
-
-        If the safe_log function is not properly defined, the values of g_en
-        above the nodes (but with different upward coordinate) are wrong: they
-        even have a different sign.
-
-        This function runs the test with a set of coordinates along the
-        northing direction.
-        """
-        vertex_easting = prism[easting_boundary]
-        vertex_northing = prism[northing_boundary]
-        # Define an easting linspace that contains the coordinate of one of the
-        # nodes of the prism
         northing = np.linspace(vertex_northing - 3, vertex_northing + 3, 61)
-        upward = 0
+        assert vertex_easting in easting and vertex_northing in northing
+        upward = prism[5] + 1  # locate the observation points above the prism
         g_en = np.array(
-            [gravity_en(vertex_easting, n, upward, prism, density) for n in northing]
+            [
+                gravity_en(e, n, upward, prism, density)
+                for e in easting
+                for n in northing
+            ]
         )
         # Check if all values in g_en have the same sign
         signs = np.sign(g_en)
