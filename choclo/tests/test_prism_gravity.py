@@ -1194,11 +1194,11 @@ class TestNonDiagonalTensor:
 
     @pytest.mark.parametrize("northing_boundary", (2, 3))
     @pytest.mark.parametrize("upward_boundary", (4, 5))
-    def test_g_nu_north_vertices(
+    def test_g_nu_east_vertices(
         self, prism, density, northing_boundary, upward_boundary
     ):
         """
-        Test values of g_nu on observation points north the nodes
+        Test values of g_nu on observation points east the nodes
 
         If the safe_log function is not properly defined, the values of g_nu at
         the east of the nodes (but with different easting coordinate) should be
