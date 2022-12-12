@@ -39,8 +39,14 @@ jobs:
       matrix:
         os: [ubuntu, macos, windows]
         python: ["3.6", "3.10"]
+        exclude: # There is no Python 3.6 available on Ubuntu 22.04
+          - os: ubuntu
+            python: "3.6"
         include:
           - python: "3.6"
+            dependencies: oldest
+          - python: "3.6" # add instance of Python 3.6 and Ubuntu 20.04
+            os: ubuntu-20.04
             dependencies: oldest
           - python: "3.10"
             dependencies: latest
