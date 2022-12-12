@@ -1118,7 +1118,24 @@ class TestLaplacian:
 
 class TestNonDiagonalTensor:
     """
-    Test if non diagonal tensor components misbehave on some regions
+    Test the behaviour of non-diagonal tensor components on critical points
+
+    The non-diagonal tensor components evaluate the log function on
+    ``log(x + r)``, where ``x`` is the shifted coordinate of the vertex and
+    ``r`` is the distance between the vertex and the computation point. When
+    the two other shifted coordinates are zero and ``x`` is negative, then
+    ``x == -r``, making impossible to evaluate the log function.
+    The ``_safe_log`` function accounts for this and safely evaluate the log
+    function in these points.
+
+    If we consider for example the ``g_en`` component, then observation points
+    that fall above one of the vertices of the prism lead to this situation. If
+    the ``_safe_log`` function is not properly defined, then the value of
+    ``g_en`` on those points will be significantly different from the
+    surrounding points, even with a different sign.
+
+    The following test functions compare the values of the non-diagonal
+    components on and around these particular observation points.
     """
 
     @pytest.fixture(name="prism")
@@ -1136,11 +1153,7 @@ class TestNonDiagonalTensor:
         self, prism, density, easting_boundary, northing_boundary
     ):
         """
-        Test values of g_en on observation points above the nodes
-
-        If the safe_log function is not properly defined, the values of g_en
-        above the nodes (but with different upward coordinate) should be wrong:
-        they will have a different sign.
+        Test g_en on an observation point above the node and around it
         """
         vertex_easting = prism[easting_boundary]
         vertex_northing = prism[northing_boundary]
@@ -1167,11 +1180,7 @@ class TestNonDiagonalTensor:
         self, prism, density, easting_boundary, upward_boundary
     ):
         """
-        Test values of g_eu on observation points north the nodes
-
-        If the safe_log function is not properly defined, the values of g_eu at
-        the north of the nodes (but with different northing coordinate) should
-        be wrong: they will have a different sign.
+        Test g_eu on an observation point north the node and around it
         """
         vertex_easting = prism[easting_boundary]
         vertex_upward = prism[upward_boundary]
@@ -1198,11 +1207,7 @@ class TestNonDiagonalTensor:
         self, prism, density, northing_boundary, upward_boundary
     ):
         """
-        Test values of g_nu on observation points east the nodes
-
-        If the safe_log function is not properly defined, the values of g_nu at
-        the east of the nodes (but with different easting coordinate) should be
-        wrong: they will have a different sign.
+        Test g_nu on an observation point north the node and around it
         """
         vertex_northing = prism[northing_boundary]
         vertex_upward = prism[upward_boundary]
