@@ -58,9 +58,9 @@ def kernel_pot(easting, northing, upward, radius):
             x y \, \operatorname{safe-ln} (z + r)
             + y z \, \operatorname{safe-ln} (x + r)
             + z x \, \operatorname{safe-ln} (y + r) \\
-            & - \frac{x^2}{2} \text{arctan2} \left( \frac{yz}{xr} \right)
-            - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
-            - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right)
+            & - \frac{x^2}{2} \text{safe-arctan} \left( yz, xr \right)
+            - \frac{y^2}{2} \text{safe-arctan} \left( zx, yr \right)
+            - \frac{z^2}{2} \text{safe-arctan} \left( xy, zr \right)
 
     where
 
@@ -76,7 +76,7 @@ def kernel_pot(easting, northing, upward, radius):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \text{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -149,7 +149,7 @@ def kernel_e(easting, northing, upward, radius):
             -\left[
             y \, \operatorname{safe-ln} (z + r)
             + z \, \operatorname{safe-ln} (y + r)
-            - x \, \text{arctan2} \left( \frac{yz}{xr} \right)
+            - x \, \text{safe-arctan} \left( yz, xr \right)
             \right]
 
     where
@@ -166,7 +166,7 @@ def kernel_e(easting, northing, upward, radius):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \text{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -242,7 +242,7 @@ def kernel_n(easting, northing, upward, radius):
             -\left[
             z \, \operatorname{safe-ln} (x + r)
             + x \, \operatorname{safe-ln} (z + r)
-            - y \, \text{arctan2} \left( \frac{zx}{yr} \right)
+            - y \, \text{safe-arctan} \left( zx, yr \right)
             \right]
 
     where
@@ -259,7 +259,7 @@ def kernel_n(easting, northing, upward, radius):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \text{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -335,7 +335,7 @@ def kernel_u(easting, northing, upward, radius):
             - \left[
             x \, \operatorname{safe-ln} (y + r)
             + y \, \operatorname{safe-ln} (x + r)
-            - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
+            - z \, \text{safe-arctan} \left( xy, zr \right)
             \right]
 
     where
@@ -352,7 +352,7 @@ def kernel_u(easting, northing, upward, radius):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \text{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -425,13 +425,13 @@ def kernel_ee(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xx}(x, y, z) = - \text{arctan2} \left( \frac{yz}{xr} \right)
+        k_{xx}(x, y, z) = - \text{safe-arctan} \left( yz, xr \right)
 
     where
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \text{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -490,13 +490,13 @@ def kernel_nn(easting, northing, upward, radius):
 
     .. math::
 
-        k_{yy}(x, y, z) = - \text{arctan2} \left( \frac{zx}{yr} \right)
+        k_{yy}(x, y, z) = - \text{safe-arctan} \left( zx, yr \right)
 
     where
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \text{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -555,13 +555,13 @@ def kernel_uu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{zz}(x, y, z) = - \text{arctan2} \left( \frac{xy}{zr} \right)
+        k_{zz}(x, y, z) = - \text{safe-arctan} \left( xy, zr \right)
 
     where
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \text{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -783,7 +783,7 @@ def _safe_atan2(y, x):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left(y, x\right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\

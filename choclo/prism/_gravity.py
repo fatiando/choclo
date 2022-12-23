@@ -79,9 +79,9 @@ def gravity_pot(easting, northing, upward, prism, density):
             x y \, \operatorname{safe-ln} (z, r)
             + y z \, \operatorname{safe-ln} (x, r)
             + z x \, \operatorname{safe-ln} (y, r) \\
-            - \frac{x^2}{2} &\text{arctan2} \left( \frac{yz}{xr} \right)
-            - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
-            - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right),
+            - \frac{x^2}{2} &\operatorname{safe-arctan} \left( yz, xr \right)
+            - \frac{y^2}{2} \operatorname{safe-arctan} \left( zx, yr \right)
+            - \frac{z^2}{2} \operatorname{safe-arctan} \left( xy, zr \right),
 
     .. math::
 
@@ -101,8 +101,8 @@ def gravity_pot(easting, northing, upward, prism, density):
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
 
-    The :math:`\operatorname{safe-ln}` and :math:`\text{arctan2}` functions are
-    defined as follows:
+    The :math:`\operatorname{safe-ln}` and :math:`\operatorname{safe-arctan}`
+    functions are defined as follows:
 
     .. math::
 
@@ -116,7 +116,7 @@ def gravity_pot(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -196,7 +196,7 @@ def gravity_e(easting, northing, upward, prism, density):
             \left[
             y \, \operatorname{safe-ln} (z, r)
             + z \, \operatorname{safe-ln} (y, r)
-            - x \, \text{arctan2} \left( \frac{yz}{xr} \right)
+            - x \, \operatorname{safe-arctan} \left( yz, xr \right)
             \right]
 
     .. math::
@@ -217,8 +217,8 @@ def gravity_e(easting, northing, upward, prism, density):
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
 
-    The :math:`\operatorname{safe-ln}` and :math:`\text{arctan2}` functions are
-    defined as follows:
+    The :math:`\operatorname{safe-ln}` and :math:`\operatorname{safe-arctan}`
+    functions are defined as follows:
 
     .. math::
 
@@ -232,7 +232,7 @@ def gravity_e(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -312,7 +312,7 @@ def gravity_n(easting, northing, upward, prism, density):
             \left[
             z \, \operatorname{safe-ln} (x, r)
             + x \, \operatorname{safe-ln} (z, r)
-            - y \, \text{arctan2} \left( \frac{zx}{yr} \right)
+            - y \, \operatorname{safe-arctan} \left( zx, yr \right)
             \right]
 
     .. math::
@@ -333,8 +333,8 @@ def gravity_n(easting, northing, upward, prism, density):
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
 
-    The :math:`\operatorname{safe-ln}` and :math:`\text{arctan2}` functions are
-    defined as follows:
+    The :math:`\operatorname{safe-ln}` and :math:`\operatorname{safe-arctan}`
+    functions are defined as follows:
 
     .. math::
 
@@ -348,7 +348,7 @@ def gravity_n(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -428,7 +428,7 @@ def gravity_u(easting, northing, upward, prism, density):
             - \left[
             x \, \operatorname{safe-ln} (y, r)
             + y \, \operatorname{safe-ln} (x, r)
-            - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
+            - z \, \operatorname{safe-arctan} \left( xy, zr \right)
             \right]
 
     .. math::
@@ -455,8 +455,8 @@ def gravity_u(easting, northing, upward, prism, density):
         the **upward** component of the acceleration. [Nagy2000]_ and
         [Nagy2002]_ equation corresponds to the *downward* coordinate.
 
-    The :math:`\operatorname{safe-ln}` and :math:`\text{arctan2}` functions are
-    defined as follows:
+    The :math:`\operatorname{safe-ln}` and :math:`\operatorname{safe-arctan}`
+    functions are defined as follows:
 
     .. math::
 
@@ -470,7 +470,7 @@ def gravity_u(easting, northing, upward, prism, density):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -546,7 +546,8 @@ def gravity_ee(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{xx}(x, y, z) = - \text{arctan2} \left( \frac{yz}{xr} \right),
+        k_{xx}(x, y, z) =
+            - \operatorname{safe-arctan} \left( yz, xr \right),
 
     .. math::
 
@@ -566,11 +567,11 @@ def gravity_ee(easting, northing, upward, prism, density):
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
 
-    The :math:`\text{arctan2}` function is defined as follows:
+    The :math:`\operatorname{safe-arctan}` function is defined as follows:
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -646,7 +647,8 @@ def gravity_nn(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{yy}(x, y, z) = - \text{arctan2} \left( \frac{zx}{yr} \right),
+        k_{yy}(x, y, z) =
+            - \operatorname{safe-arctan} \left( zx, yr \right),
 
     .. math::
 
@@ -666,11 +668,11 @@ def gravity_nn(easting, northing, upward, prism, density):
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
 
-    The :math:`\text{arctan2}` function is defined as follows:
+    The :math:`\operatorname{safe-arctan}` function is defined as follows:
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -746,7 +748,8 @@ def gravity_uu(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{zz}(x, y, z) = - \text{arctan2} \left( \frac{xy}{zr} \right),
+        k_{zz}(x, y, z) =
+            - \operatorname{safe-arctan} \left( xy, zr \right),
 
     .. math::
 
@@ -766,11 +769,11 @@ def gravity_uu(easting, northing, upward, prism, density):
     are the shifted coordinates of the prism boundaries and :math:`G` is the
     Universal Gravitational Constant.
 
-    The :math:`\text{arctan2}` function is defined as follows:
+    The :math:`\operatorname{safe-arctan}` function is defined as follows:
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
