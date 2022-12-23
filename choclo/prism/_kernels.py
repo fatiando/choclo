@@ -55,9 +55,9 @@ def kernel_pot(easting, northing, upward, radius):
     .. math::
 
         k_V(x, y, z) &=
-            x y \, \text{ln2} (z + r)
-            + y z \, \text{ln2} (x + r)
-            + z x \, \text{ln2} (y + r) \\
+            x y \, \operatorname{safe-ln} (z + r)
+            + y z \, \operatorname{safe-ln} (x + r)
+            + z x \, \operatorname{safe-ln} (y + r) \\
             & - \frac{x^2}{2} \text{arctan2} \left( \frac{yz}{xr} \right)
             - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
             - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right)
@@ -66,7 +66,7 @@ def kernel_pot(easting, northing, upward, radius):
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -147,8 +147,8 @@ def kernel_e(easting, northing, upward, radius):
 
         k_x(x, y, z) =
             -\left[
-            y \, \text{ln2} (z + r)
-            + z \, \text{ln2} (y + r)
+            y \, \operatorname{safe-ln} (z + r)
+            + z \, \operatorname{safe-ln} (y + r)
             - x \, \text{arctan2} \left( \frac{yz}{xr} \right)
             \right]
 
@@ -156,7 +156,7 @@ def kernel_e(easting, northing, upward, radius):
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -240,8 +240,8 @@ def kernel_n(easting, northing, upward, radius):
 
         k_y(x, y, z) =
             -\left[
-            z \, \text{ln2} (x + r)
-            + x \, \text{ln2} (z + r)
+            z \, \operatorname{safe-ln} (x + r)
+            + x \, \operatorname{safe-ln} (z + r)
             - y \, \text{arctan2} \left( \frac{zx}{yr} \right)
             \right]
 
@@ -249,7 +249,7 @@ def kernel_n(easting, northing, upward, radius):
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -333,8 +333,8 @@ def kernel_u(easting, northing, upward, radius):
 
         k_z(x, y, z) =
             - \left[
-            x \, \text{ln2} (y + r)
-            + y \, \text{ln2} (x + r)
+            x \, \operatorname{safe-ln} (y + r)
+            + y \, \operatorname{safe-ln} (x + r)
             - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
             \right]
 
@@ -342,7 +342,7 @@ def kernel_u(easting, northing, upward, radius):
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -620,13 +620,13 @@ def kernel_en(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xy}(x, y, z) = \text{ln2} \left( z + r \right)
+        k_{xy}(x, y, z) = \operatorname{safe-ln} \left( z + r \right)
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -683,13 +683,13 @@ def kernel_eu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xz}(x, y, z) = \text{ln2} \left( y + r \right)
+        k_{xz}(x, y, z) = \operatorname{safe-ln} \left( y + r \right)
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -746,13 +746,13 @@ def kernel_nu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{yz}(x, y, z) = \text{ln2} \left( x + r \right)
+        k_{yz}(x, y, z) = \operatorname{safe-ln} \left( x + r \right)
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
