@@ -1114,3 +1114,233 @@ class TestLaplacian:
             npt.assert_allclose(-g_nn, g_ee + g_uu)
         if left_component == "g_uu":
             npt.assert_allclose(-g_uu, g_ee + g_nn)
+
+
+class TestNonDiagonalTensor:
+    """
+    Test the behaviour of non-diagonal tensor components on critical points
+
+    The non-diagonal tensor components evaluate the log function on
+    ``log(x + r)``, where ``x`` is the shifted coordinate of the vertex and
+    ``r`` is the distance between the vertex and the computation point. When
+    the two other shifted coordinates are zero and ``x`` is negative, then
+    ``x == -r``, making impossible to evaluate the log function.
+    The ``_safe_log`` function accounts for this and safely evaluate the log
+    function in these points.
+
+    If we consider for example the ``g_en`` component, then observation points
+    that fall above one of the vertices of the prism lead to this situation. If
+    the ``_safe_log`` function is not properly defined, then the value of
+    ``g_en`` on those points will be significantly different from the
+    surrounding points, even with a different sign.
+
+    The following test functions compare the values of the non-diagonal
+    components on and around these particular observation points.
+    """
+
+    @pytest.fixture(name="prism")
+    def prism(self):
+        prism = [-10, 10, -20, 20, -50, -15]
+        return np.array(prism, dtype=np.float64)
+
+    @pytest.fixture(name="density")
+    def density(self):
+        return 400.0
+
+    @pytest.mark.parametrize("easting_boundary", (0, 1))
+    @pytest.mark.parametrize("northing_boundary", (2, 3))
+    def test_g_en_above_vertices(
+        self, prism, density, easting_boundary, northing_boundary
+    ):
+        """
+        Test g_en on an observation point above the node and around it
+        """
+        vertex_easting = prism[easting_boundary]
+        vertex_northing = prism[northing_boundary]
+        # Consider an observation point above one of the vertex of the prism
+        # and define a few observation points around it
+        easting = np.linspace(vertex_easting - 3, vertex_easting + 3, 61)
+        northing = np.linspace(vertex_northing - 3, vertex_northing + 3, 61)
+        assert vertex_easting in easting and vertex_northing in northing
+        upward = prism[5] + 1  # locate the observation points above the prism
+        g_en = np.array(
+            [
+                gravity_en(e, n, upward, prism, density)
+                for e in easting
+                for n in northing
+            ]
+        )
+        # Check if all values in g_en have the same sign
+        signs = np.sign(g_en)
+        npt.assert_allclose(signs[0], signs)
+
+    @pytest.mark.parametrize("easting_boundary", (0, 1))
+    @pytest.mark.parametrize("upward_boundary", (4, 5))
+    def test_g_eu_north_vertices(
+        self, prism, density, easting_boundary, upward_boundary
+    ):
+        """
+        Test g_eu on an observation point north the node and around it
+        """
+        vertex_easting = prism[easting_boundary]
+        vertex_upward = prism[upward_boundary]
+        # Consider an observation point at the north of one of the vertex of
+        # the prism and define a few observation points around it
+        easting = np.linspace(vertex_easting - 3, vertex_easting + 3, 61)
+        upward = np.linspace(vertex_upward - 3, vertex_upward + 3, 61)
+        assert vertex_easting in easting and vertex_upward in upward
+        northing = prism[3] + 1  # locate the observation points north the prism
+        g_eu = np.array(
+            [
+                gravity_eu(e, northing, u, prism, density)
+                for e in easting
+                for u in upward
+            ]
+        )
+        # Check if all values in g_eu have the same sign
+        signs = np.sign(g_eu)
+        npt.assert_allclose(signs[0], signs)
+
+    @pytest.mark.parametrize("northing_boundary", (2, 3))
+    @pytest.mark.parametrize("upward_boundary", (4, 5))
+    def test_g_nu_east_vertices(
+        self, prism, density, northing_boundary, upward_boundary
+    ):
+        """
+        Test g_nu on an observation point north the node and around it
+        """
+        vertex_northing = prism[northing_boundary]
+        vertex_upward = prism[upward_boundary]
+        # Consider an observation point at the east of one of the vertex of
+        # the prism and define a few observation points around it
+        northing = np.linspace(vertex_northing - 3, vertex_northing + 3, 61)
+        upward = np.linspace(vertex_upward - 3, vertex_upward + 3, 61)
+        assert vertex_northing in northing and vertex_upward in upward
+        easting = prism[1] + 1  # locate the observation points north the prism
+        g_nu = np.array(
+            [
+                gravity_nu(easting, n, u, prism, density)
+                for n in northing
+                for u in upward
+            ]
+        )
+        # Check if all values in g_nu have the same sign
+        signs = np.sign(g_nu)
+        npt.assert_allclose(signs[0], signs)
+
+
+class TestTensorSymmetry:
+    """
+    Test symmetry of tensor components
+
+    Each test will compute one tensor component on two regular grids. Each grid
+    falls in one of two parallel planes that are equidistant to the prism. The
+    grids will contain observation points that share a pair of coordinates
+    with the vertices of the prism to test symmetry on those regions.
+    For example, for `g_en` two horizontal grids will be defined: one above and
+    one below the prism. The first one will contain points that fall right
+    above its vertices, while the second one will contain points that fall
+    right below them (these points share the easting and northing coordinates
+    with these vertices).
+
+    For the non-diagonal tensor components these points are where the
+    modifications of the log functions take protagonism.
+    """
+
+    atol = 1e-18
+
+    @pytest.fixture(name="prism")
+    def prism(self):
+        prism = [-10, 10, -20, 20, -30, 30]
+        return np.array(prism, dtype=np.float64)
+
+    @pytest.fixture(name="density")
+    def density(self):
+        return 400.0
+
+    def test_g_en_symmetry(self, prism, density):
+        """
+        Test symmetry of g_en
+        """
+        west, east, south, north, bottom, top = prism[:]
+        # Define two horizontal grids
+        # (make sure that contain points that fall above and below the
+        # vertices)
+        easting = np.linspace(-40, 40, 41)
+        northing = np.linspace(-40, 40, 41)
+        assert west in easting and east in easting
+        assert south in northing and north in northing
+        delta = 2
+        g_en_top = np.array(
+            [
+                gravity_en(e, n, top + delta, prism, density)
+                for e in easting
+                for n in northing
+            ]
+        )
+        g_en_bottom = np.array(
+            [
+                gravity_en(e, n, bottom - delta, prism, density)
+                for e in easting
+                for n in northing
+            ]
+        )
+        npt.assert_allclose(g_en_top, g_en_bottom, atol=self.atol)
+
+    def test_g_eu_symmetry(self, prism, density):
+        """
+        Test symmetry of g_eu
+        """
+        west, east, south, north, bottom, top = prism[:]
+        # Define two vertical grids parallel to the easting-upward plane
+        # (make sure that contain points that fall north and south the
+        # vertices)
+        easting = np.linspace(-40, 40, 41)
+        upward = np.linspace(-40, 40, 41)
+        assert west in easting and east in easting
+        assert bottom in upward and top in upward
+        delta = 2
+        g_eu_north = np.array(
+            [
+                gravity_eu(e, north + delta, u, prism, density)
+                for e in easting
+                for u in upward
+            ]
+        )
+        g_eu_south = np.array(
+            [
+                gravity_eu(e, south - delta, u, prism, density)
+                for e in easting
+                for u in upward
+            ]
+        )
+        npt.assert_allclose(g_eu_north, g_eu_south, atol=self.atol)
+
+    def test_g_nu_symmetry(self, prism, density):
+        """
+        Test symmetry of g_nu
+        """
+        west, east, south, north, bottom, top = prism[:]
+        # Define two vertical grids parallel to the northing-upward plane
+        # (make sure that contain points that fall north and south the
+        # vertices)
+        northing = np.linspace(-40, 40, 41)
+        upward = np.linspace(-40, 40, 41)
+        assert south in northing and north in northing
+        assert bottom in upward and top in upward
+        delta = 2
+        g_nu_north = np.array(
+            [
+                gravity_nu(east + delta, n, u, prism, density)
+                for n in northing
+                for u in upward
+            ]
+        )
+        g_nu_south = np.array(
+            [
+                gravity_nu(west - delta, n, u, prism, density)
+                for n in northing
+                for u in upward
+            ]
+        )
+        npt.assert_allclose(g_nu_north, g_nu_south, atol=self.atol)

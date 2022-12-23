@@ -55,18 +55,18 @@ def kernel_pot(easting, northing, upward, radius):
     .. math::
 
         k_V(x, y, z) &=
-            x y \, \text{ln2} (z + r)
-            + y z \, \text{ln2} (x + r)
-            + z x \, \text{ln2} (y + r) \\
-            & - \frac{x^2}{2} \text{arctan2} \left( \frac{yz}{xr} \right)
-            - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
-            - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right)
+            x y \, \operatorname{safe-ln} (z + r)
+            + y z \, \operatorname{safe-ln} (x + r)
+            + z x \, \operatorname{safe-ln} (y + r) \\
+            & - \frac{x^2}{2} \operatorname{safe-arctan} \left( yz, xr \right)
+            - \frac{y^2}{2} \operatorname{safe-arctan} \left( zx, yr \right)
+            - \frac{z^2}{2} \operatorname{safe-arctan} \left( xy, zr \right)
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -76,7 +76,7 @@ def kernel_pot(easting, northing, upward, radius):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -91,9 +91,9 @@ def kernel_pot(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = (
-        easting * northing * _safe_log(upward + radius)
-        + northing * upward * _safe_log(easting + radius)
-        + easting * upward * _safe_log(northing + radius)
+        easting * northing * _safe_log(upward, radius)
+        + northing * upward * _safe_log(easting, radius)
+        + easting * upward * _safe_log(northing, radius)
         - 0.5 * easting**2 * _safe_atan2(upward * northing, easting * radius)
         - 0.5 * northing**2 * _safe_atan2(upward * easting, northing * radius)
         - 0.5 * upward**2 * _safe_atan2(easting * northing, upward * radius)
@@ -147,16 +147,16 @@ def kernel_e(easting, northing, upward, radius):
 
         k_x(x, y, z) =
             -\left[
-            y \, \text{ln2} (z + r)
-            + z \, \text{ln2} (y + r)
-            - x \, \text{arctan2} \left( \frac{yz}{xr} \right)
+            y \, \operatorname{safe-ln} (z + r)
+            + z \, \operatorname{safe-ln} (y + r)
+            - x \, \operatorname{safe-arctan} \left( yz, xr \right)
             \right]
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -166,7 +166,7 @@ def kernel_e(easting, northing, upward, radius):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -187,8 +187,8 @@ def kernel_e(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = -(
-        northing * _safe_log(upward + radius)
-        + upward * _safe_log(northing + radius)
+        northing * _safe_log(upward, radius)
+        + upward * _safe_log(northing, radius)
         - easting * _safe_atan2(northing * upward, easting * radius)
     )
     return kernel
@@ -240,16 +240,16 @@ def kernel_n(easting, northing, upward, radius):
 
         k_y(x, y, z) =
             -\left[
-            z \, \text{ln2} (x + r)
-            + x \, \text{ln2} (z + r)
-            - y \, \text{arctan2} \left( \frac{zx}{yr} \right)
+            z \, \operatorname{safe-ln} (x + r)
+            + x \, \operatorname{safe-ln} (z + r)
+            - y \, \operatorname{safe-arctan} \left( zx, yr \right)
             \right]
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -259,7 +259,7 @@ def kernel_n(easting, northing, upward, radius):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -280,8 +280,8 @@ def kernel_n(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = -(
-        upward * _safe_log(easting + radius)
-        + easting * _safe_log(upward + radius)
+        upward * _safe_log(easting, radius)
+        + easting * _safe_log(upward, radius)
         - northing * _safe_atan2(easting * upward, northing * radius)
     )
     return kernel
@@ -333,16 +333,16 @@ def kernel_u(easting, northing, upward, radius):
 
         k_z(x, y, z) =
             - \left[
-            x \, \text{ln2} (y + r)
-            + y \, \text{ln2} (x + r)
-            - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
+            x \, \operatorname{safe-ln} (y + r)
+            + y \, \operatorname{safe-ln} (x + r)
+            - z \, \operatorname{safe-arctan} \left( xy, zr \right)
             \right]
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -352,7 +352,7 @@ def kernel_u(easting, northing, upward, radius):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -376,8 +376,8 @@ def kernel_u(easting, northing, upward, radius):
     # The minus sign is to return the kernel for the upward component instead
     # of the downward one.
     kernel = -(
-        easting * _safe_log(northing + radius)
-        + northing * _safe_log(easting + radius)
+        easting * _safe_log(northing, radius)
+        + northing * _safe_log(easting, radius)
         - upward * _safe_atan2(easting * northing, upward * radius)
     )
     return kernel
@@ -425,13 +425,13 @@ def kernel_ee(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xx}(x, y, z) = - \text{arctan2} \left( \frac{yz}{xr} \right)
+        k_{xx}(x, y, z) = - \operatorname{safe-arctan} \left( yz, xr \right)
 
     where
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -490,13 +490,13 @@ def kernel_nn(easting, northing, upward, radius):
 
     .. math::
 
-        k_{yy}(x, y, z) = - \text{arctan2} \left( \frac{zx}{yr} \right)
+        k_{yy}(x, y, z) = - \operatorname{safe-arctan} \left( zx, yr \right)
 
     where
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -555,13 +555,13 @@ def kernel_uu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{zz}(x, y, z) = - \text{arctan2} \left( \frac{xy}{zr} \right)
+        k_{zz}(x, y, z) = - \operatorname{safe-arctan} \left( xy, zr \right)
 
     where
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left( y, x \right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -620,13 +620,13 @@ def kernel_en(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xy}(x, y, z) = \text{ln2} \left( z + r \right)
+        k_{xy}(x, y, z) = \operatorname{safe-ln} \left( z + r \right)
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -638,7 +638,7 @@ def kernel_en(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(upward + radius)
+    return _safe_log(upward, radius)
 
 
 @jit(nopython=True)
@@ -683,13 +683,13 @@ def kernel_eu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xz}(x, y, z) = \text{ln2} \left( y + r \right)
+        k_{xz}(x, y, z) = \operatorname{safe-ln} \left( y + r \right)
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -701,7 +701,7 @@ def kernel_eu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(northing + radius)
+    return _safe_log(northing, radius)
 
 
 @jit(nopython=True)
@@ -746,13 +746,13 @@ def kernel_nu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{yz}(x, y, z) = \text{ln2} \left( x + r \right)
+        k_{yz}(x, y, z) = \operatorname{safe-ln} \left( x + r \right)
 
     where
 
     .. math::
 
-        \text{ln2}(x) =
+        \operatorname{safe-ln}(x) =
         \begin{cases}
             0 & |x| < 10^{-10} \\
             \ln (x)
@@ -764,7 +764,7 @@ def kernel_nu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(easting + radius)
+    return _safe_log(easting, radius)
 
 
 @jit(nopython=True)
@@ -783,7 +783,7 @@ def _safe_atan2(y, x):
 
     .. math::
 
-        \text{arctan2} \left( \frac{y}{x} \right) =
+        \operatorname{safe-arctan} \left(y, x\right) =
         \begin{cases}
             \text{arctan}\left( \frac{y}{x} \right) & x \ne 0 \\
             \frac{\pi}{2} & x = 0 \quad \text{and} \quad y > 0 \\
@@ -795,43 +795,54 @@ def _safe_atan2(y, x):
     ----------
     - [Fukushima2020]_
     """
-    if x != 0:
-        result = np.arctan(y / x)
-    else:
+    if x == 0:
         if y > 0:
             result = np.pi / 2
         elif y < 0:
             result = -np.pi / 2
         else:
             result = 0
-    return result
+        return result
+    return np.arctan(y / x)
 
 
 @jit(nopython=True)
-def _safe_log(x):
+def _safe_log(x, r):
     r"""
-    Modified log to return zero for values of x close to zero
+    Safe log function to use in the prism kernels
 
-    This modified version of the log function makes the computations to agree
-    with the limits of the integral (see [Nagy2000]_).
-
-    Notes
-    -----
+    Evaluates the :math:`\ln{x + r}` where :math:`x` is one of the shifted
+    coordinate of the prism vertex and :math:`r` is the Euclidean distance
+    (always non-negative) from the vertex to the observation point.
 
     .. math::
 
-        \text{ln2}(x) =
+        \text{safe_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & x = 0, r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
+            -\ln(-2 x) & x < 0, r = -x
         \end{cases}
+
+    This function returns 0 when the observation point is located on the vertex
+    of the prism (:math:`r=0`); and two modified versions in case that
+    :math:`x` is negative: if :math:`x = -r` then the :math:`\ln{x + r}` can be
+    replaced by :math:`-\ln{|x| + r} = -\ln(-2x)`, and for any other negative
+    value of :math:`x` it returns :math:`\ln((r^2 - x^2) / (r - x))` which
+    helps by reducing the floating point errors ([Fukushima2020_]).
+    This modified version was inspired by [Nagy2000] and [Fukushima2020_]:
 
     References
     ----------
-    - [Nagy2000]_
+    - [Fukushima2020]_
     """
-    if np.abs(x) < 1e-10:
-        result = 0
-    else:
-        result = np.log(x)
-    return result
+    if r == 0:
+        return 0
+    if x < 0:
+        if r == -x:
+            result = -np.log(-2 * x)
+        else:
+            result = np.log((r**2 - x**2) / (r - x))
+        return result
+    return np.log(x + r)
