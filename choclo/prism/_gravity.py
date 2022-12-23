@@ -546,8 +546,7 @@ def gravity_ee(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{xx}(x, y, z) =
-            - \operatorname{safe-arctan} \left( yz, xr \right),
+        k_{xx}(x, y, z) = - \operatorname{safe-arctan} \left( yz, xr \right),
 
     .. math::
 
@@ -647,8 +646,7 @@ def gravity_nn(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{yy}(x, y, z) =
-            - \operatorname{safe-arctan} \left( zx, yr \right),
+        k_{yy}(x, y, z) = - \operatorname{safe-arctan} \left( zx, yr \right),
 
     .. math::
 
@@ -748,8 +746,7 @@ def gravity_uu(easting, northing, upward, prism, density):
 
     .. math::
 
-        k_{zz}(x, y, z) =
-            - \operatorname{safe-arctan} \left( xy, zr \right),
+        k_{zz}(x, y, z) = - \operatorname{safe-arctan} \left( xy, zr \right),
 
     .. math::
 
