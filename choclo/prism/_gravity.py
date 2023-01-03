@@ -11,6 +11,11 @@ import numpy as np
 from numba import jit
 
 from ..constants import GRAVITATIONAL_CONST
+from ._utils import (
+    is_point_on_easting_edge,
+    is_point_on_northing_edge,
+    is_point_on_upward_edge,
+)
 from ._kernels import (
     kernel_e,
     kernel_ee,
@@ -587,6 +592,13 @@ def gravity_ee(easting, northing, upward, prism, density):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    # Return nan if the observation point falls on a singular point.
+    # For the g_ee this are edges perpendicular to the easting direction
+    # (parallel to northing and upward)
+    if is_point_on_northing_edge(
+        easting, northing, upward, prism
+    ) or is_point_on_upward_edge(easting, northing, upward, prism):
+        return np.nan
     return (
         GRAVITATIONAL_CONST
         * density
