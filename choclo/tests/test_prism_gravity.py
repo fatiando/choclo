@@ -1509,6 +1509,57 @@ class TestDiagonalTensorSingularities:
         )
         npt.assert_allclose(result_east_face, result_west_face)
 
+    def test_gee_faces_limit(self, prism_boundaries):
+        """
+        Test if g_ee on faces normal to easting returns the limit when
+        approaching from the outside of the prism
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Compute g_ee on the east face and on a slightly displaced point
+        northing = (south + north) / 2
+        upward = (bottom + top) / 2
+        g_ee_on_face = gravity_ee(east, northing, upward, prism, density)
+        g_ee_close_to_face = gravity_ee(east + 1e-3, northing, upward, prism, density)
+        # Compare the results
+        assert np.sign(g_ee_on_face) == np.sign(g_ee_close_to_face)
+
+    def test_gnn_faces_limit(self, prism_boundaries):
+        """
+        Test if g_nn on faces normal to northing returns the limit when
+        approaching from the outside of the prism
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Compute g_nn on the north face and on a slightly displaced point
+        easting = (west + east) / 2
+        upward = (bottom + top) / 2
+        g_nn_on_face = gravity_ee(easting, north, upward, prism, density)
+        g_nn_close_to_face = gravity_ee(easting, north + 1e-3, upward, prism, density)
+        # Compare the results
+        assert np.sign(g_nn_on_face) == np.sign(g_nn_close_to_face)
+
+    def test_guu_faces_limit(self, prism_boundaries):
+        """
+        Test if g_uu on faces normal to northing returns the limit when
+        approaching from the outside of the prism
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Compute g_uu on the top face and on a slightly displaced point
+        easting = (west + east) / 2
+        northing = (south + north) / 2
+        g_uu_on_face = gravity_ee(easting, northing, top, prism, density)
+        g_uu_close_to_face = gravity_ee(easting, northing, top + 1e-3, prism, density)
+        # Compare the results
+        assert np.sign(g_uu_on_face) == np.sign(g_uu_close_to_face)
+
     def test_gnn_faces_symmetry(self, prism_boundaries):
         """
         Test if g_nn returns the same values on the faces normal to northing
