@@ -931,6 +931,10 @@ def gravity_en(easting, northing, upward, prism, density):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    # Return nan if the observation point falls on a singular point.
+    # For g_en this are edges parallel to to the upward direction
+    if is_point_on_upward_edge(easting, northing, upward, prism):
+        return np.nan
     return (
         GRAVITATIONAL_CONST
         * density
@@ -1031,6 +1035,10 @@ def gravity_eu(easting, northing, upward, prism, density):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    # Return nan if the observation point falls on a singular point.
+    # For g_eu this are edges parallel to to the northing direction
+    if is_point_on_northing_edge(easting, northing, upward, prism):
+        return np.nan
     return (
         GRAVITATIONAL_CONST
         * density
@@ -1131,6 +1139,10 @@ def gravity_nu(easting, northing, upward, prism, density):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    # Return nan if the observation point falls on a singular point.
+    # For g_nu this are edges parallel to to the easting direction
+    if is_point_on_easting_edge(easting, northing, upward, prism):
+        return np.nan
     return (
         GRAVITATIONAL_CONST
         * density
