@@ -1229,9 +1229,9 @@ class TestNonDiagonalTensor:
         npt.assert_allclose(signs[0], signs)
 
 
-class TestTensorSymmetry:
+class TestNonDiagonalTensorSymmetry:
     """
-    Test symmetry of tensor components
+    Test symmetry of non-diagonal tensor components
 
     Each test will compute one tensor component on two regular grids. Each grid
     falls in one of two parallel planes that are equidistant to the prism. The
@@ -1344,3 +1344,217 @@ class TestTensorSymmetry:
             ]
         )
         npt.assert_allclose(g_nu_north, g_nu_south, atol=self.atol)
+
+
+class TestDiagonalTensorSingularities:
+    """
+    Test if diagonal tensor components behave as expected on their singular
+    points
+
+    Diagonal tensor components have singular points on:
+    * prism vertices,
+    * prism edges perpendicular to the tensor direction, and
+    * prism faces normal to the tensor direction.
+
+    For the first two cases, the forward modelling function should return
+    ``np.nan``. For the last case, it should return the limit of the field when
+    we approach from outside of the prism.
+    """
+
+    @pytest.fixture()
+    def prism_boundaries(self):
+        """
+        Return the boundaries of the sample prism
+        """
+        west, east, south, north, bottom, top = -5.4, 10.1, 43.2, 79.5, -53.7, -44.3
+        return west, east, south, north, bottom, top
+
+    @pytest.mark.parametrize("function", (gravity_ee, gravity_nn, gravity_uu))
+    def test_on_vertices(self, prism_boundaries, function):
+        """
+        Test if diagonal tensor components on vertices are equal to NaN
+        """
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        coordinates = tuple(
+            a.ravel() for a in np.meshgrid([west, east], [south, north], [bottom, top])
+        )
+        results = list(
+            function(e, n, u, prism, density) for (e, n, u) in zip(*coordinates)
+        )
+        assert np.isnan(results).all()
+
+    def test_gee_on_edges(self, prism_boundaries):
+        """
+        Test if gravity_ee on edges perpendicular to easting is equal to NaN
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Define observation points on edges parallel to northing
+        easting, upward = tuple(
+            c.ravel() for c in np.meshgrid([west, east], [bottom, top])
+        )
+        northing = np.full_like(
+            easting, (south + north) / 2
+        )  # put points in the center of the edge
+        results = list(
+            gravity_ee(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+        # Define observation points on edges parallel to upward
+        easting, northing = tuple(
+            c.ravel() for c in np.meshgrid([west, east], [south, north])
+        )
+        upward = np.full_like(
+            easting, (bottom + top) / 2
+        )  # put points in the center of the edge
+        results = list(
+            gravity_ee(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+
+    def test_gnn_on_edges(self, prism_boundaries):
+        """
+        Test if gravity_nn on edges perpendicular to northing is equal to NaN
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Define observation points on edges parallel to easting
+        northing, upward = tuple(
+            c.ravel() for c in np.meshgrid([south, north], [bottom, top])
+        )
+        easting = np.full_like(
+            northing, (west + east) / 2
+        )  # put points in the center of the edge
+        results = list(
+            gravity_nn(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+        # Define observation points on edges parallel to upward
+        easting, northing = tuple(
+            c.ravel() for c in np.meshgrid([west, east], [south, north])
+        )
+        upward = np.full_like(
+            easting, (bottom + top) / 2
+        )  # put points in the center of the edge
+        results = list(
+            gravity_nn(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+
+    def test_guu_on_edges(self, prism_boundaries):
+        """
+        Test if gravity_uu on edges perpendicular to upward is equal to NaN
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Define observation points on edges parallel to easting
+        northing, upward = tuple(
+            c.ravel() for c in np.meshgrid([south, north], [bottom, top])
+        )
+        easting = np.full_like(
+            northing, (west + east) / 2
+        )  # put points in the center of the edge
+        results = list(
+            gravity_uu(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+        # Define observation points on edges parallel to northing
+        easting, upward = tuple(
+            c.ravel() for c in np.meshgrid([west, east], [bottom, top])
+        )
+        northing = np.full_like(
+            easting, (south + north) / 2
+        )  # put points in the center of the edge
+        results = list(
+            gravity_ee(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+
+    def test_gee_faces_symmetry(self, prism_boundaries):
+        """
+        Test if g_ee returns the same values on the faces normal to easting
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Define observation points in the two faces normal to easting
+        # (without including the edges)
+        northing = np.linspace(south, north, 21)[1:-1]
+        upward = np.linspace(bottom, top, 21)[1:-1]
+        northing, upward = tuple(c.ravel() for c in np.meshgrid(northing, upward))
+        east_face = np.full_like(northing, east)
+        west_face = np.full_like(northing, west)
+        result_east_face = list(
+            gravity_ee(e, n, u, prism, density)
+            for (e, n, u) in zip(east_face, northing, upward)
+        )
+        result_west_face = list(
+            gravity_ee(e, n, u, prism, density)
+            for (e, n, u) in zip(west_face, northing, upward)
+        )
+        npt.assert_allclose(result_east_face, result_west_face)
+
+    def test_gnn_faces_symmetry(self, prism_boundaries):
+        """
+        Test if g_nn returns the same values on the faces normal to northing
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Define observation points in the two faces normal to northing
+        # (without including the edges)
+        easting = np.linspace(west, east, 21)[1:-1]
+        upward = np.linspace(bottom, top, 21)[1:-1]
+        easting, upward = tuple(c.ravel() for c in np.meshgrid(easting, upward))
+        south_face = np.full_like(easting, south)
+        north_face = np.full_like(easting, north)
+        result_north_face = list(
+            gravity_nn(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, north_face, upward)
+        )
+        result_south_face = list(
+            gravity_nn(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, south_face, upward)
+        )
+        npt.assert_allclose(result_north_face, result_south_face)
+
+    def test_guu_faces_symmetry(self, prism_boundaries):
+        """
+        Test if g_uu returns the same values on the horizontal faces
+        """
+        # Define prism
+        west, east, south, north, bottom, top = prism_boundaries
+        prism = np.array([west, east, south, north, bottom, top])
+        density = 1.0
+        # Define observation points in the two horizontal faces
+        # (without including the edges)
+        easting = np.linspace(west, east, 21)[1:-1]
+        northing = np.linspace(south, north, 21)[1:-1]
+        easting, northing = tuple(c.ravel() for c in np.meshgrid(easting, northing))
+        top_face = np.full_like(easting, top)
+        bottom_face = np.full_like(easting, bottom)
+        result_top_face = list(
+            gravity_uu(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, northing, top_face)
+        )
+        result_bottom_face = list(
+            gravity_uu(e, n, u, prism, density)
+            for (e, n, u) in zip(easting, northing, bottom_face)
+        )
+        npt.assert_allclose(result_top_face, result_bottom_face)
