@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     
-        <title>choclo.prism.gravity_pot | Choclo v0.0.post27</title>
+        <title>choclo.prism.gravity_pot | Choclo dev</title>
     
 
     
@@ -87,7 +87,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -639,6 +639,7 @@ prism on a single computation point.</p>
 following order: <code class="docutils literal notranslate"><span class="pre">west</span></code>, <code class="docutils literal notranslate"><span class="pre">east</span></code>, <code class="docutils literal notranslate"><span class="pre">south</span></code>, <code class="docutils literal notranslate"><span class="pre">north</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>,
 <code class="docutils literal notranslate"><span class="pre">top</span></code> in a Cartesian coordinate system.
 All coordinates should be in meters.</p></li>
+<li><p><strong>density</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Density of the rectangular prism in kilograms per cubic meter.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -663,12 +664,12 @@ y_2, z_1, z_2\)</span> and with a density <span class="math notranslate nohighli
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}k_V(x, y, z) &amp;=
-    x y \, \text{ln2} (z + r)
-    + y z \, \text{ln2} (x + r)
-    + z x \, \text{ln2} (y + r) \\
-    - \frac{x^2}{2} &amp;\text{arctan2} \left( \frac{yz}{xr} \right)
-    - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)
-    - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right),\end{split}\]</div>
+    x y \, \operatorname{safe-ln} (z, r)
+    + y z \, \operatorname{safe-ln} (x, r)
+    + z x \, \operatorname{safe-ln} (y, r) \\
+    - \frac{x^2}{2} &amp;\operatorname{safe-arctan} \left( yz, xr \right)
+    - \frac{y^2}{2} \operatorname{safe-arctan} \left( zx, yr \right)
+    - \frac{z^2}{2} \operatorname{safe-arctan} \left( xy, zr \right),\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[r = \sqrt{x^2 + y^2 + z^2},\]</div>
 <p>and</p>
@@ -681,16 +682,18 @@ Z_1 = z_1 - z_p \\
 Z_2 = z_2 - z_p\end{split}\]</div>
 <p>are the shifted coordinates of the prism boundaries and <span class="math notranslate nohighlight">\(G\)</span> is the
 Universal Gravitational Constant.</p>
-<p>The <span class="math notranslate nohighlight">\(\text{ln2}\)</span> and <span class="math notranslate nohighlight">\(\text{arctan2}\)</span> functions are defined as
-follows:</p>
+<p>The <span class="math notranslate nohighlight">\(\operatorname{safe-ln}\)</span> and <span class="math notranslate nohighlight">\(\operatorname{safe-arctan}\)</span>
+functions are defined as follows:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\text{ln2}(x) =
+\[\begin{split}\operatorname{safe-ln}(x, r) =
 \begin{cases}
-    0 &amp; |x| &lt; 10^{-10} \\
-    \ln (x)
+    0 &amp; x = 0, r = 0 \\
+    \ln(x + r) &amp; x \ge 0 \\
+    \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\
+    -\ln(-2 x) &amp; x &lt; 0, r = -x
 \end{cases}\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}\text{arctan2} \left( \frac{y}{x} \right) =
+\[\begin{split}\operatorname{safe-arctan} \left( y, x \right) =
 \begin{cases}
     \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\
     \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\
@@ -738,8 +741,8 @@ any observation point.</p>
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on Jan 09, 2023.<br/>
 </p>
         </footer>
     </div>

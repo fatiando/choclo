@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>choclo.prism._gravity | Choclo v0.0.post27</title>
+        <title>choclo.prism._gravity | Choclo dev</title>
     
 
     
@@ -83,7 +83,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
@@ -603,6 +603,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -633,12 +635,12 @@ title="Open an issue"
 <span class="sd">    .. math::</span>
 
 <span class="sd">        k_V(x, y, z) &amp;=</span>
-<span class="sd">            x y \, \text{ln2} (z + r)</span>
-<span class="sd">            + y z \, \text{ln2} (x + r)</span>
-<span class="sd">            + z x \, \text{ln2} (y + r) \\</span>
-<span class="sd">            - \frac{x^2}{2} &amp;\text{arctan2} \left( \frac{yz}{xr} \right)</span>
-<span class="sd">            - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)</span>
-<span class="sd">            - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right),</span>
+<span class="sd">            x y \, \operatorname{safe-ln} (z, r)</span>
+<span class="sd">            + y z \, \operatorname{safe-ln} (x, r)</span>
+<span class="sd">            + z x \, \operatorname{safe-ln} (y, r) \\</span>
+<span class="sd">            - \frac{x^2}{2} &amp;\operatorname{safe-arctan} \left( yz, xr \right)</span>
+<span class="sd">            - \frac{y^2}{2} \operatorname{safe-arctan} \left( zx, yr \right)</span>
+<span class="sd">            - \frac{z^2}{2} \operatorname{safe-arctan} \left( xy, zr \right),</span>
 
 <span class="sd">    .. math::</span>
 
@@ -658,20 +660,22 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as</span>
-<span class="sd">    follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-ln}` and :math:`\operatorname{safe-arctan}`</span>
+<span class="sd">    functions are defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -716,6 +720,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -749,9 +755,9 @@ title="Open an issue"
 
 <span class="sd">        k_x(x, y, z) =</span>
 <span class="sd">            \left[</span>
-<span class="sd">            y \, \text{ln2} (z + r)</span>
-<span class="sd">            + z \, \text{ln2} (y + r)</span>
-<span class="sd">            - x \, \text{arctan2} \left( \frac{yz}{xr} \right)</span>
+<span class="sd">            y \, \operatorname{safe-ln} (z, r)</span>
+<span class="sd">            + z \, \operatorname{safe-ln} (y, r)</span>
+<span class="sd">            - x \, \operatorname{safe-arctan} \left( yz, xr \right)</span>
 <span class="sd">            \right]</span>
 
 <span class="sd">    .. math::</span>
@@ -772,20 +778,22 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as</span>
-<span class="sd">    follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-ln}` and :math:`\operatorname{safe-arctan}`</span>
+<span class="sd">    functions are defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -830,6 +838,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -863,9 +873,9 @@ title="Open an issue"
 
 <span class="sd">        k_y(x, y, z) =</span>
 <span class="sd">            \left[</span>
-<span class="sd">            z \, \text{ln2} (x + r)</span>
-<span class="sd">            + x \, \text{ln2} (z + r)</span>
-<span class="sd">            - y \, \text{arctan2} \left( \frac{zx}{yr} \right)</span>
+<span class="sd">            z \, \operatorname{safe-ln} (x, r)</span>
+<span class="sd">            + x \, \operatorname{safe-ln} (z, r)</span>
+<span class="sd">            - y \, \operatorname{safe-arctan} \left( zx, yr \right)</span>
 <span class="sd">            \right]</span>
 
 <span class="sd">    .. math::</span>
@@ -886,20 +896,22 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as</span>
-<span class="sd">    follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-ln}` and :math:`\operatorname{safe-arctan}`</span>
+<span class="sd">    functions are defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -944,6 +956,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -977,9 +991,9 @@ title="Open an issue"
 
 <span class="sd">        k_z(x, y, z) =</span>
 <span class="sd">            - \left[</span>
-<span class="sd">            x \, \text{ln2} (y + r)</span>
-<span class="sd">            + y \, \text{ln2} (x + r)</span>
-<span class="sd">            - z \, \text{arctan2} \left( \frac{xy}{zr} \right)</span>
+<span class="sd">            x \, \operatorname{safe-ln} (y, r)</span>
+<span class="sd">            + y \, \operatorname{safe-ln} (x, r)</span>
+<span class="sd">            - z \, \operatorname{safe-arctan} \left( xy, zr \right)</span>
 <span class="sd">            \right]</span>
 
 <span class="sd">    .. math::</span>
@@ -1006,20 +1020,22 @@ title="Open an issue"
 <span class="sd">        the **upward** component of the acceleration. [Nagy2000]_ and</span>
 <span class="sd">        [Nagy2002]_ equation corresponds to the *downward* coordinate.</span>
 
-<span class="sd">    The :math:`\text{ln2}` and :math:`\text{arctan2}` functions are defined as</span>
-<span class="sd">    follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-ln}` and :math:`\operatorname{safe-arctan}`</span>
+<span class="sd">    functions are defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -1064,6 +1080,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1095,7 +1113,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{xx}(x, y, z) = - \text{arctan2} \left( \frac{yz}{xr} \right),</span>
+<span class="sd">        k_{xx}(x, y, z) = - \operatorname{safe-arctan} \left( yz, xr \right),</span>
 
 <span class="sd">    .. math::</span>
 
@@ -1115,11 +1133,11 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{arctan2}` function is defined as follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-arctan}` function is defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -1164,6 +1182,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1195,7 +1215,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{yy}(x, y, z) = - \text{arctan2} \left( \frac{zx}{yr} \right),</span>
+<span class="sd">        k_{yy}(x, y, z) = - \operatorname{safe-arctan} \left( zx, yr \right),</span>
 
 <span class="sd">    .. math::</span>
 
@@ -1215,11 +1235,11 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{arctan2}` function is defined as follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-arctan}` function is defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -1264,6 +1284,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1295,7 +1317,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{zz}(x, y, z) = - \text{arctan2} \left( \frac{xy}{zr} \right),</span>
+<span class="sd">        k_{zz}(x, y, z) = - \operatorname{safe-arctan} \left( xy, zr \right),</span>
 
 <span class="sd">    .. math::</span>
 
@@ -1315,11 +1337,11 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{arctan2}` function is defined as follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-arctan}` function is defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -1364,6 +1386,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1395,7 +1419,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{xy}(x, y, z) = \text{ln2} \left( z + r \right),</span>
+<span class="sd">        k_{xy}(x, y, z) = \operatorname{safe-ln} \left( z, r \right),</span>
 
 <span class="sd">    .. math::</span>
 
@@ -1415,14 +1439,16 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{ln2}` function is defined as follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-ln}` function is defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
@@ -1462,6 +1488,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1493,7 +1521,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{xz}(x, y, z) = \text{ln2} \left( y + r \right),</span>
+<span class="sd">        k_{xz}(x, y, z) = \operatorname{safe-ln} \left( y, r \right),</span>
 
 <span class="sd">    .. math::</span>
 
@@ -1513,14 +1541,16 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{ln2}` function is defined as follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-ln}` function is defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
@@ -1560,6 +1590,8 @@ title="Open an issue"
 <span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
 <span class="sd">        ``top`` in a Cartesian coordinate system.</span>
 <span class="sd">        All coordinates should be in meters.</span>
+<span class="sd">    density: float</span>
+<span class="sd">        Density of the rectangular prism in kilograms per cubic meter.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1591,7 +1623,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{yz}(x, y, z) = \text{ln2} \left( x + r \right),</span>
+<span class="sd">        k_{yz}(x, y, z) = \operatorname{safe-ln} \left( x, r \right),</span>
 
 <span class="sd">    .. math::</span>
 
@@ -1611,14 +1643,16 @@ title="Open an issue"
 <span class="sd">    are the shifted coordinates of the prism boundaries and :math:`G` is the</span>
 <span class="sd">    Universal Gravitational Constant.</span>
 
-<span class="sd">    The :math:`\text{ln2}` function is defined as follows:</span>
+<span class="sd">    The :math:`\operatorname{safe-ln}` function is defined as follows:</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    It was defined after [Fukushima2020]_ and guarantee a good accuracy on any</span>
@@ -1730,8 +1764,8 @@ title="Open an issue"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on Jan 09, 2023.<br/>
 </p>
         </footer>
     </div>

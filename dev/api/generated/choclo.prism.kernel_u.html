@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     
-        <title>choclo.prism.kernel_u | Choclo v0.0.post27</title>
+        <title>choclo.prism.kernel_u | Choclo dev</title>
     
 
     
@@ -87,7 +87,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -660,20 +660,20 @@ coordinates</em>:</p>
 <div class="math notranslate nohighlight">
 \[k_z(x, y, z) =
     - \left[
-    x \, \text{ln2} (y + r)
-    + y \, \text{ln2} (x + r)
-    - z \, \text{arctan2} \left( \frac{xy}{zr} \right)
+    x \, \operatorname{safe-ln} (y + r)
+    + y \, \operatorname{safe-ln} (x + r)
+    - z \, \operatorname{safe-arctan} \left( xy, zr \right)
     \right]\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\text{ln2}(x) =
+\[\begin{split}\operatorname{safe-ln}(x) =
 \begin{cases}
     0 &amp; |x| &lt; 10^{-10} \\
     \ln (x)
 \end{cases}\end{split}\]</div>
 <p>and</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\text{arctan2} \left( \frac{y}{x} \right) =
+\[\begin{split}\operatorname{safe-arctan} \left( y, x \right) =
 \begin{cases}
     \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\
     \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\
@@ -725,8 +725,8 @@ by <a class="reference internal" href="../../references.html#nagy2000" id="id3">
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on Jan 09, 2023.<br/>
 </p>
         </footer>
     </div>
