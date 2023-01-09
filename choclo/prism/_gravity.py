@@ -46,6 +46,8 @@ def gravity_pot(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -161,6 +163,8 @@ def gravity_e(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -277,6 +281,8 @@ def gravity_n(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -393,6 +399,8 @@ def gravity_u(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -515,6 +523,8 @@ def gravity_ee(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -615,6 +625,8 @@ def gravity_nn(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -715,6 +727,8 @@ def gravity_uu(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -815,6 +829,8 @@ def gravity_en(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -915,6 +931,8 @@ def gravity_eu(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
@@ -1015,6 +1033,8 @@ def gravity_nu(easting, northing, upward, prism, density):
         following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
         ``top`` in a Cartesian coordinate system.
         All coordinates should be in meters.
+    density: float
+        Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
     -------
