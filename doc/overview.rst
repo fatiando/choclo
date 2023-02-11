@@ -155,7 +155,7 @@ too long. So this solution is not recommended.
 We can write a much faster and efficient solution relying on :mod:`numba`.
 Since every function in Choclo is being JIT compiled, we can safely include
 calls to these functions inside other JIT compiled functions. So we can write
-an alterantive function by adding a `@numba.jit` decorator:
+an alterantive function by adding a ``@numba.jit`` decorator:
 
 
 .. jupyter-execute::
@@ -211,12 +211,12 @@ Parallelizing our runs
 ~~~~~~~~~~~~~~~~~~~~~~
 
 We have already shown how we can reduce the computation times of our forward
-modelling by decorating our functions with `@numba.jit(nopython=True)`. But
+modelling by decorating our functions with ``@numba.jit(nopython=True)``. But
 this is just the first step: all the computations were being run in *serial* in
 a single CPU. We can harness the full power of our modern multiprocessors CPUs
 by parallelizing our runs. To do so we need to use the :func:`numba.prange`
-instead of the regular Python `range` function and slightly change the
-decorator of our function by adding a `parallel=True`:
+instead of the regular Python ``range`` function and slightly change the
+decorator of our function by adding a ``parallel=True``:
 
 .. jupyter-execute::
 
