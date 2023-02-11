@@ -240,7 +240,7 @@ this is just the first step: all the computations were being run in *serial* in
 a single CPU. We can harness the full power of our modern multiprocessors CPUs
 by parallelizing our runs. To do so we need to use the :func:`numba.prange`
 instead of the regular Python ``range`` function and slightly change the
-decorator of our function by adding a ``parallel=True``:
+decorator of our function by adding a ``parallel=True`` argument:
 
 .. jupyter-execute::
 
@@ -273,8 +273,8 @@ With :func:`numba.prange` we can specify which loop we want to run in parallel.
 Since we are updating the values of ``results`` on each iteration, it's
 advisable to parallelize the loop over the observation points.
 By setting ``parallel=True`` in the decorator we are telling Numba to
-pararellize this function, otherwise Numba will reinterpret the ``numba.prange``
-function as a regular ``range`` and run this loop in serial.
+pararellize this function, otherwise Numba will reinterpret the
+``numba.prange`` function as a regular ``range`` and run this loop in serial.
 
 .. note::
 
