@@ -112,9 +112,10 @@ And a set of observation points:
 
    easting = np.linspace(-5.0, 5.0, 21)
    northing = np.linspace(-4.0, 4.0, 21)
-   easting, northing = tuple(a.ravel() for a in np.meshgrid(easting, northing))
+   easting, northing = np.meshgrid(easting, northing)
    upward = 10 * np.ones_like(easting)
-   coordinates = (easting, northing, upward)
+
+   coordinates = (easting.ravel(), northing.ravel(), upward.ravel())
 
 And we want to compute the gratitational acceleration that those prisms
 generate on each observation point, we need to write some kind of loop that
@@ -142,15 +143,30 @@ A possible solution would be to use Python for loops:
                )
        return result
 
+We use this function to compute the field on every point of the grid:
+
+.. jupyter-execute::
+
    g_u = gravity_upward_slow(coordinates, prisms, densities)
 
-For loops are known to be slow, and in case we are working with very large
+And plot the results:
+
+.. jupyter-execute::
+
+   import matplotlib.pyplot as plt
+
+   plt.pcolormesh(easting, northing, g_u.reshape(easting.shape), shading='auto')
+   plt.gca().set_aspect("equal")
+   plt.colorbar()
+   plt.show()
+
+"For loops" are known to be slow, and in case we are working with very large
 models and a large number of computation points these calculations could take
 too long. So this solution is not recommended.
 
 .. important::
 
-   Using Python for loops to run Choclo's functions is not advisable!
+   Using Python "for loops" to run Choclo's functions is not advisable!
 
 
 We can write a much faster and efficient solution relying on :mod:`numba`.
@@ -182,6 +198,11 @@ an alterantive function by adding a ``@numba.jit`` decorator:
        return result
 
    g_u = gravity_upward_jit(coordinates, prisms, densities)
+
+   plt.pcolormesh(easting, northing, g_u.reshape(easting.shape), shading='auto')
+   plt.gca().set_aspect("equal")
+   plt.colorbar()
+   plt.show()
 
 Let's benchmark these two functions to see how much faster the decorated
 function runs:
@@ -221,8 +242,6 @@ decorator of our function by adding a ``parallel=True``:
 
 .. jupyter-execute::
 
-   import numba
-
    @numba.jit(nopython=True, parallel=True)
    def gravity_upward_parallel(coordinates, prisms, densities):
        """
@@ -242,6 +261,11 @@ decorator of our function by adding a ``parallel=True``:
        return result
 
    g_u = gravity_upward_parallel(coordinates, prisms, densities)
+
+   plt.pcolormesh(easting, northing, g_u.reshape(easting.shape), shading='auto')
+   plt.gca().set_aspect("equal")
+   plt.colorbar()
+   plt.show()
 
 With :func:`numba.prange` we can specify which loop we want to run in parallel.
 Since we are updating the values of ``results`` on each iteration, it's
