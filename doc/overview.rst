@@ -86,7 +86,6 @@ can just call the :func:`choclo.prism.gravity_u` function:
 
     # Compute the upward component of the grav. acceleration
     g_u = gravity_u(easting, northing, upward, prism, density)
-    g_u
 
 But this case is very simple: we usually deal with multiple sources and
 multiple computation points.
@@ -143,7 +142,6 @@ A possible solution would be to use Python for loops:
        return result
 
    g_u = gravity_upward_slow(coordinates, prisms, densities)
-   g_u
 
 For loops are known to be slow, and in case we are working with very large
 models and a large number of computation points these calculations could take
@@ -183,7 +181,6 @@ an alterantive function by adding a `@numba.jit` decorator:
        return result
 
    g_u = gravity_upward_jit(coordinates, prisms, densities)
-   g_u
 
 Let's benchmark these two functions to see how much faster the decorated
 function runs:
@@ -244,7 +241,6 @@ decorator of our function by adding a `parallel=True`:
        return result
 
    g_u = gravity_upward_parallel(coordinates, prisms, densities)
-   g_u
 
 With :func:`numba.prange` we can specify which loop we want to run in parallel.
 Since we are updating the values of ``results`` on each iteration, it's
