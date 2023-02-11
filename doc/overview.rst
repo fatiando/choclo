@@ -86,6 +86,7 @@ can just call the :func:`choclo.prism.gravity_u` function:
 
     # Compute the upward component of the grav. acceleration
     g_u = gravity_u(easting, northing, upward, prism, density)
+    g_u
 
 But this case is very simple: we usually deal with multiple sources and
 multiple computation points.
