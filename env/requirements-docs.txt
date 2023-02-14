@@ -6,3 +6,4 @@ sphinx-design==0.1.*
 jupyter-sphinx=0.3.*
 numpy
 numba
+matplotlib
