@@ -11,6 +11,43 @@ from numba import jit
 
 
 @jit(nopython=True)
+def is_point_on_edge(easting, northing, upward, prism):
+    """
+    Check if observation point falls on any edge of the prism
+
+    Return True if the observation point falls in any one of the prism edges,
+    including the prism vertices.
+    Return False if otherwise.
+
+    Parameters
+    ----------
+    easting : float
+        Easting coordinate of the observation point. Must be in meters.
+    northing : float
+        Northing coordinate of the observation point. Must be in meters.
+    upward : float
+        Upward coordinate of the observation point. Must be in meters.
+    prism : 1d-array
+        One dimensional array containing the coordinates of the prism in the
+        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
+        ``top`` in a Cartesian coordinate system.
+        All coordinates should be in meters.
+
+    Returns
+    -------
+    result : bool
+        Return True if the observation point falls in any one of the prism
+        edges. Return False if otherwise.
+    """
+    result = (
+        is_point_on_easting_edge(easting, northing, upward, prism)
+        or is_point_on_northing_edge(easting, northing, upward, prism)
+        or is_point_on_upward_edge(easting, northing, upward, prism)
+    )
+    return result
+
+
+@jit(nopython=True)
 def is_point_on_easting_edge(easting, northing, upward, prism):
     """
     Check if observation point falls in a prism edge parallel to easting

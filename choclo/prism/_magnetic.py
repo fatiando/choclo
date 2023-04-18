@@ -12,6 +12,12 @@ from numba import jit
 
 from ..constants import VACUUM_MAGNETIC_PERMEABILITY
 from ._kernels import kernel_ee, kernel_en, kernel_eu, kernel_nn, kernel_nu, kernel_uu
+from ._utils import (
+    is_point_on_east_face,
+    is_point_on_north_face,
+    is_point_on_top_face,
+    is_point_on_edge,
+)
 
 
 @jit(nopython=True)
@@ -187,6 +193,9 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
     :func:`choclo.prism.magnetic_n`
     :func:`choclo.prism.magnetic_u`
     """
+    # Check if observation point falls in a singular point
+    if is_point_on_edge(easting, northing, upward, prism):
+        return (np.nan, np.nan, np.nan)
     # Initialize magnetic field vector components
     b_e, b_n, b_u = 0.0, 0.0, 0.0
     # Iterate over the vertices of the prism
@@ -230,6 +239,18 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
                     + magnetization[1] * k_nu
                     + magnetization[2] * k_uu
                 )
+    # Add 4 pi to Be if computing on the eastmost face, to correctly evaluate
+    # the limit approaching from outside (approaching from the east)
+    if is_point_on_east_face(easting, northing, upward, prism):
+        b_e += 4 * np.pi * magnetization[0]
+    # Add 4 pi to Bn if computing on the northmost face, to correctly evaluate
+    # the limit approaching from outside (approaching from the north)
+    if is_point_on_north_face(easting, northing, upward, prism):
+        b_n += 4 * np.pi * magnetization[1]
+    # Add 4 pi to Bu if computing on the north face, to correctly evaluate the
+    # limit approaching from outside (approaching from the top)
+    if is_point_on_top_face(easting, northing, upward, prism):
+        b_u += 4 * np.pi * magnetization[2]
     c_m = VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
     b_e *= c_m
     b_n *= c_m
@@ -335,6 +356,9 @@ def magnetic_e(easting, northing, upward, prism, magnetization):
     :func:`choclo.prism.magnetic_n`
     :func:`choclo.prism.magnetic_u`
     """
+    # Check if observation point falls in a singular point
+    if is_point_on_edge(easting, northing, upward, prism):
+        return np.nan
     # Initialize magnetic field vector component
     b_e = 0.0
     # Iterate over the vertices of the prism
@@ -363,6 +387,10 @@ def magnetic_e(easting, northing, upward, prism, magnetization):
                     + magnetization[1] * k_en
                     + magnetization[2] * k_eu
                 )
+    # Add 4 pi to Be if computing on the eastmost face, to correctly evaluate
+    # the limit approaching from outside (approaching from the east)
+    if is_point_on_east_face(easting, northing, upward, prism):
+        b_e += 4 * np.pi * magnetization[0]
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_e
 
 
@@ -464,6 +492,9 @@ def magnetic_n(easting, northing, upward, prism, magnetization):
     :func:`choclo.prism.magnetic_e`
     :func:`choclo.prism.magnetic_u`
     """
+    # Check if observation point falls in a singular point
+    if is_point_on_edge(easting, northing, upward, prism):
+        return np.nan
     # Initialize magnetic field vector component
     b_n = 0.0
     # Iterate over the vertices of the prism
@@ -492,6 +523,10 @@ def magnetic_n(easting, northing, upward, prism, magnetization):
                     + magnetization[1] * k_nn
                     + magnetization[2] * k_nu
                 )
+    # Add 4 pi to Bn if computing on the northmost face, to correctly evaluate
+    # the limit approaching from outside (approaching from the north)
+    if is_point_on_north_face(easting, northing, upward, prism):
+        b_n += 4 * np.pi * magnetization[1]
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_n
 
 
@@ -593,6 +628,9 @@ def magnetic_u(easting, northing, upward, prism, magnetization):
     :func:`choclo.prism.magnetic_e`
     :func:`choclo.prism.magnetic_n`
     """
+    # Check if observation point falls in a singular point
+    if is_point_on_edge(easting, northing, upward, prism):
+        return np.nan
     # Initialize magnetic field vector component
     b_u = 0.0
     # Iterate over the vertices of the prism
@@ -621,4 +659,8 @@ def magnetic_u(easting, northing, upward, prism, magnetization):
                     + magnetization[1] * k_nu
                     + magnetization[2] * k_uu
                 )
+    # Add 4 pi to Bu if computing on the north face, to correctly evaluate the
+    # limit approaching from outside (approaching from the top)
+    if is_point_on_top_face(easting, northing, upward, prism):
+        b_u += 4 * np.pi * magnetization[2]
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_u
