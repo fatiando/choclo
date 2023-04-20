@@ -805,10 +805,11 @@ class TestMagneticFieldSingularities:
 
     Magnetic field components have singular points on:
     * prism vertices,
-    * prism edges, and
+    * prism edges,
+    * prism interior, and
     * prism faces normal to the magnetic component direction.
 
-    For the first two cases, the forward modelling function should return
+    For the first three cases, the forward modelling function should return
     ``np.nan``. For the last case, it should return the limit of the field when
     we approach from outside of the prism.
     """
@@ -878,6 +879,17 @@ class TestMagneticFieldSingularities:
         coordinates = tuple(c.ravel() for c in np.meshgrid(easting, northing, upward))
         return coordinates
 
+    def get_interior_points(self, prism):
+        """
+        Return a set of interior points
+        """
+        west, east, south, north, bottom, top = prism
+        easting = np.linspace(west, east, 5)[1:-1]
+        northing = np.linspace(south, north, 5)[1:-1]
+        upward = np.linspace(bottom, top, 5)[1:-1]
+        coordinates = tuple(c.ravel() for c in np.meshgrid(easting, northing, upward))
+        return coordinates
+
     @pytest.mark.parametrize(
         "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
     )
@@ -904,6 +916,21 @@ class TestMagneticFieldSingularities:
         # Build observation points on edges
         coordinates = getattr(self, f"get_{direction}_edges_center")(sample_prism)
         easting, northing, upward = coordinates
+        magnetization = np.array([1.0, 1.0, 1.0])
+        results = list(
+            forward_func(e, n, u, sample_prism, magnetization)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+
+    @pytest.mark.parametrize(
+        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
+    )
+    def test_on_interior_points(self, sample_prism, forward_func):
+        """
+        Test if magnetic field components are NaN on internal points
+        """
+        easting, northing, upward = self.get_interior_points(sample_prism)
         magnetization = np.array([1.0, 1.0, 1.0])
         results = list(
             forward_func(e, n, u, sample_prism, magnetization)
