@@ -14,9 +14,9 @@ from ..constants import VACUUM_MAGNETIC_PERMEABILITY
 from ._kernels import kernel_ee, kernel_en, kernel_eu, kernel_nn, kernel_nu, kernel_uu
 from ._utils import (
     is_point_on_east_face,
+    is_point_on_edge,
     is_point_on_north_face,
     is_point_on_top_face,
-    is_point_on_edge,
 )
 
 
