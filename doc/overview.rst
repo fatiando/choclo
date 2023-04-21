@@ -3,13 +3,13 @@
 Overview
 ========
 
-Choclo provides slim and optimized function to compute the gravitational and
+Choclo provides slim and optimized functions to compute the gravitational and
 magnetic fields of simple geometries like point masses, magnetic dipoles and
 prisms. It also provides the *kernel* functions needed to run compute those
-fields. The goal of Choclo is to provide developers of a simple and efficient
+fields. The goal of Choclo is to provide developers a simple and efficient
 way to calculate these fields for a wide range of applications, like forward
 modellings, sensitivity matrices calculations, equivalent sources
-implemntations and more.
+implementations and more.
 
 These functions are not designed to be used by final users. Instead they are
 meant to be part of the underlaying engine of a higher level codebase, like
@@ -34,7 +34,7 @@ that will be kept along its codebase:
   "northing" and "upward" to make extra clear the direction of each axis.
 - We use the first letter of the *easting*, *northing* and *upward* axis to
   indicate direction of derivatives. For example, a function ``gravity_e`` will
-  compute the *easting* component of the gravitional acceleration, while the
+  compute the *easting* component of the gravitational acceleration, while the
   ``gravity_n`` and ``gravity_u`` will compute the *northing* and *upward*
   ones, respectively.
 - The arguments of the functions are always assumed in SI units. And all the
@@ -119,7 +119,7 @@ And a set of observation points:
 
    coordinates = (easting.ravel(), northing.ravel(), upward.ravel())
 
-And we want to compute the gratitational acceleration that those prisms
+And we want to compute the gravitational acceleration that those prisms
 generate on each observation point, we need to write some kind of loop that
 computes the effect of each prism on each observation point and adds it to
 a running result.
@@ -174,7 +174,7 @@ too long. So this solution is not recommended.
 We can write a much faster and efficient solution relying on :mod:`numba`.
 Since every function in Choclo is being JIT compiled, we can safely include
 calls to these functions inside other JIT compiled functions. So we can write
-an alterantive function by adding a ``@numba.jit`` decorator:
+an alternative function by adding a ``@numba.jit`` decorator:
 
 
 .. jupyter-execute::
@@ -273,7 +273,7 @@ With :func:`numba.prange` we can specify which loop we want to run in parallel.
 Since we are updating the values of ``results`` on each iteration, it's
 advisable to parallelize the loop over the observation points.
 By setting ``parallel=True`` in the decorator we are telling Numba to
-pararellize this function, otherwise Numba will reinterpret the
+parallelize this function, otherwise Numba will reinterpret the
 ``numba.prange`` function as a regular ``range`` and run this loop in serial.
 
 .. note::
