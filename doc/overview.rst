@@ -298,3 +298,13 @@ Let's benchmark this function against the non-parallelized
 By distributing the load between multiple processors we were capable of
 lowering the computation time by a few more factors.
 
+----
+
+.. grid:: 2
+
+    .. grid-item-card:: :jupyter-download-script:`Download Python script <overview>`
+        :text-align: center
+
+    .. grid-item-card:: :jupyter-download-nb:`Download Jupyter notebook <overview>`
+        :text-align: center
+
