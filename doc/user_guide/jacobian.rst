@@ -13,7 +13,7 @@ computed as:
 
 .. math::
 
-   g_u(\mathbf{p}_i) = \sum\limits_{j=1}^M u_j(\mathbf{p}) \rho_j
+   g_u(\mathbf{p}_i) = \sum\limits_{j=1}^M u_j(\mathbf{p}_i) \rho_j
 
 where :math:`\rho_j` is the density of the :math:`j`-th prism and
 :math:`u_j(\mathbf{p})` represents the forward modelling function for the
