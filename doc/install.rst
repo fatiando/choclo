@@ -34,6 +34,9 @@ Required:
 * `numpy <http://www.numpy.org/>`__
 * `numba <https://numba.pydata.org/>`__
 
+The examples in the :ref:`overview` also use:
+
+* `matplotlib <https://matplotlib.org/>`__ for plotting
 
 Installing with conda
 ---------------------

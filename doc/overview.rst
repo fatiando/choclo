@@ -1,13 +1,15 @@
+.. _overview:
+
 Overview
 ========
 
-Choclo provides slim and optimized function to compute the gravitational and
+Choclo provides slim and optimized functions to compute the gravitational and
 magnetic fields of simple geometries like point masses, magnetic dipoles and
 prisms. It also provides the *kernel* functions needed to run compute those
-fields. The goal of Choclo is to provide developers of a simple and efficient
+fields. The goal of Choclo is to provide developers a simple and efficient
 way to calculate these fields for a wide range of applications, like forward
 modellings, sensitivity matrices calculations, equivalent sources
-implemntations and more.
+implementations and more.
 
 These functions are not designed to be used by final users. Instead they are
 meant to be part of the underlaying engine of a higher level codebase, like
@@ -32,7 +34,7 @@ that will be kept along its codebase:
   "northing" and "upward" to make extra clear the direction of each axis.
 - We use the first letter of the *easting*, *northing* and *upward* axis to
   indicate direction of derivatives. For example, a function ``gravity_e`` will
-  compute the *easting* component of the gravitional acceleration, while the
+  compute the *easting* component of the gravitational acceleration, while the
   ``gravity_n`` and ``gravity_u`` will compute the *northing* and *upward*
   ones, respectively.
 - The arguments of the functions are always assumed in SI units. And all the
@@ -112,11 +114,12 @@ And a set of observation points:
 
    easting = np.linspace(-5.0, 5.0, 21)
    northing = np.linspace(-4.0, 4.0, 21)
-   easting, northing = tuple(a.ravel() for a in np.meshgrid(easting, northing))
+   easting, northing = np.meshgrid(easting, northing)
    upward = 10 * np.ones_like(easting)
-   coordinates = (easting, northing, upward)
 
-And we want to compute the gratitational acceleration that those prisms
+   coordinates = (easting.ravel(), northing.ravel(), upward.ravel())
+
+And we want to compute the gravitational acceleration that those prisms
 generate on each observation point, we need to write some kind of loop that
 computes the effect of each prism on each observation point and adds it to
 a running result.
@@ -142,22 +145,36 @@ A possible solution would be to use Python for loops:
                )
        return result
 
-   g_u = gravity_upward_slow(coordinates, prisms, densities)
-   g_u
+We use this function to compute the field on every point of the grid:
 
-For loops are known to be slow, and in case we are working with very large
+.. jupyter-execute::
+
+   g_u = gravity_upward_slow(coordinates, prisms, densities)
+
+And plot the results:
+
+.. jupyter-execute::
+
+   import matplotlib.pyplot as plt
+
+   plt.pcolormesh(easting, northing, g_u.reshape(easting.shape), shading='auto')
+   plt.gca().set_aspect("equal")
+   plt.colorbar()
+   plt.show()
+
+"For loops" are known to be slow, and in case we are working with very large
 models and a large number of computation points these calculations could take
 too long. So this solution is not recommended.
 
 .. important::
 
-   Using Python for loops to run Choclo's functions is not advisable!
+   Using Python "for loops" to run Choclo's functions is not advisable!
 
 
 We can write a much faster and efficient solution relying on :mod:`numba`.
 Since every function in Choclo is being JIT compiled, we can safely include
 calls to these functions inside other JIT compiled functions. So we can write
-an alterantive function by adding a `@numba.jit` decorator:
+an alternative function by adding a ``@numba.jit`` decorator:
 
 
 .. jupyter-execute::
@@ -183,7 +200,11 @@ an alterantive function by adding a `@numba.jit` decorator:
        return result
 
    g_u = gravity_upward_jit(coordinates, prisms, densities)
-   g_u
+
+   plt.pcolormesh(easting, northing, g_u.reshape(easting.shape), shading='auto')
+   plt.gca().set_aspect("equal")
+   plt.colorbar()
+   plt.show()
 
 Let's benchmark these two functions to see how much faster the decorated
 function runs:
@@ -214,16 +235,14 @@ Parallelizing our runs
 ~~~~~~~~~~~~~~~~~~~~~~
 
 We have already shown how we can reduce the computation times of our forward
-modelling by decorating our functions with `@numba.jit(nopython=True)`. But
+modelling by decorating our functions with ``@numba.jit(nopython=True)``. But
 this is just the first step: all the computations were being run in *serial* in
 a single CPU. We can harness the full power of our modern multiprocessors CPUs
 by parallelizing our runs. To do so we need to use the :func:`numba.prange`
-instead of the regular Python `range` function and slightly change the
-decorator of our function by adding a `parallel=True`:
+instead of the regular Python ``range`` function and slightly change the
+decorator of our function by adding a ``parallel=True`` argument:
 
 .. jupyter-execute::
-
-   import numba
 
    @numba.jit(nopython=True, parallel=True)
    def gravity_upward_parallel(coordinates, prisms, densities):
@@ -244,14 +263,18 @@ decorator of our function by adding a `parallel=True`:
        return result
 
    g_u = gravity_upward_parallel(coordinates, prisms, densities)
-   g_u
+
+   plt.pcolormesh(easting, northing, g_u.reshape(easting.shape), shading='auto')
+   plt.gca().set_aspect("equal")
+   plt.colorbar()
+   plt.show()
 
 With :func:`numba.prange` we can specify which loop we want to run in parallel.
 Since we are updating the values of ``results`` on each iteration, it's
 advisable to parallelize the loop over the observation points.
 By setting ``parallel=True`` in the decorator we are telling Numba to
-pararellize this function, otherwise Numba will reinterpret the ``numba.prange``
-function as a regular ``range`` and run this loop in serial.
+parallelize this function, otherwise Numba will reinterpret the
+``numba.prange`` function as a regular ``range`` and run this loop in serial.
 
 .. note::
 
