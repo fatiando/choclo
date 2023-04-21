@@ -179,3 +179,14 @@ We can check that this result is right by comparing it with the output of the
 
    expected = gravity_upward_parallel(coordinates, prisms, densities)
    np.allclose(g_u, expected)
+
+----
+
+.. grid:: 2
+
+    .. grid-item-card:: :jupyter-download-script:`Download Python script <jacobian>`
+        :text-align: center
+
+    .. grid-item-card:: :jupyter-download-nb:`Download Jupyter notebook <jacobian>`
+        :text-align: center
+
