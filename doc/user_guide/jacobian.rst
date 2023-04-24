@@ -2,7 +2,7 @@ Building a Jacobian matrix
 --------------------------
 
 In several applications, like 3D inversions, we need to build the *Jacobian
-matrix*, a.k.a *sensitivity matrix* of our forward model for every observation
+matrix* (a.k.a *sensitivity matrix*) of our forward model for every observation
 point, i.e. how much does our field changes when I apply an infinitesimal
 change to the physical property of each source in the model.
 
@@ -16,12 +16,12 @@ computed as:
    g_u(\mathbf{p}_i) = \sum\limits_{j=1}^M u_j(\mathbf{p}_i) \rho_j
 
 where :math:`\rho_j` is the density of the :math:`j`-th prism and
-:math:`u_j(\mathbf{p})` represents the forward modelling function for the
-:math:`j`-th rectangular prism on the observation point :math:`\mathbf{p}`.
+:math:`u_j(\mathbf{p}_i)` represents the forward modelling function for the
+:math:`j`-th rectangular prism on the :math:`i`-th observation point.
 
-The Jacobian matrix :math:\mathbf{J}` is an :math:`N \times M` matrix whose
-elements are the partial derivative of :math:`g_u(\mathbf{p_i})` with respect to
-the density of the :math:`j`-th prism:
+The Jacobian matrix :math:`\mathbf{J}` is an :math:`N \times M` matrix whose
+elements are the partial derivatives of :math:`g_u(\mathbf{p_i})` with respect
+to the density of the :math:`j`-th prism:
 
 .. math::
 
@@ -30,12 +30,12 @@ the density of the :math:`j`-th prism:
 In most potential field cases, the forward model is linear on the physical
 property (density in this case), so the Jacobian elements are constant.
 
-So, in order to build the sensitivity matrix we must need to evaluate every
-:math:`u_j` on every observation point :math:`\mathbf{p}`. We can easily do so
+In order to build the sensitivity matrix we must need to evaluate every
+:math:`u_j(\mathbf{p}_i)` on every observation point. We can easily do so
 with Choclo forward modelling functions, considering that the source has unit
 density.
 
-Let's build a function that can build a sensitivity matrix for a set of
+Let's write a function that can build a sensitivity matrix for a set of
 observation points and a set of prisms. Since this operation is as demanding as
 forward modelling our entire set of prisms on every observation point, we
 want it to run fast and optionally in parallel. Therefore, we are going to
@@ -150,6 +150,11 @@ a dot product between it and the density vector of the prisms
 
    # Compute result
    g_u = jacobian @ densities
+
+.. note::
+
+   The ``@`` operator performs a matrix product. It's a shorthand of the
+   :func:`numpy.matmul` function.
 
 We can check that this result is right by comparing it with the output of the
 ``gravity_u_parallel`` function we defined in the :ref:`overview`:
