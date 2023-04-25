@@ -157,7 +157,7 @@ a dot product between it and the density vector of the prisms
    :func:`numpy.matmul` function.
 
 We can check that this result is right by comparing it with the output of the
-``gravity_u_parallel`` function we defined in the :ref:`overview`:
+``gravity_u_parallel`` function we defined in the :ref:`howtouse`:
 
 .. jupyter-execute::
    :hide-code:
