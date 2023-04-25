@@ -91,6 +91,13 @@ word *chuqllu*.
     install.rst
 
 .. toctree::
+    :hidden:
+    :maxdepth: 1
+    :caption: User Guide
+
+    user_guide/jacobian.rst
+
+.. toctree::
     :maxdepth: 1
     :hidden:
     :caption: Reference Documentation
