@@ -13,11 +13,27 @@ computed as:
 
 .. math::
 
-   g_u(\mathbf{p}_i) = \sum\limits_{j=1}^M u_j(\mathbf{p}_i) \rho_j
+   g_u(\mathbf{p}_i) = \sum\limits_{j=1}^M G \, \rho_j \, u_j(\mathbf{p}_i)
 
-where :math:`\rho_j` is the density of the :math:`j`-th prism and
-:math:`u_j(\mathbf{p}_i)` represents the forward modelling function for the
-:math:`j`-th rectangular prism on the :math:`i`-th observation point.
+where :math:`\rho_j` is the density of the :math:`j`-th prism, :math:`G` is the
+Universal Gravitational Constant and :math:`u_j(\mathbf{p}_i)` comprehends the
+analytical solution for the forward modelling of the :math:`j`-th rectangular
+prisms on the :math:`i`-th observation point:
+
+.. math::
+
+   u_j(\mathbf{p}_i) =
+      \Bigg\lvert \Bigg\lvert \Bigg\lvert
+      k_z(x, y, z)
+      \Bigg\rvert_{X_1}^{X_2}
+      \Bigg\rvert_{Y_1}^{Y_2}
+      \Bigg\rvert_{Z_1}^{Z_2}
+
+.. seealso::
+
+   See notes in :func:`choclo.prism.gravity_u` for more details on the
+   definition of the kernel function :math:`k_z` and the :math:`x`, :math:`y`,
+   :math:`z` coordinates.
 
 The Jacobian matrix :math:`\mathbf{J}` is an :math:`N \times M` matrix whose
 elements are the partial derivatives of :math:`g_u(\mathbf{p_i})` with respect
@@ -25,15 +41,17 @@ to the density of the :math:`j`-th prism:
 
 .. math::
 
-   J_{ij} = \frac{\partial g_u(\mathbf{p}_i)}{\partial \rho_j} = u_j(\mathbf{p}_i)
+   J_{ij}
+      = \frac{\partial g_u(\mathbf{p}_i)}{\partial \rho_j}
+      = G \, u_j(\mathbf{p}_i)
 
 In most potential field cases, the forward model is linear on the physical
 property (density in this case), so the Jacobian elements are constant.
 
-In order to build the sensitivity matrix we must need to evaluate every
-:math:`u_j(\mathbf{p}_i)` on every observation point. We can easily do so
-with Choclo forward modelling functions, considering that the source has unit
-density.
+In order to build the sensitivity matrix we must need to evaluate
+:math:`u_j(\mathbf{p}_i)` on every observation point and for every prism.
+We can easily do so with Choclo forward modelling functions, considering that
+the prisms have unit density.
 
 Let's write a function that can build a sensitivity matrix for a set of
 observation points and a set of prisms. Since this operation is as demanding as
