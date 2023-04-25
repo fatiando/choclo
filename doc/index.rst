@@ -95,6 +95,7 @@ word *chuqllu*.
     :maxdepth: 1
     :caption: User Guide
 
+    user_guide/how-to-use.rst
     user_guide/jacobian.rst
 
 .. toctree::
