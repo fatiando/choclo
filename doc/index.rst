@@ -91,6 +91,14 @@ word *chuqllu*.
     install.rst
 
 .. toctree::
+    :hidden:
+    :maxdepth: 1
+    :caption: User Guide
+
+    user_guide/how-to-use.rst
+    user_guide/jacobian.rst
+
+.. toctree::
     :maxdepth: 1
     :hidden:
     :caption: Reference Documentation
@@ -98,7 +106,9 @@ word *chuqllu*.
     api/index.rst
     citing.rst
     references.rst
+    changes.rst
     compatibility.rst
+    versions.rst
 
 
 .. toctree::

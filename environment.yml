@@ -1,7 +1,6 @@
 name: choclo
 channels:
   - conda-forge
-  - defaults
 dependencies:
   - python==3.9
   - pip
@@ -21,7 +20,8 @@ dependencies:
   - sphinx-book-theme==0.3.*
   - sphinx-copybutton==0.5.*
   - sphinx-design==0.1.*
-  - jupyter-sphinx==0.3.*
+  - jupyter-sphinx==0.4.*
+  - matplotlib
   # Style
   - black
   - pathspec

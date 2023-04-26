@@ -1,4 +1,4 @@
-# Choclo
+<h1 align="center">Choclo</h1>
 
 <h2 align="center">Kernel functions for your geophysical models</h2>
 
@@ -18,6 +18,7 @@ Part of the <a href="https://www.fatiando.org"><strong>Fatiando a Terra</strong>
 <a href="https://github.com/conda-forge/choclo-feedstock"><img src="https://img.shields.io/conda/vn/conda-forge/choclo.svg?style=flat-square" alt="Latest version on conda-forge"></a>
 <a href="https://codecov.io/gh/fatiando/choclo"><img src="https://img.shields.io/codecov/c/github/fatiando/choclo/main.svg?style=flat-square" alt="Test coverage status"></a>
 <a href="https://pypi.python.org/pypi/choclo"><img src="https://img.shields.io/pypi/pyversions/choclo.svg?style=flat-square" alt="Compatible Python versions."></a>
+<a href="https://doi.org/10.5281/zenodo.7851747"><img src="https://img.shields.io/badge/doi-10.5281%2Fzenodo.7851747-blue?style=flat-square" alt="DOI used to cite Choclo"></a>
 </p>
 
 ## About
