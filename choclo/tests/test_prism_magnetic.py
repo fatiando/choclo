@@ -796,3 +796,172 @@ class TestDivergenceOfB:
         )
         # Check if the divergence of B is zero
         npt.assert_allclose(-b_uu, b_ee + b_nn, atol=1e-11)
+
+
+class TestMagneticFieldSingularities:
+    """
+    Test if magnetic field components behave as expected on their singular
+    points
+
+    Magnetic field components have singular points on:
+    * prism vertices,
+    * prism edges,
+    * prism interior, and
+    * prism faces normal to the magnetic component direction.
+
+    For the first three cases, the forward modelling function should return
+    ``np.nan``. For the last case, it should return the limit of the field when
+    we approach from outside of the prism.
+    """
+
+    @pytest.fixture()
+    def sample_prism(self):
+        """
+        Return the boundaries of the sample prism
+        """
+        west, east, south, north, bottom, top = -5.4, 10.1, 43.2, 79.5, -53.7, -44.3
+        return np.array([west, east, south, north, bottom, top])
+
+    def get_vertices(self, prism):
+        """
+        Return the vertices of the prism
+        """
+        coordinates = tuple(
+            a.ravel() for a in np.meshgrid(prism[0:2], prism[2:4], prism[4:6])
+        )
+        return coordinates
+
+    def get_easting_edges_center(self, prism):
+        """
+        Return points on the center of prism edges parallel to easting
+        """
+        easting_c = (prism[0] + prism[1]) / 2
+        northing, upward = tuple(c.ravel() for c in np.meshgrid(prism[2:4], prism[4:6]))
+        easting = np.full_like(northing, easting_c)
+        return easting, northing, upward
+
+    def get_northing_edges_center(self, prism):
+        """
+        Return points on the center of prism edges parallel to northing
+        """
+        northing_c = (prism[2] + prism[3]) / 2
+        easting, upward = tuple(c.ravel() for c in np.meshgrid(prism[0:2], prism[4:6]))
+        northing = np.full_like(easting, northing_c)
+        return easting, northing, upward
+
+    def get_upward_edges_center(self, prism):
+        """
+        Return points on the center of prism edges parallel to upward
+        """
+        upward_c = (prism[4] + prism[5]) / 2
+        easting, northing = tuple(
+            c.ravel() for c in np.meshgrid(prism[0:2], prism[2:4])
+        )
+        upward = np.full_like(easting, upward_c)
+        return easting, northing, upward
+
+    def get_faces_centers(self, prism, direction):
+        """
+        Return points on the center of faces normal to the given direction
+        """
+        if direction == "easting":
+            easting = prism[0:2]
+            northing = np.mean(prism[2:4])
+            upward = np.mean(prism[4:6])
+        elif direction == "northing":
+            easting = np.mean(prism[0:2])
+            northing = prism[2:4]
+            upward = np.mean(prism[4:6])
+        elif direction == "upward":
+            easting = np.mean(prism[0:2])
+            northing = np.mean(prism[2:4])
+            upward = prism[4:6]
+        coordinates = tuple(c.ravel() for c in np.meshgrid(easting, northing, upward))
+        return coordinates
+
+    def get_interior_points(self, prism):
+        """
+        Return a set of interior points
+        """
+        west, east, south, north, bottom, top = prism
+        easting = np.linspace(west, east, 5)[1:-1]
+        northing = np.linspace(south, north, 5)[1:-1]
+        upward = np.linspace(bottom, top, 5)[1:-1]
+        coordinates = tuple(c.ravel() for c in np.meshgrid(easting, northing, upward))
+        return coordinates
+
+    @pytest.mark.parametrize(
+        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
+    )
+    def test_on_vertices(self, sample_prism, forward_func):
+        """
+        Test if magnetic field components on vertices are equal to NaN
+        """
+        easting, northing, upward = self.get_vertices(sample_prism)
+        magnetization = np.array([1.0, 1.0, 1.0])
+        results = list(
+            forward_func(e, n, u, sample_prism, magnetization)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+
+    @pytest.mark.parametrize(
+        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
+    )
+    @pytest.mark.parametrize("direction", ("easting", "northing", "upward"))
+    def test_on_edges(self, sample_prism, direction, forward_func):
+        """
+        Test if magnetic field components are NaN on edges of the prism
+        """
+        # Build observation points on edges
+        coordinates = getattr(self, f"get_{direction}_edges_center")(sample_prism)
+        easting, northing, upward = coordinates
+        magnetization = np.array([1.0, 1.0, 1.0])
+        results = list(
+            forward_func(e, n, u, sample_prism, magnetization)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+
+    @pytest.mark.parametrize(
+        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
+    )
+    def test_on_interior_points(self, sample_prism, forward_func):
+        """
+        Test if magnetic field components are NaN on internal points
+        """
+        easting, northing, upward = self.get_interior_points(sample_prism)
+        magnetization = np.array([1.0, 1.0, 1.0])
+        results = list(
+            forward_func(e, n, u, sample_prism, magnetization)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        assert np.isnan(results).all()
+
+    @pytest.mark.parametrize(
+        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
+    )
+    @pytest.mark.parametrize("direction", ("easting", "northing", "upward"))
+    def test_symmetry_on_faces(self, sample_prism, direction, forward_func):
+        """
+        Tests symmetry of magnetic field components on the center of faces
+        normal to the component direction
+
+        For example, check if ``magnetic_u`` has the same value on points in
+        the top face and points of the bottom face.
+        """
+        easting, northing, upward = self.get_faces_centers(sample_prism, direction)
+        magnetization = np.array([1.0, 1.0, 1.0])
+        if forward_func == magnetic_field:
+            component_mapping = {"easting": 0, "northing": 1, "upward": 2}
+            index = component_mapping[direction]
+            results = list(
+                forward_func(e, n, u, sample_prism, magnetization)[index]
+                for (e, n, u) in zip(easting, northing, upward)
+            )
+        else:
+            results = list(
+                forward_func(e, n, u, sample_prism, magnetization)
+                for (e, n, u) in zip(easting, northing, upward)
+            )
+        npt.assert_allclose(results, results[0])
