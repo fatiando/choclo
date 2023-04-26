@@ -731,8 +731,8 @@ def gravity_nn(easting, northing, upward, prism, density):
         return np.nan
     # Evaluate kernel function on each vertex of the prism
     result = _evaluate_kernel(easting, northing, upward, prism, kernel_nn)
-    # Add 4 pi if computing on the eastern face to return the limit approaching
-    # from outside (approaching from the east)
+    # Add 4 pi if computing on the northern face to return the limit
+    # approaching from outside (approaching from the north)
     if is_point_on_north_face(easting, northing, upward, prism):
         result += 4 * np.pi
     return GRAVITATIONAL_CONST * density * result
