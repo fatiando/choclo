@@ -106,7 +106,9 @@ word *chuqllu*.
     api/index.rst
     citing.rst
     references.rst
+    changes.rst
     compatibility.rst
+    versions.rst
 
 
 .. toctree::
