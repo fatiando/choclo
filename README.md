@@ -1,4 +1,4 @@
-# Choclo
+<h1 align="center">Choclo</h1>
 
 <h2 align="center">Kernel functions for your geophysical models</h2>
 
