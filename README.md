@@ -1,4 +1,4 @@
-<h1 align="center">Choclo</h1>
+<img src="https://github.com/fatiando/choclo/raw/main/doc/_static/readme-banner.png" alt="Choclo">
 
 <h2 align="center">Kernel functions for your geophysical models</h2>
 
