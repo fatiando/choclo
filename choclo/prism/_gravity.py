@@ -34,7 +34,18 @@ from ._utils import (
 
 
 @jit(nopython=True)
-def gravity_pot(easting, northing, upward, prism, density):
+def gravity_pot(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Gravitational potential field due to a rectangular prism
 
@@ -146,12 +157,34 @@ def gravity_pot(easting, northing, upward, prism, density):
     return (
         GRAVITATIONAL_CONST
         * density
-        * _evaluate_kernel(easting, northing, upward, prism, kernel_pot)
+        * _evaluate_kernel(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+            kernel_pot,
+        )
     )
 
 
 @jit(nopython=True)
-def gravity_e(easting, northing, upward, prism, density):
+def gravity_e(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Easting component of the gravitational acceleration due to a prism
 
@@ -264,12 +297,34 @@ def gravity_e(easting, northing, upward, prism, density):
     return (
         GRAVITATIONAL_CONST
         * density
-        * _evaluate_kernel(easting, northing, upward, prism, kernel_e)
+        * _evaluate_kernel(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+            kernel_e,
+        )
     )
 
 
 @jit(nopython=True)
-def gravity_n(easting, northing, upward, prism, density):
+def gravity_n(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Northing component of the gravitational acceleration due to a prism
 
@@ -382,12 +437,34 @@ def gravity_n(easting, northing, upward, prism, density):
     return (
         GRAVITATIONAL_CONST
         * density
-        * _evaluate_kernel(easting, northing, upward, prism, kernel_n)
+        * _evaluate_kernel(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+            kernel_n,
+        )
     )
 
 
 @jit(nopython=True)
-def gravity_u(easting, northing, upward, prism, density):
+def gravity_u(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Upward component of the gravitational acceleration due to a prism
 
@@ -506,12 +583,34 @@ def gravity_u(easting, northing, upward, prism, density):
     return (
         GRAVITATIONAL_CONST
         * density
-        * _evaluate_kernel(easting, northing, upward, prism, kernel_u)
+        * _evaluate_kernel(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+            kernel_u,
+        )
     )
 
 
 @jit(nopython=True)
-def gravity_ee(easting, northing, upward, prism, density):
+def gravity_ee(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Easting-easting component of the gravitational tensor due to a prism
 
@@ -611,22 +710,71 @@ def gravity_ee(easting, northing, upward, prism, density):
     # Return nan if the observation point falls on a singular point.
     # For the g_ee this are edges perpendicular to the easting direction
     # (parallel to northing and upward)
-    if (
-        is_point_on_northing_edge(easting, northing, upward, prism)
-        or is_point_on_upward_edge(easting, northing, upward, prism)
-    ):  # fmt: skip
+    if is_point_on_northing_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_point_on_upward_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         return np.nan
     # Evaluate kernel function on each vertex of the prism
-    result = _evaluate_kernel(easting, northing, upward, prism, kernel_ee)
+    result = _evaluate_kernel(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        kernel_ee,
+    )
     # Add 4 pi if computing on the eastern face to return the limit approaching
     # from outside (approaching from the east)
-    if is_point_on_east_face(easting, northing, upward, prism):
+    if is_point_on_east_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         result += 4 * np.pi
     return GRAVITATIONAL_CONST * density * result
 
 
 @jit(nopython=True)
-def gravity_nn(easting, northing, upward, prism, density):
+def gravity_nn(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Northing-northing component of the gravitational tensor due to a prism
 
@@ -727,21 +875,53 @@ def gravity_nn(easting, northing, upward, prism, density):
     # For the g_nn this are edges perpendicular to the northing direction
     # (parallel to easting and upward)
     if (
-        is_point_on_easting_edge(easting, northing, upward, prism)
-        or is_point_on_upward_edge(easting, northing, upward, prism)
+        is_point_on_easting_edge(easting, northing, upward, prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top)
+        or is_point_on_upward_edge(easting, northing, upward, prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top)
     ):  # fmt: skip
         return np.nan
     # Evaluate kernel function on each vertex of the prism
-    result = _evaluate_kernel(easting, northing, upward, prism, kernel_nn)
+    result = _evaluate_kernel(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        kernel_nn,
+    )
     # Add 4 pi if computing on the northern face to return the limit
     # approaching from outside (approaching from the north)
-    if is_point_on_north_face(easting, northing, upward, prism):
+    if is_point_on_north_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         result += 4 * np.pi
     return GRAVITATIONAL_CONST * density * result
 
 
 @jit(nopython=True)
-def gravity_uu(easting, northing, upward, prism, density):
+def gravity_uu(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Upward-upward component of the gravitational tensor due to a prism
 
@@ -842,21 +1022,53 @@ def gravity_uu(easting, northing, upward, prism, density):
     # For the g_uu this are edges perpendicular to the upward direction
     # (parallel to easting and northing)
     if (
-        is_point_on_easting_edge(easting, northing, upward, prism)
-        or is_point_on_northing_edge(easting, northing, upward, prism)
+        is_point_on_easting_edge(easting, northing, upward, prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top)
+        or is_point_on_northing_edge(easting, northing, upward, prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top)
     ):  # fmt: skip
         return np.nan
     # Evaluate kernel function on each vertex of the prism
-    result = _evaluate_kernel(easting, northing, upward, prism, kernel_uu)
+    result = _evaluate_kernel(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        kernel_uu,
+    )
     # Add 4 pi if computing on the top face to return the limit approaching
     # from outside (approaching from the top)
-    if is_point_on_top_face(easting, northing, upward, prism):
+    if is_point_on_top_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         result += 4 * np.pi
     return GRAVITATIONAL_CONST * density * result
 
 
 @jit(nopython=True)
-def gravity_en(easting, northing, upward, prism, density):
+def gravity_en(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Easting-northing component of the gravitational tensor due to a prism
 
@@ -954,17 +1166,49 @@ def gravity_en(easting, northing, upward, prism, density):
     """
     # Return nan if the observation point falls on a singular point.
     # For g_en this are edges parallel to to the upward direction
-    if is_point_on_upward_edge(easting, northing, upward, prism):
+    if is_point_on_upward_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         return np.nan
     return (
         GRAVITATIONAL_CONST
         * density
-        * _evaluate_kernel(easting, northing, upward, prism, kernel_en)
+        * _evaluate_kernel(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+            kernel_en,
+        )
     )
 
 
 @jit(nopython=True)
-def gravity_eu(easting, northing, upward, prism, density):
+def gravity_eu(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Easting-upward component of the gravitational tensor due to a prism
 
@@ -1063,17 +1307,49 @@ def gravity_eu(easting, northing, upward, prism, density):
     """
     # Return nan if the observation point falls on a singular point.
     # For g_eu this are edges parallel to to the northing direction
-    if is_point_on_northing_edge(easting, northing, upward, prism):
+    if is_point_on_northing_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         return np.nan
     return (
         GRAVITATIONAL_CONST
         * density
-        * _evaluate_kernel(easting, northing, upward, prism, kernel_eu)
+        * _evaluate_kernel(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+            kernel_eu,
+        )
     )
 
 
 @jit(nopython=True)
-def gravity_nu(easting, northing, upward, prism, density):
+def gravity_nu(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    density,
+):
     r"""
     Northing-upward component of the gravitational tensor due to a prism
 
@@ -1172,17 +1448,49 @@ def gravity_nu(easting, northing, upward, prism, density):
     """
     # Return nan if the observation point falls on a singular point.
     # For g_nu this are edges parallel to to the easting direction
-    if is_point_on_easting_edge(easting, northing, upward, prism):
+    if is_point_on_easting_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         return np.nan
     return (
         GRAVITATIONAL_CONST
         * density
-        * _evaluate_kernel(easting, northing, upward, prism, kernel_nu)
+        * _evaluate_kernel(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+            kernel_nu,
+        )
     )
 
 
 @jit(nopython=True)
-def _evaluate_kernel(easting, northing, upward, prism, kernel):
+def _evaluate_kernel(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    kernel,
+):
     r"""
     Evaluate a kernel function on every shifted vertex of a prism
 
@@ -1238,15 +1546,24 @@ def _evaluate_kernel(easting, northing, upward, prism, kernel):
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        shift_east = prism[1 - i] - easting
+        if i == 0:
+            shift_east = prism_east - easting
+        else:
+            shift_east = prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            shift_north = prism[3 - j] - northing
+            if j == 0:
+                shift_north = prism_north - northing
+            else:
+                shift_north = prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                shift_upward = prism[5 - k] - upward
+                if k == 0:
+                    shift_upward = prism_top - upward
+                else:
+                    shift_upward = prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
