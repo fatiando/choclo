@@ -12,7 +12,15 @@ from ..constants import VACUUM_MAGNETIC_PERMEABILITY
 
 @jit(nopython=True)
 def magnetic_field(
-    easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, magnetic_moment
+    easting_p,
+    northing_p,
+    upward_p,
+    easting_q,
+    northing_q,
+    upward_q,
+    magnetic_moment_east,
+    magnetic_moment_north,
+    magnetic_moment_up,
 ):
     r"""
     Magnetic field due to a dipole
@@ -89,24 +97,34 @@ def magnetic_field(
     r_u = upward_p - upward_q
     distance = np.sqrt(r_e**2 + r_n**2 + r_u**2)
     dotproduct = (
-        magnetic_moment[0] * r_e + magnetic_moment[1] * r_n + magnetic_moment[2] * r_u
+        magnetic_moment_east * r_e
+        + magnetic_moment_north * r_n
+        + magnetic_moment_up * r_u
     )
     c_m = VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
     b_e = c_m * (
-        3 * dotproduct * r_e / distance**5 - magnetic_moment[0] / distance**3
+        3 * dotproduct * r_e / distance**5 - magnetic_moment_east / distance**3
     )
     b_n = c_m * (
-        3 * dotproduct * r_n / distance**5 - magnetic_moment[1] / distance**3
+        3 * dotproduct * r_n / distance**5 - magnetic_moment_north / distance**3
     )
     b_u = c_m * (
-        3 * dotproduct * r_u / distance**5 - magnetic_moment[2] / distance**3
+        3 * dotproduct * r_u / distance**5 - magnetic_moment_up / distance**3
     )
     return b_e, b_n, b_u
 
 
 @jit(nopython=True)
 def magnetic_e(
-    easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, magnetic_moment
+    easting_p,
+    northing_p,
+    upward_p,
+    easting_q,
+    northing_q,
+    upward_q,
+    magnetic_moment_east,
+    magnetic_moment_north,
+    magnetic_moment_up,
 ):
     r"""
     Easting component of the magnetic field due to a dipole
@@ -174,15 +192,25 @@ def magnetic_e(
     r_u = upward_p - upward_q
     distance = np.sqrt(r_e**2 + r_n**2 + r_u**2)
     dotproduct = (
-        magnetic_moment[0] * r_e + magnetic_moment[1] * r_n + magnetic_moment[2] * r_u
+        magnetic_moment_east * r_e
+        + magnetic_moment_north * r_n
+        + magnetic_moment_up * r_u
     )
-    result = 3 * dotproduct * r_e / distance**5 - magnetic_moment[0] / distance**3
+    result = 3 * dotproduct * r_e / distance**5 - magnetic_moment_east / distance**3
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
 
 
 @jit(nopython=True)
 def magnetic_n(
-    easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, magnetic_moment
+    easting_p,
+    northing_p,
+    upward_p,
+    easting_q,
+    northing_q,
+    upward_q,
+    magnetic_moment_east,
+    magnetic_moment_north,
+    magnetic_moment_up,
 ):
     r"""
     Northing component of the magnetic field due to a dipole
@@ -250,15 +278,27 @@ def magnetic_n(
     r_u = upward_p - upward_q
     distance = np.sqrt(r_e**2 + r_n**2 + r_u**2)
     dotproduct = (
-        magnetic_moment[0] * r_e + magnetic_moment[1] * r_n + magnetic_moment[2] * r_u
+        magnetic_moment_east * r_e
+        + magnetic_moment_north * r_n
+        + magnetic_moment_up * r_u
     )
-    result = 3 * dotproduct * r_n / distance**5 - magnetic_moment[1] / distance**3
+    result = (
+        3 * dotproduct * r_n / distance**5 - magnetic_moment_north / distance**3
+    )
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
 
 
 @jit(nopython=True)
 def magnetic_u(
-    easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, magnetic_moment
+    easting_p,
+    northing_p,
+    upward_p,
+    easting_q,
+    northing_q,
+    upward_q,
+    magnetic_moment_east,
+    magnetic_moment_north,
+    magnetic_moment_up,
 ):
     r"""
     Upward component of the magnetic field due to a dipole
@@ -326,7 +366,9 @@ def magnetic_u(
     r_u = upward_p - upward_q
     distance = np.sqrt(r_e**2 + r_n**2 + r_u**2)
     dotproduct = (
-        magnetic_moment[0] * r_e + magnetic_moment[1] * r_n + magnetic_moment[2] * r_u
+        magnetic_moment_east * r_e
+        + magnetic_moment_north * r_n
+        + magnetic_moment_up * r_u
     )
-    result = 3 * dotproduct * r_u / distance**5 - magnetic_moment[2] / distance**3
+    result = 3 * dotproduct * r_u / distance**5 - magnetic_moment_up / distance**3
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result

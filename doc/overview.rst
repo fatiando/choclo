@@ -144,14 +144,21 @@ a single observation point:
 
    # Define the magnetic moment vector of the dipole (in A m^2)
    mag_moment_e, mag_moment_n, mag_moment_u = 1., 1., -2.
-   magnetic_moment = np.array([mag_moment_e, mag_moment_n, mag_moment_u])
 
    # Define coordinates of an observation point
    easting, northing, upward = -2., 2., 2.
 
    # Compute the magnetic field of the dipole on the observation point (in T)
    b_e, b_n, b_u = choclo.dipole.magnetic_field(
-      easting, northing, upward, easting_d, northing_d, upward_d, magnetic_moment
+      easting,
+      northing,
+      upward,
+      easting_d,
+      northing_d,
+      upward_d,
+      mag_moment_e,
+      mag_moment_n,
+      mag_moment_u,
    )
    print(f"b_e: {b_e:.2e} T")
    print(f"b_n: {b_n:.2e} T")
