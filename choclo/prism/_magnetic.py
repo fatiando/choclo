@@ -57,16 +57,27 @@ def magnetic_field(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
-    magnetization : 1d-array
-        Magnetization vector of the prism. It should have three components in
-        the following order: ``magnetization_easting``,
-        ``magnetization_northing``, ``magnetization_upward``.
-        Should be in :math:`A m^{-1}`.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
+    magnetization_east : float
+        The East component of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    magnetization_north : float
+        The North component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
+    magnetization_up : float
+        The upward component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
 
     Returns
     -------
@@ -362,16 +373,27 @@ def magnetic_e(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
-    magnetization : 1d-array
-        Magnetization vector of the prism. It should have three components in
-        the following order: ``magnetization_easting``,
-        ``magnetization_northing``, ``magnetization_upward``.
-        Should be in :math:`A m^{-1}`.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
+    magnetization_east : float
+        The East component of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    magnetization_north : float
+        The North component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
+    magnetization_up : float
+        The upward component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
 
     Returns
     -------
@@ -552,16 +574,27 @@ def magnetic_n(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
-    magnetization : 1d-array
-        Magnetization vector of the prism. It should have three components in
-        the following order: ``magnetization_easting``,
-        ``magnetization_northing``, ``magnetization_upward``.
-        Should be in :math:`A m^{-1}`.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
+    magnetization_east : float
+        The East component of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    magnetization_north : float
+        The North component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
+    magnetization_up : float
+        The upward component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
 
     Returns
     -------
@@ -742,16 +775,27 @@ def magnetic_u(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
-    magnetization : 1d-array
-        Magnetization vector of the prism. It should have three components in
-        the following order: ``magnetization_easting``,
-        ``magnetization_northing``, ``magnetization_upward``.
-        Should be in :math:`A m^{-1}`.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
+    magnetization_east : float
+        The East component of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    magnetization_north : float
+        The North component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
+    magnetization_up : float
+        The upward component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
 
     Returns
     -------

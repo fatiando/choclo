@@ -60,11 +60,18 @@ def gravity_pot(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -199,11 +206,18 @@ def gravity_e(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -339,11 +353,18 @@ def gravity_n(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -479,11 +500,18 @@ def gravity_u(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -625,11 +653,18 @@ def gravity_ee(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -789,11 +824,18 @@ def gravity_nn(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -936,11 +978,18 @@ def gravity_uu(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -1083,11 +1132,18 @@ def gravity_en(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -1223,11 +1279,18 @@ def gravity_eu(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -1364,11 +1427,18 @@ def gravity_nu(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     density: float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -1502,11 +1572,18 @@ def _evaluate_kernel(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
     kernel : callable
         Kernel function that will be evaluated on each one of the shifted
         vertices of the prism.

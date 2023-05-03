@@ -49,10 +49,15 @@ def magnetic_field(
         Northing coordinate of the dipole in meters.
     upward_q : float
         Upward coordinate of the dipole in meters.
-    magnetic_moment : 1d-array
-        Magnetic moment of the dipole. It should have three components in the
-        following order: ``mag_moment_easting``, ``mag_moment_northing``,
-        ``mag_moment_upward``. Should be in :math:`A m^2`.
+    magnetic_moment_east : float
+        The East component of the magnetic moment vector of the dipole. Must be
+        in :math:`A m^2`.
+    magnetic_moment_north : float
+        The North component of the magnetic moment vector of the dipole. Must
+        be in :math:`A m^2`.
+    magnetic_moment_up : float
+        The upward component of the magnetic moment vector of the dipole. Must
+        be in :math:`A m^2`.
 
     Returns
     -------
@@ -146,10 +151,15 @@ def magnetic_e(
         Northing coordinate of the dipole in meters.
     upward_q : float
         Upward coordinate of the dipole in meters.
-    magnetic_moment : 1d-array
-        Magnetic moment of the dipole. It should have three components in the
-        following order: ``mag_moment_easting``, ``mag_moment_northing``,
-        ``mag_moment_upward``. Should be in :math:`A m^2`.
+    magnetic_moment_east : float
+        The East component of the magnetic moment vector of the dipole. Must be
+        in :math:`A m^2`.
+    magnetic_moment_north : float
+        The North component of the magnetic moment vector of the dipole. Must
+        be in :math:`A m^2`.
+    magnetic_moment_up : float
+        The upward component of the magnetic moment vector of the dipole. Must
+        be in :math:`A m^2`.
 
     Returns
     -------
@@ -232,10 +242,15 @@ def magnetic_n(
         Northing coordinate of the dipole in meters.
     upward_q : float
         Upward coordinate of the dipole in meters.
-    magnetic_moment : 1d-array
-        Magnetic moment of the dipole. It should have three components in the
-        following order: ``mag_moment_easting``, ``mag_moment_northing``,
-        ``mag_moment_upward``. Should be in :math:`A m^2`.
+    magnetic_moment_east : float
+        The East component of the magnetic moment vector of the dipole. Must be
+        in :math:`A m^2`.
+    magnetic_moment_north : float
+        The North component of the magnetic moment vector of the dipole. Must
+        be in :math:`A m^2`.
+    magnetic_moment_up : float
+        The upward component of the magnetic moment vector of the dipole. Must
+        be in :math:`A m^2`.
 
     Returns
     -------
@@ -320,10 +335,15 @@ def magnetic_u(
         Northing coordinate of the dipole in meters.
     upward_q : float
         Upward coordinate of the dipole in meters.
-    magnetic_moment : 1d-array
-        Magnetic moment of the dipole. It should have three components in the
-        following order: ``mag_moment_easting``, ``mag_moment_northing``,
-        ``mag_moment_upward``. Should be in :math:`A m^2`.
+    magnetic_moment_east : float
+        The East component of the magnetic moment vector of the dipole. Must be
+        in :math:`A m^2`.
+    magnetic_moment_north : float
+        The North component of the magnetic moment vector of the dipole. Must
+        be in :math:`A m^2`.
+    magnetic_moment_up : float
+        The upward component of the magnetic moment vector of the dipole. Must
+        be in :math:`A m^2`.
 
     Returns
     -------

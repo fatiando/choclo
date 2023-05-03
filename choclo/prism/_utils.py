@@ -37,11 +37,18 @@ def is_interior_point(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -82,11 +89,18 @@ def is_point_on_edge(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -159,11 +173,18 @@ def is_point_on_easting_edge(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -207,11 +228,18 @@ def is_point_on_northing_edge(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -255,11 +283,18 @@ def is_point_on_upward_edge(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -303,11 +338,18 @@ def is_point_on_east_face(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -352,11 +394,18 @@ def is_point_on_north_face(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -400,11 +449,18 @@ def is_point_on_top_face(
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
