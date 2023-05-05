@@ -916,10 +916,27 @@ def gravity_nn(
     # Return nan if the observation point falls on a singular point.
     # For the g_nn this are edges perpendicular to the northing direction
     # (parallel to easting and upward)
-    if (
-        is_point_on_easting_edge(easting, northing, upward, prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top)
-        or is_point_on_upward_edge(easting, northing, upward, prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top)
-    ):  # fmt: skip
+    if is_point_on_easting_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_point_on_upward_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         return np.nan
     # Evaluate kernel function on each vertex of the prism
     result = _evaluate_kernel(
@@ -1070,10 +1087,27 @@ def gravity_uu(
     # Return nan if the observation point falls on a singular point.
     # For the g_uu this are edges perpendicular to the upward direction
     # (parallel to easting and northing)
-    if (
-        is_point_on_easting_edge(easting, northing, upward, prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top)
-        or is_point_on_northing_edge(easting, northing, upward, prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top)
-    ):  # fmt: skip
+    if is_point_on_easting_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_point_on_northing_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
         return np.nan
     # Evaluate kernel function on each vertex of the prism
     result = _evaluate_kernel(
