@@ -19,14 +19,14 @@ can just call the :func:`choclo.prism.gravity_u` function:
     # Define a single computation point
     easting, northing, upward = 0.0, 0.0, 10.0
 
-    # Define the boundaries of the prism as a 1d-array
-    prism = np.array([-10.0, 10.0, -7.0, 7.0, -15.0, -5.0])
+    # Define the boundaries of the prism as a list
+    prism = [-10.0, 10.0, -7.0, 7.0, -15.0, -5.0]
 
     # And its density
     density = 400.0
 
     # Compute the upward component of the grav. acceleration
-    g_u = gravity_u(easting, northing, upward, prism, density)
+    g_u = gravity_u(easting, northing, upward, *prism, density)
     g_u
 
 But this case is very simple: we usually deal with multiple sources and
@@ -51,8 +51,8 @@ And a set of observation points:
 
 .. jupyter-execute::
 
-   easting = np.linspace(-5.0, 5.0, 21)
-   northing = np.linspace(-4.0, 4.0, 21)
+   easting = np.linspace(-50.0, 50.0, 21)
+   northing = np.linspace(-40.0, 40.0, 21)
    easting, northing = np.meshgrid(easting, northing)
    upward = 10 * np.ones_like(easting)
 
@@ -80,7 +80,7 @@ A possible solution would be to use Python *for loops*:
        for i in range(len(easting)):
            for j in range(prisms.shape[0]):
                result[i] += gravity_u(
-                   easting[i], northing[i], upward[i], prisms[j, :], densities[j]
+                   easting[i], northing[i], upward[i], *prisms[j, :], densities[j]
                )
        return result
 
@@ -134,7 +134,16 @@ an alternative function by adding a ``@numba.jit`` decorator:
        for i in range(len(easting)):
            for j in range(prisms.shape[0]):
                result[i] += gravity_u(
-                   easting[i], northing[i], upward[i], prisms[j, :], densities[j]
+                   easting[i],
+                   northing[i],
+                   upward[i],
+                   prisms[j, 0],
+                   prisms[j, 1],
+                   prisms[j, 2],
+                   prisms[j, 3],
+                   prisms[j, 4],
+                   prisms[j, 5],
+                   densities[j],
                )
        return result
 
@@ -197,7 +206,16 @@ decorator of our function by adding a ``parallel=True`` argument:
        for i in numba.prange(len(easting)):
            for j in range(prisms.shape[0]):
                result[i] += gravity_u(
-                   easting[i], northing[i], upward[i], prisms[j, :], densities[j]
+                   easting[i],
+                   northing[i],
+                   upward[i],
+                   prisms[j, 0],
+                   prisms[j, 1],
+                   prisms[j, 2],
+                   prisms[j, 3],
+                   prisms[j, 4],
+                   prisms[j, 5],
+                   densities[j],
                )
        return result
 

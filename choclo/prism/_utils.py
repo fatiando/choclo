@@ -11,7 +11,17 @@ from numba import jit
 
 
 @jit(nopython=True)
-def is_interior_point(easting, northing, upward, prism):
+def is_interior_point(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+):
     """
     Check if observation point falls inside the prism
 
@@ -27,11 +37,18 @@ def is_interior_point(easting, northing, upward, prism):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -39,14 +56,24 @@ def is_interior_point(easting, northing, upward, prism):
         Return True if the observation point falls inside the prism, not
         including vertices, edges or faces. Return False if otherwise.
     """
-    in_easting = prism[0] < easting < prism[1]
-    in_northing = prism[2] < northing < prism[3]
-    in_upward = prism[4] < upward < prism[5]
+    in_easting = prism_west < easting < prism_east
+    in_northing = prism_south < northing < prism_north
+    in_upward = prism_bottom < upward < prism_top
     return in_easting and in_northing and in_upward
 
 
 @jit(nopython=True)
-def is_point_on_edge(easting, northing, upward, prism):
+def is_point_on_edge(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+):
     """
     Check if observation point falls on any edge of the prism
 
@@ -62,11 +89,18 @@ def is_point_on_edge(easting, northing, upward, prism):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -75,15 +109,55 @@ def is_point_on_edge(easting, northing, upward, prism):
         edges. Return False if otherwise.
     """
     result = (
-        is_point_on_easting_edge(easting, northing, upward, prism)
-        or is_point_on_northing_edge(easting, northing, upward, prism)
-        or is_point_on_upward_edge(easting, northing, upward, prism)
+        is_point_on_easting_edge(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+        )
+        or is_point_on_northing_edge(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+        )
+        or is_point_on_upward_edge(
+            easting,
+            northing,
+            upward,
+            prism_west,
+            prism_east,
+            prism_south,
+            prism_north,
+            prism_bottom,
+            prism_top,
+        )
     )
     return result
 
 
 @jit(nopython=True)
-def is_point_on_easting_edge(easting, northing, upward, prism):
+def is_point_on_easting_edge(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+):
     """
     Check if observation point falls in a prism edge parallel to easting
 
@@ -99,11 +173,18 @@ def is_point_on_easting_edge(easting, northing, upward, prism):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -112,16 +193,26 @@ def is_point_on_easting_edge(easting, northing, upward, prism):
         parallel to the easting direction or in any one of the vertices of the
         prism. Return False if otherwise.
     """
-    in_easting = prism[0] <= easting <= prism[1]
-    in_northing = (northing == prism[2]) or (northing == prism[3])
-    in_upward = (upward == prism[4]) or (upward == prism[5])
+    in_easting = prism_west <= easting <= prism_east
+    in_northing = northing in (prism_south, prism_north)
+    in_upward = upward in (prism_bottom, prism_top)
     if in_easting and in_northing and in_upward:
         return True
     return False
 
 
 @jit(nopython=True)
-def is_point_on_northing_edge(easting, northing, upward, prism):
+def is_point_on_northing_edge(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+):
     """
     Check if observation point falls in a prism edge parallel to northing
 
@@ -137,11 +228,18 @@ def is_point_on_northing_edge(easting, northing, upward, prism):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -150,16 +248,26 @@ def is_point_on_northing_edge(easting, northing, upward, prism):
         parallel to the northing direction or in any one of the vertices of the
         prism. Return False if otherwise.
     """
-    in_easting = (easting == prism[0]) or (easting == prism[1])
-    in_northing = prism[2] <= northing <= prism[3]
-    in_upward = (upward == prism[4]) or (upward == prism[5])
+    in_easting = easting in (prism_west, prism_east)
+    in_northing = prism_south <= northing <= prism_north
+    in_upward = upward in (prism_bottom, prism_top)
     if in_easting and in_northing and in_upward:
         return True
     return False
 
 
 @jit(nopython=True)
-def is_point_on_upward_edge(easting, northing, upward, prism):
+def is_point_on_upward_edge(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+):
     """
     Check if observation point falls in a prism edge parallel to upward
 
@@ -175,11 +283,18 @@ def is_point_on_upward_edge(easting, northing, upward, prism):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -188,16 +303,26 @@ def is_point_on_upward_edge(easting, northing, upward, prism):
         parallel to the upward direction or in any one of the vertices of the
         prism. Return False if otherwise.
     """
-    in_easting = (easting == prism[0]) or (easting == prism[1])
-    in_northing = (northing == prism[2]) or (northing == prism[3])
-    in_upward = prism[4] <= upward <= prism[5]
+    in_easting = easting in (prism_west, prism_east)
+    in_northing = northing in (prism_south, prism_north)
+    in_upward = prism_bottom <= upward <= prism_top
     if in_easting and in_northing and in_upward:
         return True
     return False
 
 
 @jit(nopython=True)
-def is_point_on_east_face(easting, northing, upward, prism):
+def is_point_on_east_face(
+    easting,
+    northing,
+    upward,
+    prism_west,  # noqa: U100
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+):
     """
     Check if observation point falls in the eastern face of the prism
 
@@ -213,11 +338,18 @@ def is_point_on_east_face(easting, northing, upward, prism):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -226,9 +358,9 @@ def is_point_on_east_face(easting, northing, upward, prism):
         the prism. Return False if otherwise.
     """
     on_east_face = (
-        (easting == prism[1])
-        and (prism[2] < northing < prism[3])
-        and (prism[4] < upward < prism[5])
+        (easting == prism_east)
+        and (prism_south < northing < prism_north)
+        and (prism_bottom < upward < prism_top)
     )
     if on_east_face:
         return True
@@ -236,7 +368,17 @@ def is_point_on_east_face(easting, northing, upward, prism):
 
 
 @jit(nopython=True)
-def is_point_on_north_face(easting, northing, upward, prism):
+def is_point_on_north_face(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,  # noqa: U100
+    prism_north,
+    prism_bottom,
+    prism_top,
+):
     """
     Check if observation point falls in the northern face of the prism
 
@@ -252,11 +394,18 @@ def is_point_on_north_face(easting, northing, upward, prism):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -265,9 +414,9 @@ def is_point_on_north_face(easting, northing, upward, prism):
         the prism. Return False if otherwise.
     """
     on_north_face = (
-        (prism[0] < easting < prism[1])
-        and (northing == prism[3])
-        and (prism[4] < upward < prism[5])
+        (prism_west < easting < prism_east)
+        and (northing == prism_north)
+        and (prism_bottom < upward < prism_top)
     )
     if on_north_face:
         return True
@@ -275,7 +424,17 @@ def is_point_on_north_face(easting, northing, upward, prism):
 
 
 @jit(nopython=True)
-def is_point_on_top_face(easting, northing, upward, prism):
+def is_point_on_top_face(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,  # noqa: U100
+    prism_top,
+):
     """
     Check if observation point falls in the top face of the prism
 
@@ -290,11 +449,18 @@ def is_point_on_top_face(easting, northing, upward, prism):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
 
     Returns
     -------
@@ -303,9 +469,9 @@ def is_point_on_top_face(easting, northing, upward, prism):
         prism. Return False if otherwise.
     """
     on_top_face = (
-        (prism[0] < easting < prism[1])
-        and (prism[2] < northing < prism[3])
-        and (upward == prism[5])
+        (prism_west < easting < prism_east)
+        and (prism_south < northing < prism_north)
+        and (upward == prism_top)
     )
     if on_top_face:
         return True

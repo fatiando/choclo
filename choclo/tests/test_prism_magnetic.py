@@ -107,7 +107,7 @@ class TestSymmetryBe:
         magnetization = np.array(magnetization)
         b_e_top = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, magnetization)
+                magnetic_e(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing.ravel(), upward_top.ravel()
                 )
@@ -115,7 +115,7 @@ class TestSymmetryBe:
         )
         b_e_bottom = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, magnetization)
+                magnetic_e(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing.ravel(), upward_bottom.ravel()
                 )
@@ -159,7 +159,7 @@ class TestSymmetryBe:
         magnetization = np.array(magnetization)
         b_e_north = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, magnetization)
+                magnetic_e(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing_north.ravel(), upward.ravel()
                 )
@@ -167,7 +167,7 @@ class TestSymmetryBe:
         )
         b_e_south = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, magnetization)
+                magnetic_e(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing_south.ravel(), upward.ravel()
                 )
@@ -211,7 +211,7 @@ class TestSymmetryBe:
         magnetization = np.array(magnetization)
         b_e_east = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, magnetization)
+                magnetic_e(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting_east.ravel(), northing.ravel(), upward.ravel()
                 )
@@ -219,7 +219,7 @@ class TestSymmetryBe:
         )
         b_e_west = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, magnetization)
+                magnetic_e(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting_west.ravel(), northing.ravel(), upward.ravel()
                 )
@@ -249,13 +249,13 @@ class TestSymmetryBe:
         # observation points
         b_e_east = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, magnetization_east)
+                magnetic_e(e, n, u, *sample_prism, *magnetization_east)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
         b_e_west = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, magnetization_west)
+                magnetic_e(e, n, u, *sample_prism, *magnetization_west)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
@@ -302,7 +302,7 @@ class TestSymmetryBn:
         magnetization = np.array(magnetization)
         b_n_top = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, magnetization)
+                magnetic_n(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing.ravel(), upward_top.ravel()
                 )
@@ -310,7 +310,7 @@ class TestSymmetryBn:
         )
         b_n_bottom = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, magnetization)
+                magnetic_n(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing.ravel(), upward_bottom.ravel()
                 )
@@ -354,7 +354,7 @@ class TestSymmetryBn:
         magnetization = np.array(magnetization)
         b_n_north = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, magnetization)
+                magnetic_n(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing_north.ravel(), upward.ravel()
                 )
@@ -362,7 +362,7 @@ class TestSymmetryBn:
         )
         b_n_south = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, magnetization)
+                magnetic_n(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing_south.ravel(), upward.ravel()
                 )
@@ -406,7 +406,7 @@ class TestSymmetryBn:
         magnetization = np.array(magnetization)
         b_n_east = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, magnetization)
+                magnetic_n(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting_east.ravel(), northing.ravel(), upward.ravel()
                 )
@@ -414,7 +414,7 @@ class TestSymmetryBn:
         )
         b_n_west = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, magnetization)
+                magnetic_n(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting_west.ravel(), northing.ravel(), upward.ravel()
                 )
@@ -444,13 +444,13 @@ class TestSymmetryBn:
         # observation points
         b_n_north = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, magnetization_north)
+                magnetic_n(e, n, u, *sample_prism, *magnetization_north)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
         b_n_south = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, magnetization_south)
+                magnetic_n(e, n, u, *sample_prism, *magnetization_south)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
@@ -497,7 +497,7 @@ class TestSymmetryBu:
         magnetization = np.array(magnetization)
         b_u_top = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, magnetization)
+                magnetic_u(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing.ravel(), upward_top.ravel()
                 )
@@ -505,7 +505,7 @@ class TestSymmetryBu:
         )
         b_u_bottom = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, magnetization)
+                magnetic_u(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing.ravel(), upward_bottom.ravel()
                 )
@@ -549,7 +549,7 @@ class TestSymmetryBu:
         magnetization = np.array(magnetization)
         b_u_north = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, magnetization)
+                magnetic_u(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing_north.ravel(), upward.ravel()
                 )
@@ -557,7 +557,7 @@ class TestSymmetryBu:
         )
         b_u_south = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, magnetization)
+                magnetic_u(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting.ravel(), northing_south.ravel(), upward.ravel()
                 )
@@ -601,7 +601,7 @@ class TestSymmetryBu:
         magnetization = np.array(magnetization)
         b_u_east = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, magnetization)
+                magnetic_u(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting_east.ravel(), northing.ravel(), upward.ravel()
                 )
@@ -609,7 +609,7 @@ class TestSymmetryBu:
         )
         b_u_west = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, magnetization)
+                magnetic_u(e, n, u, *sample_prism, *magnetization)
                 for e, n, u in zip(
                     easting_west.ravel(), northing.ravel(), upward.ravel()
                 )
@@ -639,13 +639,13 @@ class TestSymmetryBu:
         # observation points
         b_u_up = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, magnetization_up)
+                magnetic_u(e, n, u, *sample_prism, *magnetization_up)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
         b_u_down = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, magnetization_down)
+                magnetic_u(e, n, u, *sample_prism, *magnetization_down)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
@@ -669,7 +669,7 @@ class TestMagneticField:
         # Compute all components of B using magnetic_field
         b = np.array(
             list(
-                magnetic_field(e, n, u, sample_prism, sample_magnetization)
+                magnetic_field(e, n, u, *sample_prism, *sample_magnetization)
                 for e, n, u in zip(*sample_3d_grid)
             )
         )
@@ -677,19 +677,19 @@ class TestMagneticField:
         # Computed the individual fields
         b_e_expected = np.array(
             list(
-                magnetic_e(e, n, u, sample_prism, sample_magnetization)
+                magnetic_e(e, n, u, *sample_prism, *sample_magnetization)
                 for e, n, u in zip(*sample_3d_grid)
             )
         )
         b_n_expected = np.array(
             list(
-                magnetic_n(e, n, u, sample_prism, sample_magnetization)
+                magnetic_n(e, n, u, *sample_prism, *sample_magnetization)
                 for e, n, u in zip(*sample_3d_grid)
             )
         )
         b_u_expected = np.array(
             list(
-                magnetic_u(e, n, u, sample_prism, sample_magnetization)
+                magnetic_u(e, n, u, *sample_prism, *sample_magnetization)
                 for e, n, u in zip(*sample_3d_grid)
             )
         )
@@ -719,13 +719,13 @@ class TestDivergenceOfB:
         # Compute b_e on original and shifted coordinates
         b_e = np.array(
             list(
-                magnetic_e(e, n, u, prism, magnetization)
+                magnetic_e(e, n, u, *prism, *magnetization)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
         b_e_shifted = np.array(
             list(
-                magnetic_e(e, n, u, prism, magnetization)
+                magnetic_e(e, n, u, *prism, *magnetization)
                 for e, n, u in zip(easting_shifted, northing, upward)
             )
         )
@@ -744,13 +744,13 @@ class TestDivergenceOfB:
         # Compute b_e on original and shifted coordinates
         b_n = np.array(
             list(
-                magnetic_n(e, n, u, prism, magnetization)
+                magnetic_n(e, n, u, *prism, *magnetization)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
         b_n_shifted = np.array(
             list(
-                magnetic_n(e, n, u, prism, magnetization)
+                magnetic_n(e, n, u, *prism, *magnetization)
                 for e, n, u in zip(easting, northing_shifted, upward)
             )
         )
@@ -769,13 +769,13 @@ class TestDivergenceOfB:
         # Compute b_e on original and shifted coordinates
         b_u = np.array(
             list(
-                magnetic_u(e, n, u, prism, magnetization)
+                magnetic_u(e, n, u, *prism, *magnetization)
                 for e, n, u in zip(easting, northing, upward)
             )
         )
         b_u_shifted = np.array(
             list(
-                magnetic_u(e, n, u, prism, magnetization)
+                magnetic_u(e, n, u, *prism, *magnetization)
                 for e, n, u in zip(easting, northing, upward_shifted)
             )
         )
@@ -900,7 +900,7 @@ class TestMagneticFieldSingularities:
         easting, northing, upward = self.get_vertices(sample_prism)
         magnetization = np.array([1.0, 1.0, 1.0])
         results = list(
-            forward_func(e, n, u, sample_prism, magnetization)
+            forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
         )
         assert np.isnan(results).all()
@@ -918,7 +918,7 @@ class TestMagneticFieldSingularities:
         easting, northing, upward = coordinates
         magnetization = np.array([1.0, 1.0, 1.0])
         results = list(
-            forward_func(e, n, u, sample_prism, magnetization)
+            forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
         )
         assert np.isnan(results).all()
@@ -933,7 +933,7 @@ class TestMagneticFieldSingularities:
         easting, northing, upward = self.get_interior_points(sample_prism)
         magnetization = np.array([1.0, 1.0, 1.0])
         results = list(
-            forward_func(e, n, u, sample_prism, magnetization)
+            forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
         )
         assert np.isnan(results).all()
@@ -956,12 +956,12 @@ class TestMagneticFieldSingularities:
             component_mapping = {"easting": 0, "northing": 1, "upward": 2}
             index = component_mapping[direction]
             results = list(
-                forward_func(e, n, u, sample_prism, magnetization)[index]
+                forward_func(e, n, u, *sample_prism, *magnetization)[index]
                 for (e, n, u) in zip(easting, northing, upward)
             )
         else:
             results = list(
-                forward_func(e, n, u, sample_prism, magnetization)
+                forward_func(e, n, u, *sample_prism, *magnetization)
                 for (e, n, u) in zip(easting, northing, upward)
             )
         npt.assert_allclose(results, results[0])

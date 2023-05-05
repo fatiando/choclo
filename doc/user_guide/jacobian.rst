@@ -81,7 +81,16 @@ write a Numba function with parallelization enabled:
        for i in numba.prange(len(easting)):
            for j in range(prisms.shape[0]):
                jacobian[i, j] = gravity_u(
-                   easting[i], northing[i], upward[i], prisms[j, :], 1.0
+                   easting[i],
+                   northing[i],
+                   upward[i],
+                   prisms[j, 0],
+                   prisms[j, 1],
+                   prisms[j, 2],
+                   prisms[j, 3],
+                   prisms[j, 4],
+                   prisms[j, 5],
+                   1.0,
                )
        return jacobian
 
@@ -194,7 +203,16 @@ We can check that this result is right by comparing it with the output of the
        for i in numba.prange(len(easting)):
            for j in range(prisms.shape[0]):
                result[i] += gravity_u(
-                   easting[i], northing[i], upward[i], prisms[j, :], densities[j]
+                   easting[i],
+                   northing[i],
+                   upward[i],
+                   prisms[j, 0],
+                   prisms[j, 1],
+                   prisms[j, 2],
+                   prisms[j, 3],
+                   prisms[j, 4],
+                   prisms[j, 5],
+                   densities[j],
                )
        return result
 
