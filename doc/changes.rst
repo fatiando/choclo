@@ -12,8 +12,9 @@ doi: https://doi.org/10.5281/zenodo.7931023
 
 Breaking changes:
 
-- Ditch kernel functions for point masses (`#42 <https://github.com/fatiando/choclo/pull/42>`__)
-- Make Choclo functions to take only scalar inputs instead of array inputs  (`#50 <https://github.com/fatiando/choclo/pull/50>`__)
+* Ditch kernel functions for point masses (`#42 <https://github.com/fatiando/choclo/pull/42>`__)
+* Make Choclo functions to take only scalar inputs instead of array inputs (`#50 <https://github.com/fatiando/choclo/pull/50>`__)
+* Update the value of the gravitational constant to the latest standard (`#56 <https://github.com/fatiando/choclo/pull/56>`__)
 
 Bug fixes:
 
@@ -41,6 +42,7 @@ Documentation:
 * Add a logo for Choclo, based on colorful corn variations from the Andes (`#48 <https://github.com/fatiando/choclo/pull/48>`__)
 
 This release contains contributions from:
+
 * Santiago Soler
 * Leonardo Uieda
 
