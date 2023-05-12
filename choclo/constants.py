@@ -7,7 +7,7 @@
 """
 Define universal constants
 """
-#: Gravitational constant :math:`G` in SI units (:math:`m^3 kg^{-1} s^{-1}`)
+#: Gravitational constant :math:`G` in SI units (:math:`m^3 kg^{-1} s^{-2}`)
 GRAVITATIONAL_CONST = 6.6743e-11
 
 #: Vacuum magnetic permeability :math:`\mu_0` in SI units (:math:`NA^{-2}`)
