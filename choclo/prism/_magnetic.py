@@ -22,7 +22,20 @@ from ._utils import (
 
 
 @jit(nopython=True)
-def magnetic_field(easting, northing, upward, prism, magnetization):
+def magnetic_field(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    magnetization_east,
+    magnetization_north,
+    magnetization_up,
+):
     r"""
     Magnetic field due to a rectangular prism
 
@@ -44,16 +57,27 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
-    magnetization : 1d-array
-        Magnetization vector of the prism. It should have three components in
-        the following order: ``magnetization_easting``,
-        ``magnetization_northing``, ``magnetization_upward``.
-        Should be in :math:`A m^{-1}`.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
+    magnetization_east : float
+        The East component of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    magnetization_north : float
+        The North component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
+    magnetization_up : float
+        The upward component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
 
     Returns
     -------
@@ -197,8 +221,26 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
     :func:`choclo.prism.magnetic_u`
     """
     # Check if observation point falls in a singular point
-    if is_point_on_edge(easting, northing, upward, prism) or is_interior_point(
-        easting, northing, upward, prism
+    if is_point_on_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_interior_point(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
     ):
         return (np.nan, np.nan, np.nan)
     # Initialize magnetic field vector components
@@ -206,15 +248,24 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        shift_east = prism[1 - i] - easting
+        if i == 0:
+            shift_east = prism_east - easting
+        else:
+            shift_east = prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            shift_north = prism[3 - j] - northing
+            if j == 0:
+                shift_north = prism_north - northing
+            else:
+                shift_north = prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                shift_upward = prism[5 - k] - upward
+                if k == 0:
+                    shift_upward = prism_top - upward
+                else:
+                    shift_upward = prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
@@ -230,32 +281,62 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
                 # Compute the dot product between the kernel tensor and the
                 # magnetization vector of the prism
                 b_e += sign * (
-                    magnetization[0] * k_ee
-                    + magnetization[1] * k_en
-                    + magnetization[2] * k_eu
+                    magnetization_east * k_ee
+                    + magnetization_north * k_en
+                    + magnetization_up * k_eu
                 )
                 b_n += sign * (
-                    magnetization[0] * k_en
-                    + magnetization[1] * k_nn
-                    + magnetization[2] * k_nu
+                    magnetization_east * k_en
+                    + magnetization_north * k_nn
+                    + magnetization_up * k_nu
                 )
                 b_u += sign * (
-                    magnetization[0] * k_eu
-                    + magnetization[1] * k_nu
-                    + magnetization[2] * k_uu
+                    magnetization_east * k_eu
+                    + magnetization_north * k_nu
+                    + magnetization_up * k_uu
                 )
     # Add 4 pi to Be if computing on the eastmost face, to correctly evaluate
     # the limit approaching from outside (approaching from the east)
-    if is_point_on_east_face(easting, northing, upward, prism):
-        b_e += 4 * np.pi * magnetization[0]
+    if is_point_on_east_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        b_e += 4 * np.pi * magnetization_east
     # Add 4 pi to Bn if computing on the northmost face, to correctly evaluate
     # the limit approaching from outside (approaching from the north)
-    if is_point_on_north_face(easting, northing, upward, prism):
-        b_n += 4 * np.pi * magnetization[1]
+    if is_point_on_north_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        b_n += 4 * np.pi * magnetization_north
     # Add 4 pi to Bu if computing on the north face, to correctly evaluate the
     # limit approaching from outside (approaching from the top)
-    if is_point_on_top_face(easting, northing, upward, prism):
-        b_u += 4 * np.pi * magnetization[2]
+    if is_point_on_top_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        b_u += 4 * np.pi * magnetization_up
     c_m = VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
     b_e *= c_m
     b_n *= c_m
@@ -264,7 +345,20 @@ def magnetic_field(easting, northing, upward, prism, magnetization):
 
 
 @jit(nopython=True)
-def magnetic_e(easting, northing, upward, prism, magnetization):
+def magnetic_e(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    magnetization_east,
+    magnetization_north,
+    magnetization_up,
+):
     r"""
     Easting component of the magnetic field due to a prism
 
@@ -279,16 +373,27 @@ def magnetic_e(easting, northing, upward, prism, magnetization):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
-    magnetization : 1d-array
-        Magnetization vector of the prism. It should have three components in
-        the following order: ``magnetization_easting``,
-        ``magnetization_northing``, ``magnetization_upward``.
-        Should be in :math:`A m^{-1}`.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
+    magnetization_east : float
+        The East component of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    magnetization_north : float
+        The North component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
+    magnetization_up : float
+        The upward component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
 
     Returns
     -------
@@ -364,8 +469,26 @@ def magnetic_e(easting, northing, upward, prism, magnetization):
     :func:`choclo.prism.magnetic_u`
     """
     # Check if observation point falls in a singular point
-    if is_point_on_edge(easting, northing, upward, prism) or is_interior_point(
-        easting, northing, upward, prism
+    if is_point_on_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_interior_point(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
     ):
         return np.nan
     # Initialize magnetic field vector component
@@ -373,15 +496,24 @@ def magnetic_e(easting, northing, upward, prism, magnetization):
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        shift_east = prism[1 - i] - easting
+        if i == 0:
+            shift_east = prism_east - easting
+        else:
+            shift_east = prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            shift_north = prism[3 - j] - northing
+            if j == 0:
+                shift_north = prism_north - northing
+            else:
+                shift_north = prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                shift_upward = prism[5 - k] - upward
+                if k == 0:
+                    shift_upward = prism_top - upward
+                else:
+                    shift_upward = prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
@@ -392,19 +524,42 @@ def magnetic_e(easting, northing, upward, prism, magnetization):
                 # Compute b_e using the dot product between the kernel tensor
                 # and the magnetization vector of the prism
                 b_e += (-1) ** (i + j + k) * (
-                    magnetization[0] * k_ee
-                    + magnetization[1] * k_en
-                    + magnetization[2] * k_eu
+                    magnetization_east * k_ee
+                    + magnetization_north * k_en
+                    + magnetization_up * k_eu
                 )
     # Add 4 pi to Be if computing on the eastmost face, to correctly evaluate
     # the limit approaching from outside (approaching from the east)
-    if is_point_on_east_face(easting, northing, upward, prism):
-        b_e += 4 * np.pi * magnetization[0]
+    if is_point_on_east_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        b_e += 4 * np.pi * magnetization_east
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_e
 
 
 @jit(nopython=True)
-def magnetic_n(easting, northing, upward, prism, magnetization):
+def magnetic_n(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    magnetization_east,
+    magnetization_north,
+    magnetization_up,
+):
     r"""
     Northing component of the magnetic field due to a prism
 
@@ -419,16 +574,27 @@ def magnetic_n(easting, northing, upward, prism, magnetization):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
-    magnetization : 1d-array
-        Magnetization vector of the prism. It should have three components in
-        the following order: ``magnetization_easting``,
-        ``magnetization_northing``, ``magnetization_upward``.
-        Should be in :math:`A m^{-1}`.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
+    magnetization_east : float
+        The East component of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    magnetization_north : float
+        The North component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
+    magnetization_up : float
+        The upward component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
 
     Returns
     -------
@@ -504,8 +670,26 @@ def magnetic_n(easting, northing, upward, prism, magnetization):
     :func:`choclo.prism.magnetic_u`
     """
     # Check if observation point falls in a singular point
-    if is_point_on_edge(easting, northing, upward, prism) or is_interior_point(
-        easting, northing, upward, prism
+    if is_point_on_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_interior_point(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
     ):
         return np.nan
     # Initialize magnetic field vector component
@@ -513,15 +697,24 @@ def magnetic_n(easting, northing, upward, prism, magnetization):
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        shift_east = prism[1 - i] - easting
+        if i == 0:
+            shift_east = prism_east - easting
+        else:
+            shift_east = prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            shift_north = prism[3 - j] - northing
+            if j == 0:
+                shift_north = prism_north - northing
+            else:
+                shift_north = prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                shift_upward = prism[5 - k] - upward
+                if k == 0:
+                    shift_upward = prism_top - upward
+                else:
+                    shift_upward = prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
@@ -532,19 +725,42 @@ def magnetic_n(easting, northing, upward, prism, magnetization):
                 # Compute b_n using the dot product between the kernel tensor
                 # and the magnetization vector of the prism
                 b_n += (-1) ** (i + j + k) * (
-                    magnetization[0] * k_en
-                    + magnetization[1] * k_nn
-                    + magnetization[2] * k_nu
+                    magnetization_east * k_en
+                    + magnetization_north * k_nn
+                    + magnetization_up * k_nu
                 )
     # Add 4 pi to Bn if computing on the northmost face, to correctly evaluate
     # the limit approaching from outside (approaching from the north)
-    if is_point_on_north_face(easting, northing, upward, prism):
-        b_n += 4 * np.pi * magnetization[1]
+    if is_point_on_north_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        b_n += 4 * np.pi * magnetization_north
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_n
 
 
 @jit(nopython=True)
-def magnetic_u(easting, northing, upward, prism, magnetization):
+def magnetic_u(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    magnetization_east,
+    magnetization_north,
+    magnetization_up,
+):
     r"""
     Upward component of the magnetic field due to a prism
 
@@ -559,16 +775,27 @@ def magnetic_u(easting, northing, upward, prism, magnetization):
         Northing coordinate of the observation point. Must be in meters.
     upward : float
         Upward coordinate of the observation point. Must be in meters.
-    prism : 1d-array
-        One dimensional array containing the coordinates of the prism in the
-        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,
-        ``top`` in a Cartesian coordinate system.
-        All coordinates should be in meters.
-    magnetization : 1d-array
-        Magnetization vector of the prism. It should have three components in
-        the following order: ``magnetization_easting``,
-        ``magnetization_northing``, ``magnetization_upward``.
-        Should be in :math:`A m^{-1}`.
+    prism_west : float
+        The West boundary of the prism. Must be in meters.
+    prism_east : float
+        The East boundary of the prism. Must be in meters.
+    prism_south : float
+        The South boundary of the prism. Must be in meters.
+    prism_north : float
+        The North boundary of the prism. Must be in meters.
+    prism_bottom : float
+        The bottom boundary of the prism. Must be in meters.
+    prism_top : float
+        The top boundary of the prism. Must be in meters.
+    magnetization_east : float
+        The East component of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    magnetization_north : float
+        The North component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
+    magnetization_up : float
+        The upward component of the magnetization vector of the prism. Must be
+        in :math:`A m^{-1}`.
 
     Returns
     -------
@@ -644,8 +871,26 @@ def magnetic_u(easting, northing, upward, prism, magnetization):
     :func:`choclo.prism.magnetic_n`
     """
     # Check if observation point falls in a singular point
-    if is_point_on_edge(easting, northing, upward, prism) or is_interior_point(
-        easting, northing, upward, prism
+    if is_point_on_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_interior_point(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
     ):
         return np.nan
     # Initialize magnetic field vector component
@@ -653,15 +898,24 @@ def magnetic_u(easting, northing, upward, prism, magnetization):
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        shift_east = prism[1 - i] - easting
+        if i == 0:
+            shift_east = prism_east - easting
+        else:
+            shift_east = prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            shift_north = prism[3 - j] - northing
+            if j == 0:
+                shift_north = prism_north - northing
+            else:
+                shift_north = prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                shift_upward = prism[5 - k] - upward
+                if k == 0:
+                    shift_upward = prism_top - upward
+                else:
+                    shift_upward = prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
@@ -672,12 +926,22 @@ def magnetic_u(easting, northing, upward, prism, magnetization):
                 # Compute b_n using the dot product between the kernel tensor
                 # and the magnetization vector of the prism
                 b_u += (-1) ** (i + j + k) * (
-                    magnetization[0] * k_eu
-                    + magnetization[1] * k_nu
-                    + magnetization[2] * k_uu
+                    magnetization_east * k_eu
+                    + magnetization_north * k_nu
+                    + magnetization_up * k_uu
                 )
     # Add 4 pi to Bu if computing on the north face, to correctly evaluate the
     # limit approaching from outside (approaching from the top)
-    if is_point_on_top_face(easting, northing, upward, prism):
-        b_u += 4 * np.pi * magnetization[2]
+    if is_point_on_top_face(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        b_u += 4 * np.pi * magnetization_up
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_u
