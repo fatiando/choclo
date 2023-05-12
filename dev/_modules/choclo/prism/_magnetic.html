@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>choclo.prism._magnetic | Choclo v0.0.post27</title>
+        <title>choclo.prism._magnetic | Choclo dev</title>
     
 
     
@@ -81,9 +81,14 @@
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <img src="../../../_static/choclo-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
@@ -92,6 +97,40 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../install.html">
+   Installing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../user_guide/how-to-use.html">
+   How to use Choclo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../user_guide/jacobian.html">
+   Building a Jacobian matrix
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference Documentation
  </span>
@@ -175,56 +214,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../../../api/generated/choclo.dipole.magnetic_field.html">
      choclo.dipole.magnetic_field
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_pot.html">
-     choclo.point.kernel_pot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_e.html">
-     choclo.point.kernel_e
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_n.html">
-     choclo.point.kernel_n
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_u.html">
-     choclo.point.kernel_u
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_ee.html">
-     choclo.point.kernel_ee
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_nn.html">
-     choclo.point.kernel_nn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_uu.html">
-     choclo.point.kernel_uu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_en.html">
-     choclo.point.kernel_en
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_eu.html">
-     choclo.point.kernel_eu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_nu.html">
-     choclo.point.kernel_nu
     </a>
    </li>
    <li class="toctree-l2">
@@ -385,8 +374,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../../../changes.html">
+   Changelog
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../../../compatibility.html">
    Version compatibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../versions.html">
+   Documentation for other versions
   </a>
  </li>
 </ul>
@@ -569,10 +568,30 @@ title="Open an issue"
 
 <span class="kn">from</span> <span class="nn">..constants</span> <span class="kn">import</span> <span class="n">VACUUM_MAGNETIC_PERMEABILITY</span>
 <span class="kn">from</span> <span class="nn">._kernels</span> <span class="kn">import</span> <span class="n">kernel_ee</span><span class="p">,</span> <span class="n">kernel_en</span><span class="p">,</span> <span class="n">kernel_eu</span><span class="p">,</span> <span class="n">kernel_nn</span><span class="p">,</span> <span class="n">kernel_nu</span><span class="p">,</span> <span class="n">kernel_uu</span>
+<span class="kn">from</span> <span class="nn">._utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">is_interior_point</span><span class="p">,</span>
+    <span class="n">is_point_on_east_face</span><span class="p">,</span>
+    <span class="n">is_point_on_edge</span><span class="p">,</span>
+    <span class="n">is_point_on_north_face</span><span class="p">,</span>
+    <span class="n">is_point_on_top_face</span><span class="p">,</span>
+<span class="p">)</span>
 
 
 <div class="viewcode-block" id="magnetic_field"><a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_field.html#choclo.prism.magnetic_field">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_field</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">magnetization</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">magnetic_field</span><span class="p">(</span>
+    <span class="n">easting</span><span class="p">,</span>
+    <span class="n">northing</span><span class="p">,</span>
+    <span class="n">upward</span><span class="p">,</span>
+    <span class="n">prism_west</span><span class="p">,</span>
+    <span class="n">prism_east</span><span class="p">,</span>
+    <span class="n">prism_south</span><span class="p">,</span>
+    <span class="n">prism_north</span><span class="p">,</span>
+    <span class="n">prism_bottom</span><span class="p">,</span>
+    <span class="n">prism_top</span><span class="p">,</span>
+    <span class="n">magnetization_east</span><span class="p">,</span>
+    <span class="n">magnetization_north</span><span class="p">,</span>
+    <span class="n">magnetization_up</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Magnetic field due to a rectangular prism</span>
 
@@ -594,16 +613,27 @@ title="Open an issue"
 <span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
 <span class="sd">    upward : float</span>
 <span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
-<span class="sd">    prism : 1d-array</span>
-<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
-<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
-<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
-<span class="sd">        All coordinates should be in meters.</span>
-<span class="sd">    magnetization : 1d-array</span>
-<span class="sd">        Magnetization vector of the prism. It should have three components in</span>
-<span class="sd">        the following order: ``magnetization_easting``,</span>
-<span class="sd">        ``magnetization_northing``, ``magnetization_upward``.</span>
-<span class="sd">        Should be in :math:`A m^{-1}`.</span>
+<span class="sd">    prism_west : float</span>
+<span class="sd">        The West boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_east : float</span>
+<span class="sd">        The East boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_south : float</span>
+<span class="sd">        The South boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_north : float</span>
+<span class="sd">        The North boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_bottom : float</span>
+<span class="sd">        The bottom boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_top : float</span>
+<span class="sd">        The top boundary of the prism. Must be in meters.</span>
+<span class="sd">    magnetization_east : float</span>
+<span class="sd">        The East component of the magnetization vector of the prism. Must be in</span>
+<span class="sd">        :math:`A m^{-1}`.</span>
+<span class="sd">    magnetization_north : float</span>
+<span class="sd">        The North component of the magnetization vector of the prism. Must be</span>
+<span class="sd">        in :math:`A m^{-1}`.</span>
+<span class="sd">    magnetization_up : float</span>
+<span class="sd">        The upward component of the magnetization vector of the prism. Must be</span>
+<span class="sd">        in :math:`A m^{-1}`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -612,6 +642,8 @@ title="Open an issue"
 <span class="sd">        the observation point in :math:`\text{T}`.</span>
 <span class="sd">        The components are returned in the following order: ``b_e``, ``b_n``,</span>
 <span class="sd">        ``b_u``.</span>
+<span class="sd">        Return a tuple full of ``numpy.nan`` if the observation point falls in</span>
+<span class="sd">        a singular point: prism vertices, prism edges or interior points.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -720,7 +752,7 @@ title="Open an issue"
 <span class="sd">            \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}</span>
 <span class="sd">            dv</span>
 
-<span class="sd">    with :math:`i, j \in \{x, y z\}`.</span>
+<span class="sd">    with :math:`i, j \in \{x, y, z\}`.</span>
 
 <span class="sd">    We can then express the magnetic field :math:`\mathbf{B}(\mathbf{p})`</span>
 <span class="sd">    generated by the prism in a compact form:</span>
@@ -744,20 +776,52 @@ title="Open an issue"
 <span class="sd">    :func:`choclo.prism.magnetic_n`</span>
 <span class="sd">    :func:`choclo.prism.magnetic_u`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if observation point falls in a singular point</span>
+    <span class="k">if</span> <span class="n">is_point_on_edge</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">)</span> <span class="ow">or</span> <span class="n">is_interior_point</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
     <span class="c1"># Initialize magnetic field vector components</span>
     <span class="n">b_e</span><span class="p">,</span> <span class="n">b_n</span><span class="p">,</span> <span class="n">b_u</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
     <span class="c1"># Iterate over the vertices of the prism</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
         <span class="c1"># Compute shifted easting coordinate</span>
-        <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_east</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_west</span> <span class="o">-</span> <span class="n">easting</span>
         <span class="n">shift_east_sq</span> <span class="o">=</span> <span class="n">shift_east</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
             <span class="c1"># Compute shifted northing coordinate</span>
-            <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">3</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_north</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_south</span> <span class="o">-</span> <span class="n">northing</span>
             <span class="n">shift_north_sq</span> <span class="o">=</span> <span class="n">shift_north</span><span class="o">**</span><span class="mi">2</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
                 <span class="c1"># Compute shifted upward coordinate</span>
-                <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">5</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_top</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_bottom</span> <span class="o">-</span> <span class="n">upward</span>
                 <span class="n">shift_upward_sq</span> <span class="o">=</span> <span class="n">shift_upward</span><span class="o">**</span><span class="mi">2</span>
                 <span class="c1"># Compute the radius</span>
                 <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">shift_east_sq</span> <span class="o">+</span> <span class="n">shift_north_sq</span> <span class="o">+</span> <span class="n">shift_upward_sq</span><span class="p">)</span>
@@ -773,20 +837,62 @@ title="Open an issue"
                 <span class="c1"># Compute the dot product between the kernel tensor and the</span>
                 <span class="c1"># magnetization vector of the prism</span>
                 <span class="n">b_e</span> <span class="o">+=</span> <span class="n">sign</span> <span class="o">*</span> <span class="p">(</span>
-                    <span class="n">magnetization</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_ee</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_en</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_eu</span>
+                    <span class="n">magnetization_east</span> <span class="o">*</span> <span class="n">k_ee</span>
+                    <span class="o">+</span> <span class="n">magnetization_north</span> <span class="o">*</span> <span class="n">k_en</span>
+                    <span class="o">+</span> <span class="n">magnetization_up</span> <span class="o">*</span> <span class="n">k_eu</span>
                 <span class="p">)</span>
                 <span class="n">b_n</span> <span class="o">+=</span> <span class="n">sign</span> <span class="o">*</span> <span class="p">(</span>
-                    <span class="n">magnetization</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_en</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_nn</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_nu</span>
+                    <span class="n">magnetization_east</span> <span class="o">*</span> <span class="n">k_en</span>
+                    <span class="o">+</span> <span class="n">magnetization_north</span> <span class="o">*</span> <span class="n">k_nn</span>
+                    <span class="o">+</span> <span class="n">magnetization_up</span> <span class="o">*</span> <span class="n">k_nu</span>
                 <span class="p">)</span>
                 <span class="n">b_u</span> <span class="o">+=</span> <span class="n">sign</span> <span class="o">*</span> <span class="p">(</span>
-                    <span class="n">magnetization</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_eu</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_nu</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_uu</span>
+                    <span class="n">magnetization_east</span> <span class="o">*</span> <span class="n">k_eu</span>
+                    <span class="o">+</span> <span class="n">magnetization_north</span> <span class="o">*</span> <span class="n">k_nu</span>
+                    <span class="o">+</span> <span class="n">magnetization_up</span> <span class="o">*</span> <span class="n">k_uu</span>
                 <span class="p">)</span>
+    <span class="c1"># Add 4 pi to Be if computing on the eastmost face, to correctly evaluate</span>
+    <span class="c1"># the limit approaching from outside (approaching from the east)</span>
+    <span class="k">if</span> <span class="n">is_point_on_east_face</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">b_e</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">magnetization_east</span>
+    <span class="c1"># Add 4 pi to Bn if computing on the northmost face, to correctly evaluate</span>
+    <span class="c1"># the limit approaching from outside (approaching from the north)</span>
+    <span class="k">if</span> <span class="n">is_point_on_north_face</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">b_n</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">magnetization_north</span>
+    <span class="c1"># Add 4 pi to Bu if computing on the north face, to correctly evaluate the</span>
+    <span class="c1"># limit approaching from outside (approaching from the top)</span>
+    <span class="k">if</span> <span class="n">is_point_on_top_face</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">b_u</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">magnetization_up</span>
     <span class="n">c_m</span> <span class="o">=</span> <span class="n">VACUUM_MAGNETIC_PERMEABILITY</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
     <span class="n">b_e</span> <span class="o">*=</span> <span class="n">c_m</span>
     <span class="n">b_n</span> <span class="o">*=</span> <span class="n">c_m</span>
@@ -795,7 +901,20 @@ title="Open an issue"
 
 
 <div class="viewcode-block" id="magnetic_e"><a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_e.html#choclo.prism.magnetic_e">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_e</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">magnetization</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">magnetic_e</span><span class="p">(</span>
+    <span class="n">easting</span><span class="p">,</span>
+    <span class="n">northing</span><span class="p">,</span>
+    <span class="n">upward</span><span class="p">,</span>
+    <span class="n">prism_west</span><span class="p">,</span>
+    <span class="n">prism_east</span><span class="p">,</span>
+    <span class="n">prism_south</span><span class="p">,</span>
+    <span class="n">prism_north</span><span class="p">,</span>
+    <span class="n">prism_bottom</span><span class="p">,</span>
+    <span class="n">prism_top</span><span class="p">,</span>
+    <span class="n">magnetization_east</span><span class="p">,</span>
+    <span class="n">magnetization_north</span><span class="p">,</span>
+    <span class="n">magnetization_up</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Easting component of the magnetic field due to a prism</span>
 
@@ -810,22 +929,35 @@ title="Open an issue"
 <span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
 <span class="sd">    upward : float</span>
 <span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
-<span class="sd">    prism : 1d-array</span>
-<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
-<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
-<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
-<span class="sd">        All coordinates should be in meters.</span>
-<span class="sd">    magnetization : 1d-array</span>
-<span class="sd">        Magnetization vector of the prism. It should have three components in</span>
-<span class="sd">        the following order: ``magnetization_easting``,</span>
-<span class="sd">        ``magnetization_northing``, ``magnetization_upward``.</span>
-<span class="sd">        Should be in :math:`A m^{-1}`.</span>
+<span class="sd">    prism_west : float</span>
+<span class="sd">        The West boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_east : float</span>
+<span class="sd">        The East boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_south : float</span>
+<span class="sd">        The South boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_north : float</span>
+<span class="sd">        The North boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_bottom : float</span>
+<span class="sd">        The bottom boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_top : float</span>
+<span class="sd">        The top boundary of the prism. Must be in meters.</span>
+<span class="sd">    magnetization_east : float</span>
+<span class="sd">        The East component of the magnetization vector of the prism. Must be in</span>
+<span class="sd">        :math:`A m^{-1}`.</span>
+<span class="sd">    magnetization_north : float</span>
+<span class="sd">        The North component of the magnetization vector of the prism. Must be</span>
+<span class="sd">        in :math:`A m^{-1}`.</span>
+<span class="sd">    magnetization_up : float</span>
+<span class="sd">        The upward component of the magnetization vector of the prism. Must be</span>
+<span class="sd">        in :math:`A m^{-1}`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    b_e : float</span>
 <span class="sd">        Easting component of the magnetic field generated by the prism</span>
 <span class="sd">        on the observation point in :math:`\text{T}`.</span>
+<span class="sd">        Return ``numpy.nan`` if the observation point falls in</span>
+<span class="sd">        a singular point: prism vertices, prism edges or interior points.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -892,20 +1024,52 @@ title="Open an issue"
 <span class="sd">    :func:`choclo.prism.magnetic_n`</span>
 <span class="sd">    :func:`choclo.prism.magnetic_u`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if observation point falls in a singular point</span>
+    <span class="k">if</span> <span class="n">is_point_on_edge</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">)</span> <span class="ow">or</span> <span class="n">is_interior_point</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="c1"># Initialize magnetic field vector component</span>
     <span class="n">b_e</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="c1"># Iterate over the vertices of the prism</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
         <span class="c1"># Compute shifted easting coordinate</span>
-        <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_east</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_west</span> <span class="o">-</span> <span class="n">easting</span>
         <span class="n">shift_east_sq</span> <span class="o">=</span> <span class="n">shift_east</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
             <span class="c1"># Compute shifted northing coordinate</span>
-            <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">3</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_north</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_south</span> <span class="o">-</span> <span class="n">northing</span>
             <span class="n">shift_north_sq</span> <span class="o">=</span> <span class="n">shift_north</span><span class="o">**</span><span class="mi">2</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
                 <span class="c1"># Compute shifted upward coordinate</span>
-                <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">5</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_top</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_bottom</span> <span class="o">-</span> <span class="n">upward</span>
                 <span class="n">shift_upward_sq</span> <span class="o">=</span> <span class="n">shift_upward</span><span class="o">**</span><span class="mi">2</span>
                 <span class="c1"># Compute the radius</span>
                 <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">shift_east_sq</span> <span class="o">+</span> <span class="n">shift_north_sq</span> <span class="o">+</span> <span class="n">shift_upward_sq</span><span class="p">)</span>
@@ -916,15 +1080,42 @@ title="Open an issue"
                 <span class="c1"># Compute b_e using the dot product between the kernel tensor</span>
                 <span class="c1"># and the magnetization vector of the prism</span>
                 <span class="n">b_e</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
-                    <span class="n">magnetization</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_ee</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_en</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_eu</span>
+                    <span class="n">magnetization_east</span> <span class="o">*</span> <span class="n">k_ee</span>
+                    <span class="o">+</span> <span class="n">magnetization_north</span> <span class="o">*</span> <span class="n">k_en</span>
+                    <span class="o">+</span> <span class="n">magnetization_up</span> <span class="o">*</span> <span class="n">k_eu</span>
                 <span class="p">)</span>
+    <span class="c1"># Add 4 pi to Be if computing on the eastmost face, to correctly evaluate</span>
+    <span class="c1"># the limit approaching from outside (approaching from the east)</span>
+    <span class="k">if</span> <span class="n">is_point_on_east_face</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">b_e</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">magnetization_east</span>
     <span class="k">return</span> <span class="n">VACUUM_MAGNETIC_PERMEABILITY</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">b_e</span></div>
 
 
 <div class="viewcode-block" id="magnetic_n"><a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_n.html#choclo.prism.magnetic_n">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_n</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">magnetization</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">magnetic_n</span><span class="p">(</span>
+    <span class="n">easting</span><span class="p">,</span>
+    <span class="n">northing</span><span class="p">,</span>
+    <span class="n">upward</span><span class="p">,</span>
+    <span class="n">prism_west</span><span class="p">,</span>
+    <span class="n">prism_east</span><span class="p">,</span>
+    <span class="n">prism_south</span><span class="p">,</span>
+    <span class="n">prism_north</span><span class="p">,</span>
+    <span class="n">prism_bottom</span><span class="p">,</span>
+    <span class="n">prism_top</span><span class="p">,</span>
+    <span class="n">magnetization_east</span><span class="p">,</span>
+    <span class="n">magnetization_north</span><span class="p">,</span>
+    <span class="n">magnetization_up</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Northing component of the magnetic field due to a prism</span>
 
@@ -939,22 +1130,35 @@ title="Open an issue"
 <span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
 <span class="sd">    upward : float</span>
 <span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
-<span class="sd">    prism : 1d-array</span>
-<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
-<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
-<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
-<span class="sd">        All coordinates should be in meters.</span>
-<span class="sd">    magnetization : 1d-array</span>
-<span class="sd">        Magnetization vector of the prism. It should have three components in</span>
-<span class="sd">        the following order: ``magnetization_easting``,</span>
-<span class="sd">        ``magnetization_northing``, ``magnetization_upward``.</span>
-<span class="sd">        Should be in :math:`A m^{-1}`.</span>
+<span class="sd">    prism_west : float</span>
+<span class="sd">        The West boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_east : float</span>
+<span class="sd">        The East boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_south : float</span>
+<span class="sd">        The South boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_north : float</span>
+<span class="sd">        The North boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_bottom : float</span>
+<span class="sd">        The bottom boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_top : float</span>
+<span class="sd">        The top boundary of the prism. Must be in meters.</span>
+<span class="sd">    magnetization_east : float</span>
+<span class="sd">        The East component of the magnetization vector of the prism. Must be in</span>
+<span class="sd">        :math:`A m^{-1}`.</span>
+<span class="sd">    magnetization_north : float</span>
+<span class="sd">        The North component of the magnetization vector of the prism. Must be</span>
+<span class="sd">        in :math:`A m^{-1}`.</span>
+<span class="sd">    magnetization_up : float</span>
+<span class="sd">        The upward component of the magnetization vector of the prism. Must be</span>
+<span class="sd">        in :math:`A m^{-1}`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    b_n : float</span>
 <span class="sd">        Northing component of the magnetic field generated by the prism</span>
 <span class="sd">        on the observation point in :math:`\text{T}`.</span>
+<span class="sd">        Return ``numpy.nan`` if the observation point falls in</span>
+<span class="sd">        a singular point: prism vertices, prism edges or interior points.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1021,20 +1225,52 @@ title="Open an issue"
 <span class="sd">    :func:`choclo.prism.magnetic_e`</span>
 <span class="sd">    :func:`choclo.prism.magnetic_u`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if observation point falls in a singular point</span>
+    <span class="k">if</span> <span class="n">is_point_on_edge</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">)</span> <span class="ow">or</span> <span class="n">is_interior_point</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="c1"># Initialize magnetic field vector component</span>
     <span class="n">b_n</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="c1"># Iterate over the vertices of the prism</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
         <span class="c1"># Compute shifted easting coordinate</span>
-        <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_east</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_west</span> <span class="o">-</span> <span class="n">easting</span>
         <span class="n">shift_east_sq</span> <span class="o">=</span> <span class="n">shift_east</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
             <span class="c1"># Compute shifted northing coordinate</span>
-            <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">3</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_north</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_south</span> <span class="o">-</span> <span class="n">northing</span>
             <span class="n">shift_north_sq</span> <span class="o">=</span> <span class="n">shift_north</span><span class="o">**</span><span class="mi">2</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
                 <span class="c1"># Compute shifted upward coordinate</span>
-                <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">5</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_top</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_bottom</span> <span class="o">-</span> <span class="n">upward</span>
                 <span class="n">shift_upward_sq</span> <span class="o">=</span> <span class="n">shift_upward</span><span class="o">**</span><span class="mi">2</span>
                 <span class="c1"># Compute the radius</span>
                 <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">shift_east_sq</span> <span class="o">+</span> <span class="n">shift_north_sq</span> <span class="o">+</span> <span class="n">shift_upward_sq</span><span class="p">)</span>
@@ -1045,15 +1281,42 @@ title="Open an issue"
                 <span class="c1"># Compute b_n using the dot product between the kernel tensor</span>
                 <span class="c1"># and the magnetization vector of the prism</span>
                 <span class="n">b_n</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
-                    <span class="n">magnetization</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_en</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_nn</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_nu</span>
+                    <span class="n">magnetization_east</span> <span class="o">*</span> <span class="n">k_en</span>
+                    <span class="o">+</span> <span class="n">magnetization_north</span> <span class="o">*</span> <span class="n">k_nn</span>
+                    <span class="o">+</span> <span class="n">magnetization_up</span> <span class="o">*</span> <span class="n">k_nu</span>
                 <span class="p">)</span>
+    <span class="c1"># Add 4 pi to Bn if computing on the northmost face, to correctly evaluate</span>
+    <span class="c1"># the limit approaching from outside (approaching from the north)</span>
+    <span class="k">if</span> <span class="n">is_point_on_north_face</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">b_n</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">magnetization_north</span>
     <span class="k">return</span> <span class="n">VACUUM_MAGNETIC_PERMEABILITY</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">b_n</span></div>
 
 
 <div class="viewcode-block" id="magnetic_u"><a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_u.html#choclo.prism.magnetic_u">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_u</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">magnetization</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">magnetic_u</span><span class="p">(</span>
+    <span class="n">easting</span><span class="p">,</span>
+    <span class="n">northing</span><span class="p">,</span>
+    <span class="n">upward</span><span class="p">,</span>
+    <span class="n">prism_west</span><span class="p">,</span>
+    <span class="n">prism_east</span><span class="p">,</span>
+    <span class="n">prism_south</span><span class="p">,</span>
+    <span class="n">prism_north</span><span class="p">,</span>
+    <span class="n">prism_bottom</span><span class="p">,</span>
+    <span class="n">prism_top</span><span class="p">,</span>
+    <span class="n">magnetization_east</span><span class="p">,</span>
+    <span class="n">magnetization_north</span><span class="p">,</span>
+    <span class="n">magnetization_up</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Upward component of the magnetic field due to a prism</span>
 
@@ -1068,22 +1331,35 @@ title="Open an issue"
 <span class="sd">        Northing coordinate of the observation point. Must be in meters.</span>
 <span class="sd">    upward : float</span>
 <span class="sd">        Upward coordinate of the observation point. Must be in meters.</span>
-<span class="sd">    prism : 1d-array</span>
-<span class="sd">        One dimensional array containing the coordinates of the prism in the</span>
-<span class="sd">        following order: ``west``, ``east``, ``south``, ``north``, ``bottom``,</span>
-<span class="sd">        ``top`` in a Cartesian coordinate system.</span>
-<span class="sd">        All coordinates should be in meters.</span>
-<span class="sd">    magnetization : 1d-array</span>
-<span class="sd">        Magnetization vector of the prism. It should have three components in</span>
-<span class="sd">        the following order: ``magnetization_easting``,</span>
-<span class="sd">        ``magnetization_northing``, ``magnetization_upward``.</span>
-<span class="sd">        Should be in :math:`A m^{-1}`.</span>
+<span class="sd">    prism_west : float</span>
+<span class="sd">        The West boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_east : float</span>
+<span class="sd">        The East boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_south : float</span>
+<span class="sd">        The South boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_north : float</span>
+<span class="sd">        The North boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_bottom : float</span>
+<span class="sd">        The bottom boundary of the prism. Must be in meters.</span>
+<span class="sd">    prism_top : float</span>
+<span class="sd">        The top boundary of the prism. Must be in meters.</span>
+<span class="sd">    magnetization_east : float</span>
+<span class="sd">        The East component of the magnetization vector of the prism. Must be in</span>
+<span class="sd">        :math:`A m^{-1}`.</span>
+<span class="sd">    magnetization_north : float</span>
+<span class="sd">        The North component of the magnetization vector of the prism. Must be</span>
+<span class="sd">        in :math:`A m^{-1}`.</span>
+<span class="sd">    magnetization_up : float</span>
+<span class="sd">        The upward component of the magnetization vector of the prism. Must be</span>
+<span class="sd">        in :math:`A m^{-1}`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    b_u : float</span>
 <span class="sd">        Upward component of the magnetic field generated by the prism</span>
 <span class="sd">        on the observation point in :math:`\text{T}`.</span>
+<span class="sd">        Return ``numpy.nan`` if the observation point falls in</span>
+<span class="sd">        a singular point: prism vertices, prism edges or interior points.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1150,20 +1426,52 @@ title="Open an issue"
 <span class="sd">    :func:`choclo.prism.magnetic_e`</span>
 <span class="sd">    :func:`choclo.prism.magnetic_n`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if observation point falls in a singular point</span>
+    <span class="k">if</span> <span class="n">is_point_on_edge</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">)</span> <span class="ow">or</span> <span class="n">is_interior_point</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="c1"># Initialize magnetic field vector component</span>
     <span class="n">b_u</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="c1"># Iterate over the vertices of the prism</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
         <span class="c1"># Compute shifted easting coordinate</span>
-        <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_east</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_west</span> <span class="o">-</span> <span class="n">easting</span>
         <span class="n">shift_east_sq</span> <span class="o">=</span> <span class="n">shift_east</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
             <span class="c1"># Compute shifted northing coordinate</span>
-            <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">3</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_north</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_south</span> <span class="o">-</span> <span class="n">northing</span>
             <span class="n">shift_north_sq</span> <span class="o">=</span> <span class="n">shift_north</span><span class="o">**</span><span class="mi">2</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
                 <span class="c1"># Compute shifted upward coordinate</span>
-                <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism</span><span class="p">[</span><span class="mi">5</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_top</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_bottom</span> <span class="o">-</span> <span class="n">upward</span>
                 <span class="n">shift_upward_sq</span> <span class="o">=</span> <span class="n">shift_upward</span><span class="o">**</span><span class="mi">2</span>
                 <span class="c1"># Compute the radius</span>
                 <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">shift_east_sq</span> <span class="o">+</span> <span class="n">shift_north_sq</span> <span class="o">+</span> <span class="n">shift_upward_sq</span><span class="p">)</span>
@@ -1174,10 +1482,24 @@ title="Open an issue"
                 <span class="c1"># Compute b_n using the dot product between the kernel tensor</span>
                 <span class="c1"># and the magnetization vector of the prism</span>
                 <span class="n">b_u</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
-                    <span class="n">magnetization</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_eu</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_nu</span>
-                    <span class="o">+</span> <span class="n">magnetization</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_uu</span>
+                    <span class="n">magnetization_east</span> <span class="o">*</span> <span class="n">k_eu</span>
+                    <span class="o">+</span> <span class="n">magnetization_north</span> <span class="o">*</span> <span class="n">k_nu</span>
+                    <span class="o">+</span> <span class="n">magnetization_up</span> <span class="o">*</span> <span class="n">k_uu</span>
                 <span class="p">)</span>
+    <span class="c1"># Add 4 pi to Bu if computing on the north face, to correctly evaluate the</span>
+    <span class="c1"># limit approaching from outside (approaching from the top)</span>
+    <span class="k">if</span> <span class="n">is_point_on_top_face</span><span class="p">(</span>
+        <span class="n">easting</span><span class="p">,</span>
+        <span class="n">northing</span><span class="p">,</span>
+        <span class="n">upward</span><span class="p">,</span>
+        <span class="n">prism_west</span><span class="p">,</span>
+        <span class="n">prism_east</span><span class="p">,</span>
+        <span class="n">prism_south</span><span class="p">,</span>
+        <span class="n">prism_north</span><span class="p">,</span>
+        <span class="n">prism_bottom</span><span class="p">,</span>
+        <span class="n">prism_top</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">b_u</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">magnetization_up</span>
     <span class="k">return</span> <span class="n">VACUUM_MAGNETIC_PERMEABILITY</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">b_u</span></div>
 </pre></div>
 
@@ -1195,8 +1517,8 @@ title="Open an issue"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on May 12, 2023.<br/>
 </p>
         </footer>
     </div>

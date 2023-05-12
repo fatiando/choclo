@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     
-        <title>choclo.prism.magnetic_e | Choclo v0.0.post27</title>
+        <title>choclo.prism.magnetic_e | Choclo dev</title>
     
 
     
@@ -85,9 +85,14 @@
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <img src="../../_static/choclo-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -96,6 +101,40 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../install.html">
+   Installing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../user_guide/how-to-use.html">
+   How to use Choclo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../user_guide/jacobian.html">
+   Building a Jacobian matrix
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference Documentation
  </span>
@@ -179,56 +218,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="choclo.dipole.magnetic_field.html">
      choclo.dipole.magnetic_field
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_pot.html">
-     choclo.point.kernel_pot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_e.html">
-     choclo.point.kernel_e
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_n.html">
-     choclo.point.kernel_n
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_u.html">
-     choclo.point.kernel_u
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_ee.html">
-     choclo.point.kernel_ee
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_nn.html">
-     choclo.point.kernel_nn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_uu.html">
-     choclo.point.kernel_uu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_en.html">
-     choclo.point.kernel_en
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_eu.html">
-     choclo.point.kernel_eu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_nu.html">
-     choclo.point.kernel_nu
     </a>
    </li>
    <li class="toctree-l2">
@@ -389,8 +378,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../../changes.html">
+   Changelog
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../../compatibility.html">
    Version compatibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../versions.html">
+   Documentation for other versions
   </a>
  </li>
 </ul>
@@ -625,7 +624,7 @@ title="Print to PDF"
 <h1>choclo.prism.magnetic_e<a class="headerlink" href="#choclo-prism-magnetic-e" title="Permalink to this headline">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="choclo.prism.magnetic_e">
-<span class="sig-prename descclassname"><span class="pre">choclo.prism.</span></span><span class="sig-name descname"><span class="pre">magnetic_e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">easting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upward</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prism</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetization</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/choclo/prism/_magnetic.html#magnetic_e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#choclo.prism.magnetic_e" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">choclo.prism.</span></span><span class="sig-name descname"><span class="pre">magnetic_e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">easting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upward</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prism_west</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prism_east</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prism_south</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prism_north</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prism_bottom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prism_top</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetization_east</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetization_north</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetization_up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/choclo/prism/_magnetic.html#magnetic_e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#choclo.prism.magnetic_e" title="Permalink to this definition">#</a></dt>
 <dd><p>Easting component of the magnetic field due to a prism</p>
 <p>Returns the easting component of the magnetic field due to a single
 rectangular prism on a single computation point.</p>
@@ -635,19 +634,25 @@ rectangular prism on a single computation point.</p>
 <li><p><strong>easting</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Easting coordinate of the observation point. Must be in meters.</p></li>
 <li><p><strong>northing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Northing coordinate of the observation point. Must be in meters.</p></li>
 <li><p><strong>upward</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Upward coordinate of the observation point. Must be in meters.</p></li>
-<li><p><strong>prism</strong> (<em>1d-array</em>) – One dimensional array containing the coordinates of the prism in the
-following order: <code class="docutils literal notranslate"><span class="pre">west</span></code>, <code class="docutils literal notranslate"><span class="pre">east</span></code>, <code class="docutils literal notranslate"><span class="pre">south</span></code>, <code class="docutils literal notranslate"><span class="pre">north</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>,
-<code class="docutils literal notranslate"><span class="pre">top</span></code> in a Cartesian coordinate system.
-All coordinates should be in meters.</p></li>
-<li><p><strong>magnetization</strong> (<em>1d-array</em>) – Magnetization vector of the prism. It should have three components in
-the following order: <code class="docutils literal notranslate"><span class="pre">magnetization_easting</span></code>,
-<code class="docutils literal notranslate"><span class="pre">magnetization_northing</span></code>, <code class="docutils literal notranslate"><span class="pre">magnetization_upward</span></code>.
-Should be in <span class="math notranslate nohighlight">\(A m^{-1}\)</span>.</p></li>
+<li><p><strong>prism_west</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The West boundary of the prism. Must be in meters.</p></li>
+<li><p><strong>prism_east</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The East boundary of the prism. Must be in meters.</p></li>
+<li><p><strong>prism_south</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The South boundary of the prism. Must be in meters.</p></li>
+<li><p><strong>prism_north</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The North boundary of the prism. Must be in meters.</p></li>
+<li><p><strong>prism_bottom</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The bottom boundary of the prism. Must be in meters.</p></li>
+<li><p><strong>prism_top</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The top boundary of the prism. Must be in meters.</p></li>
+<li><p><strong>magnetization_east</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The East component of the magnetization vector of the prism. Must be in
+<span class="math notranslate nohighlight">\(A m^{-1}\)</span>.</p></li>
+<li><p><strong>magnetization_north</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The North component of the magnetization vector of the prism. Must be
+in <span class="math notranslate nohighlight">\(A m^{-1}\)</span>.</p></li>
+<li><p><strong>magnetization_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The upward component of the magnetization vector of the prism. Must be
+in <span class="math notranslate nohighlight">\(A m^{-1}\)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>b_e</strong> (<em>float</em>) – Easting component of the magnetic field generated by the prism
-on the observation point in <span class="math notranslate nohighlight">\(\text{T}\)</span>.</p>
+on the observation point in <span class="math notranslate nohighlight">\(\text{T}\)</span>.
+Return <code class="docutils literal notranslate"><span class="pre">numpy.nan</span></code> if the observation point falls in
+a singular point: prism vertices, prism edges or interior points.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -736,8 +741,8 @@ u_{xz} &amp;=
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on May 12, 2023.<br/>
 </p>
         </footer>
     </div>

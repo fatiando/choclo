@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     
-        <title>Choclo v0.0.post27</title>
+        <title>Choclo dev</title>
     
 
     
@@ -49,7 +49,7 @@
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="List of functions and classes (API)" href="api/index.html" />
+    <link rel="next" title="Overview" href="overview.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -83,9 +83,14 @@
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="#">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <img src="_static/choclo-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -94,6 +99,40 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install.html">
+   Installing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="user_guide/how-to-use.html">
+   How to use Choclo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="user_guide/jacobian.html">
+   Building a Jacobian matrix
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference Documentation
  </span>
@@ -177,56 +216,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="api/generated/choclo.dipole.magnetic_field.html">
      choclo.dipole.magnetic_field
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_pot.html">
-     choclo.point.kernel_pot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_e.html">
-     choclo.point.kernel_e
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_n.html">
-     choclo.point.kernel_n
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_u.html">
-     choclo.point.kernel_u
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_ee.html">
-     choclo.point.kernel_ee
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_nn.html">
-     choclo.point.kernel_nn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_uu.html">
-     choclo.point.kernel_uu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_en.html">
-     choclo.point.kernel_en
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_eu.html">
-     choclo.point.kernel_eu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_nu.html">
-     choclo.point.kernel_nu
     </a>
    </li>
    <li class="toctree-l2">
@@ -387,8 +376,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="changes.html">
+   Changelog
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="compatibility.html">
    Version compatibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="versions.html">
+   Documentation for other versions
   </a>
  </li>
 </ul>
@@ -617,45 +616,6 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Overview
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conventions">
-   Conventions
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-library">
-   The library
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-use-choclo">
-   How to use Choclo
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-simplest-case">
-     The simplest case
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multiple-sources-and-computation-points">
-     Multiple sources and computation points
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parallelizing-our-runs">
-     Parallelizing our runs
-    </a>
-    <ul class="nav section-nav flex-column">
-    </ul>
-   </li>
-  </ul>
- </li>
 </ul>
 
     </nav>
@@ -665,7 +625,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Overview</h1>
+                <h1>Home</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -675,45 +635,6 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Overview
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conventions">
-   Conventions
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-library">
-   The library
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-use-choclo">
-   How to use Choclo
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-simplest-case">
-     The simplest case
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multiple-sources-and-computation-points">
-     Multiple sources and computation points
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parallelizing-our-runs">
-     Parallelizing our runs
-    </a>
-    <ul class="nav section-nav flex-column">
-    </ul>
-   </li>
-  </ul>
- </li>
 </ul>
 
                         </nav>
@@ -724,681 +645,81 @@ title="Print to PDF"
                 
               <div>
                 
-  <h1 class="display-1">Choclo</h1>
-
-<div class="sd-fs-3 sd-mb-4">
-Kernel functions for your geophysical models
-</div><p><strong>Choclo</strong> is a Python library that hosts optimized forward modelling and
+  <div class="sd-container-fluid sd-sphinx-override sd-mt-5 sd-mb-5 sd-ml-0 sd-mr-0 sd-pt-0 sd-pb-0 sd-pl-0 sd-pr-0 docutils">
+<div class="sd-row sd-g-2 sd-g-xs-2 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<h1 class="display-1">Choclo</h1><div class="sd-fs-3 docutils">
+<p>Kernel functions for your geophysical models</p>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<a class="sd-m-auto reference internal image-reference" href="_images/choclo-logo.svg"><img alt="_images/choclo-logo.svg" class="sd-m-auto" src="_images/choclo-logo.svg" width="200px" /></a>
+</div>
+</div>
+</div>
+<p><strong>Choclo</strong> is a Python library that hosts optimized forward modelling and
 kernel functions for running geophysical forward and inverse models, intended
 to be used by other libraries as the underlying layer of their computation.</p>
 <p>“Choclo” is a term used in some countries of South America to refer to corn,
 originated from the <a class="reference external" href="https://en.wikipedia.org/wiki/Quechuan_languages">quechua</a>
 word <em>chuqllu</em>.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mt-5 sd-mb-5 sd-ml-0 sd-mr-0 sd-pt-0 sd-pb-0 sd-pl-0 sd-pr-0 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-1 sd-row-cols-lg-2 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center sd-p-3 docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold sd-fs-5 docutils">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-rocket" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M14.064 0a8.75 8.75 0 00-6.187 2.563l-.459.458c-.314.314-.616.641-.904.979H3.31a1.75 1.75 0 00-1.49.833L.11 7.607a.75.75 0 00.418 1.11l3.102.954c.037.051.079.1.124.145l2.429 2.428c.046.046.094.088.145.125l.954 3.102a.75.75 0 001.11.418l2.774-1.707a1.75 1.75 0 00.833-1.49V9.485c.338-.288.665-.59.979-.904l.458-.459A8.75 8.75 0 0016 1.936V1.75A1.75 1.75 0 0014.25 0h-.186zM10.5 10.625c-.088.06-.177.118-.266.175l-2.35 1.521.548 1.783 1.949-1.2a.25.25 0 00.119-.213v-2.066zM3.678 8.116L5.2 5.766c.058-.09.117-.178.176-.266H3.309a.25.25 0 00-.213.119l-1.2 1.95 1.782.547zm5.26-4.493A7.25 7.25 0 0114.063 1.5h.186a.25.25 0 01.25.25v.186a7.25 7.25 0 01-2.123 5.127l-.459.458a15.21 15.21 0 01-2.499 2.02l-2.317 1.5-2.143-2.143 1.5-2.317a15.25 15.25 0 012.02-2.5l.458-.458h.002zM12 5a1 1 0 11-2 0 1 1 0 012 0zm-8.44 9.56a1.5 1.5 0 10-2.12-2.12c-.734.73-1.047 2.332-1.15 3.003a.23.23 0 00.265.265c.671-.103 2.273-.416 3.005-1.148z"></path></svg> Getting started</div>
+<p class="sd-card-text">New to Choclo? Start here!</p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-outline-primary sd-stretched-link reference internal" href="overview.html"><span class="doc">Overview</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center sd-p-3 docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold sd-fs-5 docutils">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-comment-discussion" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 2.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v5.5a.25.25 0 01-.25.25h-3.5a.75.75 0 00-.53.22L3.5 11.44V9.25a.75.75 0 00-.75-.75h-1a.25.25 0 01-.25-.25v-5.5zM1.75 1A1.75 1.75 0 000 2.75v5.5C0 9.216.784 10 1.75 10H2v1.543a1.457 1.457 0 002.487 1.03L7.061 10h3.189A1.75 1.75 0 0012 8.25v-5.5A1.75 1.75 0 0010.25 1h-8.5zM14.5 4.75a.25.25 0 00-.25-.25h-.5a.75.75 0 110-1.5h.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0114.25 12H14v1.543a1.457 1.457 0 01-2.487 1.03L9.22 12.28a.75.75 0 111.06-1.06l2.22 2.22v-2.19a.75.75 0 01.75-.75h1a.25.25 0 00.25-.25v-5.5z"></path></svg> Need help?</div>
+<p class="sd-card-text">Ask on our community channels</p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-outline-primary sd-stretched-link reference external" href="https://www.fatiando.org/contact"><span> Join the conversation</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center sd-p-3 docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold sd-fs-5 docutils">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Reference documentation</div>
+<p class="sd-card-text">A list of modules and functions</p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-outline-primary sd-stretched-link reference internal" href="api/index.html#api"><span class="std std-ref">List of functions and classes (API)</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center sd-p-3 docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold sd-fs-5 docutils">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-bookmark" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M4.75 2.5a.25.25 0 00-.25.25v9.91l3.023-2.489a.75.75 0 01.954 0l3.023 2.49V2.75a.25.25 0 00-.25-.25h-6.5zM3 2.75C3 1.784 3.784 1 4.75 1h6.5c.966 0 1.75.784 1.75 1.75v11.5a.75.75 0 01-1.227.579L8 11.722l-3.773 3.107A.75.75 0 013 14.25V2.75z"></path></svg> Using Choclo for research?</div>
+<p class="sd-card-text">Citations help support our work</p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-outline-primary sd-stretched-link reference internal" href="citing.html"><span class="doc">Citing Choclo</span></a></span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>Choclo is a part of the
 <a class="reference external" href="https://www.fatiando.org/">Fatiando a Terra</a> project.</p>
 </div>
-<section id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h1>
-<p>Choclo provides slim and optimized function to compute the gravitational and
-magnetic fields of simple geometries like point masses, magnetic dipoles and
-prisms. It also provides the <em>kernel</em> functions needed to run compute those
-fields. The goal of Choclo is to provide developers of a simple and efficient
-way to calculate these fields for a wide range of applications, like forward
-modellings, sensitivity matrices calculations, equivalent sources
-implementations and more.</p>
-<p>These functions are not designed to be used by final users. Instead they are
-meant to be part of the underlaying engine of a higher level codebase, like
-<a class="reference external" href="https://www.fatiando.org/harmonica">Harmonica</a>.</p>
-<p>All Choclo functions rely on <a class="reference external" href="https://numba.pydata.org/">Numba</a> for
-just-in-time compilations, meaning that there’s no need to distribute
-precompiled code: Choclo provides pure Python code that gets compiled during
-runtime allowing to run them as fast as they were written in C.
-Moreover, developers could harness the power of Numba to parallelize processes
-in a quick and easy way.</p>
-</section>
-<section id="conventions">
-<h1>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">#</a></h1>
-<p>Before you jump into Choclo’s functions, it’s worth noting some conventions
-that will be kept along its codebase:</p>
-<ul class="simple">
-<li><p>The functions assume a right-handed coordinate system. We avoid using names
-like “x”, “y” and “z” for the coordinates. Instead we use “easting”,
-“northing” and “upward” to make extra clear the direction of each axis.</p></li>
-<li><p>We use the first letter of the <em>easting</em>, <em>northing</em> and <em>upward</em> axis to
-indicate direction of derivatives. For example, a function <code class="docutils literal notranslate"><span class="pre">gravity_e</span></code> will
-compute the <em>easting</em> component of the gravitional acceleration, while the
-<code class="docutils literal notranslate"><span class="pre">gravity_n</span></code> and <code class="docutils literal notranslate"><span class="pre">gravity_u</span></code> will compute the <em>northing</em> and <em>upward</em>
-ones, respectively.</p></li>
-<li><p>The arguments of the functions are always assumed in SI units. And all the
-functions return results also in SI units. Choclo <strong>doesn’t</strong> perform <strong>unit
-conversions</strong>.</p></li>
-<li><p>The components of the gravitational accelerations and the magnetic fields are
-computed in the same direction of the <em>easting</em>, <em>northing</em> and <em>upward</em>
-axis. So <code class="docutils literal notranslate"><span class="pre">gravity_u</span></code> will compute the <strong>upward</strong> component of the
-gravitational acceleration (note the difference with the <strong>downward</strong>
-component).</p></li>
-</ul>
-</section>
-<section id="the-library">
-<h1>The library<a class="headerlink" href="#the-library" title="Permalink to this headline">#</a></h1>
-<p>Choclo is divided in a few different submodules, each with different goals. The
-three main modules are the ones that host the forward and kernel functions for
-the different geometries supported by Choclo: <code class="docutils literal notranslate"><span class="pre">point</span></code>, <code class="docutils literal notranslate"><span class="pre">dipole</span></code> and
-<code class="docutils literal notranslate"><span class="pre">prism</span></code>. Inside each one of these modules we will find forward modelling
-functions and potentially some kernel functions. The names of the forward
-modelling functions follow a simple pattern of <code class="docutils literal notranslate"><span class="pre">{field}_{type}</span></code>. For
-example, <a class="reference internal" href="api/generated/choclo.prism.gravity_e.html#choclo.prism.gravity_e" title="choclo.prism.gravity_e"><code class="xref py py-func docutils literal notranslate"><span class="pre">choclo.prism.gravity_e</span></code></a> computes the easting component of the
-gravitational acceleration of a prism, while <a class="reference internal" href="api/generated/choclo.prism.gravity_ee.html#choclo.prism.gravity_ee" title="choclo.prism.gravity_ee"><code class="xref py py-func docutils literal notranslate"><span class="pre">choclo.prism.gravity_ee</span></code></a>
-computes the easting-easting gravity tensor component.</p>
-</section>
-<section id="how-to-use-choclo">
-<h1>How to use Choclo<a class="headerlink" href="#how-to-use-choclo" title="Permalink to this headline">#</a></h1>
-<section id="the-simplest-case">
-<h2>The simplest case<a class="headerlink" href="#the-simplest-case" title="Permalink to this headline">#</a></h2>
-<p>Using Choclo is very simple, but it requires some work from our side. Let’s say
-we need to compute the upward component of the gravitational acceleration that
-a single rectangular prism produces on a single computation point. To do so we
-can just call the <a class="reference internal" href="api/generated/choclo.prism.gravity_u.html#choclo.prism.gravity_u" title="choclo.prism.gravity_u"><code class="xref py py-func docutils literal notranslate"><span class="pre">choclo.prism.gravity_u</span></code></a> function:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">choclo.prism</span> <span class="kn">import</span> <span class="n">gravity_u</span>
-
-<span class="c1"># Define a single computation point</span>
-<span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span>
-
-<span class="c1"># Define the boundaries of the prism as a 1d-array</span>
-<span class="n">prism</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">])</span>
-
-<span class="c1"># And its density</span>
-<span class="n">density</span> <span class="o">=</span> <span class="mf">400.0</span>
-
-<span class="c1"># Compute the upward component of the grav. acceleration</span>
-<span class="n">g_u</span> <span class="o">=</span> <span class="n">gravity_u</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">prism</span><span class="p">,</span> <span class="n">density</span><span class="p">)</span>
-<span class="n">g_u</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>-1.653643133689388e-07
-</pre></div>
-</div>
-</div>
-</div>
-<p>But this case is very simple: we usually deal with multiple sources and
-multiple computation points.</p>
-</section>
-<section id="multiple-sources-and-computation-points">
-<h2>Multiple sources and computation points<a class="headerlink" href="#multiple-sources-and-computation-points" title="Permalink to this headline">#</a></h2>
-<p>In case we have a collection of prisms with certain densities:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prisms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">],</span>
-    <span class="p">[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">25.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.0</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">13.0</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">12.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.0</span><span class="p">],</span>
-<span class="p">])</span>
-<span class="n">densities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">200.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">400.0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-</div>
-</div>
-<p>And a set of observation points:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">easting</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
-<span class="n">northing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
-<span class="n">easting</span><span class="p">,</span> <span class="n">northing</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">))</span>
-<span class="n">upward</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">easting</span><span class="p">)</span>
-<span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-</div>
-</div>
-<p>And we want to compute the gratitational acceleration that those prisms
-generate on each observation point, we need to write some kind of loop that
-computes the effect of each prism on each observation point and adds it to
-a running result.</p>
-<p>A possible solution would be to use Python for loops:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gravity_upward_slow</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute the upward component of the acceleration of a set of prisms</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Unpack coordinates of the observation points</span>
-    <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[:]</span>
-    <span class="c1"># Initialize a result array full of zeros</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="c1"># Compute the upward component that every prism generate on each</span>
-    <span class="c1"># observation point</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">easting</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prisms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gravity_u</span><span class="p">(</span>
-                <span class="n">easting</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">northing</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">upward</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:],</span> <span class="n">densities</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            <span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="n">g_u</span> <span class="o">=</span> <span class="n">gravity_upward_slow</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">)</span>
-<span class="n">g_u</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-3.08024767e-08, -3.10103482e-08, -3.11926215e-08, -3.13484961e-08,
-       -3.14772466e-08, -3.15782275e-08, -3.16508775e-08, -3.16947240e-08,
-       -3.17093869e-08, -3.16945831e-08, -3.16501302e-08, -3.15759501e-08,
-       -3.14720725e-08, -3.13386380e-08, -3.11759003e-08, -3.09842280e-08,
-       -3.07641061e-08, -3.05161358e-08, -3.02410339e-08, -2.99396310e-08,
-       -2.96128686e-08, -3.11195000e-08, -3.13346703e-08, -3.15240617e-08,
-       -3.16868368e-08, -3.18222319e-08, -3.19295618e-08, -3.20082244e-08,
-       -3.20577056e-08, -3.20775840e-08, -3.20675354e-08, -3.20273375e-08,
-       -3.19568737e-08, -3.18561377e-08, -3.17252367e-08, -3.15643944e-08,
-       -3.13739539e-08, -3.11543785e-08, -3.09062534e-08, -3.06302842e-08,
-       -3.03272966e-08, -2.99982325e-08, -3.14196998e-08, -3.16420877e-08,
-       -3.18385422e-08, -3.20081895e-08, -3.21502273e-08, -3.22639303e-08,
-       -3.23486553e-08, -3.24038461e-08, -3.24290393e-08, -3.24238686e-08,
-       -3.23880705e-08, -3.23214892e-08, -3.22240807e-08, -3.20959177e-08,
-       -3.19371927e-08, -3.17482213e-08, -3.15294445e-08, -3.12814294e-08,
-       -3.10048696e-08, -3.07005838e-08, -3.03695135e-08, -3.17021952e-08,
-       -3.19316874e-08, -3.21351185e-08, -3.23115780e-08, -3.24602255e-08,
-       -3.25802955e-08, -3.26711033e-08, -3.27320505e-08, -3.27626308e-08,
-       -3.27624353e-08, -3.27311588e-08, -3.26686047e-08, -3.25746907e-08,
-       -3.24494538e-08, -3.22930541e-08, -3.21057787e-08, -3.18880444e-08,
-       -3.16403995e-08, -3.13635238e-08, -3.10582283e-08, -3.07254524e-08,
-       -3.19661435e-08, -3.22025940e-08, -3.24128819e-08, -3.25960611e-08,
-       -3.27512529e-08, -3.28776521e-08, -3.29745324e-08, -3.30412529e-08,
-       -3.30772642e-08, -3.30821145e-08, -3.30554558e-08, -3.29970507e-08,
-       -3.29067776e-08, -3.27846366e-08, -3.26307546e-08, -3.24453891e-08,
-       -3.22289318e-08, -3.19819108e-08, -3.17049911e-08, -3.13989744e-08,
-       -3.10647971e-08, -3.22107451e-08, -3.24539745e-08, -3.26709663e-08,
-       -3.28607390e-08, -3.30223766e-08, -3.31550343e-08, -3.32579446e-08,
-       -3.33304242e-08, -3.33718804e-08, -3.33818184e-08, -3.33598474e-08,
-       -3.33056883e-08, -3.32191797e-08, -3.31002846e-08, -3.29490955e-08,
-       -3.27658396e-08, -3.25508827e-08, -3.23047313e-08, -3.20280348e-08,
-       -3.17215845e-08, -3.13863123e-08, -3.24352494e-08, -3.26850446e-08,
-       -3.29085531e-08, -3.31047592e-08, -3.32727101e-08, -3.34115219e-08,
-       -3.35203866e-08, -3.35985787e-08, -3.36454629e-08, -3.36605008e-08,
-       -3.36432592e-08, -3.35934170e-08, -3.35107730e-08, -3.33952522e-08,
-       -3.32469127e-08, -3.30659504e-08, -3.28527044e-08, -3.26076592e-08,
-       -3.23314471e-08, -3.20248483e-08, -3.16887888e-08, -3.26389589e-08,
-       -3.28950733e-08, -3.31248774e-08, -3.33273224e-08, -3.35014197e-08,
-       -3.36462472e-08, -3.37609571e-08, -3.38447825e-08, -3.38970454e-08,
-       -3.39171650e-08, -3.39046654e-08, -3.38591840e-08, -3.37804794e-08,
-       -3.36684390e-08, -3.35230855e-08, -3.33445839e-08, -3.31332455e-08,
-       -3.28895323e-08, -3.26140588e-08, -3.23075927e-08, -3.19710535e-08,
-       -3.28212346e-08, -3.30833883e-08, -3.33192332e-08, -3.35276885e-08,
-       -3.37077309e-08, -3.38584016e-08, -3.39788135e-08, -3.40681594e-08,
-       -3.41257196e-08, -3.41508714e-08, -3.41430967e-08, -3.41019920e-08,
-       -3.40272760e-08, -3.39187982e-08, -3.37765467e-08, -3.36006546e-08,
-       -3.33914057e-08, -3.31492385e-08, -3.28747492e-08, -3.25686922e-08,
-       -3.22319792e-08, -3.29815001e-08, -3.32493807e-08, -3.34909783e-08,
-       -3.37051816e-08, -3.38909341e-08, -3.40472413e-08, -3.41731784e-08,
-       -3.42678988e-08, -3.43306425e-08, -3.43607454e-08, -3.43576487e-08,
-       -3.43209081e-08, -3.42502033e-08, -3.41453465e-08, -3.40062911e-08,
-       -3.38331385e-08, -3.36261448e-08, -3.33857248e-08, -3.31124558e-08,
-       -3.28070782e-08, -3.24704949e-08, -3.31192457e-08, -3.33925095e-08,
-       -3.36395397e-08, -3.38591960e-08, -3.40503903e-08, -3.42120940e-08,
-       -3.43433462e-08, -3.44432623e-08, -3.45110433e-08, -3.45459852e-08,
-       -3.45474893e-08, -3.45150719e-08, -3.44483743e-08, -3.43471723e-08,
-       -3.42113849e-08, -3.40410824e-08, -3.38364930e-08, -3.35980079e-08,
-       -3.33261849e-08, -3.30217497e-08, -3.26855958e-08, -3.32340324e-08,
-       -3.35123058e-08, -3.37644175e-08, -3.39892003e-08, -3.41855361e-08,
-       -3.43523641e-08, -3.44886890e-08, -3.45935899e-08, -3.46662305e-08,
-       -3.47058685e-08, -3.47118667e-08, -3.46837034e-08, -3.46209825e-08,
-       -3.45234445e-08, -3.43909748e-08, -3.42236131e-08, -3.40215600e-08,
-       -3.37851831e-08, -3.35150205e-08, -3.32117829e-08, -3.28763531e-08,
-       -3.33254950e-08, -3.36083762e-08, -3.38651893e-08, -3.40947420e-08,
-       -3.42958885e-08, -3.44675377e-08, -3.46086619e-08, -3.47183060e-08,
-       -3.47955980e-08, -3.48397595e-08, -3.48501163e-08, -3.48261102e-08,
-       -3.47673097e-08, -3.46734205e-08, -3.45442961e-08, -3.43799459e-08,
-       -3.41805438e-08, -3.39464337e-08, -3.36781342e-08, -3.33763402e-08,
-       -3.30419234e-08, -3.33933450e-08, -3.36804060e-08, -3.39415134e-08,
-       -3.41754516e-08, -3.43810495e-08, -3.45571878e-08, -3.47028085e-08,
-       -3.48169248e-08, -3.48986312e-08, -3.49471148e-08, -3.49616670e-08,
-       -3.49416949e-08, -3.48867329e-08, -3.47964541e-08, -3.46706805e-08,
-       -3.45093929e-08, -3.43127390e-08, -3.40810394e-08, -3.38147931e-08,
-       -3.35146792e-08, -3.31815574e-08, -3.34373730e-08, -3.37281623e-08,
-       -3.39931319e-08, -3.42310457e-08, -3.44407092e-08, -3.46209775e-08,
-       -3.47707650e-08, -3.48890551e-08, -3.49749115e-08, -3.50274894e-08,
-       -3.50460476e-08, -3.50299609e-08, -3.49787315e-08, -3.48920015e-08,
-       -3.47695634e-08, -3.46113702e-08, -3.44175443e-08, -3.41883839e-08,
-       -3.39243683e-08, -3.36261607e-08, -3.32946084e-08, -3.34574503e-08,
-       -3.37514954e-08, -3.40198732e-08, -3.42613296e-08, -3.44746493e-08,
-       -3.46586642e-08, -3.48122637e-08, -3.49344043e-08, -3.50241213e-08,
-       -3.50805406e-08, -3.51028913e-08, -3.50905176e-08, -3.50428922e-08,
-       -3.49596280e-08, -3.48404898e-08, -3.46854042e-08, -3.44944694e-08,
-       -3.42679617e-08, -3.40063416e-08, -3.37102559e-08, -3.33805389e-08,
-       -3.34535302e-08, -3.37503405e-08, -3.40216536e-08, -3.42661995e-08,
-       -3.44827449e-08, -3.46701015e-08, -3.48271362e-08, -3.49527814e-08,
-       -3.50460472e-08, -3.51060327e-08, -3.51319398e-08, -3.51230852e-08,
-       -3.50789142e-08, -3.49990128e-08, -3.48831198e-08, -3.47311373e-08,
-       -3.45431403e-08, -3.43193846e-08, -3.40603115e-08, -3.37665521e-08,
-       -3.34389272e-08, -3.34256488e-08, -3.37247189e-08, -3.39984781e-08,
-       -3.42456436e-08, -3.44649665e-08, -3.46552412e-08, -3.48153152e-08,
-       -3.49440999e-08, -3.50405826e-08, -3.51038392e-08, -3.51330469e-08,
-       -3.51274979e-08, -3.50866127e-08, -3.50099526e-08, -3.48972326e-08,
-       -3.47483320e-08, -3.45633044e-08, -3.43423853e-08, -3.40859983e-08,
-       -3.37947583e-08, -3.34694725e-08, -3.33739245e-08, -3.36747374e-08,
-       -3.39504412e-08, -3.41997427e-08, -3.44213805e-08, -3.46141346e-08,
-       -3.47768360e-08, -3.49083782e-08, -3.50077294e-08, -3.50739448e-08,
-       -3.51061803e-08, -3.51037064e-08, -3.50659214e-08, -3.49923646e-08,
-       -3.48827295e-08, -3.47368744e-08, -3.45548329e-08, -3.43368218e-08,
-       -3.40832472e-08, -3.37947084e-08, -3.34719985e-08, -3.32985579e-08,
-       -3.36005885e-08, -3.38777261e-08, -3.41286699e-08, -3.43521490e-08,
-       -3.45469319e-08, -3.47118364e-08, -3.48457414e-08, -3.49475987e-08,
-       -3.50164466e-08, -3.50514228e-08, -3.50517789e-08, -3.50168939e-08,
-       -3.49462882e-08, -3.48396356e-08, -3.46967757e-08, -3.45177238e-08,
-       -3.43026790e-08, -3.40520311e-08, -3.37663636e-08, -3.34464556e-08,
-       -3.31998300e-08, -3.35025487e-08, -3.37806038e-08, -3.40326898e-08,
-       -3.42575292e-08, -3.44538820e-08, -3.46205563e-08, -3.47564193e-08,
-       -3.48604103e-08, -3.49315535e-08, -3.49689717e-08, -3.49719010e-08,
-       -3.49397041e-08, -3.48718848e-08, -3.47681001e-08, -3.46281729e-08,
-       -3.44521018e-08, -3.42400699e-08, -3.39924510e-08, -3.37098137e-08,
-       -3.33929226e-08])
-</pre></div>
-</div>
-</div>
-</div>
-<p>For loops are known to be slow, and in case we are working with very large
-models and a large number of computation points these calculations could take
-too long. So this solution is not recommended.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Using Python for loops to run Choclo’s functions is not advisable!</p>
-</div>
-<p>We can write a much faster and efficient solution relying on <code class="xref py py-mod docutils literal notranslate"><span class="pre">numba</span></code>.
-Since every function in Choclo is being JIT compiled, we can safely include
-calls to these functions inside other JIT compiled functions. So we can write
-an alterantive function by adding a <cite>&#64;numba.jit</cite> decorator:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numba</span>
-
-<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">gravity_upward_jit</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute the upward component of the acceleration of a set of prisms</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Unpack coordinates of the observation points</span>
-    <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[:]</span>
-    <span class="c1"># Initialize a result array full of zeros</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="c1"># Compute the upward component that every prism generate on each</span>
-    <span class="c1"># observation point</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">easting</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prisms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gravity_u</span><span class="p">(</span>
-                <span class="n">easting</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">northing</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">upward</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:],</span> <span class="n">densities</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            <span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="n">g_u</span> <span class="o">=</span> <span class="n">gravity_upward_jit</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">)</span>
-<span class="n">g_u</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-3.08024767e-08, -3.10103482e-08, -3.11926215e-08, -3.13484961e-08,
-       -3.14772466e-08, -3.15782275e-08, -3.16508775e-08, -3.16947240e-08,
-       -3.17093869e-08, -3.16945831e-08, -3.16501302e-08, -3.15759501e-08,
-       -3.14720725e-08, -3.13386380e-08, -3.11759003e-08, -3.09842280e-08,
-       -3.07641061e-08, -3.05161358e-08, -3.02410339e-08, -2.99396310e-08,
-       -2.96128686e-08, -3.11195000e-08, -3.13346703e-08, -3.15240617e-08,
-       -3.16868368e-08, -3.18222319e-08, -3.19295618e-08, -3.20082244e-08,
-       -3.20577056e-08, -3.20775840e-08, -3.20675354e-08, -3.20273375e-08,
-       -3.19568737e-08, -3.18561377e-08, -3.17252367e-08, -3.15643944e-08,
-       -3.13739539e-08, -3.11543785e-08, -3.09062534e-08, -3.06302842e-08,
-       -3.03272966e-08, -2.99982325e-08, -3.14196998e-08, -3.16420877e-08,
-       -3.18385422e-08, -3.20081895e-08, -3.21502273e-08, -3.22639303e-08,
-       -3.23486553e-08, -3.24038461e-08, -3.24290393e-08, -3.24238686e-08,
-       -3.23880705e-08, -3.23214892e-08, -3.22240807e-08, -3.20959177e-08,
-       -3.19371927e-08, -3.17482213e-08, -3.15294445e-08, -3.12814294e-08,
-       -3.10048696e-08, -3.07005838e-08, -3.03695135e-08, -3.17021952e-08,
-       -3.19316874e-08, -3.21351185e-08, -3.23115780e-08, -3.24602255e-08,
-       -3.25802955e-08, -3.26711033e-08, -3.27320505e-08, -3.27626308e-08,
-       -3.27624353e-08, -3.27311588e-08, -3.26686047e-08, -3.25746907e-08,
-       -3.24494538e-08, -3.22930541e-08, -3.21057787e-08, -3.18880444e-08,
-       -3.16403995e-08, -3.13635238e-08, -3.10582283e-08, -3.07254524e-08,
-       -3.19661435e-08, -3.22025940e-08, -3.24128819e-08, -3.25960611e-08,
-       -3.27512529e-08, -3.28776521e-08, -3.29745324e-08, -3.30412529e-08,
-       -3.30772642e-08, -3.30821145e-08, -3.30554558e-08, -3.29970507e-08,
-       -3.29067776e-08, -3.27846366e-08, -3.26307546e-08, -3.24453891e-08,
-       -3.22289318e-08, -3.19819108e-08, -3.17049911e-08, -3.13989744e-08,
-       -3.10647971e-08, -3.22107451e-08, -3.24539745e-08, -3.26709663e-08,
-       -3.28607390e-08, -3.30223766e-08, -3.31550343e-08, -3.32579446e-08,
-       -3.33304242e-08, -3.33718804e-08, -3.33818184e-08, -3.33598474e-08,
-       -3.33056883e-08, -3.32191797e-08, -3.31002846e-08, -3.29490955e-08,
-       -3.27658396e-08, -3.25508827e-08, -3.23047313e-08, -3.20280348e-08,
-       -3.17215845e-08, -3.13863123e-08, -3.24352494e-08, -3.26850446e-08,
-       -3.29085531e-08, -3.31047592e-08, -3.32727101e-08, -3.34115219e-08,
-       -3.35203866e-08, -3.35985787e-08, -3.36454629e-08, -3.36605008e-08,
-       -3.36432592e-08, -3.35934170e-08, -3.35107730e-08, -3.33952522e-08,
-       -3.32469127e-08, -3.30659504e-08, -3.28527044e-08, -3.26076592e-08,
-       -3.23314471e-08, -3.20248483e-08, -3.16887888e-08, -3.26389589e-08,
-       -3.28950733e-08, -3.31248774e-08, -3.33273224e-08, -3.35014197e-08,
-       -3.36462472e-08, -3.37609571e-08, -3.38447825e-08, -3.38970454e-08,
-       -3.39171650e-08, -3.39046654e-08, -3.38591840e-08, -3.37804794e-08,
-       -3.36684390e-08, -3.35230855e-08, -3.33445839e-08, -3.31332455e-08,
-       -3.28895323e-08, -3.26140588e-08, -3.23075927e-08, -3.19710535e-08,
-       -3.28212346e-08, -3.30833883e-08, -3.33192332e-08, -3.35276885e-08,
-       -3.37077309e-08, -3.38584016e-08, -3.39788135e-08, -3.40681594e-08,
-       -3.41257196e-08, -3.41508714e-08, -3.41430967e-08, -3.41019920e-08,
-       -3.40272760e-08, -3.39187982e-08, -3.37765467e-08, -3.36006546e-08,
-       -3.33914057e-08, -3.31492385e-08, -3.28747492e-08, -3.25686922e-08,
-       -3.22319792e-08, -3.29815001e-08, -3.32493807e-08, -3.34909783e-08,
-       -3.37051816e-08, -3.38909341e-08, -3.40472413e-08, -3.41731784e-08,
-       -3.42678988e-08, -3.43306425e-08, -3.43607454e-08, -3.43576487e-08,
-       -3.43209081e-08, -3.42502033e-08, -3.41453465e-08, -3.40062911e-08,
-       -3.38331385e-08, -3.36261448e-08, -3.33857248e-08, -3.31124558e-08,
-       -3.28070782e-08, -3.24704949e-08, -3.31192457e-08, -3.33925095e-08,
-       -3.36395397e-08, -3.38591960e-08, -3.40503903e-08, -3.42120940e-08,
-       -3.43433462e-08, -3.44432623e-08, -3.45110433e-08, -3.45459852e-08,
-       -3.45474893e-08, -3.45150719e-08, -3.44483743e-08, -3.43471723e-08,
-       -3.42113849e-08, -3.40410824e-08, -3.38364930e-08, -3.35980079e-08,
-       -3.33261849e-08, -3.30217497e-08, -3.26855958e-08, -3.32340324e-08,
-       -3.35123058e-08, -3.37644175e-08, -3.39892003e-08, -3.41855361e-08,
-       -3.43523641e-08, -3.44886890e-08, -3.45935899e-08, -3.46662305e-08,
-       -3.47058685e-08, -3.47118667e-08, -3.46837034e-08, -3.46209825e-08,
-       -3.45234445e-08, -3.43909748e-08, -3.42236131e-08, -3.40215600e-08,
-       -3.37851831e-08, -3.35150205e-08, -3.32117829e-08, -3.28763531e-08,
-       -3.33254950e-08, -3.36083762e-08, -3.38651893e-08, -3.40947420e-08,
-       -3.42958885e-08, -3.44675377e-08, -3.46086619e-08, -3.47183060e-08,
-       -3.47955980e-08, -3.48397595e-08, -3.48501163e-08, -3.48261102e-08,
-       -3.47673097e-08, -3.46734205e-08, -3.45442961e-08, -3.43799459e-08,
-       -3.41805438e-08, -3.39464337e-08, -3.36781342e-08, -3.33763402e-08,
-       -3.30419234e-08, -3.33933450e-08, -3.36804060e-08, -3.39415134e-08,
-       -3.41754516e-08, -3.43810495e-08, -3.45571878e-08, -3.47028085e-08,
-       -3.48169248e-08, -3.48986312e-08, -3.49471148e-08, -3.49616670e-08,
-       -3.49416949e-08, -3.48867329e-08, -3.47964541e-08, -3.46706805e-08,
-       -3.45093929e-08, -3.43127390e-08, -3.40810394e-08, -3.38147931e-08,
-       -3.35146792e-08, -3.31815574e-08, -3.34373730e-08, -3.37281623e-08,
-       -3.39931319e-08, -3.42310457e-08, -3.44407092e-08, -3.46209775e-08,
-       -3.47707650e-08, -3.48890551e-08, -3.49749115e-08, -3.50274894e-08,
-       -3.50460476e-08, -3.50299609e-08, -3.49787315e-08, -3.48920015e-08,
-       -3.47695634e-08, -3.46113702e-08, -3.44175443e-08, -3.41883839e-08,
-       -3.39243683e-08, -3.36261607e-08, -3.32946084e-08, -3.34574503e-08,
-       -3.37514954e-08, -3.40198732e-08, -3.42613296e-08, -3.44746493e-08,
-       -3.46586642e-08, -3.48122637e-08, -3.49344043e-08, -3.50241213e-08,
-       -3.50805406e-08, -3.51028913e-08, -3.50905176e-08, -3.50428922e-08,
-       -3.49596280e-08, -3.48404898e-08, -3.46854042e-08, -3.44944694e-08,
-       -3.42679617e-08, -3.40063416e-08, -3.37102559e-08, -3.33805389e-08,
-       -3.34535302e-08, -3.37503405e-08, -3.40216536e-08, -3.42661995e-08,
-       -3.44827449e-08, -3.46701015e-08, -3.48271362e-08, -3.49527814e-08,
-       -3.50460472e-08, -3.51060327e-08, -3.51319398e-08, -3.51230852e-08,
-       -3.50789142e-08, -3.49990128e-08, -3.48831198e-08, -3.47311373e-08,
-       -3.45431403e-08, -3.43193846e-08, -3.40603115e-08, -3.37665521e-08,
-       -3.34389272e-08, -3.34256488e-08, -3.37247189e-08, -3.39984781e-08,
-       -3.42456436e-08, -3.44649665e-08, -3.46552412e-08, -3.48153152e-08,
-       -3.49440999e-08, -3.50405826e-08, -3.51038392e-08, -3.51330469e-08,
-       -3.51274979e-08, -3.50866127e-08, -3.50099526e-08, -3.48972326e-08,
-       -3.47483320e-08, -3.45633044e-08, -3.43423853e-08, -3.40859983e-08,
-       -3.37947583e-08, -3.34694725e-08, -3.33739245e-08, -3.36747374e-08,
-       -3.39504412e-08, -3.41997427e-08, -3.44213805e-08, -3.46141346e-08,
-       -3.47768360e-08, -3.49083782e-08, -3.50077294e-08, -3.50739448e-08,
-       -3.51061803e-08, -3.51037064e-08, -3.50659214e-08, -3.49923646e-08,
-       -3.48827295e-08, -3.47368744e-08, -3.45548329e-08, -3.43368218e-08,
-       -3.40832472e-08, -3.37947084e-08, -3.34719985e-08, -3.32985579e-08,
-       -3.36005885e-08, -3.38777261e-08, -3.41286699e-08, -3.43521490e-08,
-       -3.45469319e-08, -3.47118364e-08, -3.48457414e-08, -3.49475987e-08,
-       -3.50164466e-08, -3.50514228e-08, -3.50517789e-08, -3.50168939e-08,
-       -3.49462882e-08, -3.48396356e-08, -3.46967757e-08, -3.45177238e-08,
-       -3.43026790e-08, -3.40520311e-08, -3.37663636e-08, -3.34464556e-08,
-       -3.31998300e-08, -3.35025487e-08, -3.37806038e-08, -3.40326898e-08,
-       -3.42575292e-08, -3.44538820e-08, -3.46205563e-08, -3.47564193e-08,
-       -3.48604103e-08, -3.49315535e-08, -3.49689717e-08, -3.49719010e-08,
-       -3.49397041e-08, -3.48718848e-08, -3.47681001e-08, -3.46281729e-08,
-       -3.44521018e-08, -3.42400699e-08, -3.39924510e-08, -3.37098137e-08,
-       -3.33929226e-08])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s benchmark these two functions to see how much faster the decorated
-function runs:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">gravity_upward_slow</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>3.32 ms ± 22.4 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">gravity_upward_jit</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>600 µs ± 314 ns per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
-</pre></div>
-</div>
-</div>
-</div>
-<p>From these numbers we can see that we have significantly reduced the
-computation time by several factors by just decorating our function.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The benchmarked times may vary if you run them in your system.</p>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>Check <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/5minguide.html#how-to-measure-the-performance-of-numba">How to measure the performance of Numba?</a>
-to learn more about how to properly benchmark jitted functions.</p>
-</div>
-</section>
-<section id="parallelizing-our-runs">
-<h2>Parallelizing our runs<a class="headerlink" href="#parallelizing-our-runs" title="Permalink to this headline">#</a></h2>
-<p>We have already shown how we can reduce the computation times of our forward
-modelling by decorating our functions with <cite>&#64;numba.jit(nopython=True)</cite>. But
-this is just the first step: all the computations were being run in <em>serial</em> in
-a single CPU. We can harness the full power of our modern multiprocessors CPUs
-by parallelizing our runs. To do so we need to use the <code class="xref py py-func docutils literal notranslate"><span class="pre">numba.prange</span></code>
-instead of the regular Python <cite>range</cite> function and slightly change the
-decorator of our function by adding a <cite>parallel=True</cite>:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numba</span>
-
-<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">gravity_upward_parallel</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute the upward component of the acceleration of a set of prisms</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Unpack coordinates of the observation points</span>
-    <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[:]</span>
-    <span class="c1"># Initialize a result array full of zeros</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="c1"># Compute the upward component that every prism generate on each</span>
-    <span class="c1"># observation point</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numba</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">easting</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prisms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gravity_u</span><span class="p">(</span>
-                <span class="n">easting</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">northing</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">upward</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:],</span> <span class="n">densities</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            <span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="n">g_u</span> <span class="o">=</span> <span class="n">gravity_upward_parallel</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">)</span>
-<span class="n">g_u</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-3.08024767e-08, -3.10103482e-08, -3.11926215e-08, -3.13484961e-08,
-       -3.14772466e-08, -3.15782275e-08, -3.16508775e-08, -3.16947240e-08,
-       -3.17093869e-08, -3.16945831e-08, -3.16501302e-08, -3.15759501e-08,
-       -3.14720725e-08, -3.13386380e-08, -3.11759003e-08, -3.09842280e-08,
-       -3.07641061e-08, -3.05161358e-08, -3.02410339e-08, -2.99396310e-08,
-       -2.96128686e-08, -3.11195000e-08, -3.13346703e-08, -3.15240617e-08,
-       -3.16868368e-08, -3.18222319e-08, -3.19295618e-08, -3.20082244e-08,
-       -3.20577056e-08, -3.20775840e-08, -3.20675354e-08, -3.20273375e-08,
-       -3.19568737e-08, -3.18561377e-08, -3.17252367e-08, -3.15643944e-08,
-       -3.13739539e-08, -3.11543785e-08, -3.09062534e-08, -3.06302842e-08,
-       -3.03272966e-08, -2.99982325e-08, -3.14196998e-08, -3.16420877e-08,
-       -3.18385422e-08, -3.20081895e-08, -3.21502273e-08, -3.22639303e-08,
-       -3.23486553e-08, -3.24038461e-08, -3.24290393e-08, -3.24238686e-08,
-       -3.23880705e-08, -3.23214892e-08, -3.22240807e-08, -3.20959177e-08,
-       -3.19371927e-08, -3.17482213e-08, -3.15294445e-08, -3.12814294e-08,
-       -3.10048696e-08, -3.07005838e-08, -3.03695135e-08, -3.17021952e-08,
-       -3.19316874e-08, -3.21351185e-08, -3.23115780e-08, -3.24602255e-08,
-       -3.25802955e-08, -3.26711033e-08, -3.27320505e-08, -3.27626308e-08,
-       -3.27624353e-08, -3.27311588e-08, -3.26686047e-08, -3.25746907e-08,
-       -3.24494538e-08, -3.22930541e-08, -3.21057787e-08, -3.18880444e-08,
-       -3.16403995e-08, -3.13635238e-08, -3.10582283e-08, -3.07254524e-08,
-       -3.19661435e-08, -3.22025940e-08, -3.24128819e-08, -3.25960611e-08,
-       -3.27512529e-08, -3.28776521e-08, -3.29745324e-08, -3.30412529e-08,
-       -3.30772642e-08, -3.30821145e-08, -3.30554558e-08, -3.29970507e-08,
-       -3.29067776e-08, -3.27846366e-08, -3.26307546e-08, -3.24453891e-08,
-       -3.22289318e-08, -3.19819108e-08, -3.17049911e-08, -3.13989744e-08,
-       -3.10647971e-08, -3.22107451e-08, -3.24539745e-08, -3.26709663e-08,
-       -3.28607390e-08, -3.30223766e-08, -3.31550343e-08, -3.32579446e-08,
-       -3.33304242e-08, -3.33718804e-08, -3.33818184e-08, -3.33598474e-08,
-       -3.33056883e-08, -3.32191797e-08, -3.31002846e-08, -3.29490955e-08,
-       -3.27658396e-08, -3.25508827e-08, -3.23047313e-08, -3.20280348e-08,
-       -3.17215845e-08, -3.13863123e-08, -3.24352494e-08, -3.26850446e-08,
-       -3.29085531e-08, -3.31047592e-08, -3.32727101e-08, -3.34115219e-08,
-       -3.35203866e-08, -3.35985787e-08, -3.36454629e-08, -3.36605008e-08,
-       -3.36432592e-08, -3.35934170e-08, -3.35107730e-08, -3.33952522e-08,
-       -3.32469127e-08, -3.30659504e-08, -3.28527044e-08, -3.26076592e-08,
-       -3.23314471e-08, -3.20248483e-08, -3.16887888e-08, -3.26389589e-08,
-       -3.28950733e-08, -3.31248774e-08, -3.33273224e-08, -3.35014197e-08,
-       -3.36462472e-08, -3.37609571e-08, -3.38447825e-08, -3.38970454e-08,
-       -3.39171650e-08, -3.39046654e-08, -3.38591840e-08, -3.37804794e-08,
-       -3.36684390e-08, -3.35230855e-08, -3.33445839e-08, -3.31332455e-08,
-       -3.28895323e-08, -3.26140588e-08, -3.23075927e-08, -3.19710535e-08,
-       -3.28212346e-08, -3.30833883e-08, -3.33192332e-08, -3.35276885e-08,
-       -3.37077309e-08, -3.38584016e-08, -3.39788135e-08, -3.40681594e-08,
-       -3.41257196e-08, -3.41508714e-08, -3.41430967e-08, -3.41019920e-08,
-       -3.40272760e-08, -3.39187982e-08, -3.37765467e-08, -3.36006546e-08,
-       -3.33914057e-08, -3.31492385e-08, -3.28747492e-08, -3.25686922e-08,
-       -3.22319792e-08, -3.29815001e-08, -3.32493807e-08, -3.34909783e-08,
-       -3.37051816e-08, -3.38909341e-08, -3.40472413e-08, -3.41731784e-08,
-       -3.42678988e-08, -3.43306425e-08, -3.43607454e-08, -3.43576487e-08,
-       -3.43209081e-08, -3.42502033e-08, -3.41453465e-08, -3.40062911e-08,
-       -3.38331385e-08, -3.36261448e-08, -3.33857248e-08, -3.31124558e-08,
-       -3.28070782e-08, -3.24704949e-08, -3.31192457e-08, -3.33925095e-08,
-       -3.36395397e-08, -3.38591960e-08, -3.40503903e-08, -3.42120940e-08,
-       -3.43433462e-08, -3.44432623e-08, -3.45110433e-08, -3.45459852e-08,
-       -3.45474893e-08, -3.45150719e-08, -3.44483743e-08, -3.43471723e-08,
-       -3.42113849e-08, -3.40410824e-08, -3.38364930e-08, -3.35980079e-08,
-       -3.33261849e-08, -3.30217497e-08, -3.26855958e-08, -3.32340324e-08,
-       -3.35123058e-08, -3.37644175e-08, -3.39892003e-08, -3.41855361e-08,
-       -3.43523641e-08, -3.44886890e-08, -3.45935899e-08, -3.46662305e-08,
-       -3.47058685e-08, -3.47118667e-08, -3.46837034e-08, -3.46209825e-08,
-       -3.45234445e-08, -3.43909748e-08, -3.42236131e-08, -3.40215600e-08,
-       -3.37851831e-08, -3.35150205e-08, -3.32117829e-08, -3.28763531e-08,
-       -3.33254950e-08, -3.36083762e-08, -3.38651893e-08, -3.40947420e-08,
-       -3.42958885e-08, -3.44675377e-08, -3.46086619e-08, -3.47183060e-08,
-       -3.47955980e-08, -3.48397595e-08, -3.48501163e-08, -3.48261102e-08,
-       -3.47673097e-08, -3.46734205e-08, -3.45442961e-08, -3.43799459e-08,
-       -3.41805438e-08, -3.39464337e-08, -3.36781342e-08, -3.33763402e-08,
-       -3.30419234e-08, -3.33933450e-08, -3.36804060e-08, -3.39415134e-08,
-       -3.41754516e-08, -3.43810495e-08, -3.45571878e-08, -3.47028085e-08,
-       -3.48169248e-08, -3.48986312e-08, -3.49471148e-08, -3.49616670e-08,
-       -3.49416949e-08, -3.48867329e-08, -3.47964541e-08, -3.46706805e-08,
-       -3.45093929e-08, -3.43127390e-08, -3.40810394e-08, -3.38147931e-08,
-       -3.35146792e-08, -3.31815574e-08, -3.34373730e-08, -3.37281623e-08,
-       -3.39931319e-08, -3.42310457e-08, -3.44407092e-08, -3.46209775e-08,
-       -3.47707650e-08, -3.48890551e-08, -3.49749115e-08, -3.50274894e-08,
-       -3.50460476e-08, -3.50299609e-08, -3.49787315e-08, -3.48920015e-08,
-       -3.47695634e-08, -3.46113702e-08, -3.44175443e-08, -3.41883839e-08,
-       -3.39243683e-08, -3.36261607e-08, -3.32946084e-08, -3.34574503e-08,
-       -3.37514954e-08, -3.40198732e-08, -3.42613296e-08, -3.44746493e-08,
-       -3.46586642e-08, -3.48122637e-08, -3.49344043e-08, -3.50241213e-08,
-       -3.50805406e-08, -3.51028913e-08, -3.50905176e-08, -3.50428922e-08,
-       -3.49596280e-08, -3.48404898e-08, -3.46854042e-08, -3.44944694e-08,
-       -3.42679617e-08, -3.40063416e-08, -3.37102559e-08, -3.33805389e-08,
-       -3.34535302e-08, -3.37503405e-08, -3.40216536e-08, -3.42661995e-08,
-       -3.44827449e-08, -3.46701015e-08, -3.48271362e-08, -3.49527814e-08,
-       -3.50460472e-08, -3.51060327e-08, -3.51319398e-08, -3.51230852e-08,
-       -3.50789142e-08, -3.49990128e-08, -3.48831198e-08, -3.47311373e-08,
-       -3.45431403e-08, -3.43193846e-08, -3.40603115e-08, -3.37665521e-08,
-       -3.34389272e-08, -3.34256488e-08, -3.37247189e-08, -3.39984781e-08,
-       -3.42456436e-08, -3.44649665e-08, -3.46552412e-08, -3.48153152e-08,
-       -3.49440999e-08, -3.50405826e-08, -3.51038392e-08, -3.51330469e-08,
-       -3.51274979e-08, -3.50866127e-08, -3.50099526e-08, -3.48972326e-08,
-       -3.47483320e-08, -3.45633044e-08, -3.43423853e-08, -3.40859983e-08,
-       -3.37947583e-08, -3.34694725e-08, -3.33739245e-08, -3.36747374e-08,
-       -3.39504412e-08, -3.41997427e-08, -3.44213805e-08, -3.46141346e-08,
-       -3.47768360e-08, -3.49083782e-08, -3.50077294e-08, -3.50739448e-08,
-       -3.51061803e-08, -3.51037064e-08, -3.50659214e-08, -3.49923646e-08,
-       -3.48827295e-08, -3.47368744e-08, -3.45548329e-08, -3.43368218e-08,
-       -3.40832472e-08, -3.37947084e-08, -3.34719985e-08, -3.32985579e-08,
-       -3.36005885e-08, -3.38777261e-08, -3.41286699e-08, -3.43521490e-08,
-       -3.45469319e-08, -3.47118364e-08, -3.48457414e-08, -3.49475987e-08,
-       -3.50164466e-08, -3.50514228e-08, -3.50517789e-08, -3.50168939e-08,
-       -3.49462882e-08, -3.48396356e-08, -3.46967757e-08, -3.45177238e-08,
-       -3.43026790e-08, -3.40520311e-08, -3.37663636e-08, -3.34464556e-08,
-       -3.31998300e-08, -3.35025487e-08, -3.37806038e-08, -3.40326898e-08,
-       -3.42575292e-08, -3.44538820e-08, -3.46205563e-08, -3.47564193e-08,
-       -3.48604103e-08, -3.49315535e-08, -3.49689717e-08, -3.49719010e-08,
-       -3.49397041e-08, -3.48718848e-08, -3.47681001e-08, -3.46281729e-08,
-       -3.44521018e-08, -3.42400699e-08, -3.39924510e-08, -3.37098137e-08,
-       -3.33929226e-08])
-</pre></div>
-</div>
-</div>
-</div>
-<p>With <code class="xref py py-func docutils literal notranslate"><span class="pre">numba.prange</span></code> we can specify which loop we want to run in parallel.
-Since we are updating the values of <code class="docutils literal notranslate"><span class="pre">results</span></code> on each iteration, it’s
-advisable to parallelize the loop over the observation points.
-By setting <code class="docutils literal notranslate"><span class="pre">parallel=True</span></code> in the decorator we are telling Numba to
-pararellize this function, otherwise Numba will reinterpret the <code class="docutils literal notranslate"><span class="pre">numba.prange</span></code>
-function as a regular <code class="docutils literal notranslate"><span class="pre">range</span></code> and run this loop in serial.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In some applications it’s desirable that our forward models are run in
-serial. For example, if they are part of larger problem that gets
-parallelized at a higher level. The <code class="docutils literal notranslate"><span class="pre">parallel</span></code> parameter in the
-<code class="docutils literal notranslate"><span class="pre">numba.jit</span></code> decorator allows us to change this behaviour at will without
-having to modify the function code.</p>
-</div>
-<p>Let’s benchmark this function against the non-parallelized
-<code class="docutils literal notranslate"><span class="pre">gravity_upward_jit</span></code>:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">gravity_upward_jit</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>600 µs ± 231 ns per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">gravity_upward_parallel</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>300 µs ± 256 ns per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
-</pre></div>
-</div>
-</div>
-</div>
-<p>By distributing the load between multiple processors we were capable of
-lowering the computation time by a few more factors.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
-</section>
-</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 
 
               </div>
@@ -1408,10 +729,10 @@ lowering the computation time by a few more factors.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="api/index.html" title="next page">
+    <a class='right-next' id="next-link" href="overview.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">List of functions and classes (API)</p>
+        <p class="prev-next-title">Overview</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -1422,8 +743,8 @@ lowering the computation time by a few more factors.</p>
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on May 12, 2023.<br/>
 </p>
         </footer>
     </div>

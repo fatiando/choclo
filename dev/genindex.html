@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>Index | Choclo v0.0.post27</title>
+        <title>Index | Choclo dev</title>
     
 
     
@@ -81,9 +81,14 @@
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <img src="_static/choclo-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -92,6 +97,40 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install.html">
+   Installing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="user_guide/how-to-use.html">
+   How to use Choclo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="user_guide/jacobian.html">
+   Building a Jacobian matrix
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference Documentation
  </span>
@@ -175,56 +214,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="api/generated/choclo.dipole.magnetic_field.html">
      choclo.dipole.magnetic_field
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_pot.html">
-     choclo.point.kernel_pot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_e.html">
-     choclo.point.kernel_e
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_n.html">
-     choclo.point.kernel_n
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_u.html">
-     choclo.point.kernel_u
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_ee.html">
-     choclo.point.kernel_ee
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_nn.html">
-     choclo.point.kernel_nn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_uu.html">
-     choclo.point.kernel_uu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_en.html">
-     choclo.point.kernel_en
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_eu.html">
-     choclo.point.kernel_eu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="api/generated/choclo.point.kernel_nu.html">
-     choclo.point.kernel_nu
     </a>
    </li>
    <li class="toctree-l2">
@@ -385,8 +374,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="changes.html">
+   Changelog
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="compatibility.html">
    Version compatibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="versions.html">
+   Documentation for other versions
   </a>
  </li>
 </ul>
@@ -666,68 +665,28 @@ title="Open an issue"
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/generated/choclo.point.kernel_e.html#choclo.point.kernel_e">kernel_e() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_e.html#choclo.prism.kernel_e">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_e.html#choclo.prism.kernel_e">kernel_e() (in module choclo.prism)</a>
 </li>
-      </ul></li>
-      <li><a href="api/generated/choclo.point.kernel_ee.html#choclo.point.kernel_ee">kernel_ee() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_ee.html#choclo.prism.kernel_ee">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_ee.html#choclo.prism.kernel_ee">kernel_ee() (in module choclo.prism)</a>
 </li>
-      </ul></li>
-      <li><a href="api/generated/choclo.point.kernel_en.html#choclo.point.kernel_en">kernel_en() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_en.html#choclo.prism.kernel_en">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_en.html#choclo.prism.kernel_en">kernel_en() (in module choclo.prism)</a>
 </li>
-      </ul></li>
-      <li><a href="api/generated/choclo.point.kernel_eu.html#choclo.point.kernel_eu">kernel_eu() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_eu.html#choclo.prism.kernel_eu">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_eu.html#choclo.prism.kernel_eu">kernel_eu() (in module choclo.prism)</a>
 </li>
-      </ul></li>
-      <li><a href="api/generated/choclo.point.kernel_n.html#choclo.point.kernel_n">kernel_n() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_n.html#choclo.prism.kernel_n">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_n.html#choclo.prism.kernel_n">kernel_n() (in module choclo.prism)</a>
 </li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/generated/choclo.point.kernel_nn.html#choclo.point.kernel_nn">kernel_nn() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_nn.html#choclo.prism.kernel_nn">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_nn.html#choclo.prism.kernel_nn">kernel_nn() (in module choclo.prism)</a>
 </li>
-      </ul></li>
-      <li><a href="api/generated/choclo.point.kernel_nu.html#choclo.point.kernel_nu">kernel_nu() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_nu.html#choclo.prism.kernel_nu">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_nu.html#choclo.prism.kernel_nu">kernel_nu() (in module choclo.prism)</a>
 </li>
-      </ul></li>
-      <li><a href="api/generated/choclo.point.kernel_pot.html#choclo.point.kernel_pot">kernel_pot() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_pot.html#choclo.prism.kernel_pot">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_pot.html#choclo.prism.kernel_pot">kernel_pot() (in module choclo.prism)</a>
 </li>
-      </ul></li>
-      <li><a href="api/generated/choclo.point.kernel_u.html#choclo.point.kernel_u">kernel_u() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_u.html#choclo.prism.kernel_u">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_u.html#choclo.prism.kernel_u">kernel_u() (in module choclo.prism)</a>
 </li>
-      </ul></li>
-      <li><a href="api/generated/choclo.point.kernel_uu.html#choclo.point.kernel_uu">kernel_uu() (in module choclo.point)</a>
-
-      <ul>
-        <li><a href="api/generated/choclo.prism.kernel_uu.html#choclo.prism.kernel_uu">(in module choclo.prism)</a>
+      <li><a href="api/generated/choclo.prism.kernel_uu.html#choclo.prism.kernel_uu">kernel_uu() (in module choclo.prism)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -794,8 +753,8 @@ title="Open an issue"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on May 12, 2023.<br/>
 </p>
         </footer>
     </div>

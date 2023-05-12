@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     
-        <title>List of functions and classes (API) | Choclo v0.0.post27</title>
+        <title>List of functions and classes (API) | Choclo dev</title>
     
 
     
@@ -51,7 +51,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="choclo.point.gravity_pot" href="generated/choclo.point.gravity_pot.html" />
-    <link rel="prev" title="Overview" href="../index.html" />
+    <link rel="prev" title="Building a Jacobian matrix" href="../user_guide/jacobian.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -85,9 +85,14 @@
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <img src="../_static/choclo-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -96,6 +101,40 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../install.html">
+   Installing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../user_guide/how-to-use.html">
+   How to use Choclo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../user_guide/jacobian.html">
+   Building a Jacobian matrix
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference Documentation
  </span>
@@ -179,56 +218,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="generated/choclo.dipole.magnetic_field.html">
      choclo.dipole.magnetic_field
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_pot.html">
-     choclo.point.kernel_pot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_e.html">
-     choclo.point.kernel_e
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_n.html">
-     choclo.point.kernel_n
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_u.html">
-     choclo.point.kernel_u
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_ee.html">
-     choclo.point.kernel_ee
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_nn.html">
-     choclo.point.kernel_nn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_uu.html">
-     choclo.point.kernel_uu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_en.html">
-     choclo.point.kernel_en
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_eu.html">
-     choclo.point.kernel_eu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generated/choclo.point.kernel_nu.html">
-     choclo.point.kernel_nu
     </a>
    </li>
    <li class="toctree-l2">
@@ -389,8 +378,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../changes.html">
+   Changelog
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../compatibility.html">
    Version compatibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../versions.html">
+   Documentation for other versions
   </a>
  </li>
 </ul>
@@ -639,11 +638,6 @@ title="Print to PDF"
        Magnetic
       </a>
      </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#kernels">
-       Kernels
-      </a>
-     </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -662,7 +656,7 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
+      <a class="reference internal nav-link" href="#kernels">
        Kernels
       </a>
      </li>
@@ -726,11 +720,6 @@ title="Print to PDF"
        Magnetic
       </a>
      </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#kernels">
-       Kernels
-      </a>
-     </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -749,7 +738,7 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
+      <a class="reference internal nav-link" href="#kernels">
        Kernels
       </a>
      </li>
@@ -858,47 +847,6 @@ coordinates</strong>.</p>
 </tbody>
 </table>
 </section>
-<section id="kernels">
-<h4>Kernels<a class="headerlink" href="#kernels" title="Permalink to this headline">#</a></h4>
-<table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/choclo.point.kernel_pot.html#choclo.point.kernel_pot" title="choclo.point.kernel_pot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_pot</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>The inverse of the distance between the two points</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/choclo.point.kernel_e.html#choclo.point.kernel_e" title="choclo.point.kernel_e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_e</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Easting component of the gradient of the inverse of the distance</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/choclo.point.kernel_n.html#choclo.point.kernel_n" title="choclo.point.kernel_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_n</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Northing component of the gradient of the inverse of the distance</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/choclo.point.kernel_u.html#choclo.point.kernel_u" title="choclo.point.kernel_u"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_u</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Upward component of the gradient of the inverse of the distance</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/choclo.point.kernel_ee.html#choclo.point.kernel_ee" title="choclo.point.kernel_ee"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_ee</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Second derivative of the inverse of the distance along easting-easting</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/choclo.point.kernel_nn.html#choclo.point.kernel_nn" title="choclo.point.kernel_nn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_nn</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Second derivative of the inverse of the distance along northing-northing</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/choclo.point.kernel_uu.html#choclo.point.kernel_uu" title="choclo.point.kernel_uu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_uu</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Second derivative of the inverse of the distance along upward-upward</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/choclo.point.kernel_en.html#choclo.point.kernel_en" title="choclo.point.kernel_en"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_en</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Second derivative of the inverse of the distance along easting-northing</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/choclo.point.kernel_eu.html#choclo.point.kernel_eu" title="choclo.point.kernel_eu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_eu</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Second derivative of the inverse of the distance along easting-upward</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/choclo.point.kernel_nu.html#choclo.point.kernel_nu" title="choclo.point.kernel_nu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point.kernel_nu</span></code></a>(easting_p, northing_p, ...)</p></td>
-<td><p>Second derivative of the inverse of the distance along northing-upward</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 </section>
 <section id="rectangular-prisms">
 <h3>Rectangular Prisms<a class="headerlink" href="#rectangular-prisms" title="Permalink to this headline">#</a></h3>
@@ -966,8 +914,8 @@ coordinates</strong>.</p>
 </tbody>
 </table>
 </section>
-<section id="id3">
-<h4>Kernels<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h4>
+<section id="kernels">
+<h4>Kernels<a class="headerlink" href="#kernels" title="Permalink to this headline">#</a></h4>
 <table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
@@ -1043,7 +991,7 @@ coordinates:</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/choclo.constants.GRAVITATIONAL_CONST.html#choclo.constants.GRAVITATIONAL_CONST" title="choclo.constants.GRAVITATIONAL_CONST"><code class="xref py py-obj docutils literal notranslate"><span class="pre">constants.GRAVITATIONAL_CONST</span></code></a></p></td>
-<td><p>Gravitational constant <span class="math notranslate nohighlight">\(G\)</span> in SI units (<span class="math notranslate nohighlight">\(m^3 kg^{-1} s^{-1}\)</span>)</p></td>
+<td><p>Gravitational constant <span class="math notranslate nohighlight">\(G\)</span> in SI units (<span class="math notranslate nohighlight">\(m^3 kg^{-1} s^{-2}\)</span>)</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/choclo.constants.VACUUM_MAGNETIC_PERMEABILITY.html#choclo.constants.VACUUM_MAGNETIC_PERMEABILITY" title="choclo.constants.VACUUM_MAGNETIC_PERMEABILITY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">constants.VACUUM_MAGNETIC_PERMEABILITY</span></code></a></p></td>
 <td><p>Vacuum magnetic permeability <span class="math notranslate nohighlight">\(\mu_0\)</span> in SI units (<span class="math notranslate nohighlight">\(NA^{-2}\)</span>)</p></td>
@@ -1062,11 +1010,11 @@ coordinates:</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../user_guide/jacobian.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Overview</p>
+            <p class="prev-next-title">Building a Jacobian matrix</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="generated/choclo.point.gravity_pot.html" title="next page">
@@ -1083,8 +1031,8 @@ coordinates:</p>
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on May 12, 2023.<br/>
 </p>
         </footer>
     </div>

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     
-        <title>choclo.dipole.magnetic_e | Choclo v0.0.post27</title>
+        <title>choclo.dipole.magnetic_e | Choclo dev</title>
     
 
     
@@ -85,9 +85,14 @@
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <img src="../../_static/choclo-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -96,6 +101,40 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../install.html">
+   Installing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../user_guide/how-to-use.html">
+   How to use Choclo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../user_guide/jacobian.html">
+   Building a Jacobian matrix
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference Documentation
  </span>
@@ -179,56 +218,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="choclo.dipole.magnetic_field.html">
      choclo.dipole.magnetic_field
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_pot.html">
-     choclo.point.kernel_pot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_e.html">
-     choclo.point.kernel_e
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_n.html">
-     choclo.point.kernel_n
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_u.html">
-     choclo.point.kernel_u
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_ee.html">
-     choclo.point.kernel_ee
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_nn.html">
-     choclo.point.kernel_nn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_uu.html">
-     choclo.point.kernel_uu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_en.html">
-     choclo.point.kernel_en
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_eu.html">
-     choclo.point.kernel_eu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="choclo.point.kernel_nu.html">
-     choclo.point.kernel_nu
     </a>
    </li>
    <li class="toctree-l2">
@@ -389,8 +378,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../../changes.html">
+   Changelog
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../../compatibility.html">
    Version compatibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../versions.html">
+   Documentation for other versions
   </a>
  </li>
 </ul>
@@ -625,7 +624,7 @@ title="Print to PDF"
 <h1>choclo.dipole.magnetic_e<a class="headerlink" href="#choclo-dipole-magnetic-e" title="Permalink to this headline">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="choclo.dipole.magnetic_e">
-<span class="sig-prename descclassname"><span class="pre">choclo.dipole.</span></span><span class="sig-name descname"><span class="pre">magnetic_e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">easting_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northing_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upward_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">easting_q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northing_q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upward_q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetic_moment</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/choclo/dipole/_forward.html#magnetic_e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#choclo.dipole.magnetic_e" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">choclo.dipole.</span></span><span class="sig-name descname"><span class="pre">magnetic_e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">easting_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northing_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upward_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">easting_q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northing_q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upward_q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetic_moment_east</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetic_moment_north</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetic_moment_up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/choclo/dipole/_forward.html#magnetic_e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#choclo.dipole.magnetic_e" title="Permalink to this definition">#</a></dt>
 <dd><p>Easting component of the magnetic field due to a dipole</p>
 <p>Returns the easting component of the magnetic field by a single dipole on
 a single computation point</p>
@@ -638,9 +637,12 @@ a single computation point</p>
 <li><p><strong>easting_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Easting coordinate of the dipole in meters.</p></li>
 <li><p><strong>northing_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Northing coordinate of the dipole in meters.</p></li>
 <li><p><strong>upward_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Upward coordinate of the dipole in meters.</p></li>
-<li><p><strong>magnetic_moment</strong> (<em>1d-array</em>) – Magnetic moment of the dipole. It should have three components in the
-following order: <code class="docutils literal notranslate"><span class="pre">mag_moment_easting</span></code>, <code class="docutils literal notranslate"><span class="pre">mag_moment_northing</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mag_moment_upward</span></code>. Should be in <span class="math notranslate nohighlight">\(A m^2\)</span>.</p></li>
+<li><p><strong>magnetic_moment_east</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The East component of the magnetic moment vector of the dipole. Must be
+in <span class="math notranslate nohighlight">\(A m^2\)</span>.</p></li>
+<li><p><strong>magnetic_moment_north</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The North component of the magnetic moment vector of the dipole. Must
+be in <span class="math notranslate nohighlight">\(A m^2\)</span>.</p></li>
+<li><p><strong>magnetic_moment_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The upward component of the magnetic moment vector of the dipole. Must
+be in <span class="math notranslate nohighlight">\(A m^2\)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -706,8 +708,8 @@ and <span class="math notranslate nohighlight">\(\mu_0\)</span> is the vacuum ma
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on May 12, 2023.<br/>
 </p>
         </footer>
     </div>

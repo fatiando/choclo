@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>choclo.prism._kernels | Choclo v0.0.post27</title>
+        <title>choclo.prism._kernels | Choclo dev</title>
     
 
     
@@ -81,9 +81,14 @@
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
       
       
-      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">v0.0.post27</span></h1>
+      <img src="../../../_static/choclo-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Choclo <span class="project-version">dev</span></h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
@@ -92,6 +97,40 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../install.html">
+   Installing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../user_guide/how-to-use.html">
+   How to use Choclo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../user_guide/jacobian.html">
+   Building a Jacobian matrix
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference Documentation
  </span>
@@ -175,56 +214,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../../../api/generated/choclo.dipole.magnetic_field.html">
      choclo.dipole.magnetic_field
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_pot.html">
-     choclo.point.kernel_pot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_e.html">
-     choclo.point.kernel_e
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_n.html">
-     choclo.point.kernel_n
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_u.html">
-     choclo.point.kernel_u
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_ee.html">
-     choclo.point.kernel_ee
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_nn.html">
-     choclo.point.kernel_nn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_uu.html">
-     choclo.point.kernel_uu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_en.html">
-     choclo.point.kernel_en
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_eu.html">
-     choclo.point.kernel_eu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../api/generated/choclo.point.kernel_nu.html">
-     choclo.point.kernel_nu
     </a>
    </li>
    <li class="toctree-l2">
@@ -385,8 +374,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../../../changes.html">
+   Changelog
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../../../compatibility.html">
    Version compatibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../versions.html">
+   Documentation for other versions
   </a>
  </li>
 </ul>
@@ -612,18 +611,18 @@ title="Open an issue"
 <span class="sd">    .. math::</span>
 
 <span class="sd">        k_V(x, y, z) &amp;=</span>
-<span class="sd">            x y \, \text{ln2} (z + r)</span>
-<span class="sd">            + y z \, \text{ln2} (x + r)</span>
-<span class="sd">            + z x \, \text{ln2} (y + r) \\</span>
-<span class="sd">            &amp; - \frac{x^2}{2} \text{arctan2} \left( \frac{yz}{xr} \right)</span>
-<span class="sd">            - \frac{y^2}{2} \text{arctan2} \left( \frac{zx}{yr} \right)</span>
-<span class="sd">            - \frac{z^2}{2} \text{arctan2} \left( \frac{xy}{zr} \right)</span>
+<span class="sd">            x y \, \operatorname{safe-ln} (z + r)</span>
+<span class="sd">            + y z \, \operatorname{safe-ln} (x + r)</span>
+<span class="sd">            + z x \, \operatorname{safe-ln} (y + r) \\</span>
+<span class="sd">            &amp; - \frac{x^2}{2} \operatorname{safe-arctan} \left( yz, xr \right)</span>
+<span class="sd">            - \frac{y^2}{2} \operatorname{safe-arctan} \left( zx, yr \right)</span>
+<span class="sd">            - \frac{z^2}{2} \operatorname{safe-arctan} \left( xy, zr \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
 <span class="sd">            \ln (x)</span>
@@ -633,7 +632,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -648,9 +647,9 @@ title="Open an issue"
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">easting</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">upward</span> <span class="o">*</span> <span class="n">northing</span><span class="p">,</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">northing</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">upward</span> <span class="o">*</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">upward</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
@@ -704,16 +703,16 @@ title="Open an issue"
 
 <span class="sd">        k_x(x, y, z) =</span>
 <span class="sd">            -\left[</span>
-<span class="sd">            y \, \text{ln2} (z + r)</span>
-<span class="sd">            + z \, \text{ln2} (y + r)</span>
-<span class="sd">            - x \, \text{arctan2} \left( \frac{yz}{xr} \right)</span>
+<span class="sd">            y \, \operatorname{safe-ln} (z + r)</span>
+<span class="sd">            + z \, \operatorname{safe-ln} (y + r)</span>
+<span class="sd">            - x \, \operatorname{safe-arctan} \left( yz, xr \right)</span>
 <span class="sd">            \right]</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
 <span class="sd">            \ln (x)</span>
@@ -723,7 +722,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -744,8 +743,8 @@ title="Open an issue"
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
-        <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">northing</span> <span class="o">*</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">kernel</span></div>
@@ -797,16 +796,16 @@ title="Open an issue"
 
 <span class="sd">        k_y(x, y, z) =</span>
 <span class="sd">            -\left[</span>
-<span class="sd">            z \, \text{ln2} (x + r)</span>
-<span class="sd">            + x \, \text{ln2} (z + r)</span>
-<span class="sd">            - y \, \text{arctan2} \left( \frac{zx}{yr} \right)</span>
+<span class="sd">            z \, \operatorname{safe-ln} (x + r)</span>
+<span class="sd">            + x \, \operatorname{safe-ln} (z + r)</span>
+<span class="sd">            - y \, \operatorname{safe-arctan} \left( zx, yr \right)</span>
 <span class="sd">            \right]</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
 <span class="sd">            \ln (x)</span>
@@ -816,7 +815,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -837,8 +836,8 @@ title="Open an issue"
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
-        <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">easting</span> <span class="o">*</span> <span class="n">upward</span><span class="p">,</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">kernel</span></div>
@@ -890,16 +889,16 @@ title="Open an issue"
 
 <span class="sd">        k_z(x, y, z) =</span>
 <span class="sd">            - \left[</span>
-<span class="sd">            x \, \text{ln2} (y + r)</span>
-<span class="sd">            + y \, \text{ln2} (x + r)</span>
-<span class="sd">            - z \, \text{arctan2} \left( \frac{xy}{zr} \right)</span>
+<span class="sd">            x \, \operatorname{safe-ln} (y + r)</span>
+<span class="sd">            + y \, \operatorname{safe-ln} (x + r)</span>
+<span class="sd">            - z \, \operatorname{safe-arctan} \left( xy, zr \right)</span>
 <span class="sd">            \right]</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
 <span class="sd">            \ln (x)</span>
@@ -909,7 +908,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -933,8 +932,8 @@ title="Open an issue"
     <span class="c1"># The minus sign is to return the kernel for the upward component instead</span>
     <span class="c1"># of the downward one.</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
-        <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">kernel</span></div>
@@ -982,13 +981,13 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{xx}(x, y, z) = - \text{arctan2} \left( \frac{yz}{xr} \right)</span>
+<span class="sd">        k_{xx}(x, y, z) = - \operatorname{safe-arctan} \left( yz, xr \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -1047,13 +1046,13 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{yy}(x, y, z) = - \text{arctan2} \left( \frac{zx}{yr} \right)</span>
+<span class="sd">        k_{yy}(x, y, z) = - \operatorname{safe-arctan} \left( zx, yr \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -1112,13 +1111,13 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{zz}(x, y, z) = - \text{arctan2} \left( \frac{xy}{zr} \right)</span>
+<span class="sd">        k_{zz}(x, y, z) = - \operatorname{safe-arctan} \left( xy, zr \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left( y, x \right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -1177,13 +1176,13 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{xy}(x, y, z) = \text{ln2} \left( z + r \right)</span>
+<span class="sd">        k_{xy}(x, y, z) = \operatorname{safe-ln} \left( z + r \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
 <span class="sd">            \ln (x)</span>
@@ -1195,7 +1194,7 @@ title="Open an issue"
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="kernel_eu"><a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_eu.html#choclo.prism.kernel_eu">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1240,13 +1239,13 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{xz}(x, y, z) = \text{ln2} \left( y + r \right)</span>
+<span class="sd">        k_{xz}(x, y, z) = \operatorname{safe-ln} \left( y + r \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
 <span class="sd">            \ln (x)</span>
@@ -1258,7 +1257,7 @@ title="Open an issue"
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="kernel_nu"><a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nu.html#choclo.prism.kernel_nu">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1303,13 +1302,13 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{yz}(x, y, z) = \text{ln2} \left( x + r \right)</span>
+<span class="sd">        k_{yz}(x, y, z) = \operatorname{safe-ln} \left( x + r \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \operatorname{safe-ln}(x) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
 <span class="sd">            \ln (x)</span>
@@ -1321,7 +1320,7 @@ title="Open an issue"
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1340,7 +1339,7 @@ title="Open an issue"
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{arctan2} \left( \frac{y}{x} \right) =</span>
+<span class="sd">        \operatorname{safe-arctan} \left(y, x\right) =</span>
 <span class="sd">        \begin{cases}</span>
 <span class="sd">            \text{arctan}\left( \frac{y}{x} \right) &amp; x \ne 0 \\</span>
 <span class="sd">            \frac{\pi}{2} &amp; x = 0 \quad \text{and} \quad y &gt; 0 \\</span>
@@ -1352,46 +1351,57 @@ title="Open an issue"
 <span class="sd">    ----------</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">y</span> <span class="o">/</span> <span class="n">x</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">elif</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">y</span> <span class="o">/</span> <span class="n">x</span><span class="p">)</span>
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_safe_log</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_safe_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Modified log to return zero for values of x close to zero</span>
+<span class="sd">    Safe log function to use in the prism kernels</span>
 
-<span class="sd">    This modified version of the log function makes the computations to agree</span>
-<span class="sd">    with the limits of the integral (see [Nagy2000]_).</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
+<span class="sd">    Evaluates the :math:`\ln{x + r}` where :math:`x` is one of the shifted</span>
+<span class="sd">    coordinate of the prism vertex and :math:`r` is the Euclidean distance</span>
+<span class="sd">    (always non-negative) from the vertex to the observation point.</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{ln2}(x) =</span>
+<span class="sd">        \text{safe_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
 <span class="sd">        \end{cases}</span>
+
+<span class="sd">    This function returns 0 when the observation point is located on the vertex</span>
+<span class="sd">    of the prism (:math:`r=0`); and two modified versions in case that</span>
+<span class="sd">    :math:`x` is negative: if :math:`x = -r` then the :math:`\ln{x + r}` can be</span>
+<span class="sd">    replaced by :math:`-\ln{|x| + r} = -\ln(-2x)`, and for any other negative</span>
+<span class="sd">    value of :math:`x` it returns :math:`\ln((r^2 - x^2) / (r - x))` which</span>
+<span class="sd">    helps by reducing the floating point errors ([Fukushima2020_]).</span>
+<span class="sd">    This modified version was inspired by [Nagy2000] and [Fukushima2020_]:</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
-<span class="sd">    - [Nagy2000]_</span>
+<span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="o">-</span><span class="n">x</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span>
 </pre></div>
 
               </div>
@@ -1408,8 +1418,8 @@ title="Open an issue"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-      &copy; Copyright 2022, The Choclo Developers.<br/>
-    Last updated on Nov 19, 2022.<br/>
+      &copy; Copyright 2023, The Choclo Developers.<br/>
+    Last updated on May 12, 2023.<br/>
 </p>
         </footer>
     </div>
