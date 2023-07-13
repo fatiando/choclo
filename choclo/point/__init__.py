@@ -19,3 +19,15 @@ from ._forward import (
     gravity_u,
     gravity_uu,
 )
+from ._forward_spherical import (
+    gravity_e_spherical,
+    gravity_ee_spherical,
+    gravity_en_spherical,
+    gravity_eu_spherical,
+    gravity_n_spherical,
+    gravity_nn_spherical,
+    gravity_nu_spherical,
+    gravity_pot_spherical,
+    gravity_u_spherical,
+    gravity_uu_spherical,
+)
