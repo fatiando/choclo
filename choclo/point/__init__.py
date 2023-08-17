@@ -19,3 +19,15 @@ from ._forward import (
     gravity_u,
     gravity_uu,
 )
+from ._kernels import (
+    kernel_e,
+    kernel_ee,
+    kernel_en,
+    kernel_eu,
+    kernel_n,
+    kernel_nn,
+    kernel_nu,
+    kernel_pot,
+    kernel_u,
+    kernel_uu,
+)
