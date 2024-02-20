@@ -47,6 +47,24 @@ Magnetic
     dipole.magnetic_u
     dipole.magnetic_field
 
+Kernels
+^^^^^^^
+
+.. autosummary::
+   :toctree: generated/
+
+    point.kernel_pot
+    point.kernel_e
+    point.kernel_n
+    point.kernel_u
+    point.kernel_ee
+    point.kernel_nn
+    point.kernel_uu
+    point.kernel_en
+    point.kernel_eu
+    point.kernel_nu
+
+
 Rectangular Prisms
 ~~~~~~~~~~~~~~~~~~
 

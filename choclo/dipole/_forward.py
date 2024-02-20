@@ -113,9 +113,7 @@ def magnetic_field(
     b_n = c_m * (
         3 * dotproduct * r_n / distance**5 - magnetic_moment_north / distance**3
     )
-    b_u = c_m * (
-        3 * dotproduct * r_u / distance**5 - magnetic_moment_up / distance**3
-    )
+    b_u = c_m * (3 * dotproduct * r_u / distance**5 - magnetic_moment_up / distance**3)
     return b_e, b_n, b_u
 
 
@@ -297,9 +295,7 @@ def magnetic_n(
         + magnetic_moment_north * r_n
         + magnetic_moment_up * r_u
     )
-    result = (
-        3 * dotproduct * r_n / distance**5 - magnetic_moment_north / distance**3
-    )
+    result = 3 * dotproduct * r_n / distance**5 - magnetic_moment_north / distance**3
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
 
 

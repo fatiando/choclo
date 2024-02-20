@@ -11,6 +11,18 @@ from numba import jit
 
 from ..constants import GRAVITATIONAL_CONST
 from ..utils import distance_cartesian
+from ._kernels import (
+    kernel_e,
+    kernel_ee,
+    kernel_en,
+    kernel_eu,
+    kernel_n,
+    kernel_nn,
+    kernel_nu,
+    kernel_pot,
+    kernel_u,
+    kernel_uu,
+)
 
 
 @jit(nopython=True)
@@ -62,7 +74,10 @@ def gravity_pot(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    return GRAVITATIONAL_CONST * mass / distance
+    kernel = kernel_pot(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
+    return GRAVITATIONAL_CONST * mass * kernel
 
 
 @jit(nopython=True)
@@ -119,7 +134,9 @@ def gravity_e(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = -(easting_p - easting_q) / distance**3
+    kernel = kernel_e(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
 
 
@@ -177,7 +194,9 @@ def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = -(northing_p - northing_q) / distance**3
+    kernel = kernel_n(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
 
 
@@ -235,7 +254,9 @@ def gravity_u(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = -(upward_p - upward_q) / distance**3
+    kernel = kernel_u(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
 
 
@@ -300,7 +321,9 @@ def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = 3 * (easting_p - easting_q) ** 2 / distance**5 - 1 / distance**3
+    kernel = kernel_ee(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
 
 
@@ -365,7 +388,9 @@ def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = 3 * (northing_p - northing_q) ** 2 / distance**5 - 1 / distance**3
+    kernel = kernel_nn(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
 
 
@@ -430,7 +455,9 @@ def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = 3 * (upward_p - upward_q) ** 2 / distance**5 - 1 / distance**3
+    kernel = kernel_uu(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
 
 
@@ -490,7 +517,9 @@ def gravity_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = 3 * (easting_p - easting_q) * (northing_p - northing_q) / distance**5
+    kernel = kernel_en(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
 
 
@@ -550,7 +579,9 @@ def gravity_eu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = 3 * (easting_p - easting_q) * (upward_p - upward_q) / distance**5
+    kernel = kernel_eu(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
 
 
@@ -610,5 +641,7 @@ def gravity_nu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     distance = distance_cartesian(
         easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     )
-    kernel = 3 * (northing_p - northing_q) * (upward_p - upward_q) / distance**5
+    kernel = kernel_nu(
+        easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+    )
     return GRAVITATIONAL_CONST * mass * kernel
