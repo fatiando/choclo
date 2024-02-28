@@ -21,7 +21,7 @@
 
         .. image:: ./_static/choclo-logo.svg
             :width: 200px
-            :class: sd-m-auto
+            :class: sd-m-auto dark-light
 
 **Choclo** is a Python library that hosts optimized forward modelling and
 kernel functions for running geophysical forward and inverse models, intended
