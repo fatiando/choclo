@@ -12,8 +12,9 @@ modellings, sensitivity matrices calculations, equivalent sources
 implementations and more.
 
 These functions are not designed to be used by final users. Instead they are
-meant to be part of the underlaying engine of a higher level codebase, like
-`Harmonica <https://www.fatiando.org/harmonica>`__.
+meant to be part of the underlying engine of a higher level codebase, like
+`Harmonica <https://www.fatiando.org/harmonica>`__ and `SimPEG
+<https://docs.simpeg.xyz>`__.
 
 All Choclo functions rely on `Numba <https://numba.pydata.org/>`__ for
 just-in-time compilations, meaning that there's no need to distribute

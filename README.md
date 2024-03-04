@@ -10,7 +10,9 @@
 </p>
 
 <p align="center">
-Part of the <a href="https://www.fatiando.org"><strong>Fatiando a Terra</strong></a> project
+Part of the <a href="https://www.fatiando.org"><strong>Fatiando
+a Terra</strong></a> project, built in collaboration with <a
+href="https://simpeg.xyz"><strong>SimPEG</strong></a>
 </p>
 
 <p align="center">

@@ -27,10 +27,17 @@
 kernel functions for running geophysical forward and inverse models, intended
 to be used by other libraries as the underlying layer of their computation.
 
-"Choclo" is a term used in some countries of South America to refer to corn,
-originated from the `quechua
-<https://en.wikipedia.org/wiki/Quechuan_languages>`__
-word *chuqllu*.
+Choclo is part of the `Fatiando a Terra <https://www.fatiando.org/>`__ project,
+and built in collaboration with `SimPEG <https://simpeg.xyz>`__ with the goal
+of developing a common engine for running gravity and magnetic forward models.
+
+.. hint::
+
+   "Choclo" is a term used in some countries of South America to refer to corn,
+   originated from the `quechua
+   <https://en.wikipedia.org/wiki/Quechuan_languages>`__
+   word *chuqllu*.
+
 
 .. grid:: 1 2 1 2
     :margin: 5 5 0 0
@@ -91,11 +98,6 @@ word *chuqllu*.
             :outline:
             :expand:
 
-.. seealso::
-
-    Choclo is a part of the
-    `Fatiando a Terra <https://www.fatiando.org/>`__ project.
-
 
 .. toctree::
     :hidden:
@@ -136,3 +138,4 @@ word *chuqllu*.
     Code of Conduct <https://github.com/fatiando/choclo/blob/main/CODE_OF_CONDUCT.md>
     Source code on GitHub <https://github.com/fatiando/choclo>
     The Fatiando a Terra project <https://www.fatiando.org>
+    SimPEG <https://simpeg.xyz>
