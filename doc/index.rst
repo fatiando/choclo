@@ -138,3 +138,4 @@ of developing a common engine for running gravity and magnetic forward models.
     Code of Conduct <https://github.com/fatiando/choclo/blob/main/CODE_OF_CONDUCT.md>
     Source code on GitHub <https://github.com/fatiando/choclo>
     The Fatiando a Terra project <https://www.fatiando.org>
+    SimPEG <https://simpeg.xyz>
