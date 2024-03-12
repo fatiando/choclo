@@ -3,7 +3,7 @@ PROJECT=choclo
 TESTDIR=tmp-test-dir-with-unique-name
 PYTEST_ARGS=--cov-config=../.coveragerc --cov-report=term-missing --cov=$(PROJECT) --doctest-modules -v --pyargs
 NUMBATEST_ARGS=--doctest-modules -v --pyargs
-CHECK_STYLE=$(PROJECT) doc tools
+CHECK_STYLE=$(PROJECT) doc
 
 help:
 	@echo "Commands:"
@@ -37,29 +37,19 @@ test_numba:
 	cd $(TESTDIR); NUMBA_DISABLE_JIT=0 pytest $(NUMBATEST_ARGS) $(PROJECT)
 	rm -rvf $(TESTDIR)
 
-format: license isort black
-
-check: black-check isort-check license-check flake8
-
-black:
-	black $(CHECK_STYLE)
-
-black-check:
-	black --check $(CHECK_STYLE)
-
-license:
-	python tools/license_notice.py
-
-license-check:
-	python tools/license_notice.py --check
-
-isort:
+format:
 	isort $(CHECK_STYLE)
+	black $(CHECK_STYLE)
+	burocrata --extension=py $(CHECK_STYLE)
 
-isort-check:
+check: check-format check-style
+
+check-format:
 	isort --check $(CHECK_STYLE)
+	black --check $(CHECK_STYLE)
+	burocrata --check --extension=py $(CHECK_STYLE)
 
-flake8:
+check-style:
 	flake8 $(CHECK_STYLE)
 
 clean:
