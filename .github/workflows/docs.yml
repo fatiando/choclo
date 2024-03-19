@@ -82,7 +82,7 @@ jobs:
           echo "::set-output name=dir::$(pip cache dir)"
 
       - name: Setup caching for pip packages
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements-full.txt') }}
@@ -104,7 +104,7 @@ jobs:
         run: python -m pip install --no-deps dist/*.whl
 
       - name: Cache the Ensaio datasets
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/cache/ensaio
           # Use a constant key to reuse the datasets across all jobs
