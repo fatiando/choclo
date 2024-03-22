@@ -14,7 +14,7 @@ MANIFEST
 dask-worker-space
 build/
 dist/
-choclo/_version_generated.py
+choclo/_version.py
 doc/_build
 doc/api/generated
 doc/tutorials
