@@ -35,13 +35,10 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://www.fatiando.org/choclo"
 "Documentation" = "https://www.fatiando.org/choclo"
-"Repository" = "https://github.com/fatiando/choclo.git"
 "Changelog" = "https://www.fatiando.org/choclo/latest/changes.html"
 "Bug Tracker" = "https://github.com/fatiando/choclo/issues"
 "Source Code" = "https://github.com/fatiando/choclo"
-"Release Notes" = "https://github.com/fatiando/choclo/releases"
 
 [build-system]
 requires = ["setuptools>=61", "wheel", "setuptools_scm[toml]>=8.0.3"]
