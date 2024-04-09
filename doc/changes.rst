@@ -3,6 +3,53 @@
 Changelog
 =========
 
+Version 0.2.0
+-------------
+
+Released on: 2024/04/09
+
+doi: https://doi.org/10.5281/zenodo.10951580
+
+New features:
+
+* Restore kernel functions for forward modelling of point sources (`#58
+  <https://github.com/fatiando/choclo/pull/58>`__)
+
+Documentation:
+
+* Update the versions of Sphinx and its plugins, including dark theme and minor
+  changes to the style of the docs (`#64
+  <https://github.com/fatiando/choclo/pull/64>`__)
+* Mention SimPEG's support and collaboration in docs (`#65
+  <https://github.com/fatiando/choclo/pull/65>`__)
+
+Maintenance:
+
+* Use pip instead of conda for the docs workflow (`#63
+  <https://github.com/fatiando/choclo/pull/63>`__)
+* Use Burocrata to check/add license notices (`#66
+  <https://github.com/fatiando/choclo/pull/66>`__)
+* Use Dependabot to manage GitHub Actions updates (`#68
+  <https://github.com/fatiando/choclo/pull/68>`__)
+* Setup Trusted Publisher deployment to PyPI (`#67
+  <https://github.com/fatiando/choclo/pull/67>`__)
+* Ditch setup.cfg and replace it with pyproject.toml (`#77
+  <https://github.com/fatiando/choclo/pull/77>`__)
+* Replace `_version_generated.py` for `_version.py` (`#80
+  <https://github.com/fatiando/choclo/pull/80>`__)
+* Extend support for Python 3.12 (`#79
+  <https://github.com/fatiando/choclo/pull/79>`__)
+* Drop support for Python 3.7 (`#78
+  <https://github.com/fatiando/choclo/pull/78>`__)
+* Update Black formatting to version 24.2 (`#61
+  <https://github.com/fatiando/choclo/pull/61>`__)
+
+This release contains contributions from:
+
+* Santiago Soler
+* Leonardo Uieda
+
+
 Version 0.1.0
 -------------
 
