@@ -1,7 +1,47 @@
-# Specify that we use setuptools and setuptools_scm (to generate the version
-# string). Actual configuration is in setup.cfg.
+[project]
+name = "choclo"
+description = "Kernel functions for your geophysical models"
+dynamic = ["version"]
+authors = [
+  {name="The Choclo Developers", email="fatiandoaterra@protonmail.com"},
+]
+maintainers = [
+  {name = "Santiago Soler", email = "santisoler@fastmail.com"}
+]
+readme = "README.md"
+license = {text = "BSD-3-Clause"}
+keywords = ["geoscience", "geophysics"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: BSD License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.19",
+    "numba>=0.52",
+]
+
+[project.urls]
+"Documentation" = "https://www.fatiando.org/choclo"
+"Changelog" = "https://www.fatiando.org/choclo/latest/changes.html"
+"Bug Tracker" = "https://github.com/fatiando/choclo/issues"
+"Source Code" = "https://github.com/fatiando/choclo"
+
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=61", "wheel", "setuptools_scm[toml]>=8.0.3"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
