@@ -62,3 +62,20 @@ notice = '''
 #
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #'''
+
+# Validate docstrings using numpydoc
+[tool.numpydoc_validation]
+checks = [
+    "all",   # report on all checks, except the below
+    "EX01",
+    "SA01",
+    "SS03",
+    "RT02",
+    "ES01",  # no extended summary
+]
+exclude = [  # don't report on objects that match any of these regex
+    '\.undocumented_method$',
+    '\.__repr__$',
+    '_version',
+    'test_[a-z_]*', # exclude all tests
+]
