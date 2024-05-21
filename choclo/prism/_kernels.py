@@ -366,7 +366,6 @@ def kernel_u(easting, northing, upward, radius):
         by [Nagy2000]_ in order to compute the numerical kernel for the
         **upward** component instead for the downward one.
 
-
     References
     ----------
     - [Nagy2000]_

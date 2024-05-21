@@ -72,7 +72,7 @@ def gravity_pot(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -218,7 +218,7 @@ def gravity_e(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -365,7 +365,7 @@ def gravity_n(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -512,7 +512,7 @@ def gravity_u(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -665,7 +665,7 @@ def gravity_ee(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -836,7 +836,7 @@ def gravity_nn(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -1007,7 +1007,7 @@ def gravity_uu(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -1178,7 +1178,7 @@ def gravity_en(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -1325,7 +1325,7 @@ def gravity_eu(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
@@ -1473,7 +1473,7 @@ def gravity_nu(
         The bottom boundary of the prism. Must be in meters.
     prism_top : float
         The top boundary of the prism. Must be in meters.
-    density: float
+    density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
     Returns
