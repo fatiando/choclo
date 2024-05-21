@@ -205,7 +205,6 @@ def magnetic_field(
 
         \mathbf{B}(\mathbf{p}) = \frac{\mu_0}{4\pi} \mathbf{U} \cdot \mathbf{M}
 
-
     References
     ----------
     - [Blakely1995]_
