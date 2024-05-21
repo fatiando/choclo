@@ -214,7 +214,7 @@ def magnetic_field(
     - [Nagy2002]_
     - [Fukushima2020]_
 
-    See also
+    See Also
     --------
     :func:`choclo.prism.magnetic_e`
     :func:`choclo.prism.magnetic_n`
@@ -462,7 +462,7 @@ def magnetic_e(
     - [Nagy2002]_
     - [Fukushima2020]_
 
-    See also
+    See Also
     --------
     :func:`choclo.prism.magnetic_field`
     :func:`choclo.prism.magnetic_n`
@@ -663,7 +663,7 @@ def magnetic_n(
     - [Nagy2002]_
     - [Fukushima2020]_
 
-    See also
+    See Also
     --------
     :func:`choclo.prism.magnetic_field`
     :func:`choclo.prism.magnetic_e`
@@ -864,7 +864,7 @@ def magnetic_u(
     - [Nagy2002]_
     - [Fukushima2020]_
 
-    See also
+    See Also
     --------
     :func:`choclo.prism.magnetic_field`
     :func:`choclo.prism.magnetic_e`
