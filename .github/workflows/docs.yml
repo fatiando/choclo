@@ -79,7 +79,7 @@ jobs:
       - name: Get the pip cache folder
         id: pip-cache
         run: |
-          run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
       - name: Setup caching for pip packages
         uses: actions/cache@v4
