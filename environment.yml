@@ -9,7 +9,7 @@ dependencies:
   - numpy
   - numba
   # Build
-  - build
+  - python-build
   - twine
   # Test
   - pytest
