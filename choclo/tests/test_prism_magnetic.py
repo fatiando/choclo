@@ -68,24 +68,98 @@ def get_prism_center(prism):
     return easting, northing, upward
 
 
+def evaluate(forward_func, coordinates, prism, magnetization):
+    """
+    Evaluate a forward function on a set of observation points.
+
+    Parameters
+    ----------
+    forward_func : callable
+        Forward modelling function to evaluate.
+    coordinates : tuple of (n_data) arrays
+        Coordinates of the observation points.
+    prism : (6) array
+        Boundaries of the prism.
+    magnetization : (3) array
+        Magnetization vector of the prism.
+
+    Returns
+    -------
+    array
+        Array with the result of evaluating the ``forward_func`` on every
+        observation point.
+    """
+    coordinates = tuple(c.ravel() for c in coordinates)
+    result = np.array(
+        list(
+            forward_func(e, n, u, *prism, *magnetization)
+            for e, n, u in zip(*coordinates)
+        )
+    )
+    return result
+
+
+def finite_differences(
+    coordinates, prism, magnetization, direction, forward_func, delta=1e-6
+):
+    """
+    Compute spatial derivatives through finite differences.
+
+    Parameters
+    ----------
+    coordinates : tuple of (n_data) arrays
+        Coordinates of the observation points.
+    prism : (6) array
+        Boundaries of the prism.
+    magnetization : (3) array
+        Magnetization vector of the prism.
+    direction : {"e", "n", "u"}
+        Direction along which take the derivative.
+    forward_func : callable
+        Forward modelling function to use to compute the finite difference.
+    delta : float, optional
+        Displacement for the finite differences.
+
+    Returns
+    -------
+    (n_data) array
+        Array with the derivatives of the ``forward_func`` on each observation
+        point calculated using finite differences.
+    """
+    # Get original coordinates
+    easting, northing, upward = coordinates
+    if direction == "e":
+        shifted_coords = (easting + delta, northing, upward)
+    elif direction == "n":
+        shifted_coords = (easting, northing + delta, upward)
+    elif direction == "u":
+        shifted_coords = (easting, northing, upward + delta)
+    else:
+        ValueError(f"Invalid direction '{direction}'")
+    # Compute field on original and shifted coordinates
+    field = evaluate(forward_func, coordinates, prism, magnetization)
+    field_shifted = evaluate(forward_func, shifted_coords, prism, magnetization)
+    # Compute spatial derivative
+    spatial_derivative = (field_shifted - field) / delta
+    return spatial_derivative
+
+
 class TestSymmetryBe:
     """
     Test symmetry of easting component of the magnetic field
     """
 
     atol = 1e-17  # absolute tolerance for values near zero
+    MAGNETIZATIONS = [
+        (500, 0, 0),
+        (-500, 0, 0),
+        (0, 500, 0),
+        (0, -500, 0),
+        (0, 0, 500),
+        (0, 0, -500),
+    ]
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_easting_northing(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -105,21 +179,11 @@ class TestSymmetryBe:
         upward_bottom = 2 * prism_center_u - upward_top
         # Compute magnetic_e on every observation point
         magnetization = np.array(magnetization)
-        b_e_top = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_top.ravel()
-                )
-            )
+        b_e_top = evaluate(
+            magnetic_e, (easting, northing, upward_top), sample_prism, magnetization
         )
-        b_e_bottom = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_bottom.ravel()
-                )
-            )
+        b_e_bottom = evaluate(
+            magnetic_e, (easting, northing, upward_bottom), sample_prism, magnetization
         )
         # Check symmetry between top and bottom
         if magnetization[2] != 0:
@@ -127,17 +191,7 @@ class TestSymmetryBe:
         else:
             npt.assert_allclose(b_e_top, b_e_bottom, atol=self.atol)
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_easting_upward(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -157,21 +211,11 @@ class TestSymmetryBe:
         northing_south = 2 * prism_center_n - northing_north
         # Compute magnetic_e on every observation point
         magnetization = np.array(magnetization)
-        b_e_north = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing_north.ravel(), upward.ravel()
-                )
-            )
+        b_e_north = evaluate(
+            magnetic_e, (easting, northing_north, upward), sample_prism, magnetization
         )
-        b_e_south = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing_south.ravel(), upward.ravel()
-                )
-            )
+        b_e_south = evaluate(
+            magnetic_e, (easting, northing_south, upward), sample_prism, magnetization
         )
         # Check symmetry between south and north
         if magnetization[1] != 0:
@@ -179,17 +223,7 @@ class TestSymmetryBe:
         else:
             npt.assert_allclose(b_e_north, b_e_south, atol=self.atol)
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_northing_upward(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -209,21 +243,11 @@ class TestSymmetryBe:
         easting_west = 2 * prism_center_e - easting_east
         # Compute magnetic_e on every observation point
         magnetization = np.array(magnetization)
-        b_e_east = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting_east.ravel(), northing.ravel(), upward.ravel()
-                )
-            )
+        b_e_east = evaluate(
+            magnetic_e, (easting_east, northing, upward), sample_prism, magnetization
         )
-        b_e_west = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting_west.ravel(), northing.ravel(), upward.ravel()
-                )
-            )
+        b_e_west = evaluate(
+            magnetic_e, (easting_west, northing, upward), sample_prism, magnetization
         )
         # Check symmetry between west and east
         if magnetization[0] != 0:
@@ -247,17 +271,11 @@ class TestSymmetryBe:
         magnetization_west = np.array([-500.0, 0, 0])
         # Compute the magnetic field generated by each moment on the
         # observation points
-        b_e_east = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *magnetization_east)
-                for e, n, u in zip(easting, northing, upward)
-            )
+        b_e_east = evaluate(
+            magnetic_e, (easting, northing, upward), sample_prism, magnetization_east
         )
-        b_e_west = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *magnetization_west)
-                for e, n, u in zip(easting, northing, upward)
-            )
+        b_e_west = evaluate(
+            magnetic_e, (easting, northing, upward), sample_prism, magnetization_west
         )
         # Check if the sign gets inverted
         npt.assert_allclose(b_e_east, -b_e_west)
@@ -269,18 +287,16 @@ class TestSymmetryBn:
     """
 
     atol = 1e-17  # absolute tolerance for values near zero
+    MAGNETIZATIONS = [
+        (500, 0, 0),
+        (-500, 0, 0),
+        (0, 500, 0),
+        (0, -500, 0),
+        (0, 0, 500),
+        (0, 0, -500),
+    ]
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_easting_northing(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -300,21 +316,11 @@ class TestSymmetryBn:
         upward_bottom = 2 * prism_center_u - upward_top
         # Compute magnetic_n on every observation point
         magnetization = np.array(magnetization)
-        b_n_top = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_top.ravel()
-                )
-            )
+        b_n_top = evaluate(
+            magnetic_n, (easting, northing, upward_top), sample_prism, magnetization
         )
-        b_n_bottom = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_bottom.ravel()
-                )
-            )
+        b_n_bottom = evaluate(
+            magnetic_n, (easting, northing, upward_bottom), sample_prism, magnetization
         )
         # Check symmetry between top and bottom
         if magnetization[2] != 0:
@@ -322,17 +328,7 @@ class TestSymmetryBn:
         else:
             npt.assert_allclose(b_n_top, b_n_bottom, atol=self.atol)
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_easting_upward(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -352,21 +348,11 @@ class TestSymmetryBn:
         northing_south = 2 * prism_center_n - northing_north
         # Compute magnetic_n on every observation point
         magnetization = np.array(magnetization)
-        b_n_north = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing_north.ravel(), upward.ravel()
-                )
-            )
+        b_n_north = evaluate(
+            magnetic_n, (easting, northing_north, upward), sample_prism, magnetization
         )
-        b_n_south = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing_south.ravel(), upward.ravel()
-                )
-            )
+        b_n_south = evaluate(
+            magnetic_n, (easting, northing_south, upward), sample_prism, magnetization
         )
         # Check symmetry between south and north
         if magnetization[1] != 0:
@@ -374,17 +360,7 @@ class TestSymmetryBn:
         else:
             npt.assert_allclose(b_n_north, -b_n_south, atol=self.atol)
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_northing_upward(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -404,21 +380,11 @@ class TestSymmetryBn:
         easting_west = 2 * prism_center_e - easting_east
         # Compute magnetic_n on every observation point
         magnetization = np.array(magnetization)
-        b_n_east = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting_east.ravel(), northing.ravel(), upward.ravel()
-                )
-            )
+        b_n_east = evaluate(
+            magnetic_n, (easting_east, northing, upward), sample_prism, magnetization
         )
-        b_n_west = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting_west.ravel(), northing.ravel(), upward.ravel()
-                )
-            )
+        b_n_west = evaluate(
+            magnetic_n, (easting_west, northing, upward), sample_prism, magnetization
         )
         # Check symmetry between west and east
         if magnetization[0] != 0:
@@ -442,17 +408,11 @@ class TestSymmetryBn:
         magnetization_south = np.array([0, -500.0, 0])
         # Compute the magnetic field generated by each moment on the
         # observation points
-        b_n_north = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *magnetization_north)
-                for e, n, u in zip(easting, northing, upward)
-            )
+        b_n_north = evaluate(
+            magnetic_n, (easting, northing, upward), sample_prism, magnetization_north
         )
-        b_n_south = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *magnetization_south)
-                for e, n, u in zip(easting, northing, upward)
-            )
+        b_n_south = evaluate(
+            magnetic_n, (easting, northing, upward), sample_prism, magnetization_south
         )
         # Check if the sign gets inverted
         npt.assert_allclose(b_n_north, -b_n_south)
@@ -464,18 +424,16 @@ class TestSymmetryBu:
     """
 
     atol = 1e-17  # absolute tolerance for values near zero
+    MAGNETIZATIONS = [
+        (500, 0, 0),
+        (-500, 0, 0),
+        (0, 500, 0),
+        (0, -500, 0),
+        (0, 0, 500),
+        (0, 0, -500),
+    ]
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_easting_northing(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -495,21 +453,11 @@ class TestSymmetryBu:
         upward_bottom = 2 * prism_center_u - upward_top
         # Compute magnetic_u on every observation point
         magnetization = np.array(magnetization)
-        b_u_top = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_top.ravel()
-                )
-            )
+        b_u_top = evaluate(
+            magnetic_u, (easting, northing, upward_top), sample_prism, magnetization
         )
-        b_u_bottom = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_bottom.ravel()
-                )
-            )
+        b_u_bottom = evaluate(
+            magnetic_u, (easting, northing, upward_bottom), sample_prism, magnetization
         )
         # Check symmetry between top and bottom
         if magnetization[2] != 0:
@@ -517,17 +465,7 @@ class TestSymmetryBu:
         else:
             npt.assert_allclose(b_u_top, -b_u_bottom, atol=self.atol)
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_easting_upward(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -547,21 +485,11 @@ class TestSymmetryBu:
         northing_south = 2 * prism_center_n - northing_north
         # Compute magnetic_u on every observation point
         magnetization = np.array(magnetization)
-        b_u_north = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing_north.ravel(), upward.ravel()
-                )
-            )
+        b_u_north = evaluate(
+            magnetic_u, (easting, northing_north, upward), sample_prism, magnetization
         )
-        b_u_south = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting.ravel(), northing_south.ravel(), upward.ravel()
-                )
-            )
+        b_u_south = evaluate(
+            magnetic_u, (easting, northing_south, upward), sample_prism, magnetization
         )
         # Check symmetry between south and north
         if magnetization[1] != 0:
@@ -569,17 +497,7 @@ class TestSymmetryBu:
         else:
             npt.assert_allclose(b_u_north, b_u_south, atol=self.atol)
 
-    @pytest.mark.parametrize(
-        "magnetization",
-        [
-            (500, 0, 0),
-            (-500, 0, 0),
-            (0, 500, 0),
-            (0, -500, 0),
-            (0, 0, 500),
-            (0, 0, -500),
-        ],
-    )
+    @pytest.mark.parametrize("magnetization", MAGNETIZATIONS)
     def test_symmetry_across_northing_upward(
         self, sample_3d_grid, sample_prism, magnetization
     ):
@@ -599,21 +517,11 @@ class TestSymmetryBu:
         easting_west = 2 * prism_center_e - easting_east
         # Compute magnetic_u on every observation point
         magnetization = np.array(magnetization)
-        b_u_east = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting_east.ravel(), northing.ravel(), upward.ravel()
-                )
-            )
+        b_u_east = evaluate(
+            magnetic_u, (easting_east, northing, upward), sample_prism, magnetization
         )
-        b_u_west = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *magnetization)
-                for e, n, u in zip(
-                    easting_west.ravel(), northing.ravel(), upward.ravel()
-                )
-            )
+        b_u_west = evaluate(
+            magnetic_u, (easting_west, northing, upward), sample_prism, magnetization
         )
         # Check symmetry between east and west
         if magnetization[0] != 0:
@@ -637,17 +545,11 @@ class TestSymmetryBu:
         magnetization_down = np.array([0, 0, -500.0])
         # Compute the magnetic field generated by each moment on the
         # observation points
-        b_u_up = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *magnetization_up)
-                for e, n, u in zip(easting, northing, upward)
-            )
+        b_u_up = evaluate(
+            magnetic_u, (easting, northing, upward), sample_prism, magnetization_up
         )
-        b_u_down = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *magnetization_down)
-                for e, n, u in zip(easting, northing, upward)
-            )
+        b_u_down = evaluate(
+            magnetic_u, (easting, northing, upward), sample_prism, magnetization_down
         )
         # Check if the sign gets inverted
         npt.assert_allclose(b_u_up, -b_u_down)
@@ -667,31 +569,17 @@ class TestMagneticField:
         Test magnetic_field against each one of the other functions
         """
         # Compute all components of B using magnetic_field
-        b = np.array(
-            list(
-                magnetic_field(e, n, u, *sample_prism, *sample_magnetization)
-                for e, n, u in zip(*sample_3d_grid)
-            )
-        )
+        b = evaluate(magnetic_field, sample_3d_grid, sample_prism, sample_magnetization)
         b_e, b_n, b_u = tuple(b[:, i] for i in range(3))
         # Computed the individual fields
-        b_e_expected = np.array(
-            list(
-                magnetic_e(e, n, u, *sample_prism, *sample_magnetization)
-                for e, n, u in zip(*sample_3d_grid)
-            )
+        b_e_expected = evaluate(
+            magnetic_e, sample_3d_grid, sample_prism, sample_magnetization
         )
-        b_n_expected = np.array(
-            list(
-                magnetic_n(e, n, u, *sample_prism, *sample_magnetization)
-                for e, n, u in zip(*sample_3d_grid)
-            )
+        b_n_expected = evaluate(
+            magnetic_n, sample_3d_grid, sample_prism, sample_magnetization
         )
-        b_u_expected = np.array(
-            list(
-                magnetic_u(e, n, u, *sample_prism, *sample_magnetization)
-                for e, n, u in zip(*sample_3d_grid)
-            )
+        b_u_expected = evaluate(
+            magnetic_u, sample_3d_grid, sample_prism, sample_magnetization
         )
         npt.assert_allclose(b_e, b_e_expected)
         npt.assert_allclose(b_n, b_n_expected)
@@ -700,100 +588,25 @@ class TestMagneticField:
 
 class TestDivergenceOfB:
     """
-    Test if the divergence of the magnetic field is equal to zero
-
-    Compute the derivatives of B through finite differences
+    Test if the divergence of the magnetic field is equal to zero.
     """
 
-    # Displacement used in the finite differences
-    delta = 1e-6
-
-    def get_b_ee_finite_differences(self, coordinates, prism, magnetization):
+    def test_divergence_of_b_finite_differences(
+        self, sample_3d_grid, sample_prism, sample_magnetization
+    ):
         """
-        Compute b_ee using finite differences
+        Test div of B computing its derivatives through finite differences.
         """
-        # Get original coordinates
-        easting, northing, upward = coordinates
-        # Shift coordinates using delta
-        easting_shifted = easting + self.delta
-        # Compute b_e on original and shifted coordinates
-        b_e = np.array(
-            list(
-                magnetic_e(e, n, u, *prism, *magnetization)
-                for e, n, u in zip(easting, northing, upward)
-            )
+        delta = 1e-6
+        kwargs = dict(
+            coordinates=sample_3d_grid,
+            prism=sample_prism,
+            magnetization=sample_magnetization,
+            delta=delta,
         )
-        b_e_shifted = np.array(
-            list(
-                magnetic_e(e, n, u, *prism, *magnetization)
-                for e, n, u in zip(easting_shifted, northing, upward)
-            )
-        )
-        # Compute b_ee
-        b_ee = (b_e_shifted - b_e) / self.delta
-        return b_ee
-
-    def get_b_nn_finite_differences(self, coordinates, prism, magnetization):
-        """
-        Compute b_nn using finite differences
-        """
-        # Get original coordinates
-        easting, northing, upward = coordinates
-        # Shift coordinates using delta
-        northing_shifted = northing + self.delta
-        # Compute b_e on original and shifted coordinates
-        b_n = np.array(
-            list(
-                magnetic_n(e, n, u, *prism, *magnetization)
-                for e, n, u in zip(easting, northing, upward)
-            )
-        )
-        b_n_shifted = np.array(
-            list(
-                magnetic_n(e, n, u, *prism, *magnetization)
-                for e, n, u in zip(easting, northing_shifted, upward)
-            )
-        )
-        # Compute b_nn
-        b_nn = (b_n_shifted - b_n) / self.delta
-        return b_nn
-
-    def get_b_uu_finite_differences(self, coordinates, prism, magnetization):
-        """
-        Compute b_uu using finite differences
-        """
-        # Get original coordinates
-        easting, northing, upward = coordinates
-        # Shift coordinates using delta
-        upward_shifted = upward + self.delta
-        # Compute b_e on original and shifted coordinates
-        b_u = np.array(
-            list(
-                magnetic_u(e, n, u, *prism, *magnetization)
-                for e, n, u in zip(easting, northing, upward)
-            )
-        )
-        b_u_shifted = np.array(
-            list(
-                magnetic_u(e, n, u, *prism, *magnetization)
-                for e, n, u in zip(easting, northing, upward_shifted)
-            )
-        )
-        # Compute b_uu
-        b_uu = (b_u_shifted - b_u) / self.delta
-        return b_uu
-
-    def test_divergence_of_b(self, sample_3d_grid, sample_prism, sample_magnetization):
-        # Compute b_ee, b_nn and b_uu using finite differences
-        b_ee = self.get_b_ee_finite_differences(
-            sample_3d_grid, sample_prism, sample_magnetization
-        )
-        b_nn = self.get_b_nn_finite_differences(
-            sample_3d_grid, sample_prism, sample_magnetization
-        )
-        b_uu = self.get_b_uu_finite_differences(
-            sample_3d_grid, sample_prism, sample_magnetization
-        )
+        b_ee = finite_differences(direction="e", forward_func=magnetic_e, **kwargs)
+        b_nn = finite_differences(direction="n", forward_func=magnetic_n, **kwargs)
+        b_uu = finite_differences(direction="u", forward_func=magnetic_u, **kwargs)
         # Check if the divergence of B is zero
         npt.assert_allclose(-b_uu, b_ee + b_nn, atol=1e-11)
 
