@@ -801,3 +801,24 @@ class TestMagneticFieldSingularities:
                 for (e, n, u) in zip(easting, northing, upward)
             )
         npt.assert_allclose(results, results[0])
+
+
+class TestMagGradiometryFiniteDifferences:
+    """
+    Test the magnetic gradiometry components by comparing them to numerical
+    derivatives computed through finite differences of the magnetic components.
+    """
+
+    delta = 1e-6  # displacement used in the finite difference calculations
+
+    def test(self, sample_3d_grid, sample_prism, sample_magnetization):
+        b_ee = evaluate(magnetic_ee, sample_3d_grid, sample_prism, sample_magnetization)
+        b_ee_finite_diff = finite_differences(
+            sample_3d_grid,
+            sample_prism,
+            sample_magnetization,
+            direction="e",
+            forward_func=magnetic_e,
+            delta=self.delta,
+        )
+        npt.assert_allclose(b_ee, b_ee_finite_diff, atol=1e-14)
