@@ -11,7 +11,15 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..prism import magnetic_e, magnetic_field, magnetic_n, magnetic_u
+from ..prism import (
+    magnetic_e,
+    magnetic_field,
+    magnetic_n,
+    magnetic_u,
+    magnetic_ee,
+    magnetic_nn,
+    magnetic_uu,
+)
 
 
 @pytest.fixture(name="sample_prism")
@@ -590,6 +598,21 @@ class TestDivergenceOfB:
     """
     Test if the divergence of the magnetic field is equal to zero.
     """
+
+    def test_divergence_of_b(self, sample_3d_grid, sample_prism, sample_magnetization):
+        """
+        Test div of B through magnetic gradiometry analytical functions.
+        """
+        kwargs = dict(
+            coordinates=sample_3d_grid,
+            prism=sample_prism,
+            magnetization=sample_magnetization,
+        )
+        b_ee = evaluate(magnetic_ee, **kwargs)
+        b_nn = evaluate(magnetic_nn, **kwargs)
+        b_uu = evaluate(magnetic_uu, **kwargs)
+        # Check if the divergence of B is zero
+        npt.assert_allclose(-b_uu, b_ee + b_nn, atol=1e-11)
 
     def test_divergence_of_b_finite_differences(
         self, sample_3d_grid, sample_prism, sample_magnetization
