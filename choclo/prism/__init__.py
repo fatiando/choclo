@@ -30,6 +30,15 @@ from ._kernels import (
     kernel_pot,
     kernel_u,
     kernel_uu,
+    kernel_eee,
+    kernel_nnn,
+    kernel_uuu,
+    kernel_een,
+    kernel_eeu,
+    kernel_enn,
+    kernel_nnu,
+    kernel_euu,
+    kernel_nuu,
 )
 from ._magnetic import (
     magnetic_e,
