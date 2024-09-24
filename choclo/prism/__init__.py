@@ -31,4 +31,12 @@ from ._kernels import (
     kernel_u,
     kernel_uu,
 )
-from ._magnetic import magnetic_e, magnetic_field, magnetic_n, magnetic_u
+from ._magnetic import (
+    magnetic_e,
+    magnetic_field,
+    magnetic_n,
+    magnetic_u,
+    magnetic_ee,
+    magnetic_nn,
+    magnetic_uu,
+)
