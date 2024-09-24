@@ -595,7 +595,7 @@ class TestDivergenceOfB:
         self, sample_3d_grid, sample_prism, sample_magnetization
     ):
         """
-        Test divergence of B computing its derivatives through finite differences.
+        Test div of B computing its derivatives through finite differences.
         """
         delta = 1e-6
         kwargs = dict(
