@@ -39,6 +39,7 @@ from ._kernels import (
     kernel_nnu,
     kernel_euu,
     kernel_nuu,
+    kernel_enu,
 )
 from ._magnetic import (
     magnetic_e,
