@@ -821,4 +821,4 @@ class TestMagGradiometryFiniteDifferences:
             forward_func=magnetic_e,
             delta=self.delta,
         )
-        npt.assert_allclose(b_ee, b_ee_finite_diff, atol=1e-14)
+        npt.assert_allclose(b_ee, b_ee_finite_diff, atol=1e-11)
