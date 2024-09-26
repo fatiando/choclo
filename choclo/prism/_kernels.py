@@ -889,7 +889,7 @@ def kernel_eee(easting, northing, upward, radius):
 
         k_{xxx}(x, y, z) =
             \frac{
-                y z (2 x^2 + y^2 + z^2)
+                - y z (2 x^2 + y^2 + z^2)
             }{
                 (x^2 + y^2)(x^2 + z^2)
                 \sqrt{x^2 + y^2 + z^2}
@@ -941,7 +941,7 @@ def kernel_nnn(easting, northing, upward, radius):
 
         k_{yyy}(x, y, z) =
             \frac{
-                x z (x^2 + 2 y^2 + z^2)
+                - x z (x^2 + 2 y^2 + z^2)
             }{
                 (x^2 + y^2)(y^2 + z^2)
                 \sqrt{x^2 + y^2 + z^2}
@@ -993,7 +993,7 @@ def kernel_uuu(easting, northing, upward, radius):
 
         k_{zzz}(x, y, z) =
             \frac{
-                x y (x^2 + y^2 + 2 z^2)
+                - x y (x^2 + y^2 + 2 z^2)
             }{
                 (x^2 + z^2)(y^2 + z^2)
                 \sqrt{x^2 + y^2 + z^2}
@@ -1045,7 +1045,7 @@ def kernel_een(easting, northing, upward, radius):
 
         k_{xxy}(x, y, z) =
             \frac{
-                x
+                - x
             }{
                 (z + \sqrt{x^2 + y^2 + z^2})
                 \sqrt{x^2 + y^2 + z^2}
@@ -1097,7 +1097,7 @@ def kernel_eeu(easting, northing, upward, radius):
 
         k_{xxz}(x, y, z) =
             \frac{
-                x
+                - x
             }{
                 (y + \sqrt{x^2 + y^2 + z^2})
                 \sqrt{x^2 + y^2 + z^2}
@@ -1149,7 +1149,7 @@ def kernel_enn(easting, northing, upward, radius):
 
         k_{xyy}(x, y, z) =
             \frac{
-                y
+                - y
             }{
                 (z + \sqrt{x^2 + y^2 + z^2})
                 \sqrt{x^2 + y^2 + z^2}
@@ -1201,7 +1201,7 @@ def kernel_nnu(easting, northing, upward, radius):
 
         k_{yyz}(x, y, z) =
             \frac{
-                y
+                - y
             }{
                 (x + \sqrt{x^2 + y^2 + z^2})
                 \sqrt{x^2 + y^2 + z^2}
@@ -1253,7 +1253,7 @@ def kernel_euu(easting, northing, upward, radius):
 
         k_{xzz}(x, y, z) =
             \frac{
-                z
+                - z
             }{
                 (y + \sqrt{x^2 + y^2 + z^2})
                 \sqrt{x^2 + y^2 + z^2}
@@ -1305,7 +1305,7 @@ def kernel_nuu(easting, northing, upward, radius):
 
         k_{yzz}(x, y, z) =
             \frac{
-                z
+                - z
             }{
                 (x + \sqrt{x^2 + y^2 + z^2})
                 \sqrt{x^2 + y^2 + z^2}
@@ -1355,10 +1355,10 @@ def kernel_enu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xyz}(x, y, z) = \frac{1}{\sqrt{x^2 + y^2 + z^2}}
+        k_{xyz}(x, y, z) = \frac{-1}{\sqrt{x^2 + y^2 + z^2}}
 
     """
-    return 1 / radius
+    return -1 / radius
 
 
 @jit(nopython=True)
@@ -1372,7 +1372,7 @@ def _kernel_iii(x_i, x_j, x_k, radius):
 
         k_{iii}(x_i, x_j, x_k) =
             \frac{
-                x_j x_k (2 x_i^2 + x_j^2 + x_k^2)
+                - x_j x_k (2 x_i^2 + x_j^2 + x_k^2)
             }{
                 (x_i^2 + x_j^2)(x_i^2 + x_k^2)
                 \sqrt{x_i^2 + x_j^2 + x_k^2}
@@ -1409,8 +1409,10 @@ def _kernel_iii(x_i, x_j, x_k, radius):
     >>> k_nnn = _kernel_iii(northing, upward, easting, radius)
     >>> k_uuu = _kernel_iii(upward, easting, northing, radius)
     """
+    if (x_i == 0 and x_j == 0) or (x_i == 0 and x_k == 0):
+        return 0.0
     x_i_sq, x_j_sq, x_k_sq = x_i**2, x_j**2, x_k**2
-    numerator = x_j * x_k * (2 * x_i_sq + x_j_sq + x_k_sq)
+    numerator = -x_j * x_k * (2 * x_i_sq + x_j_sq + x_k_sq)
     denominator = (x_i_sq + x_j_sq) * (x_i_sq + x_k_sq) * radius
     return numerator / denominator
 
@@ -1428,7 +1430,7 @@ def _kernel_iij(x_i, x_j, x_k, radius):
 
         k_{iij}(x_i, x_j, x_k) =
             \frac{
-                x_i
+                - x_i
             }{
                 (x_k + \sqrt{x_i^2 + x_j^2 + x_k^2})
                 \sqrt{x_i^2 + x_j^2 + x_k^2}
@@ -1470,4 +1472,6 @@ def _kernel_iij(x_i, x_j, x_k, radius):
     >>> k_euu = _kernel_iij(upward, easting, northing, radius)
     >>> k_nuu = _kernel_iij(upward, northing, upward, radius)
     """
-    return x_i / ((x_k + radius) * radius)
+    if x_i == 0 and x_j == 0:
+        return 0.0
+    return -x_i / ((x_k + radius) * radius)
