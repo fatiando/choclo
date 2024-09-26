@@ -1073,7 +1073,29 @@ def magnetic_ee(
     :func:`choclo.prism.magnetic_nn`
     :func:`choclo.prism.magnetic_uu`
     """
-    # TODO: Check if observation point falls in a singular point
+    # Check if observation point falls in a singular point
+    if is_point_on_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_interior_point(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        return np.nan
     # Initialize magnetic gradiometry component
     b_ee = 0.0
     # Iterate over the vertices of the prism
@@ -1217,7 +1239,29 @@ def magnetic_nn(
     :func:`choclo.prism.magnetic_ee`
     :func:`choclo.prism.magnetic_uu`
     """
-    # TODO: Check if observation point falls in a singular point
+    # Check if observation point falls in a singular point
+    if is_point_on_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_interior_point(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        return np.nan
     # Initialize magnetic gradiometry component
     b_nn = 0.0
     # Iterate over the vertices of the prism
@@ -1361,7 +1405,29 @@ def magnetic_uu(
     :func:`choclo.prism.magnetic_ee`
     :func:`choclo.prism.magnetic_nn`
     """
-    # TODO: Check if observation point falls in a singular point
+    # Check if observation point falls in a singular point
+    if is_point_on_edge(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ) or is_interior_point(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+    ):
+        return np.nan
     # Initialize magnetic gradiometry component
     b_uu = 0.0
     # Iterate over the vertices of the prism
