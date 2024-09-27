@@ -810,15 +810,37 @@ class TestMagGradiometryFiniteDifferences:
     """
 
     delta = 1e-6  # displacement used in the finite difference calculations
+    rtol, atol = 5e-4, 1e-13  # tolerances used in the comparisons
 
-    def test(self, sample_3d_grid, sample_prism, sample_magnetization):
-        b_ee = evaluate(magnetic_ee, sample_3d_grid, sample_prism, sample_magnetization)
-        b_ee_finite_diff = finite_differences(
+    @pytest.mark.parametrize("direction_1", ["e", "n", "u"])
+    @pytest.mark.parametrize("direction_2", ["e", "n", "u"])
+    def test_derivatives_of_magnetic_components(
+        self,
+        sample_3d_grid,
+        sample_prism,
+        sample_magnetization,
+        direction_1,
+        direction_2,
+    ):
+        # Get magnetic forward function
+        mag_func = globals()[f"magnetic_{direction_1}"]
+        # Get magnetic gradiometry forward function
+        grad_component = "".join(sorted(f"{direction_1}{direction_2}"))
+        mag_grad_func = globals()[f"magnetic_{grad_component}"]
+        # Evaluate the mag grad function on the sample grid
+        mag_grad = evaluate(
+            mag_grad_func, sample_3d_grid, sample_prism, sample_magnetization
+        )
+        # Compute the mag grad function using finite differences
+        mag_grad_finite_diff = finite_differences(
             sample_3d_grid,
             sample_prism,
             sample_magnetization,
-            direction="e",
-            forward_func=magnetic_e,
+            direction=direction_2,
+            forward_func=mag_func,
             delta=self.delta,
         )
-        npt.assert_allclose(b_ee, b_ee_finite_diff, atol=1e-11)
+        # Compare results
+        npt.assert_allclose(
+            mag_grad, mag_grad_finite_diff, rtol=self.rtol, atol=self.atol
+        )
