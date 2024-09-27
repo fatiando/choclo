@@ -215,8 +215,7 @@ def magnetic_field(
     .. math::
 
         u_{ij} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
+            \frac{\partial^2}{\partial i \partial j}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -445,8 +444,7 @@ def magnetic_e(
     .. math::
 
         u_{ij} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
+            \frac{\partial^2}{\partial i \partial j}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -627,8 +625,7 @@ def magnetic_n(
     .. math::
 
         u_{ij} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
+            \frac{\partial^2}{\partial i \partial j}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -809,8 +806,7 @@ def magnetic_u(
     .. math::
 
         u_{ij} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
+            \frac{\partial^2}{\partial i \partial j}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -991,9 +987,7 @@ def magnetic_ee(
     .. math::
 
         u_{ijk} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
-            \frac{\partial}{\partial k}
+            \frac{\partial^3}{\partial i \partial j \partial k}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -1141,9 +1135,7 @@ def magnetic_nn(
     .. math::
 
         u_{ijk} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
-            \frac{\partial}{\partial k}
+            \frac{\partial^3}{\partial i \partial j \partial k}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -1291,9 +1283,7 @@ def magnetic_uu(
     .. math::
 
         u_{ijk} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
-            \frac{\partial}{\partial k}
+            \frac{\partial^3}{\partial i \partial j \partial k}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -1441,9 +1431,7 @@ def magnetic_en(
     .. math::
 
         u_{ijk} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
-            \frac{\partial}{\partial k}
+            \frac{\partial^3}{\partial i \partial j \partial k}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -1591,9 +1579,7 @@ def magnetic_eu(
     .. math::
 
         u_{ijk} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
-            \frac{\partial}{\partial k}
+            \frac{\partial^3}{\partial i \partial j \partial k}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
@@ -1741,9 +1727,7 @@ def magnetic_nu(
     .. math::
 
         u_{ijk} =
-            \frac{\partial}{\partial i}
-            \frac{\partial}{\partial j}
-            \frac{\partial}{\partial k}
+            \frac{\partial^3}{\partial i \partial j \partial k}
             \int\limits_R
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert}
             dv
