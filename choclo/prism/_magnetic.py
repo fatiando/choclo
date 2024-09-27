@@ -13,21 +13,21 @@ from numba import jit
 from ..constants import VACUUM_MAGNETIC_PERMEABILITY
 from ._kernels import (
     kernel_ee,
-    kernel_en,
-    kernel_eu,
-    kernel_nn,
-    kernel_nu,
-    kernel_uu,
     kernel_eee,
-    kernel_nnn,
-    kernel_uuu,
     kernel_een,
     kernel_eeu,
+    kernel_en,
     kernel_enn,
-    kernel_nnu,
-    kernel_euu,
-    kernel_nuu,
     kernel_enu,
+    kernel_eu,
+    kernel_euu,
+    kernel_nn,
+    kernel_nnn,
+    kernel_nnu,
+    kernel_nu,
+    kernel_nuu,
+    kernel_uu,
+    kernel_uuu,
 )
 from ._utils import (
     is_interior_point,
@@ -1827,8 +1827,12 @@ def _calculate_component(
     ----------
     easting, northing, upward : floats
         Coordinates of the observation point. Must be in meters.
-    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : floats
-        The boundaries of the prism. Must be in meters.
+    prism_west, prism_east : floats
+        The easting boundaries of the prism. Must be in meters.
+    prism_south, prism_north : floats
+        The northing boundaries of the prism. Must be in meters.
+    prism_bottom, prism_top : floats
+        The upward boundaries of the prism. Must be in meters.
     magnetization_east, magnetization_north, magnetization_up : floats
         The components of the magnetization vector of the prism. Must be in
         :math:`A m^{-1}`.

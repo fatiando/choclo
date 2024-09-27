@@ -13,15 +13,15 @@ import pytest
 
 from ..prism import (
     magnetic_e,
-    magnetic_field,
-    magnetic_n,
-    magnetic_u,
     magnetic_ee,
-    magnetic_nn,
-    magnetic_uu,
     magnetic_en,
     magnetic_eu,
+    magnetic_field,
+    magnetic_n,
+    magnetic_nn,
     magnetic_nu,
+    magnetic_u,
+    magnetic_uu,
 )
 
 
