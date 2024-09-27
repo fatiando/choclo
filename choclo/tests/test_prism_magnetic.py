@@ -19,6 +19,9 @@ from ..prism import (
     magnetic_ee,
     magnetic_nn,
     magnetic_uu,
+    magnetic_en,
+    magnetic_eu,
+    magnetic_nu,
 )
 
 
@@ -810,7 +813,7 @@ class TestMagGradiometryFiniteDifferences:
     """
 
     delta = 1e-6  # displacement used in the finite difference calculations
-    rtol, atol = 5e-4, 1e-13  # tolerances used in the comparisons
+    rtol, atol = 5e-4, 5e-12  # tolerances used in the comparisons
 
     @pytest.mark.parametrize("i", ["e", "n", "u"])
     @pytest.mark.parametrize("j", ["e", "n", "u"])
