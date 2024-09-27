@@ -49,4 +49,7 @@ from ._magnetic import (
     magnetic_ee,
     magnetic_nn,
     magnetic_uu,
+    magnetic_en,
+    magnetic_eu,
+    magnetic_nu,
 )
