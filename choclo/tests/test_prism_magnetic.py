@@ -812,20 +812,23 @@ class TestMagGradiometryFiniteDifferences:
     delta = 1e-6  # displacement used in the finite difference calculations
     rtol, atol = 5e-4, 1e-13  # tolerances used in the comparisons
 
-    @pytest.mark.parametrize("direction_1", ["e", "n", "u"])
-    @pytest.mark.parametrize("direction_2", ["e", "n", "u"])
+    @pytest.mark.parametrize("i", ["e", "n", "u"])
+    @pytest.mark.parametrize("j", ["e", "n", "u"])
     def test_derivatives_of_magnetic_components(
-        self,
-        sample_3d_grid,
-        sample_prism,
-        sample_magnetization,
-        direction_1,
-        direction_2,
+        self, sample_3d_grid, sample_prism, sample_magnetization, i, j
     ):
+        """
+        Compare the magnetic gradiometry functions with a finite difference
+        approximation of it computed from the magnetic field components.
+
+        With this function we can compare the result of ``magnetic_{i}{j}``
+        against a finite difference approximation using the ``magnetic_{i}``
+        forward function, where ``i`` and ``j`` can be ``e``, ``n`` or ``u``.
+        """
         # Get magnetic forward function
-        mag_func = globals()[f"magnetic_{direction_1}"]
+        mag_func = globals()[f"magnetic_{i}"]
         # Get magnetic gradiometry forward function
-        grad_component = "".join(sorted(f"{direction_1}{direction_2}"))
+        grad_component = "".join(sorted(f"{i}{j}"))
         mag_grad_func = globals()[f"magnetic_{grad_component}"]
         # Evaluate the mag grad function on the sample grid
         mag_grad = evaluate(
@@ -836,7 +839,7 @@ class TestMagGradiometryFiniteDifferences:
             sample_3d_grid,
             sample_prism,
             sample_magnetization,
-            direction=direction_2,
+            direction=j,
             forward_func=mag_func,
             delta=self.delta,
         )
