@@ -514,43 +514,24 @@ def magnetic_e(
         prism_top,
     ):
         return np.nan
-    # Initialize magnetic field vector component
-    b_e = 0.0
-    # Iterate over the vertices of the prism
-    for i in range(2):
-        # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
-        shift_east_sq = shift_east**2
-        for j in range(2):
-            # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
-            shift_north_sq = shift_north**2
-            for k in range(2):
-                # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
-                shift_upward_sq = shift_upward**2
-                # Compute the radius
-                radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
-                # Compute kernel tensor components for the current vertex
-                k_ee = kernel_ee(shift_east, shift_north, shift_upward, radius)
-                k_en = kernel_en(shift_east, shift_north, shift_upward, radius)
-                k_eu = kernel_eu(shift_east, shift_north, shift_upward, radius)
-                # Compute b_e using the dot product between the kernel tensor
-                # and the magnetization vector of the prism
-                b_e += (-1) ** (i + j + k) * (
-                    magnetization_east * k_ee
-                    + magnetization_north * k_en
-                    + magnetization_up * k_eu
-                )
+    # Compute magnetic field vector component
+    b_e = _calculate_component(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        magnetization_east,
+        magnetization_north,
+        magnetization_up,
+        kernel_ee,
+        kernel_en,
+        kernel_eu,
+    )
     # Add 4 pi to Be if computing on the eastmost face, to correctly evaluate
     # the limit approaching from outside (approaching from the east)
     if is_point_on_east_face(
@@ -715,43 +696,24 @@ def magnetic_n(
         prism_top,
     ):
         return np.nan
-    # Initialize magnetic field vector component
-    b_n = 0.0
-    # Iterate over the vertices of the prism
-    for i in range(2):
-        # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
-        shift_east_sq = shift_east**2
-        for j in range(2):
-            # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
-            shift_north_sq = shift_north**2
-            for k in range(2):
-                # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
-                shift_upward_sq = shift_upward**2
-                # Compute the radius
-                radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
-                # Compute kernel tensor components for the current vertex
-                k_nn = kernel_nn(shift_east, shift_north, shift_upward, radius)
-                k_en = kernel_en(shift_east, shift_north, shift_upward, radius)
-                k_nu = kernel_nu(shift_east, shift_north, shift_upward, radius)
-                # Compute b_n using the dot product between the kernel tensor
-                # and the magnetization vector of the prism
-                b_n += (-1) ** (i + j + k) * (
-                    magnetization_east * k_en
-                    + magnetization_north * k_nn
-                    + magnetization_up * k_nu
-                )
+    # Compute magnetic field vector component
+    b_n = _calculate_component(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        magnetization_east,
+        magnetization_north,
+        magnetization_up,
+        kernel_en,
+        kernel_nn,
+        kernel_nu,
+    )
     # Add 4 pi to Bn if computing on the northmost face, to correctly evaluate
     # the limit approaching from outside (approaching from the north)
     if is_point_on_north_face(
@@ -916,43 +878,24 @@ def magnetic_u(
         prism_top,
     ):
         return np.nan
-    # Initialize magnetic field vector component
-    b_u = 0.0
-    # Iterate over the vertices of the prism
-    for i in range(2):
-        # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
-        shift_east_sq = shift_east**2
-        for j in range(2):
-            # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
-            shift_north_sq = shift_north**2
-            for k in range(2):
-                # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
-                shift_upward_sq = shift_upward**2
-                # Compute the radius
-                radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
-                # Compute kernel tensor components for the current vertex
-                k_uu = kernel_uu(shift_east, shift_north, shift_upward, radius)
-                k_eu = kernel_eu(shift_east, shift_north, shift_upward, radius)
-                k_nu = kernel_nu(shift_east, shift_north, shift_upward, radius)
-                # Compute b_n using the dot product between the kernel tensor
-                # and the magnetization vector of the prism
-                b_u += (-1) ** (i + j + k) * (
-                    magnetization_east * k_eu
-                    + magnetization_north * k_nu
-                    + magnetization_up * k_uu
-                )
+    # Compute magnetic field vector component
+    b_u = _calculate_component(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        magnetization_east,
+        magnetization_north,
+        magnetization_up,
+        kernel_eu,
+        kernel_nu,
+        kernel_uu,
+    )
     # Add 4 pi to Bu if computing on the north face, to correctly evaluate the
     # limit approaching from outside (approaching from the top)
     if is_point_on_top_face(
@@ -1096,43 +1039,24 @@ def magnetic_ee(
         prism_top,
     ):
         return np.nan
-    # Initialize magnetic gradiometry component
-    b_ee = 0.0
-    # Iterate over the vertices of the prism
-    for i in range(2):
-        # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
-        shift_east_sq = shift_east**2
-        for j in range(2):
-            # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
-            shift_north_sq = shift_north**2
-            for k in range(2):
-                # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
-                shift_upward_sq = shift_upward**2
-                # Compute the radius
-                radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
-                # Compute kernel tensor components for the current vertex
-                k_eee = kernel_eee(shift_east, shift_north, shift_upward, radius)
-                k_een = kernel_een(shift_east, shift_north, shift_upward, radius)
-                k_eeu = kernel_eeu(shift_east, shift_north, shift_upward, radius)
-                # Compute b_ee using the dot product between the kernel tensor
-                # and the magnetization vector of the prism
-                b_ee += (-1) ** (i + j + k) * (
-                    magnetization_east * k_eee
-                    + magnetization_north * k_een
-                    + magnetization_up * k_eeu
-                )
+    # Compute magnetic gradiometry component
+    b_ee = _calculate_component(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        magnetization_east,
+        magnetization_north,
+        magnetization_up,
+        kernel_eee,
+        kernel_een,
+        kernel_eeu,
+    )
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_ee
 
 
@@ -1262,43 +1186,24 @@ def magnetic_nn(
         prism_top,
     ):
         return np.nan
-    # Initialize magnetic gradiometry component
-    b_nn = 0.0
-    # Iterate over the vertices of the prism
-    for i in range(2):
-        # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
-        shift_east_sq = shift_east**2
-        for j in range(2):
-            # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
-            shift_north_sq = shift_north**2
-            for k in range(2):
-                # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
-                shift_upward_sq = shift_upward**2
-                # Compute the radius
-                radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
-                # Compute kernel tensor components for the current vertex
-                k_enn = kernel_enn(shift_east, shift_north, shift_upward, radius)
-                k_nnn = kernel_nnn(shift_east, shift_north, shift_upward, radius)
-                k_nnu = kernel_nnu(shift_east, shift_north, shift_upward, radius)
-                # Compute b_nn using the dot product between the kernel tensor
-                # and the magnetization vector of the prism
-                b_nn += (-1) ** (i + j + k) * (
-                    magnetization_east * k_enn
-                    + magnetization_north * k_nnn
-                    + magnetization_up * k_nnu
-                )
+    # Compute magnetic gradiometry component
+    b_nn = _calculate_component(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        magnetization_east,
+        magnetization_north,
+        magnetization_up,
+        kernel_enn,
+        kernel_nnn,
+        kernel_nnu,
+    )
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_nn
 
 
@@ -1428,8 +1333,111 @@ def magnetic_uu(
         prism_top,
     ):
         return np.nan
-    # Initialize magnetic gradiometry component
-    b_uu = 0.0
+    # Compute magnetic gradiometry component
+    b_uu = _calculate_component(
+        easting,
+        northing,
+        upward,
+        prism_west,
+        prism_east,
+        prism_south,
+        prism_north,
+        prism_bottom,
+        prism_top,
+        magnetization_east,
+        magnetization_north,
+        magnetization_up,
+        kernel_euu,
+        kernel_nuu,
+        kernel_uuu,
+    )
+    return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_uu
+
+
+@jit(nopython=True)
+def _calculate_component(
+    easting,
+    northing,
+    upward,
+    prism_west,
+    prism_east,
+    prism_south,
+    prism_north,
+    prism_bottom,
+    prism_top,
+    magnetization_east,
+    magnetization_north,
+    magnetization_up,
+    kernel_i,
+    kernel_j,
+    kernel_k,
+):
+    r"""
+    Calculate field component for a single prism and observation point.
+
+    Evaluate the provided kernels on the shifted coordinates of prism vertices
+    to compute the magnetic field component given a magnetization vector of the
+    prism.
+
+    Parameters
+    ----------
+    easting, northing, upward : floats
+        Coordinates of the observation point. Must be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : floats
+        The boundaries of the prism. Must be in meters.
+    magnetization_east, magnetization_north, magnetization_up : floats
+        The components of the magnetization vector of the prism. Must be in
+        :math:`A m^{-1}`.
+    kernel_i, kernel_j, kernel_k : callables
+        Kernel functions to be evaluated on each vertex of the prism.
+
+    Returns
+    -------
+    float
+
+    Notes
+    -----
+    Given the kernels :math:`k_i(\hat{x}, \hat{y}, \hat{z})`,
+    :math:`k_j(\hat{x}, \hat{y}, \hat{z})`, and :math:`k_k(\hat{x}, \hat{y},
+    \hat{z})`; a prism provided by its boundaries :math:`x_1`, :math:`x_2`,
+    :math:`y_1`, :math:`y_2`, :math:`z_1`, and :math:`z_2`; a magnetization
+    vector :math:`\mathbf{M}=(M_x, M_y, M_z)`; and an observation point
+    :math:`\mathbf{p}=(x, y, z)`, this function returns:
+
+    .. math::
+
+        M_x u_x(x, y, z) + M_y u_y(x, y, z) + M_z u_z(x, y, z),
+
+    where
+
+    .. math::
+
+        u_x(x, y, z) =
+            \Bigg\lvert\Bigg\lvert\Bigg\lvert
+              k_i(\hat{x}, \hat{y}, \hat{z})
+            \Bigg\rvert_{x_1 - x}^{x_2 - x}
+            \Bigg\rvert_{y_1 - y}^{y_2 - y}
+            \Bigg\rvert_{z_1 - z}^{z_2 - z}
+
+    .. math::
+
+        u_y(x, y, z) =
+            \Bigg\lvert\Bigg\lvert\Bigg\lvert
+              k_j(\hat{x}, \hat{y}, \hat{z})
+            \Bigg\rvert_{x_1 - x}^{x_2 - x}
+            \Bigg\rvert_{y_1 - y}^{y_2 - y}
+            \Bigg\rvert_{z_1 - z}^{z_2 - z}
+
+    .. math::
+
+        u_z(x, y, z) =
+          \Bigg\lvert\Bigg\lvert\Bigg\lvert
+            k_k(\hat{x}, \hat{y}, \hat{z})
+          \Bigg\rvert_{x_1 - x}^{x_2 - x}
+          \Bigg\rvert_{y_1 - y}^{y_2 - y}
+          \Bigg\rvert_{z_1 - z}^{z_2 - z}
+    """
+    result = 0.0
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
@@ -1455,14 +1463,14 @@ def magnetic_uu(
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
                 # Compute kernel tensor components for the current vertex
-                k_euu = kernel_euu(shift_east, shift_north, shift_upward, radius)
-                k_nuu = kernel_nuu(shift_east, shift_north, shift_upward, radius)
-                k_uuu = kernel_uuu(shift_east, shift_north, shift_upward, radius)
-                # Compute b_uu using the dot product between the kernel tensor
+                k_e = kernel_i(shift_east, shift_north, shift_upward, radius)
+                k_n = kernel_j(shift_east, shift_north, shift_upward, radius)
+                k_u = kernel_k(shift_east, shift_north, shift_upward, radius)
+                # Compute b_en using the dot product between the kernel tensor
                 # and the magnetization vector of the prism
-                b_uu += (-1) ** (i + j + k) * (
-                    magnetization_east * k_euu
-                    + magnetization_north * k_nuu
-                    + magnetization_up * k_uuu
+                result += (-1) ** (i + j + k) * (
+                    magnetization_east * k_e
+                    + magnetization_north * k_n
+                    + magnetization_up * k_u
                 )
-    return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_uu
+    return result
