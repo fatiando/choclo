@@ -850,7 +850,7 @@ class TestBugfixKernelEvaluation:
         diff_above = kernel_above[0] - kernel_above[1]
         diff_shifted = kernel_shifted[0] - kernel_shifted[1]
         # These two differences should be close enough (not equal!)
-        npt.assert_allclose(diff_above, diff_shifted, rtol=1e-2)
+        npt.assert_allclose(diff_above, diff_shifted, rtol=1e-7)
 
     @pytest.mark.parametrize("shift", ("easting", "upward"))
     def test_kernel_eu(self, prism, shift):
@@ -878,7 +878,7 @@ class TestBugfixKernelEvaluation:
         diff_inline = kernel_inline[0] - kernel_inline[1]
         diff_shifted = kernel_shifted[0] - kernel_shifted[1]
         # These two differences should be close enough (not equal!)
-        npt.assert_allclose(diff_inline, diff_shifted, rtol=1e-2)
+        npt.assert_allclose(diff_inline, diff_shifted, rtol=1e-7)
 
     @pytest.mark.parametrize("shift", ("northing", "upward"))
     def test_kernel_nu(self, prism, shift):
@@ -906,4 +906,4 @@ class TestBugfixKernelEvaluation:
         diff_inline = kernel_inline[0] - kernel_inline[1]
         diff_shifted = kernel_shifted[0] - kernel_shifted[1]
         # These two differences should be close enough (not equal!)
-        npt.assert_allclose(diff_inline, diff_shifted, rtol=1e-2)
+        npt.assert_allclose(diff_inline, diff_shifted, rtol=1e-7)
