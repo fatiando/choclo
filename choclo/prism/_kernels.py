@@ -874,7 +874,7 @@ def _safe_log(x, y, z, r):
       ([Fukushima2020]_).
     * If :math:`x < 0, r = |x|`, then it returns one of the terms of the limit
       of the second-order kernels (when the observation point is inline with
-      two nodes): :math;`-\ln(-2x)`.
+      two nodes): :math:`-\ln(-2x)`.
 
     When checking if :math:`r = |x|`, we will evaluate if ``y == 0.0 and z ==
     0.0``, to avoid issues with floating point errors in cases in which
@@ -893,7 +893,7 @@ def _safe_log(x, y, z, r):
     if r == 0:
         return 0
     if x < 0:
-        if y == 0.0 and z == 0.0:  # equivalent to if r == -x
+        if y == 0.0 and z == 0.0:
             result = -np.log(-2 * x)
         else:
             result = np.log((y**2 + z**2) / (r - x))
