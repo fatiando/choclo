@@ -832,7 +832,8 @@ class TestBugfixKernelEvaluation:
         # Get the coordinates of the prism and collect only two of the vertices
         _, east, south, _, bottom, top = prism[:]
         vertices = [[east, south, top], [east, south, bottom]]
-        # Build observation points: one above the vertices, one slightly shifted
+        # Build observation points:
+        # one above the vertices, one slightly shifted
         delta = 1e-6
         if shift == "easting":
             coords = [(east, south, top + 50.0), (east + delta, south, top + 50.0)]
