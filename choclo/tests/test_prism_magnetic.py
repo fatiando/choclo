@@ -11,7 +11,15 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..prism import magnetic_e, magnetic_field, magnetic_n, magnetic_u
+from ..prism import (
+    kernel_en,
+    kernel_eu,
+    kernel_nu,
+    magnetic_e,
+    magnetic_field,
+    magnetic_n,
+    magnetic_u,
+)
 
 
 @pytest.fixture(name="sample_prism")
@@ -778,3 +786,123 @@ class TestMagneticFieldSingularities:
                 for (e, n, u) in zip(easting, northing, upward)
             )
         npt.assert_allclose(results, results[0])
+
+
+class TestBugfixKernelEvaluation:
+    r"""
+    Tests that ensure that the bug related to wrong evaluation of the
+    non-diagonal second-order kernels was fixed.
+
+    This bug is due to wrongly evaluating the safe_log function on two of the
+    vertices of the prism.
+    """
+
+    @pytest.fixture
+    def prism(self):
+        return np.array([-10.0, 10.0, -12.0, 12.0, -20.0, -5.0])
+
+    def evaluate_kernel(self, coordinates, vertex, kernel):
+        """
+        Evaluate a given kernel.
+
+        Parameters
+        ----------
+        coordinates : tuple of floats
+            Coordinates of the observation point.
+        vertex : tuple of floats
+            Coordinates of the prism vertex.
+        kernel : callable
+            Kernel function to evaluate.
+
+        Returns
+        -------
+        float
+        """
+        shifted_east, shifted_north, shifted_upward = tuple(
+            vertex[i] - coordinates[i] for i in range(3)
+        )
+        radius = np.sqrt(shifted_east**2 + shifted_north**2 + shifted_upward**2)
+        return kernel(shifted_east, shifted_north, shifted_upward, radius)
+
+    @pytest.mark.parametrize("shift", ("easting", "northing"))
+    def test_kernel_en(self, prism, shift):
+        """
+        Test bugfix on kernel_en.
+        """
+        # Get the coordinates of the prism and collect only two of the vertices
+        _, east, south, _, bottom, top = prism[:]
+        vertices = [[east, south, top], [east, south, bottom]]
+        # Build observation points: one above the vertices, one slightly shifted
+        delta = 1e-6
+        if shift == "easting":
+            coords = [(east, south, top + 50.0), (east + delta, south, top + 50.0)]
+        else:
+            coords = [(east, south, top + 50.0), (east, south + delta, top + 50.0)]
+        # Evaluate kernel on the two nodes
+        kernel_above = [
+            self.evaluate_kernel(coords[0], vertex, kernel_en) for vertex in vertices
+        ]
+        kernel_shifted = [
+            self.evaluate_kernel(coords[1], vertex, kernel_en) for vertex in vertices
+        ]
+        # Compute the differences between the evaluations on both nodes
+        diff_above = kernel_above[0] - kernel_above[1]
+        diff_shifted = kernel_shifted[0] - kernel_shifted[1]
+        # These two differences should be close enough (not equal!)
+        npt.assert_allclose(diff_above, diff_shifted, rtol=1e-2)
+
+    @pytest.mark.parametrize("shift", ("easting", "upward"))
+    def test_kernel_eu(self, prism, shift):
+        """
+        Test bugfix on kernel_eu.
+        """
+        # Get the coordinates of the prism and collect only two of the vertices
+        _, east, south, north, _, top = prism[:]
+        vertices = [[east, north, top], [east, south, top]]
+        # Build observation points:
+        # one to the north of the vertices, one slightly shifted.
+        delta = 1e-6
+        if shift == "easting":
+            coords = [(east, north + 50.0, top), (east + delta, north + 50.0, top)]
+        else:
+            coords = [(east, north + 50.0, top), (east, north + 50.0, top + delta)]
+        # Evaluate kernel on the two nodes
+        kernel_inline = [
+            self.evaluate_kernel(coords[0], vertex, kernel_eu) for vertex in vertices
+        ]
+        kernel_shifted = [
+            self.evaluate_kernel(coords[1], vertex, kernel_eu) for vertex in vertices
+        ]
+        # Compute the differences between the evaluations on both nodes
+        diff_inline = kernel_inline[0] - kernel_inline[1]
+        diff_shifted = kernel_shifted[0] - kernel_shifted[1]
+        # These two differences should be close enough (not equal!)
+        npt.assert_allclose(diff_inline, diff_shifted, rtol=1e-2)
+
+    @pytest.mark.parametrize("shift", ("northing", "upward"))
+    def test_kernel_nu(self, prism, shift):
+        """
+        Test bugfix on kernel_nu.
+        """
+        # Get the coordinates of the prism and collect only two of the vertices
+        west, east, _, north, _, top = prism[:]
+        vertices = [[east, north, top], [west, north, top]]
+        # Build observation points:
+        # one to the east of the vertices, one slightly shifted.
+        delta = 1e-6
+        if shift == "northing":
+            coords = [(east + 50.0, north, top), (east + 50.0, north + delta, top)]
+        else:
+            coords = [(east + 50.0, north, top), (east + 50.0, north, top + delta)]
+        # Evaluate kernel on the two nodes
+        kernel_inline = [
+            self.evaluate_kernel(coords[0], vertex, kernel_nu) for vertex in vertices
+        ]
+        kernel_shifted = [
+            self.evaluate_kernel(coords[1], vertex, kernel_nu) for vertex in vertices
+        ]
+        # Compute the differences between the evaluations on both nodes
+        diff_inline = kernel_inline[0] - kernel_inline[1]
+        diff_shifted = kernel_shifted[0] - kernel_shifted[1]
+        # These two differences should be close enough (not equal!)
+        npt.assert_allclose(diff_inline, diff_shifted, rtol=1e-2)
