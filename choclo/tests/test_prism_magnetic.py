@@ -8,6 +8,7 @@
 Test magnetic forward modelling functions for rectangular prisms
 """
 import itertools
+
 import numpy as np
 import numpy.testing as npt
 import pytest
@@ -16,15 +17,15 @@ from ..prism import (
     kernel_en,
     kernel_eu,
     kernel_nu,
-    magnetic_field,
-    magnetic_n,
-    magnetic_u,
     magnetic_e,
     magnetic_ee,
     magnetic_en,
     magnetic_eu,
+    magnetic_field,
+    magnetic_n,
     magnetic_nn,
     magnetic_nu,
+    magnetic_u,
     magnetic_uu,
 )
 
