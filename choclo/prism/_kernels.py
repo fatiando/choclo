@@ -55,9 +55,9 @@ def kernel_pot(easting, northing, upward, radius):
     .. math::
 
         k_V(x, y, z) &=
-            x y \, \operatorname{safe-ln} (z + r)
-            + y z \, \operatorname{safe-ln} (x + r)
-            + z x \, \operatorname{safe-ln} (y + r) \\
+            x y \, \operatorname{safe\_ln} (z, r)
+            + y z \, \operatorname{safe\_ln} (x, r)
+            + z x \, \operatorname{safe\_ln} (y, r) \\
             & - \frac{x^2}{2} \operatorname{safe-arctan} \left( yz, xr \right)
             - \frac{y^2}{2} \operatorname{safe-arctan} \left( zx, yr \right)
             - \frac{z^2}{2} \operatorname{safe-arctan} \left( xy, zr \right)
@@ -66,10 +66,12 @@ def kernel_pot(easting, northing, upward, radius):
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     and
@@ -91,9 +93,9 @@ def kernel_pot(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = (
-        easting * northing * _safe_log(upward, radius)
-        + northing * upward * _safe_log(easting, radius)
-        + easting * upward * _safe_log(northing, radius)
+        easting * northing * _safe_log(upward, easting, northing, radius)
+        + northing * upward * _safe_log(easting, northing, upward, radius)
+        + easting * upward * _safe_log(northing, upward, easting, radius)
         - 0.5 * easting**2 * _safe_atan2(upward * northing, easting * radius)
         - 0.5 * northing**2 * _safe_atan2(upward * easting, northing * radius)
         - 0.5 * upward**2 * _safe_atan2(easting * northing, upward * radius)
@@ -147,8 +149,8 @@ def kernel_e(easting, northing, upward, radius):
 
         k_x(x, y, z) =
             -\left[
-            y \, \operatorname{safe-ln} (z + r)
-            + z \, \operatorname{safe-ln} (y + r)
+            y \, \operatorname{safe\_ln} (z, r)
+            + z \, \operatorname{safe\_ln} (y, r)
             - x \, \operatorname{safe-arctan} \left( yz, xr \right)
             \right]
 
@@ -156,10 +158,12 @@ def kernel_e(easting, northing, upward, radius):
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     and
@@ -187,8 +191,8 @@ def kernel_e(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = -(
-        northing * _safe_log(upward, radius)
-        + upward * _safe_log(northing, radius)
+        northing * _safe_log(upward, easting, northing, radius)
+        + upward * _safe_log(northing, upward, easting, radius)
         - easting * _safe_atan2(northing * upward, easting * radius)
     )
     return kernel
@@ -240,8 +244,8 @@ def kernel_n(easting, northing, upward, radius):
 
         k_y(x, y, z) =
             -\left[
-            z \, \operatorname{safe-ln} (x + r)
-            + x \, \operatorname{safe-ln} (z + r)
+            z \, \operatorname{safe\_ln} (x, r)
+            + x \, \operatorname{safe\_ln} (z, r)
             - y \, \operatorname{safe-arctan} \left( zx, yr \right)
             \right]
 
@@ -249,10 +253,12 @@ def kernel_n(easting, northing, upward, radius):
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     and
@@ -280,8 +286,8 @@ def kernel_n(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = -(
-        upward * _safe_log(easting, radius)
-        + easting * _safe_log(upward, radius)
+        upward * _safe_log(easting, northing, upward, radius)
+        + easting * _safe_log(upward, easting, northing, radius)
         - northing * _safe_atan2(easting * upward, northing * radius)
     )
     return kernel
@@ -333,8 +339,8 @@ def kernel_u(easting, northing, upward, radius):
 
         k_z(x, y, z) =
             - \left[
-            x \, \operatorname{safe-ln} (y + r)
-            + y \, \operatorname{safe-ln} (x + r)
+            x \, \operatorname{safe\_ln} (y, r)
+            + y \, \operatorname{safe\_ln} (x, r)
             - z \, \operatorname{safe-arctan} \left( xy, zr \right)
             \right]
 
@@ -342,10 +348,12 @@ def kernel_u(easting, northing, upward, radius):
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     and
@@ -375,8 +383,8 @@ def kernel_u(easting, northing, upward, radius):
     # The minus sign is to return the kernel for the upward component instead
     # of the downward one.
     kernel = -(
-        easting * _safe_log(northing, radius)
-        + northing * _safe_log(easting, radius)
+        easting * _safe_log(northing, upward, easting, radius)
+        + northing * _safe_log(easting, northing, upward, radius)
         - upward * _safe_atan2(easting * northing, upward * radius)
     )
     return kernel
@@ -619,16 +627,18 @@ def kernel_en(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xy}(x, y, z) = \operatorname{safe-ln} \left( z + r \right)
+        k_{xy}(x, y, z) = \operatorname{safe\_ln} \left(z, r \right)
 
     where
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     References
@@ -637,7 +647,7 @@ def kernel_en(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(upward, radius)
+    return _safe_log(upward, easting, northing, radius)
 
 
 @jit(nopython=True)
@@ -682,16 +692,18 @@ def kernel_eu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xz}(x, y, z) = \operatorname{safe-ln} \left( y + r \right)
+        k_{xz}(x, y, z) = \operatorname{safe\_ln} \left(y, r \right)
 
     where
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     References
@@ -700,7 +712,7 @@ def kernel_eu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(northing, radius)
+    return _safe_log(northing, easting, upward, radius)
 
 
 @jit(nopython=True)
@@ -745,16 +757,18 @@ def kernel_nu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{yz}(x, y, z) = \operatorname{safe-ln} \left( x + r \right)
+        k_{yz}(x, y, z) = \operatorname{safe\_ln} \left(x, r \right)
 
     where
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     References
@@ -763,7 +777,7 @@ def kernel_nu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(easting, radius)
+    return _safe_log(easting, northing, upward, radius)
 
 
 @jit(nopython=True)
@@ -806,42 +820,82 @@ def _safe_atan2(y, x):
 
 
 @jit(nopython=True)
-def _safe_log(x, r):
+def _safe_log(x, y, z, r):
     r"""
-    Safe log function to use in the prism kernels
+    Safe log function to use in the prism kernels.
 
-    Evaluates the :math:`\ln{x + r}` where :math:`x` is one of the shifted
+    Evaluates the :math:`\ln(x + r)` where :math:`x` is one of the shifted
     coordinate of the prism vertex and :math:`r` is the Euclidean distance
     (always non-negative) from the vertex to the observation point.
 
+    Parameters
+    ----------
+    x : float
+        Shifted coordinate of the prism vertex that will be used for evaluating
+        the log.
+    y, z : floats
+        The other two shifted coordinates of the prism vertex. They are used to
+        determine if ``abs(x) == r`` with more accuracy, and to evaluate the
+        log function to avoid floating point errors when :math:`x < 0` and
+        :math:`r \ne |x|`.
+    r : float
+        Euclidean distance from the vertex to the observation point. We require
+        this argument because this quantity is usually precomputed before
+        evaluating the kernel, thus saving computation time.
+
+    Returns
+    -------
+    float
+        Evaluation of the :math:`\ln{x + r}` to be used on kernels.
+
+    Notes
+    -----
+    The :math:`\text{safe\_ln}(x, r)` function is defined as:
+
     .. math::
 
-        \text{safe_ln}(x, r) =
+        \text{safe\_ln}(x, r) =
         \begin{cases}
-            0 & x = 0, r = 0 \\
+            0 & r = 0 \\
             \ln(x + r) & x \ge 0 \\
-            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
-            -\ln(-2 x) & x < 0, r = -x
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
-    This function returns 0 when the observation point is located on the vertex
-    of the prism (:math:`r=0`); and two modified versions in case that
-    :math:`x` is negative: if :math:`x = -r` then the :math:`\ln{x + r}` can be
-    replaced by :math:`-\ln{|x| + r} = -\ln(-2x)`, and for any other negative
-    value of :math:`x` it returns :math:`\ln((r^2 - x^2) / (r - x))` which
-    helps by reducing the floating point errors ([Fukushima2020_]).
-    This modified version was inspired by [Nagy2000] and [Fukushima2020_]:
+    The function evaluates :math:`\ln(x + r)` when :math:`x \ge 0`. Otherwise,
+    the returned value takes into account the limit cases:
+
+    * If :math:`r = 0` (observation point is on one of the vertices of the
+      prism), it returns zero. This accounts for the limits of the
+      zeroth-order and first-order kernels when evaluated on the vertices of
+      the prism. The second-order kernels are not defined on the vertices.
+    * If :math:`x < 0, r \ne |x|`, then it evaluates
+      :math:`\ln((y^2 + z^2) / (r - x))` to reduce floating point errors
+      ([Fukushima2020]_).
+    * If :math:`x < 0, r = |x|`, then it returns one of the terms of the limit
+      of the second-order kernels (when the observation point is inline with
+      two nodes): :math:`-\ln(-2x)`.
+
+    When checking if :math:`r = |x|`, we will evaluate if ``y == 0.0 and z ==
+    0.0``, to avoid issues with floating point errors in cases in which
+    :math:`|x| \gg |y|` and/or  :math:`|x| \gg |z|`. In such cases, the ``r``
+    value could be exactly the same as ``x`` (up to machine precision) and
+    not reflect that ``y`` and/or ``z`` are not-null.
+
+    This modified version of the log function was inspired by [Nagy2000]_ and
+    [Fukushima2020]_.
 
     References
     ----------
+    - [Nagy2000]_
     - [Fukushima2020]_
     """
     if r == 0:
         return 0
     if x < 0:
-        if r == -x:
+        if y == 0.0 and z == 0.0:
             result = -np.log(-2 * x)
         else:
-            result = np.log((r**2 - x**2) / (r - x))
+            result = np.log((y**2 + z**2) / (r - x))
         return result
     return np.log(x + r)
