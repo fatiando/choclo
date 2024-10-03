@@ -828,6 +828,34 @@ class TestMagneticFieldSingularities:
             )
         npt.assert_allclose(results, results[0])
 
+    @pytest.mark.parametrize(
+        "forward_func",
+        (
+            magnetic_ee,
+            magnetic_nn,
+            magnetic_uu,
+            magnetic_en,
+            magnetic_eu,
+            magnetic_nu,
+        ),
+    )
+    @pytest.mark.parametrize("direction", ("easting", "northing", "upward"))
+    def test_gradiometry_symmetry_on_faces(self, sample_prism, direction, forward_func):
+        """
+        Tests symmetry of magnetic gradiometry components on the center of
+        faces normal to the component direction
+
+        For example, check if ``magnetic_ee`` has the opposite value on points
+        in the top face and points of the bottom face.
+        """
+        easting, northing, upward = self.get_faces_centers(sample_prism, direction)
+        magnetization = np.array([1.0, 1.0, 1.0])
+        results = list(
+            forward_func(e, n, u, *sample_prism, *magnetization)
+            for (e, n, u) in zip(easting, northing, upward)
+        )
+        npt.assert_allclose(results[0], -results[1:])
+
 
 class TestMagGradiometryFiniteDifferences:
     """
