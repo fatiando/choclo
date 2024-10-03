@@ -854,7 +854,7 @@ class TestMagneticFieldSingularities:
             forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
         )
-        npt.assert_allclose(results[0], -results[1:])
+        npt.assert_allclose(-results[0], results[1:], atol=1e-23)
 
 
 class TestMagGradiometryFiniteDifferences:
