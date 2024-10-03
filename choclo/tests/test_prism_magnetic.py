@@ -1033,7 +1033,6 @@ class TestMagGradiometryLimits:
         forward function, where ``i`` and ``j`` can be ``e``, ``n`` or ``u``.
         """
         coordinates = self.get_coords_on_line(sample_prism, direction="u")
-        print(coordinates)
         # Evaluate the mag grad function on the sample grid
         mag_grad = evaluate(
             magnetic_nn, coordinates, sample_prism, sample_magnetization
