@@ -242,6 +242,12 @@ def magnetic_field(
     :func:`choclo.prism.magnetic_e`
     :func:`choclo.prism.magnetic_n`
     :func:`choclo.prism.magnetic_u`
+    :func:`choclo.prism.magnetic_ee`
+    :func:`choclo.prism.magnetic_nn`
+    :func:`choclo.prism.magnetic_uu`
+    :func:`choclo.prism.magnetic_en`
+    :func:`choclo.prism.magnetic_eu`
+    :func:`choclo.prism.magnetic_nu`
     """
     # Check if observation point falls in a singular point
     if is_point_on_edge(
@@ -489,6 +495,12 @@ def magnetic_e(
     :func:`choclo.prism.magnetic_field`
     :func:`choclo.prism.magnetic_n`
     :func:`choclo.prism.magnetic_u`
+    :func:`choclo.prism.magnetic_ee`
+    :func:`choclo.prism.magnetic_nn`
+    :func:`choclo.prism.magnetic_uu`
+    :func:`choclo.prism.magnetic_en`
+    :func:`choclo.prism.magnetic_eu`
+    :func:`choclo.prism.magnetic_nu`
     """
     # Check if observation point falls in a singular point
     if is_point_on_edge(
@@ -670,6 +682,12 @@ def magnetic_n(
     :func:`choclo.prism.magnetic_field`
     :func:`choclo.prism.magnetic_e`
     :func:`choclo.prism.magnetic_u`
+    :func:`choclo.prism.magnetic_ee`
+    :func:`choclo.prism.magnetic_nn`
+    :func:`choclo.prism.magnetic_uu`
+    :func:`choclo.prism.magnetic_en`
+    :func:`choclo.prism.magnetic_eu`
+    :func:`choclo.prism.magnetic_nu`
     """
     # Check if observation point falls in a singular point
     if is_point_on_edge(
@@ -851,6 +869,12 @@ def magnetic_u(
     :func:`choclo.prism.magnetic_field`
     :func:`choclo.prism.magnetic_e`
     :func:`choclo.prism.magnetic_n`
+    :func:`choclo.prism.magnetic_ee`
+    :func:`choclo.prism.magnetic_nn`
+    :func:`choclo.prism.magnetic_uu`
+    :func:`choclo.prism.magnetic_en`
+    :func:`choclo.prism.magnetic_eu`
+    :func:`choclo.prism.magnetic_nu`
     """
     # Check if observation point falls in a singular point
     if is_point_on_edge(
