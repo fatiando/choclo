@@ -889,6 +889,7 @@ class TestMagGradiometryFiniteDifferences:
         # Get forward functions
         mag_func = get_forward_function(i)
         mag_grad_func = get_forward_function(i + j)
+        direction = j  # direction along which to apply the finite differences
         # Evaluate the mag grad function on the sample grid
         mag_grad = evaluate(
             mag_grad_func, sample_3d_grid, sample_prism, sample_magnetization
@@ -898,7 +899,7 @@ class TestMagGradiometryFiniteDifferences:
             sample_3d_grid,
             sample_prism,
             sample_magnetization,
-            direction=j,
+            direction=direction,
             forward_func=mag_func,
             delta=self.delta,
         )
@@ -963,6 +964,7 @@ class TestMagGradiometryLimits:
         # Get forward functions
         mag_func = get_forward_function(i)
         mag_grad_func = get_forward_function(f"{i}{j}")
+        direction = j  # direction along which to apply the finite differences
         # Evaluate the mag grad function on the sample grid
         mag_grad = evaluate(
             mag_grad_func, coordinates, sample_prism, sample_magnetization
@@ -972,7 +974,7 @@ class TestMagGradiometryLimits:
             coordinates,
             sample_prism,
             sample_magnetization,
-            direction=j,
+            direction=direction,
             forward_func=mag_func,
             delta=self.delta,
         )
