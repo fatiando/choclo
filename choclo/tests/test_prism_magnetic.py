@@ -880,7 +880,7 @@ class TestMagGradiometryFiniteDifferences:
     ):
         """
         Compare the magnetic gradiometry functions with a finite difference
-        approximation of it computed from the magnetic field components.
+        approximation of them computed from the magnetic field components.
 
         With this function we can compare the result of ``magnetic_{i}{j}``
         against a finite difference approximation using the ``magnetic_{i}``
@@ -912,36 +912,14 @@ class TestMagGradiometryLimits:
     """
     Test if limits are well evaluated in magnetic gradiometry kernels.
 
-    Most of the third-order kernels are singular along the lines that matches
-    with the edges of the prism, but the magnetic gradiometry functions are
-    defined (and finite) in those regions. These tests ensure that these
+    Most of the third-order kernels have singular points along the lines that
+    matches with the edges of the prism, but the magnetic gradiometry functions
+    are defined (and finite) in those regions. These tests ensure that these
     limits are well resolved.
     """
 
     delta = 1e-6  # displacement used in the finite difference calculations
     rtol, atol = 5e-4, 5e-12  # tolerances used in the comparisons
-
-    def get_coords_on_line(self, prism, direction):
-        west, east, south, north, bottom, top = prism
-        distance = 13.4  # define distance from the nearest vertex for obs points
-        points = []
-        if direction == "e":
-            for northing, upward in itertools.product((south, north), (bottom, top)):
-                points.append([west - distance, northing, upward])
-                points.append([east + distance, northing, upward])
-        elif direction == "n":
-            for easting, upward in itertools.product((west, east), (bottom, top)):
-                points.append([easting, south - distance, upward])
-                points.append([easting, north + distance, upward])
-        elif direction == "u":
-            for easting, northing in itertools.product((west, east), (south, north)):
-                points.append([easting, northing, bottom - distance])
-                points.append([easting, northing, top + distance])
-        else:
-            raise ValueError(f"Invalid direction '{direction}'.")
-        points = np.array(points).T
-        easting, northing, upward = points[:]
-        return easting, northing, upward
 
     @pytest.fixture
     def coordinates(self, sample_prism):
@@ -967,7 +945,6 @@ class TestMagGradiometryLimits:
         easting, northing, upward = points[:]
         return easting, northing, upward
 
-    @pytest.mark.skip
     @pytest.mark.parametrize("i", ["e", "n", "u"])
     @pytest.mark.parametrize("j", ["e", "n", "u"])
     def test_derivatives_of_magnetic_components_on_edges(
@@ -975,7 +952,9 @@ class TestMagGradiometryLimits:
     ):
         """
         Compare the magnetic gradiometry functions with a finite difference
-        approximation of it computed from the magnetic field components.
+        approximation of it computed from the magnetic field components on
+        observation points that are located along the same lines of the prism
+        edges.
 
         With this function we can compare the result of ``magnetic_{i}{j}``
         against a finite difference approximation using the ``magnetic_{i}``
@@ -983,7 +962,7 @@ class TestMagGradiometryLimits:
         """
         # Get forward functions
         mag_func = get_forward_function(i)
-        mag_grad_func = get_forward_function(i + j)
+        mag_grad_func = get_forward_function(f"{i}{j}")
         # Evaluate the mag grad function on the sample grid
         mag_grad = evaluate(
             mag_grad_func, coordinates, sample_prism, sample_magnetization
@@ -995,62 +974,6 @@ class TestMagGradiometryLimits:
             sample_magnetization,
             direction=j,
             forward_func=mag_func,
-            delta=self.delta,
-        )
-        # Compare results
-        npt.assert_allclose(
-            mag_grad, mag_grad_finite_diff, rtol=self.rtol, atol=self.atol
-        )
-
-    def test_magnetic_ee(self, sample_prism, sample_magnetization):
-        """
-        Compare the magnetic gradiometry functions with a finite difference
-        approximation of it computed from the magnetic field components.
-
-        With this function we can compare the result of ``magnetic_{i}{j}``
-        against a finite difference approximation using the ``magnetic_{i}``
-        forward function, where ``i`` and ``j`` can be ``e``, ``n`` or ``u``.
-        """
-        coordinates = self.get_coords_on_line(sample_prism, direction="n")
-        # Evaluate the mag grad function on the sample grid
-        mag_grad = evaluate(
-            magnetic_ee, coordinates, sample_prism, sample_magnetization
-        )
-        # Compute the mag grad function using finite differences
-        mag_grad_finite_diff = finite_differences(
-            coordinates,
-            sample_prism,
-            sample_magnetization,
-            direction="e",
-            forward_func=magnetic_e,
-            delta=self.delta,
-        )
-        # Compare results
-        npt.assert_allclose(
-            mag_grad, mag_grad_finite_diff, rtol=self.rtol, atol=self.atol
-        )
-
-    def test_magnetic_nn(self, sample_prism, sample_magnetization):
-        """
-        Compare the magnetic gradiometry functions with a finite difference
-        approximation of it computed from the magnetic field components.
-
-        With this function we can compare the result of ``magnetic_{i}{j}``
-        against a finite difference approximation using the ``magnetic_{i}``
-        forward function, where ``i`` and ``j`` can be ``e``, ``n`` or ``u``.
-        """
-        coordinates = self.get_coords_on_line(sample_prism, direction="u")
-        # Evaluate the mag grad function on the sample grid
-        mag_grad = evaluate(
-            magnetic_nn, coordinates, sample_prism, sample_magnetization
-        )
-        # Compute the mag grad function using finite differences
-        mag_grad_finite_diff = finite_differences(
-            coordinates,
-            sample_prism,
-            sample_magnetization,
-            direction="n",
-            forward_func=magnetic_n,
             delta=self.delta,
         )
         # Compare results
