@@ -676,6 +676,19 @@ class TestMagneticFieldSingularities:
     we approach from outside of the prism.
     """
 
+    COMPONENTS = (
+        magnetic_field,
+        magnetic_e,
+        magnetic_n,
+        magnetic_u,
+        magnetic_ee,
+        magnetic_en,
+        magnetic_eu,
+        magnetic_nn,
+        magnetic_nu,
+        magnetic_uu,
+    )
+
     @pytest.fixture()
     def sample_prism(self):
         """
@@ -752,9 +765,7 @@ class TestMagneticFieldSingularities:
         coordinates = tuple(c.ravel() for c in np.meshgrid(easting, northing, upward))
         return coordinates
 
-    @pytest.mark.parametrize(
-        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
-    )
+    @pytest.mark.parametrize("forward_func", COMPONENTS)
     def test_on_vertices(self, sample_prism, forward_func):
         """
         Test if magnetic field components on vertices are equal to NaN
@@ -767,9 +778,7 @@ class TestMagneticFieldSingularities:
         )
         assert np.isnan(results).all()
 
-    @pytest.mark.parametrize(
-        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
-    )
+    @pytest.mark.parametrize("forward_func", COMPONENTS)
     @pytest.mark.parametrize("direction", ("easting", "northing", "upward"))
     def test_on_edges(self, sample_prism, direction, forward_func):
         """
@@ -785,9 +794,7 @@ class TestMagneticFieldSingularities:
         )
         assert np.isnan(results).all()
 
-    @pytest.mark.parametrize(
-        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
-    )
+    @pytest.mark.parametrize("forward_func", COMPONENTS)
     def test_on_interior_points(self, sample_prism, forward_func):
         """
         Test if magnetic field components are NaN on internal points
@@ -854,7 +861,7 @@ class TestMagneticFieldSingularities:
             forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
         )
-        npt.assert_allclose(results[0], -results[1:])
+        npt.assert_allclose(-results[0], results[1:], atol=1e-23)
 
 
 class TestMagGradiometryFiniteDifferences:
