@@ -95,6 +95,12 @@ Magnetic
     prism.magnetic_e
     prism.magnetic_n
     prism.magnetic_u
+    prism.magnetic_ee
+    prism.magnetic_nn
+    prism.magnetic_uu
+    prism.magnetic_en
+    prism.magnetic_eu
+    prism.magnetic_nu
 
 Kernels
 ^^^^^^^
@@ -112,6 +118,16 @@ Kernels
     prism.kernel_en
     prism.kernel_eu
     prism.kernel_nu
+    prism.kernel_eee
+    prism.kernel_nnn
+    prism.kernel_uuu
+    prism.kernel_een
+    prism.kernel_eeu
+    prism.kernel_enn
+    prism.kernel_nnu
+    prism.kernel_euu
+    prism.kernel_nuu
+    prism.kernel_enu
 
 
 Utilities
