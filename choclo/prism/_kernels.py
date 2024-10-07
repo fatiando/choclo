@@ -949,6 +949,12 @@ def kernel_eee(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_eee(x, y, z, r)) # doctest: +NUMBER
+    0.18706595
     """
     return _kernel_iii(easting, northing, upward, radius)
 
@@ -1001,6 +1007,12 @@ def kernel_nnn(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_nnn(x, y, z, r)) # doctest: +NUMBER
+    0.07574927
     """
     return _kernel_iii(northing, upward, easting, radius)
 
@@ -1053,6 +1065,12 @@ def kernel_uuu(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_uuu(x, y, z, r)) # doctest: +NUMBER
+    -0.19440331
     """
     return _kernel_iii(upward, northing, easting, radius)
 
@@ -1105,6 +1123,12 @@ def kernel_een(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_een(x, y, z, r)) # doctest: +NUMBER
+    -0.12214070
     """
     return _kernel_iij(easting, northing, upward, radius)
 
@@ -1157,6 +1181,12 @@ def kernel_eeu(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_eeu(x, y, z, r)) # doctest: +NUMBER
+    -0.03837408
     """
     return _kernel_iij(easting, upward, northing, radius)
 
@@ -1209,6 +1239,12 @@ def kernel_enn(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_enn(x, y, z, r)) # doctest: +NUMBER
+    -0.20488118
     """
     return _kernel_iij(northing, easting, upward, radius)
 
@@ -1261,6 +1297,12 @@ def kernel_nnu(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_nnu(x, y, z, r)) # doctest: +NUMBER
+    -0.07808384
     """
     return _kernel_iij(northing, upward, easting, radius)
 
@@ -1313,6 +1355,12 @@ def kernel_euu(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_euu(x, y, z, r)) # doctest: +NUMBER
+    0.03713621
     """
     return _kernel_iij(upward, easting, northing, radius)
 
@@ -1365,6 +1413,12 @@ def kernel_nuu(easting, northing, upward, radius):
                 \sqrt{x^2 + y^2 + z^2}
             }
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_nuu(x, y, z, r)) # doctest: +NUMBER
+    0.04504837
     """
     return _kernel_iij(upward, northing, easting, radius)
 
@@ -1411,6 +1465,12 @@ def kernel_enu(easting, northing, upward, radius):
 
         k_{xyz}(x, y, z) = \frac{-1}{\sqrt{x^2 + y^2 + z^2}}
 
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_enu(x, y, z, r)) # doctest: +NUMBER
+    -0.1480061
     """
     return -1 / radius
 
