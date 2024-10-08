@@ -3,6 +3,42 @@
 Changelog
 =========
 
+Version 0.3.0
+-------------
+
+Released on: 2024/10/08
+
+doi: https://doi.org/10.5281/zenodo.13905447
+
+Bug fixes:
+
+-  Fix bug on ``safe_log`` and solves discontinuous magnetic fields (`#100 <https://github.com/fatiando/choclo/pull/100>`__)
+
+New features:
+
+-  Add forward modelling functions for the magnetic gradiometry components of prisms (`#97 <https://github.com/fatiando/choclo/pull/97>`__)
+
+Maintenance:
+
+-  Run tests with oldest dependencies on x86 macos (`#83 <https://github.com/fatiando/choclo/pull/83>`__)
+-  Replace ``_version_generated.py`` for ``_version.py`` in Makefile (`#82 <https://github.com/fatiando/choclo/pull/82>`__)
+-  Update how output variables are stored in Actions (`#90 <https://github.com/fatiando/choclo/pull/90>`__)
+-  Move push to codecov to its own job in Actions (`#88 <https://github.com/fatiando/choclo/pull/88>`__)
+-  Replace ``build`` for ``python-build`` in ``environment.yml`` (`#91 <https://github.com/fatiando/choclo/pull/91>`__)
+-  Simplify tests for prism magnetic forward funcs (`#96 <https://github.com/fatiando/choclo/pull/96>`__)
+-  Add some more tests for ``_safe_log`` (`#101 <https://github.com/fatiando/choclo/pull/101>`__)
+
+Documentation:
+
+-  Replace Sphinx napoleon for numpydoc (`#84 <https://github.com/fatiando/choclo/pull/84>`__)
+-  Fix style errors in docstrings (`#85 <https://github.com/fatiando/choclo/pull/85>`__)
+-  Improve docstrings of ``magnetic_field`` functions (`#87 <https://github.com/fatiando/choclo/pull/87>`__)
+
+This release contains contributions from:
+
+-  Santiago Soler
+
+
 Version 0.2.0
 -------------
 
