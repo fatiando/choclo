@@ -17,22 +17,22 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
@@ -40,9 +40,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=12168cd1" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
@@ -50,7 +50,7 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/thebelab-helper.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -68,27 +68,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,8 +106,13 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -137,6 +138,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../../index.html">
   
@@ -152,7 +155,7 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -173,7 +176,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">List of functions and classes (API)</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.point.gravity_pot.html">choclo.point.gravity_pot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.point.gravity_e.html">choclo.point.gravity_e</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.point.gravity_n.html">choclo.point.gravity_n</a></li>
@@ -212,6 +215,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_e.html">choclo.prism.magnetic_e</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_n.html">choclo.prism.magnetic_n</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_u.html">choclo.prism.magnetic_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_ee.html">choclo.prism.magnetic_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_nn.html">choclo.prism.magnetic_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_uu.html">choclo.prism.magnetic_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_en.html">choclo.prism.magnetic_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_eu.html">choclo.prism.magnetic_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.magnetic_nu.html">choclo.prism.magnetic_nu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_pot.html">choclo.prism.kernel_pot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_e.html">choclo.prism.kernel_e</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_n.html">choclo.prism.kernel_n</a></li>
@@ -222,13 +231,23 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_en.html">choclo.prism.kernel_en</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_eu.html">choclo.prism.kernel_eu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_nu.html">choclo.prism.kernel_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_eee.html">choclo.prism.kernel_eee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_nnn.html">choclo.prism.kernel_nnn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_uuu.html">choclo.prism.kernel_uuu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_een.html">choclo.prism.kernel_een</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_eeu.html">choclo.prism.kernel_eeu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_enn.html">choclo.prism.kernel_enn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_nnu.html">choclo.prism.kernel_nnu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_euu.html">choclo.prism.kernel_euu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_nuu.html">choclo.prism.kernel_nuu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.prism.kernel_enu.html">choclo.prism.kernel_enu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.utils.distance_cartesian.html">choclo.utils.distance_cartesian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.utils.distance_spherical.html">choclo.utils.distance_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.utils.distance_spherical_core.html">choclo.utils.distance_spherical_core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.constants.GRAVITATIONAL_CONST.html">choclo.constants.GRAVITATIONAL_CONST</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/generated/choclo.constants.VACUUM_MAGNETIC_PERMEABILITY.html">choclo.constants.VACUUM_MAGNETIC_PERMEABILITY</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing Choclo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
@@ -258,7 +277,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -267,14 +286,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -351,10 +370,10 @@
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -362,7 +381,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -452,9 +471,9 @@ document.write(`
 <span class="sd">    .. math::</span>
 
 <span class="sd">        k_V(x, y, z) &amp;=</span>
-<span class="sd">            x y \, \operatorname{safe-ln} (z + r)</span>
-<span class="sd">            + y z \, \operatorname{safe-ln} (x + r)</span>
-<span class="sd">            + z x \, \operatorname{safe-ln} (y + r) \\</span>
+<span class="sd">            x y \, \operatorname{safe\_ln} (z, r)</span>
+<span class="sd">            + y z \, \operatorname{safe\_ln} (x, r)</span>
+<span class="sd">            + z x \, \operatorname{safe\_ln} (y, r) \\</span>
 <span class="sd">            &amp; - \frac{x^2}{2} \operatorname{safe-arctan} \left( yz, xr \right)</span>
 <span class="sd">            - \frac{y^2}{2} \operatorname{safe-arctan} \left( zx, yr \right)</span>
 <span class="sd">            - \frac{z^2}{2} \operatorname{safe-arctan} \left( xy, zr \right)</span>
@@ -463,10 +482,12 @@ document.write(`
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \operatorname{safe-ln}(x) =</span>
+<span class="sd">        \operatorname{safe\_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((y^2 + z^2) / (r - x)) &amp; x &lt; 0, r \ne |x| \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = |x|</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    and</span>
@@ -488,9 +509,9 @@ document.write(`
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">easting</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">upward</span> <span class="o">*</span> <span class="n">northing</span><span class="p">,</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">northing</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">upward</span> <span class="o">*</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">upward</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
@@ -547,8 +568,8 @@ document.write(`
 
 <span class="sd">        k_x(x, y, z) =</span>
 <span class="sd">            -\left[</span>
-<span class="sd">            y \, \operatorname{safe-ln} (z + r)</span>
-<span class="sd">            + z \, \operatorname{safe-ln} (y + r)</span>
+<span class="sd">            y \, \operatorname{safe\_ln} (z, r)</span>
+<span class="sd">            + z \, \operatorname{safe\_ln} (y, r)</span>
 <span class="sd">            - x \, \operatorname{safe-arctan} \left( yz, xr \right)</span>
 <span class="sd">            \right]</span>
 
@@ -556,10 +577,12 @@ document.write(`
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \operatorname{safe-ln}(x) =</span>
+<span class="sd">        \operatorname{safe\_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((y^2 + z^2) / (r - x)) &amp; x &lt; 0, r \ne |x| \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = |x|</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    and</span>
@@ -587,8 +610,8 @@ document.write(`
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
-        <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">northing</span> <span class="o">*</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">kernel</span></div>
@@ -643,8 +666,8 @@ document.write(`
 
 <span class="sd">        k_y(x, y, z) =</span>
 <span class="sd">            -\left[</span>
-<span class="sd">            z \, \operatorname{safe-ln} (x + r)</span>
-<span class="sd">            + x \, \operatorname{safe-ln} (z + r)</span>
+<span class="sd">            z \, \operatorname{safe\_ln} (x, r)</span>
+<span class="sd">            + x \, \operatorname{safe\_ln} (z, r)</span>
 <span class="sd">            - y \, \operatorname{safe-arctan} \left( zx, yr \right)</span>
 <span class="sd">            \right]</span>
 
@@ -652,10 +675,12 @@ document.write(`
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \operatorname{safe-ln}(x) =</span>
+<span class="sd">        \operatorname{safe\_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((y^2 + z^2) / (r - x)) &amp; x &lt; 0, r \ne |x| \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = |x|</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    and</span>
@@ -683,8 +708,8 @@ document.write(`
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
-        <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">easting</span> <span class="o">*</span> <span class="n">upward</span><span class="p">,</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">kernel</span></div>
@@ -739,8 +764,8 @@ document.write(`
 
 <span class="sd">        k_z(x, y, z) =</span>
 <span class="sd">            - \left[</span>
-<span class="sd">            x \, \operatorname{safe-ln} (y + r)</span>
-<span class="sd">            + y \, \operatorname{safe-ln} (x + r)</span>
+<span class="sd">            x \, \operatorname{safe\_ln} (y, r)</span>
+<span class="sd">            + y \, \operatorname{safe\_ln} (x, r)</span>
 <span class="sd">            - z \, \operatorname{safe-arctan} \left( xy, zr \right)</span>
 <span class="sd">            \right]</span>
 
@@ -748,10 +773,12 @@ document.write(`
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \operatorname{safe-ln}(x) =</span>
+<span class="sd">        \operatorname{safe\_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((y^2 + z^2) / (r - x)) &amp; x &lt; 0, r \ne |x| \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = |x|</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    and</span>
@@ -772,7 +799,6 @@ document.write(`
 <span class="sd">        by [Nagy2000]_ in order to compute the numerical kernel for the</span>
 <span class="sd">        **upward** component instead for the downward one.</span>
 
-
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    - [Nagy2000]_</span>
@@ -782,8 +808,8 @@ document.write(`
     <span class="c1"># The minus sign is to return the kernel for the upward component instead</span>
     <span class="c1"># of the downward one.</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
-        <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="n">easting</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
         <span class="o">-</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">_safe_atan2</span><span class="p">(</span><span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">kernel</span></div>
@@ -1038,16 +1064,18 @@ document.write(`
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{xy}(x, y, z) = \operatorname{safe-ln} \left( z + r \right)</span>
+<span class="sd">        k_{xy}(x, y, z) = \operatorname{safe\_ln} \left(z, r \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \operatorname{safe-ln}(x) =</span>
+<span class="sd">        \operatorname{safe\_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((y^2 + z^2) / (r - x)) &amp; x &lt; 0, r \ne |x| \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = |x|</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    References</span>
@@ -1056,7 +1084,7 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
 
@@ -1104,16 +1132,18 @@ document.write(`
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{xz}(x, y, z) = \operatorname{safe-ln} \left( y + r \right)</span>
+<span class="sd">        k_{xz}(x, y, z) = \operatorname{safe\_ln} \left(y, r \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \operatorname{safe-ln}(x) =</span>
+<span class="sd">        \operatorname{safe\_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((y^2 + z^2) / (r - x)) &amp; x &lt; 0, r \ne |x| \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = |x|</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    References</span>
@@ -1122,7 +1152,7 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
 
@@ -1170,16 +1200,18 @@ document.write(`
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        k_{yz}(x, y, z) = \operatorname{safe-ln} \left( x + r \right)</span>
+<span class="sd">        k_{yz}(x, y, z) = \operatorname{safe\_ln} \left(x, r \right)</span>
 
 <span class="sd">    where</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \operatorname{safe-ln}(x) =</span>
+<span class="sd">        \operatorname{safe\_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; |x| &lt; 10^{-10} \\</span>
-<span class="sd">            \ln (x)</span>
+<span class="sd">            0 &amp; r = 0 \\</span>
+<span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
+<span class="sd">            \ln((y^2 + z^2) / (r - x)) &amp; x &lt; 0, r \ne |x| \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = |x|</span>
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    References</span>
@@ -1188,7 +1220,7 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
 
@@ -1232,45 +1264,805 @@ document.write(`
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_safe_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_safe_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Safe log function to use in the prism kernels</span>
+<span class="sd">    Safe log function to use in the prism kernels.</span>
 
-<span class="sd">    Evaluates the :math:`\ln{x + r}` where :math:`x` is one of the shifted</span>
+<span class="sd">    Evaluates the :math:`\ln(x + r)` where :math:`x` is one of the shifted</span>
 <span class="sd">    coordinate of the prism vertex and :math:`r` is the Euclidean distance</span>
 <span class="sd">    (always non-negative) from the vertex to the observation point.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Shifted coordinate of the prism vertex that will be used for evaluating</span>
+<span class="sd">        the log.</span>
+<span class="sd">    y, z : floats</span>
+<span class="sd">        The other two shifted coordinates of the prism vertex. They are used to</span>
+<span class="sd">        determine if ``abs(x) == r`` with more accuracy, and to evaluate the</span>
+<span class="sd">        log function to avoid floating point errors when :math:`x &lt; 0` and</span>
+<span class="sd">        :math:`r \ne |x|`.</span>
+<span class="sd">    r : float</span>
+<span class="sd">        Euclidean distance from the vertex to the observation point. We require</span>
+<span class="sd">        this argument because this quantity is usually precomputed before</span>
+<span class="sd">        evaluating the kernel, thus saving computation time.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Evaluation of the :math:`\ln{x + r}` to be used on kernels.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The :math:`\text{safe\_ln}(x, r)` function is defined as:</span>
+
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \text{safe_ln}(x, r) =</span>
+<span class="sd">        \text{safe\_ln}(x, r) =</span>
 <span class="sd">        \begin{cases}</span>
-<span class="sd">            0 &amp; x = 0, r = 0 \\</span>
+<span class="sd">            0 &amp; r = 0 \\</span>
 <span class="sd">            \ln(x + r) &amp; x \ge 0 \\</span>
-<span class="sd">            \ln((r^2 - x^2) / (r - x)) &amp; x &lt; 0, r \ne -x \\</span>
-<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = -x</span>
+<span class="sd">            \ln((y^2 + z^2) / (r - x)) &amp; x &lt; 0, r \ne |x| \\</span>
+<span class="sd">            -\ln(-2 x) &amp; x &lt; 0, r = |x|</span>
 <span class="sd">        \end{cases}</span>
 
-<span class="sd">    This function returns 0 when the observation point is located on the vertex</span>
-<span class="sd">    of the prism (:math:`r=0`); and two modified versions in case that</span>
-<span class="sd">    :math:`x` is negative: if :math:`x = -r` then the :math:`\ln{x + r}` can be</span>
-<span class="sd">    replaced by :math:`-\ln{|x| + r} = -\ln(-2x)`, and for any other negative</span>
-<span class="sd">    value of :math:`x` it returns :math:`\ln((r^2 - x^2) / (r - x))` which</span>
-<span class="sd">    helps by reducing the floating point errors ([Fukushima2020_]).</span>
-<span class="sd">    This modified version was inspired by [Nagy2000] and [Fukushima2020_]:</span>
+<span class="sd">    The function evaluates :math:`\ln(x + r)` when :math:`x \ge 0`. Otherwise,</span>
+<span class="sd">    the returned value takes into account the limit cases:</span>
+
+<span class="sd">    * If :math:`r = 0` (observation point is on one of the vertices of the</span>
+<span class="sd">      prism), it returns zero. This accounts for the limits of the</span>
+<span class="sd">      zeroth-order and first-order kernels when evaluated on the vertices of</span>
+<span class="sd">      the prism. The second-order kernels are not defined on the vertices.</span>
+<span class="sd">    * If :math:`x &lt; 0, r \ne |x|`, then it evaluates</span>
+<span class="sd">      :math:`\ln((y^2 + z^2) / (r - x))` to reduce floating point errors</span>
+<span class="sd">      ([Fukushima2020]_).</span>
+<span class="sd">    * If :math:`x &lt; 0, r = |x|`, then it returns one of the terms of the limit</span>
+<span class="sd">      of the second-order kernels (when the observation point is inline with</span>
+<span class="sd">      two nodes): :math:`-\ln(-2x)`.</span>
+
+<span class="sd">    When checking if :math:`r = |x|`, we will evaluate if ``y == 0.0 and z ==</span>
+<span class="sd">    0.0``, to avoid issues with floating point errors in cases in which</span>
+<span class="sd">    :math:`|x| \gg |y|` and/or  :math:`|x| \gg |z|`. In such cases, the ``r``</span>
+<span class="sd">    value could be exactly the same as ``x`` (up to machine precision) and</span>
+<span class="sd">    not reflect that ``y`` and/or ``z`` are not-null.</span>
+
+<span class="sd">    This modified version of the log function was inspired by [Nagy2000]_ and</span>
+<span class="sd">    [Fukushima2020]_.</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
+<span class="sd">    - [Nagy2000]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="o">-</span><span class="n">x</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="ow">and</span> <span class="n">z</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">result</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="kernel_eee">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_eee.html#choclo.prism.kernel_eee">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_eee</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-easting-easting kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the easting-easting-easting component</span>
+<span class="sd">    of the grad tensor generated by a prism [Nagy2000]_ on a single vertex of</span>
+<span class="sd">    the prism. The coordinates that must be passed are shifted coordinates: the</span>
+<span class="sd">    coordinates of the vertex from a Cartesian coordinate system whose origin</span>
+<span class="sd">    is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the easting-easting-easting component</span>
+<span class="sd">        of the grad tensor due to a rectangular prism evaluated on a single</span>
+<span class="sd">        vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xxx}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - y z (2 x^2 + y^2 + z^2)</span>
+<span class="sd">            }{</span>
+<span class="sd">                (x^2 + y^2)(x^2 + z^2)</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_eee(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    0.18706595</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iii</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_nnn">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nnn.html#choclo.prism.kernel_nnn">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_nnn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Northing-northing-northing kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the northing-northing-northing</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the northing-northing-northing</span>
+<span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
+<span class="sd">        a single vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{yyy}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - x z (x^2 + 2 y^2 + z^2)</span>
+<span class="sd">            }{</span>
+<span class="sd">                (x^2 + y^2)(y^2 + z^2)</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_nnn(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    0.07574927</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iii</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_uuu">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_uuu.html#choclo.prism.kernel_uuu">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_uuu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Upward-upward-upward kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the upward-upward-upward</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the upward-upward-upward component of</span>
+<span class="sd">        the grad tensor due to a rectangular prism evaluated on a single</span>
+<span class="sd">        vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{zzz}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - x y (x^2 + y^2 + 2 z^2)</span>
+<span class="sd">            }{</span>
+<span class="sd">                (x^2 + z^2)(y^2 + z^2)</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_uuu(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    -0.19440331</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iii</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_een">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_een.html#choclo.prism.kernel_een">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_een</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-easting-northing kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the easting-easting-northing</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the easting-easting-northing component</span>
+<span class="sd">        of the grad tensor due to a rectangular prism evaluated on a single</span>
+<span class="sd">        vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xxy}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - x</span>
+<span class="sd">            }{</span>
+<span class="sd">                (z + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_een(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    -0.12214070</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_eeu">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_eeu.html#choclo.prism.kernel_eeu">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_eeu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-easting-upward kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the easting-easting-upward</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the easting-easting-upward component</span>
+<span class="sd">        of the grad tensor due to a rectangular prism evaluated on a single</span>
+<span class="sd">        vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xxz}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - x</span>
+<span class="sd">            }{</span>
+<span class="sd">                (y + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_eeu(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    -0.03837408</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_enn">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_enn.html#choclo.prism.kernel_enn">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_enn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-northing-northing kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the easting-northing-northing</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the easting-northing-northing</span>
+<span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
+<span class="sd">        a single vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xyy}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - y</span>
+<span class="sd">            }{</span>
+<span class="sd">                (z + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_enn(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    -0.20488118</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_nnu">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nnu.html#choclo.prism.kernel_nnu">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_nnu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Northing-northing-upward kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the northing-northing-upward</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the northing-northing-upward</span>
+<span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
+<span class="sd">        a single vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{yyz}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - y</span>
+<span class="sd">            }{</span>
+<span class="sd">                (x + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_nnu(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    -0.07808384</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_euu">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_euu.html#choclo.prism.kernel_euu">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_euu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-upward-upward kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the easting-upward-upward</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the easting-upward-upward</span>
+<span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
+<span class="sd">        a single vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xzz}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - z</span>
+<span class="sd">            }{</span>
+<span class="sd">                (y + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_euu(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    0.03713621</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_nuu">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nuu.html#choclo.prism.kernel_nuu">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_nuu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Northing-upward-upward kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the northing-upward-upward</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the northing-upward-upward</span>
+<span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
+<span class="sd">        a single vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{yzz}(x, y, z) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - z</span>
+<span class="sd">            }{</span>
+<span class="sd">                (x + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_nuu(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    0.04504837</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kernel_enu">
+<a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_enu.html#choclo.prism.kernel_enu">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">kernel_enu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Easting-northing-upward kernel due to a prism.</span>
+
+<span class="sd">    Evaluates the integration kernel for the easting-northing-upward</span>
+<span class="sd">    component of the grad tensor generated by a prism [Nagy2000]_ on a single</span>
+<span class="sd">    vertex of the prism. The coordinates that must be passed are shifted</span>
+<span class="sd">    coordinates: the coordinates of the vertex from a Cartesian coordinate</span>
+<span class="sd">    system whose origin is located in the observation point.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    easting : float</span>
+<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    northing : float</span>
+<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    upward : float</span>
+<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
+<span class="sd">        meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
+<span class="sd">        and ``upward`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function for the easting-northing-upward component</span>
+<span class="sd">        of the grad tensor due to a rectangular prism evaluated on a single</span>
+<span class="sd">        vertex.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computes the following numerical kernel on the passed *shifted</span>
+<span class="sd">    coordinates*:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{xyz}(x, y, z) = \frac{-1}{\sqrt{x^2 + y^2 + z^2}}</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
+<span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
+<span class="sd">    &gt;&gt;&gt; float(kernel_enu(x, y, z, r)) # doctest: +NUMBER</span>
+<span class="sd">    -0.1480061</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="n">radius</span></div>
+
+
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_kernel_iii</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_j</span><span class="p">,</span> <span class="n">x_k</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Diagonal 3rd order kernels of a prism.</span>
+
+<span class="sd">    Evaluates the following integration kernel:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_{iii}(x_i, x_j, x_k) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - x_j x_k (2 x_i^2 + x_j^2 + x_k^2)</span>
+<span class="sd">            }{</span>
+<span class="sd">                (x_i^2 + x_j^2)(x_i^2 + x_k^2)</span>
+<span class="sd">                \sqrt{x_i^2 + x_j^2 + x_k^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    This function allows us to evaluate the third order kernels</span>
+<span class="sd">    :math:`k_{xxx}(x, y, z)`, :math:`k_{yyy}(x, y, z)`, and :math:`k_{zzz}(x,</span>
+<span class="sd">    y, z)` by cycling through the coordinates of the nodes of the prism.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x_i, x_j, x_k : floats</span>
+<span class="sd">        Shifted coordinates of the vertex of the prism. Must be in meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``x_i``, ``x_j``, and</span>
+<span class="sd">        ``x_k`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Given the shifted coordinates of a prism vertex ``easting``, ``northing``</span>
+<span class="sd">    and ``upward``, we can use this function to compute the diagonal third</span>
+<span class="sd">    order kernels by cycling the order of the shifted coordinates of the</span>
+<span class="sd">    vertex:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; easting, northing, upward = 1.7, 2.8, 3.9</span>
+<span class="sd">    &gt;&gt;&gt; radius = np.sqrt(easting**2 + northing**2 + upward**2)</span>
+<span class="sd">    &gt;&gt;&gt; k_eee = _kernel_iii(easting, northing, upward, radius)</span>
+<span class="sd">    &gt;&gt;&gt; k_nnn = _kernel_iii(northing, upward, easting, radius)</span>
+<span class="sd">    &gt;&gt;&gt; k_uuu = _kernel_iii(upward, easting, northing, radius)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x_i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x_j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x_i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x_k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="n">x_i_sq</span><span class="p">,</span> <span class="n">x_j_sq</span><span class="p">,</span> <span class="n">x_k_sq</span> <span class="o">=</span> <span class="n">x_i</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x_j</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x_k</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="o">-</span><span class="n">x_j</span> <span class="o">*</span> <span class="n">x_k</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x_i_sq</span> <span class="o">+</span> <span class="n">x_j_sq</span> <span class="o">+</span> <span class="n">x_k_sq</span><span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_i_sq</span> <span class="o">+</span> <span class="n">x_j_sq</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_i_sq</span> <span class="o">+</span> <span class="n">x_k_sq</span><span class="p">)</span> <span class="o">*</span> <span class="n">radius</span>
+    <span class="k">return</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_kernel_iij</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_j</span><span class="p">,</span> <span class="n">x_k</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Non-diagonal 3rd order kernels of a prism.</span>
+
+<span class="sd">    Evaluates the following integration kernel:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        easting / ((upward + radius) * radius)</span>
+
+<span class="sd">        k_{iij}(x_i, x_j, x_k) =</span>
+<span class="sd">            \frac{</span>
+<span class="sd">                - x_i</span>
+<span class="sd">            }{</span>
+<span class="sd">                (x_k + \sqrt{x_i^2 + x_j^2 + x_k^2})</span>
+<span class="sd">                \sqrt{x_i^2 + x_j^2 + x_k^2}</span>
+<span class="sd">            }</span>
+
+<span class="sd">    This function allows us to evaluate the non-diagonal third order kernels</span>
+<span class="sd">    :math:`k_{xxy}(x, y, z)`, :math:`k_{xxz}(x, y, z)`,</span>
+<span class="sd">    :math:`k_{xyy}(x, y, z)`, :math:`k_{yyz}(x, y, z)`,</span>
+<span class="sd">    :math:`k_{xzz}(x, y, z)`, and :math:`k_{yzz}(x, y, z)` by cycling</span>
+<span class="sd">    through the coordinates of the nodes of the prism.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x_i, x_j, x_k : floats</span>
+<span class="sd">        Shifted coordinates of the vertex of the prism. Must be in meters.</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Square root of the sum of the squares of the ``x_i``, ``x_j``, and</span>
+<span class="sd">        ``x_k`` shifted coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kernel : float</span>
+<span class="sd">        Value of the kernel function.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Given the shifted coordinates of a prism vertex ``easting``, ``northing``</span>
+<span class="sd">    and ``upward``, we can use this function to compute the non-diagonal third</span>
+<span class="sd">    order kernels by changing the order of the shifted coordinates of the</span>
+<span class="sd">    vertex:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; easting, northing, upward = 1.7, 2.8, 3.9</span>
+<span class="sd">    &gt;&gt;&gt; radius = np.sqrt(easting**2 + northing**2 + upward**2)</span>
+<span class="sd">    &gt;&gt;&gt; k_een = _kernel_iij(easting, northing, upward, radius)</span>
+<span class="sd">    &gt;&gt;&gt; k_eeu = _kernel_iij(easting, upward, northing, radius)</span>
+<span class="sd">    &gt;&gt;&gt; k_enn = _kernel_iij(northing, easting, upward, radius)</span>
+<span class="sd">    &gt;&gt;&gt; k_nnu = _kernel_iij(northing, upward, easting, radius)</span>
+<span class="sd">    &gt;&gt;&gt; k_euu = _kernel_iij(upward, easting, northing, radius)</span>
+<span class="sd">    &gt;&gt;&gt; k_nuu = _kernel_iij(upward, northing, upward, radius)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">x_i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x_j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">x_i</span> <span class="o">/</span> <span class="p">((</span><span class="n">x_k</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
 </pre></div>
 
                 </article>
@@ -1280,7 +2072,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
 </div>
@@ -1289,8 +2081,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"></div>
               
             
           </div>
@@ -1316,7 +2106,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Apr 09, 2024.
+  Last updated on Oct 08, 2024.
   <br/>
 </p>
   </div>
@@ -1334,8 +2124,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
