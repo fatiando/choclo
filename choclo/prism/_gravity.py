@@ -54,24 +54,11 @@ def gravity_pot(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -200,24 +187,11 @@ def gravity_e(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -347,24 +321,11 @@ def gravity_n(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -494,24 +455,11 @@ def gravity_u(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -647,24 +595,11 @@ def gravity_ee(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -818,24 +753,11 @@ def gravity_nn(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -989,24 +911,11 @@ def gravity_uu(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -1160,24 +1069,11 @@ def gravity_en(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -1307,24 +1203,11 @@ def gravity_eu(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -1455,24 +1338,11 @@ def gravity_nu(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     density : float
         Density of the rectangular prism in kilograms per cubic meter.
 
@@ -1600,24 +1470,11 @@ def _evaluate_kernel(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
     kernel : callable
         Kernel function that will be evaluated on each one of the shifted
         vertices of the prism.

@@ -35,18 +35,11 @@ def gravity_pot(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -90,18 +83,11 @@ def gravity_e(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -150,18 +136,11 @@ def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -210,18 +189,11 @@ def gravity_u(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -270,18 +242,11 @@ def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -337,18 +302,11 @@ def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -404,18 +362,11 @@ def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -471,18 +422,11 @@ def gravity_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -533,18 +477,11 @@ def gravity_eu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
@@ -595,18 +532,11 @@ def gravity_nu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the point source in meters.
-    northing_q : float
-        Northing coordinate of the point source in meters.
-    upward_q : float
-        Upward coordinate of the point source in meters.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the point source in meters.
     mass : float
         Mass of the point source in kilograms.
 
