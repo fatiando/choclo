@@ -31,24 +31,11 @@ def is_interior_point(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
 
     Returns
     -------
@@ -83,24 +70,11 @@ def is_point_on_edge(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
 
     Returns
     -------
@@ -167,24 +141,11 @@ def is_point_on_easting_edge(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
 
     Returns
     -------
@@ -222,24 +183,11 @@ def is_point_on_northing_edge(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
 
     Returns
     -------
@@ -277,24 +225,11 @@ def is_point_on_upward_edge(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
 
     Returns
     -------
@@ -332,24 +267,11 @@ def is_point_on_east_face(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
 
     Returns
     -------
@@ -388,24 +310,11 @@ def is_point_on_north_face(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
 
     Returns
     -------
@@ -443,24 +352,11 @@ def is_point_on_top_face(
 
     Parameters
     ----------
-    easting : float
-        Easting coordinate of the observation point. Must be in meters.
-    northing : float
-        Northing coordinate of the observation point. Must be in meters.
-    upward : float
-        Upward coordinate of the observation point. Must be in meters.
-    prism_west : float
-        The West boundary of the prism. Must be in meters.
-    prism_east : float
-        The East boundary of the prism. Must be in meters.
-    prism_south : float
-        The South boundary of the prism. Must be in meters.
-    prism_north : float
-        The North boundary of the prism. Must be in meters.
-    prism_bottom : float
-        The bottom boundary of the prism. Must be in meters.
-    prism_top : float
-        The top boundary of the prism. Must be in meters.
+    easting, northing, upward : float
+        Easting, northing and upward coordinates of the observation point. Must
+        be in meters.
+    prism_west, prism_east, prism_south, prism_north, prism_bottom, prism_top : float
+        The boundaries of the prism. Must be in meters.
 
     Returns
     -------

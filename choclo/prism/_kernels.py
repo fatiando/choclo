@@ -28,15 +28,9 @@ def kernel_pot(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -120,15 +114,9 @@ def kernel_e(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -215,15 +203,9 @@ def kernel_n(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -310,15 +292,9 @@ def kernel_u(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -406,15 +382,9 @@ def kernel_ee(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -471,15 +441,9 @@ def kernel_nn(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -536,15 +500,9 @@ def kernel_uu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -601,15 +559,9 @@ def kernel_en(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -666,15 +618,9 @@ def kernel_eu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -731,15 +677,9 @@ def kernel_nu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -833,7 +773,7 @@ def _safe_log(x, y, z, r):
     x : float
         Shifted coordinate of the prism vertex that will be used for evaluating
         the log.
-    y, z : floats
+    y, z : float
         The other two shifted coordinates of the prism vertex. They are used to
         determine if ``abs(x) == r`` with more accuracy, and to evaluate the
         log function to avoid floating point errors when :math:`x < 0` and
@@ -914,15 +854,9 @@ def kernel_eee(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -973,15 +907,9 @@ def kernel_nnn(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1032,15 +960,9 @@ def kernel_uuu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1091,15 +1013,9 @@ def kernel_een(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1150,15 +1066,9 @@ def kernel_eeu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1209,15 +1119,9 @@ def kernel_enn(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1268,15 +1172,9 @@ def kernel_nnu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1327,15 +1225,9 @@ def kernel_euu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1386,15 +1278,9 @@ def kernel_nuu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1445,15 +1331,9 @@ def kernel_enu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -1510,7 +1390,7 @@ def _kernel_iii(x_i, x_j, x_k, radius):
 
     Parameters
     ----------
-    x_i, x_j, x_k : floats
+    x_i, x_j, x_k : float
         Shifted coordinates of the vertex of the prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``x_i``, ``x_j``, and
@@ -1572,7 +1452,7 @@ def _kernel_iij(x_i, x_j, x_k, radius):
 
     Parameters
     ----------
-    x_i, x_j, x_k : floats
+    x_i, x_j, x_k : float
         Shifted coordinates of the vertex of the prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``x_i``, ``x_j``, and

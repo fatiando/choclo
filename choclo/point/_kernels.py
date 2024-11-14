@@ -24,18 +24,10 @@ def kernel_pot(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -80,18 +72,10 @@ def kernel_e(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -141,18 +125,10 @@ def kernel_n(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -202,18 +178,10 @@ def kernel_u(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -263,18 +231,10 @@ def kernel_ee(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -329,18 +289,10 @@ def kernel_nn(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -395,18 +347,10 @@ def kernel_uu(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -461,18 +405,10 @@ def kernel_en(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -522,18 +458,10 @@ def kernel_eu(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
@@ -583,18 +511,10 @@ def kernel_nu(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
     distance : float
         Euclidean distance between points :math:`\mathbf{p}` and
         :math:`\mathbf{q}`.
