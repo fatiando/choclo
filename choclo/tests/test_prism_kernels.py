@@ -1,21 +1,27 @@
+# Copyright (c) 2022 The Choclo Developers.
+# Distributed under the terms of the BSD 3-Clause License.
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# This code is part of the Fatiando a Terra project (https://www.fatiando.org)
+#
 """
 Additional tests to prism kernels.
 """
 
-import pytest
 import numpy as np
+import pytest
 
 from choclo.prism import (
     kernel_eee,
-    kernel_nnn,
-    kernel_uuu,
     kernel_een,
     kernel_eeu,
     kernel_enn,
-    kernel_nnu,
-    kernel_euu,
-    kernel_nuu,
     kernel_enu,
+    kernel_euu,
+    kernel_nnn,
+    kernel_nnu,
+    kernel_nuu,
+    kernel_uuu,
 )
 
 
