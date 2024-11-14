@@ -38,7 +38,8 @@ def magnetic_field(
     Parameters
     ----------
     easting_p, northing_p, upward_p : float
-        Easting, northing and upward coordinates of the observation point in meters.
+        Easting, northing and upward coordinates of the observation point in
+        meters.
     easting_q, northing_q, upward_q : float
         Easting, northing and upward coordinates of the dipole in meters.
     magnetic_moment_east, magnetic_moment_north, magnetic_moment_up : float
@@ -122,7 +123,8 @@ def magnetic_e(
     Parameters
     ----------
     easting_p, northing_p, upward_p : float
-        Easting, northing and upward coordinates of the observation point in meters.
+        Easting, northing and upward coordinates of the observation point in
+        meters.
     easting_q, northing_q, upward_q : float
         Easting, northing and upward coordinates of the dipole in meters.
     magnetic_moment_east, magnetic_moment_north, magnetic_moment_up : float
@@ -199,7 +201,8 @@ def magnetic_n(
     Parameters
     ----------
     easting_p, northing_p, upward_p : float
-        Easting, northing and upward coordinates of the observation point in meters.
+        Easting, northing and upward coordinates of the observation point in
+        meters.
     easting_q, northing_q, upward_q : float
         Easting, northing and upward coordinates of the dipole in meters.
     magnetic_moment_east, magnetic_moment_north, magnetic_moment_up : float
@@ -276,7 +279,8 @@ def magnetic_u(
     Parameters
     ----------
     easting_p, northing_p, upward_p : float
-        Easting, northing and upward coordinates of the observation point in meters.
+        Easting, northing and upward coordinates of the observation point in
+        meters.
     easting_q, northing_q, upward_q : float
         Easting, northing and upward coordinates of the dipole in meters.
     magnetic_moment_east, magnetic_moment_north, magnetic_moment_up : float
