@@ -24,18 +24,10 @@ def distance_cartesian(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of point :math:`\mathbf{p}`.
-    northing_p : float
-        Northing coordinate of point :math:`\mathbf{p}`.
-    upward_p : float
-        Upward coordinate of point :math:`\mathbf{p}`.
-    easting_q : float
-        Easting coordinate of point :math:`\mathbf{q}`.
-    northing_q : float
-        Northing coordinate of point :math:`\mathbf{q}`.
-    upward_q : float
-        Upward coordinate of point :math:`\mathbf{q}`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
 
     Returns
     -------
@@ -75,23 +67,20 @@ def distance_spherical(
 
     Parameters
     ----------
-    longitude_p : float
-        Longitude coordinate of point :math:`\mathbf{p}` in degrees.
-    latitude_p : float
-        Latitude coordinate of point :math:`\mathbf{p}` in degrees.
-    radius_p : float
-        Radial coordinate of point :math:`\mathbf{p}` in meters.
-    longitude_q : float
-        Longitude coordinate of point :math:`\mathbf{q}` in degrees.
-    latitude_q : float
-        Latitude coordinate of point :math:`\mathbf{q}` in degrees.
-    radius_q : float
-        Radial coordinate of point :math:`\mathbf{q}` in meters.
+    longitude_p, latitude_p, radius_p : float
+        Longitude, latitude and radial coordinates of point :math:`\mathbf{p}`.
+        Longitude and latitude must be in degrees. Radial coordinate should be
+        in meters.
+    longitude_q, latitude_q, radius_q : float
+        Longitude, latitude and radial coordinates of point :math:`\mathbf{q}`.
+        Longitude and latitude must be in degrees. Radial coordinate should be
+        in meters.
 
     Returns
     -------
     distance : float
-        Euclidean distance between ``point_p`` and ``point_q``.
+        Euclidean distance between point :math:`\mathbf{p}` and point
+        :math:`\mathbf{q}`.
 
     Notes
     -----
