@@ -932,7 +932,8 @@ def kernel_eee(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-easting-easting component
         of the grad tensor due to a rectangular prism evaluated on a single
-        vertex.
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
 
     Notes
     -----
@@ -990,7 +991,8 @@ def kernel_nnn(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the northing-northing-northing
         component of the grad tensor due to a rectangular prism evaluated on
-        a single vertex.
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
 
     Notes
     -----
@@ -1048,7 +1050,8 @@ def kernel_uuu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the upward-upward-upward component of
         the grad tensor due to a rectangular prism evaluated on a single
-        vertex.
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
 
     Notes
     -----
@@ -1106,7 +1109,8 @@ def kernel_een(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-easting-northing component
         of the grad tensor due to a rectangular prism evaluated on a single
-        vertex.
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
 
     Notes
     -----
@@ -1164,7 +1168,8 @@ def kernel_eeu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-easting-upward component
         of the grad tensor due to a rectangular prism evaluated on a single
-        vertex.
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
 
     Notes
     -----
@@ -1222,7 +1227,8 @@ def kernel_enn(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-northing-northing
         component of the grad tensor due to a rectangular prism evaluated on
-        a single vertex.
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
 
     Notes
     -----
@@ -1280,7 +1286,8 @@ def kernel_nnu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the northing-northing-upward
         component of the grad tensor due to a rectangular prism evaluated on
-        a single vertex.
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
 
     Notes
     -----
@@ -1338,7 +1345,8 @@ def kernel_euu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-upward-upward
         component of the grad tensor due to a rectangular prism evaluated on
-        a single vertex.
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
 
     Notes
     -----
@@ -1396,7 +1404,8 @@ def kernel_nuu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the northing-upward-upward
         component of the grad tensor due to a rectangular prism evaluated on
-        a single vertex.
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
 
     Notes
     -----
@@ -1454,7 +1463,8 @@ def kernel_enu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-northing-upward component
         of the grad tensor due to a rectangular prism evaluated on a single
-        vertex.
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
 
     Notes
     -----
@@ -1472,6 +1482,8 @@ def kernel_enu(easting, northing, upward, radius):
     >>> float(kernel_enu(x, y, z, r)) # doctest: +NUMBER
     -0.1480061
     """
+    if radius == 0.0:
+        return np.nan
     return -1 / radius
 
 
@@ -1507,7 +1519,7 @@ def _kernel_iii(x_i, x_j, x_k, radius):
     Returns
     -------
     kernel : float
-        Value of the kernel function.
+        Value of the kernel function. Return ``np.nan`` if ``radius`` is zero.
 
     Examples
     --------
@@ -1523,6 +1535,8 @@ def _kernel_iii(x_i, x_j, x_k, radius):
     >>> k_nnn = _kernel_iii(northing, upward, easting, radius)
     >>> k_uuu = _kernel_iii(upward, easting, northing, radius)
     """
+    if radius == 0.0:
+        return np.nan
     if (x_i == 0 and x_j == 0) or (x_i == 0 and x_k == 0):
         return 0.0
     x_i_sq, x_j_sq, x_k_sq = x_i**2, x_j**2, x_k**2
@@ -1567,7 +1581,7 @@ def _kernel_iij(x_i, x_j, x_k, radius):
     Returns
     -------
     kernel : float
-        Value of the kernel function.
+        Value of the kernel function. Return ``np.nan`` if ``radius`` is zero.
 
     Examples
     --------
@@ -1586,6 +1600,8 @@ def _kernel_iij(x_i, x_j, x_k, radius):
     >>> k_euu = _kernel_iij(upward, easting, northing, radius)
     >>> k_nuu = _kernel_iij(upward, northing, upward, radius)
     """
+    if radius == 0.0:
+        return np.nan
     if x_i == 0 and x_j == 0:
         return 0.0
     return -x_i / ((x_k + radius) * radius)
