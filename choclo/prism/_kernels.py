@@ -422,6 +422,8 @@ def kernel_ee(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return -_safe_atan2(northing * upward, easting * radius)
 
 
@@ -481,6 +483,8 @@ def kernel_nn(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return -_safe_atan2(easting * upward, northing * radius)
 
 
@@ -540,6 +544,8 @@ def kernel_uu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return -_safe_atan2(easting * northing, upward * radius)
 
 
@@ -599,6 +605,8 @@ def kernel_en(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return _safe_log(upward, easting, northing, radius)
 
 
@@ -658,6 +666,8 @@ def kernel_eu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return _safe_log(northing, easting, upward, radius)
 
 
@@ -717,6 +727,8 @@ def kernel_nu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return _safe_log(easting, northing, upward, radius)
 
 

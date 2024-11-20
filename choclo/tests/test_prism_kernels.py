@@ -12,15 +12,21 @@ import numpy as np
 import pytest
 
 from choclo.prism import (
+    kernel_ee,
     kernel_eee,
     kernel_een,
     kernel_eeu,
+    kernel_en,
     kernel_enn,
     kernel_enu,
+    kernel_eu,
     kernel_euu,
+    kernel_nn,
     kernel_nnn,
     kernel_nnu,
+    kernel_nu,
     kernel_nuu,
+    kernel_uu,
     kernel_uuu,
 )
 
@@ -34,7 +40,15 @@ class TestThirdOrderKernelsOnVertex:
     it since they filter out singular points before they call kernels.
     """
 
-    KERNELS = (
+    SECOND_ORDER_KERNELS = (
+        kernel_ee,
+        kernel_nn,
+        kernel_uu,
+        kernel_en,
+        kernel_eu,
+        kernel_nu,
+    )
+    THIRD_ORDER_KERNELS = (
         kernel_eee,
         kernel_nnn,
         kernel_uuu,
@@ -47,8 +61,15 @@ class TestThirdOrderKernelsOnVertex:
         kernel_enu,
     )
 
-    @pytest.mark.parametrize("kernel", KERNELS)
+    @pytest.mark.parametrize("kernel", THIRD_ORDER_KERNELS)
     def test_third_order_kernels_on_vertex(self, kernel):
+        easting, northing, upward = 0.0, 0.0, 0.0
+        radius = 0.0
+        result = kernel(easting, northing, upward, radius)
+        assert np.isnan(result)
+
+    @pytest.mark.parametrize("kernel", SECOND_ORDER_KERNELS)
+    def test_second_order_kernels_on_vertex(self, kernel):
         easting, northing, upward = 0.0, 0.0, 0.0
         radius = 0.0
         result = kernel(easting, northing, upward, radius)
