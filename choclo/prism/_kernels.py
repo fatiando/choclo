@@ -394,6 +394,7 @@ def kernel_ee(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-easting component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -455,6 +456,7 @@ def kernel_nn(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the northing-northing component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -516,6 +518,7 @@ def kernel_uu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the upward-upward component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -577,6 +580,7 @@ def kernel_en(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-northing component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -638,6 +642,7 @@ def kernel_eu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-upward component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -699,6 +704,7 @@ def kernel_nu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the northing-upward component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
