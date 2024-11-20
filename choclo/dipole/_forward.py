@@ -37,35 +37,20 @@ def magnetic_field(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the dipole in meters.
-    northing_q : float
-        Northing coordinate of the dipole in meters.
-    upward_q : float
-        Upward coordinate of the dipole in meters.
-    magnetic_moment_east : float
-        The East component of the magnetic moment vector of the dipole. Must be
-        in :math:`A m^2`.
-    magnetic_moment_north : float
-        The North component of the magnetic moment vector of the dipole. Must
-        be in :math:`A m^2`.
-    magnetic_moment_up : float
-        The upward component of the magnetic moment vector of the dipole. Must
-        be in :math:`A m^2`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the dipole in meters.
+    magnetic_moment_east, magnetic_moment_north, magnetic_moment_up : float
+        The east, north and upward component of the magnetic moment vector of
+        the dipole. Must be in :math:`A m^2`.
 
     Returns
     -------
-    b : array
-        Array containing the three components of the magnetic field generated
+    b_e, b_n, b_u : float
+        Easting, northing and upward components of the magnetic field generated
         by the dipole on the observation point in :math:`\text{T}`.
-        The components are returned in the following order: ``b_e``, ``b_n``,
-        ``b_u``.
 
     Notes
     -----
@@ -137,27 +122,14 @@ def magnetic_e(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the dipole in meters.
-    northing_q : float
-        Northing coordinate of the dipole in meters.
-    upward_q : float
-        Upward coordinate of the dipole in meters.
-    magnetic_moment_east : float
-        The East component of the magnetic moment vector of the dipole. Must be
-        in :math:`A m^2`.
-    magnetic_moment_north : float
-        The North component of the magnetic moment vector of the dipole. Must
-        be in :math:`A m^2`.
-    magnetic_moment_up : float
-        The upward component of the magnetic moment vector of the dipole. Must
-        be in :math:`A m^2`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the dipole in meters.
+    magnetic_moment_east, magnetic_moment_north, magnetic_moment_up : float
+        The east, north and upward component of the magnetic moment vector of
+        the dipole. Must be in :math:`A m^2`.
 
     Returns
     -------
@@ -228,27 +200,14 @@ def magnetic_n(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the dipole in meters.
-    northing_q : float
-        Northing coordinate of the dipole in meters.
-    upward_q : float
-        Upward coordinate of the dipole in meters.
-    magnetic_moment_east : float
-        The East component of the magnetic moment vector of the dipole. Must be
-        in :math:`A m^2`.
-    magnetic_moment_north : float
-        The North component of the magnetic moment vector of the dipole. Must
-        be in :math:`A m^2`.
-    magnetic_moment_up : float
-        The upward component of the magnetic moment vector of the dipole. Must
-        be in :math:`A m^2`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the dipole in meters.
+    magnetic_moment_east, magnetic_moment_north, magnetic_moment_up : float
+        The east, north and upward component of the magnetic moment vector of
+        the dipole. Must be in :math:`A m^2`.
 
     Returns
     -------
@@ -319,27 +278,14 @@ def magnetic_u(
 
     Parameters
     ----------
-    easting_p : float
-        Easting coordinate of the observation point in meters.
-    northing_p : float
-        Northing coordinate of the observation point in meters.
-    upward_p : float
-        Upward coordinate of the observation point in meters.
-    easting_q : float
-        Easting coordinate of the dipole in meters.
-    northing_q : float
-        Northing coordinate of the dipole in meters.
-    upward_q : float
-        Upward coordinate of the dipole in meters.
-    magnetic_moment_east : float
-        The East component of the magnetic moment vector of the dipole. Must be
-        in :math:`A m^2`.
-    magnetic_moment_north : float
-        The North component of the magnetic moment vector of the dipole. Must
-        be in :math:`A m^2`.
-    magnetic_moment_up : float
-        The upward component of the magnetic moment vector of the dipole. Must
-        be in :math:`A m^2`.
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of the observation point in
+        meters.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of the dipole in meters.
+    magnetic_moment_east, magnetic_moment_north, magnetic_moment_up : float
+        The east, north and upward component of the magnetic moment vector of
+        the dipole. Must be in :math:`A m^2`.
 
     Returns
     -------

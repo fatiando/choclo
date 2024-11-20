@@ -28,15 +28,9 @@ def kernel_pot(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -55,9 +49,9 @@ def kernel_pot(easting, northing, upward, radius):
     .. math::
 
         k_V(x, y, z) &=
-            x y \, \operatorname{safe-ln} (z + r)
-            + y z \, \operatorname{safe-ln} (x + r)
-            + z x \, \operatorname{safe-ln} (y + r) \\
+            x y \, \operatorname{safe\_ln} (z, r)
+            + y z \, \operatorname{safe\_ln} (x, r)
+            + z x \, \operatorname{safe\_ln} (y, r) \\
             & - \frac{x^2}{2} \operatorname{safe-arctan} \left( yz, xr \right)
             - \frac{y^2}{2} \operatorname{safe-arctan} \left( zx, yr \right)
             - \frac{z^2}{2} \operatorname{safe-arctan} \left( xy, zr \right)
@@ -66,10 +60,12 @@ def kernel_pot(easting, northing, upward, radius):
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     and
@@ -91,9 +87,9 @@ def kernel_pot(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = (
-        easting * northing * _safe_log(upward, radius)
-        + northing * upward * _safe_log(easting, radius)
-        + easting * upward * _safe_log(northing, radius)
+        easting * northing * _safe_log(upward, easting, northing, radius)
+        + northing * upward * _safe_log(easting, northing, upward, radius)
+        + easting * upward * _safe_log(northing, upward, easting, radius)
         - 0.5 * easting**2 * _safe_atan2(upward * northing, easting * radius)
         - 0.5 * northing**2 * _safe_atan2(upward * easting, northing * radius)
         - 0.5 * upward**2 * _safe_atan2(easting * northing, upward * radius)
@@ -118,15 +114,9 @@ def kernel_e(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -147,8 +137,8 @@ def kernel_e(easting, northing, upward, radius):
 
         k_x(x, y, z) =
             -\left[
-            y \, \operatorname{safe-ln} (z + r)
-            + z \, \operatorname{safe-ln} (y + r)
+            y \, \operatorname{safe\_ln} (z, r)
+            + z \, \operatorname{safe\_ln} (y, r)
             - x \, \operatorname{safe-arctan} \left( yz, xr \right)
             \right]
 
@@ -156,10 +146,12 @@ def kernel_e(easting, northing, upward, radius):
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     and
@@ -187,8 +179,8 @@ def kernel_e(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = -(
-        northing * _safe_log(upward, radius)
-        + upward * _safe_log(northing, radius)
+        northing * _safe_log(upward, easting, northing, radius)
+        + upward * _safe_log(northing, upward, easting, radius)
         - easting * _safe_atan2(northing * upward, easting * radius)
     )
     return kernel
@@ -211,15 +203,9 @@ def kernel_n(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -240,8 +226,8 @@ def kernel_n(easting, northing, upward, radius):
 
         k_y(x, y, z) =
             -\left[
-            z \, \operatorname{safe-ln} (x + r)
-            + x \, \operatorname{safe-ln} (z + r)
+            z \, \operatorname{safe\_ln} (x, r)
+            + x \, \operatorname{safe\_ln} (z, r)
             - y \, \operatorname{safe-arctan} \left( zx, yr \right)
             \right]
 
@@ -249,10 +235,12 @@ def kernel_n(easting, northing, upward, radius):
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     and
@@ -280,8 +268,8 @@ def kernel_n(easting, northing, upward, radius):
     - [Fukushima2020]_
     """
     kernel = -(
-        upward * _safe_log(easting, radius)
-        + easting * _safe_log(upward, radius)
+        upward * _safe_log(easting, northing, upward, radius)
+        + easting * _safe_log(upward, easting, northing, radius)
         - northing * _safe_atan2(easting * upward, northing * radius)
     )
     return kernel
@@ -304,15 +292,9 @@ def kernel_u(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -333,8 +315,8 @@ def kernel_u(easting, northing, upward, radius):
 
         k_z(x, y, z) =
             - \left[
-            x \, \operatorname{safe-ln} (y + r)
-            + y \, \operatorname{safe-ln} (x + r)
+            x \, \operatorname{safe\_ln} (y, r)
+            + y \, \operatorname{safe\_ln} (x, r)
             - z \, \operatorname{safe-arctan} \left( xy, zr \right)
             \right]
 
@@ -342,10 +324,12 @@ def kernel_u(easting, northing, upward, radius):
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     and
@@ -366,7 +350,6 @@ def kernel_u(easting, northing, upward, radius):
         by [Nagy2000]_ in order to compute the numerical kernel for the
         **upward** component instead for the downward one.
 
-
     References
     ----------
     - [Nagy2000]_
@@ -376,8 +359,8 @@ def kernel_u(easting, northing, upward, radius):
     # The minus sign is to return the kernel for the upward component instead
     # of the downward one.
     kernel = -(
-        easting * _safe_log(northing, radius)
-        + northing * _safe_log(easting, radius)
+        easting * _safe_log(northing, upward, easting, radius)
+        + northing * _safe_log(easting, northing, upward, radius)
         - upward * _safe_atan2(easting * northing, upward * radius)
     )
     return kernel
@@ -399,15 +382,9 @@ def kernel_ee(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -417,6 +394,7 @@ def kernel_ee(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-easting component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -445,6 +423,8 @@ def kernel_ee(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return -_safe_atan2(northing * upward, easting * radius)
 
 
@@ -464,15 +444,9 @@ def kernel_nn(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -482,6 +456,7 @@ def kernel_nn(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the northing-northing component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -510,6 +485,8 @@ def kernel_nn(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return -_safe_atan2(easting * upward, northing * radius)
 
 
@@ -529,15 +506,9 @@ def kernel_uu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -547,6 +518,7 @@ def kernel_uu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the upward-upward component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -575,6 +547,8 @@ def kernel_uu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
+    if radius == 0.0:
+        return np.nan
     return -_safe_atan2(easting * northing, upward * radius)
 
 
@@ -594,15 +568,9 @@ def kernel_en(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -612,6 +580,7 @@ def kernel_en(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-northing component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -620,16 +589,18 @@ def kernel_en(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xy}(x, y, z) = \operatorname{safe-ln} \left( z + r \right)
+        k_{xy}(x, y, z) = \operatorname{safe\_ln} \left(z, r \right)
 
     where
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     References
@@ -638,7 +609,9 @@ def kernel_en(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(upward, radius)
+    if radius == 0.0:
+        return np.nan
+    return _safe_log(upward, easting, northing, radius)
 
 
 @jit(nopython=True)
@@ -657,15 +630,9 @@ def kernel_eu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -675,6 +642,7 @@ def kernel_eu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the easting-upward component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -683,16 +651,18 @@ def kernel_eu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{xz}(x, y, z) = \operatorname{safe-ln} \left( y + r \right)
+        k_{xz}(x, y, z) = \operatorname{safe\_ln} \left(y, r \right)
 
     where
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     References
@@ -701,7 +671,9 @@ def kernel_eu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(northing, radius)
+    if radius == 0.0:
+        return np.nan
+    return _safe_log(northing, easting, upward, radius)
 
 
 @jit(nopython=True)
@@ -720,15 +692,9 @@ def kernel_nu(easting, northing, upward, radius):
 
     Parameters
     ----------
-    easting : float
-        Shifted easting coordinate of the vertex of the prism. Must be in
-        meters.
-    northing : float
-        Shifted northing coordinate of the vertex of the prism. Must be in
-        meters.
-    upward : float
-        Shifted upward coordinate of the vertex of the prism. Must be in
-        meters.
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
     radius : float
         Square root of the sum of the squares of the ``easting``, ``northing``
         and ``upward`` shifted coordinates.
@@ -738,6 +704,7 @@ def kernel_nu(easting, northing, upward, radius):
     kernel : float
         Value of the kernel function for the northing-upward component of the
         tensor due to a rectangular prism evaluated on a single vertex.
+        Return ``np.nan`` if ``radius`` is zero.
 
     Notes
     -----
@@ -746,16 +713,18 @@ def kernel_nu(easting, northing, upward, radius):
 
     .. math::
 
-        k_{yz}(x, y, z) = \operatorname{safe-ln} \left( x + r \right)
+        k_{yz}(x, y, z) = \operatorname{safe\_ln} \left(x, r \right)
 
     where
 
     .. math::
 
-        \operatorname{safe-ln}(x) =
+        \operatorname{safe\_ln}(x, r) =
         \begin{cases}
-            0 & |x| < 10^{-10} \\
-            \ln (x)
+            0 & r = 0 \\
+            \ln(x + r) & x \ge 0 \\
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
     References
@@ -764,7 +733,9 @@ def kernel_nu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    return _safe_log(easting, radius)
+    if radius == 0.0:
+        return np.nan
+    return _safe_log(easting, northing, upward, radius)
 
 
 @jit(nopython=True)
@@ -807,42 +778,728 @@ def _safe_atan2(y, x):
 
 
 @jit(nopython=True)
-def _safe_log(x, r):
+def _safe_log(x, y, z, r):
     r"""
-    Safe log function to use in the prism kernels
+    Safe log function to use in the prism kernels.
 
-    Evaluates the :math:`\ln{x + r}` where :math:`x` is one of the shifted
+    Evaluates the :math:`\ln(x + r)` where :math:`x` is one of the shifted
     coordinate of the prism vertex and :math:`r` is the Euclidean distance
     (always non-negative) from the vertex to the observation point.
 
+    Parameters
+    ----------
+    x : float
+        Shifted coordinate of the prism vertex that will be used for evaluating
+        the log.
+    y, z : float
+        The other two shifted coordinates of the prism vertex. They are used to
+        determine if ``abs(x) == r`` with more accuracy, and to evaluate the
+        log function to avoid floating point errors when :math:`x < 0` and
+        :math:`r \ne |x|`.
+    r : float
+        Euclidean distance from the vertex to the observation point. We require
+        this argument because this quantity is usually precomputed before
+        evaluating the kernel, thus saving computation time.
+
+    Returns
+    -------
+    float
+        Evaluation of the :math:`\ln{x + r}` to be used on kernels.
+
+    Notes
+    -----
+    The :math:`\text{safe\_ln}(x, r)` function is defined as:
+
     .. math::
 
-        \text{safe_ln}(x, r) =
+        \text{safe\_ln}(x, r) =
         \begin{cases}
-            0 & x = 0, r = 0 \\
+            0 & r = 0 \\
             \ln(x + r) & x \ge 0 \\
-            \ln((r^2 - x^2) / (r - x)) & x < 0, r \ne -x \\
-            -\ln(-2 x) & x < 0, r = -x
+            \ln((y^2 + z^2) / (r - x)) & x < 0, r \ne |x| \\
+            -\ln(-2 x) & x < 0, r = |x|
         \end{cases}
 
-    This function returns 0 when the observation point is located on the vertex
-    of the prism (:math:`r=0`); and two modified versions in case that
-    :math:`x` is negative: if :math:`x = -r` then the :math:`\ln{x + r}` can be
-    replaced by :math:`-\ln{|x| + r} = -\ln(-2x)`, and for any other negative
-    value of :math:`x` it returns :math:`\ln((r^2 - x^2) / (r - x))` which
-    helps by reducing the floating point errors ([Fukushima2020_]).
-    This modified version was inspired by [Nagy2000] and [Fukushima2020_]:
+    The function evaluates :math:`\ln(x + r)` when :math:`x \ge 0`. Otherwise,
+    the returned value takes into account the limit cases:
+
+    * If :math:`r = 0` (observation point is on one of the vertices of the
+      prism), it returns zero. This accounts for the limits of the
+      zeroth-order and first-order kernels when evaluated on the vertices of
+      the prism. The second-order kernels are not defined on the vertices.
+    * If :math:`x < 0, r \ne |x|`, then it evaluates
+      :math:`\ln((y^2 + z^2) / (r - x))` to reduce floating point errors
+      ([Fukushima2020]_).
+    * If :math:`x < 0, r = |x|`, then it returns one of the terms of the limit
+      of the second-order kernels (when the observation point is inline with
+      two nodes): :math:`-\ln(-2x)`.
+
+    When checking if :math:`r = |x|`, we will evaluate if ``y == 0.0 and z ==
+    0.0``, to avoid issues with floating point errors in cases in which
+    :math:`|x| \gg |y|` and/or  :math:`|x| \gg |z|`. In such cases, the ``r``
+    value could be exactly the same as ``x`` (up to machine precision) and
+    not reflect that ``y`` and/or ``z`` are not-null.
+
+    This modified version of the log function was inspired by [Nagy2000]_ and
+    [Fukushima2020]_.
 
     References
     ----------
+    - [Nagy2000]_
     - [Fukushima2020]_
     """
     if r == 0:
         return 0
     if x < 0:
-        if r == -x:
+        if y == 0.0 and z == 0.0:
             result = -np.log(-2 * x)
         else:
-            result = np.log((r**2 - x**2) / (r - x))
+            result = np.log((y**2 + z**2) / (r - x))
         return result
     return np.log(x + r)
+
+
+@jit(nopython=True)
+def kernel_eee(easting, northing, upward, radius):
+    r"""
+    Easting-easting-easting kernel due to a prism.
+
+    Evaluates the integration kernel for the easting-easting-easting component
+    of the grad tensor generated by a prism [Nagy2000]_ on a single vertex of
+    the prism. The coordinates that must be passed are shifted coordinates: the
+    coordinates of the vertex from a Cartesian coordinate system whose origin
+    is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the easting-easting-easting component
+        of the grad tensor due to a rectangular prism evaluated on a single
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{xxx}(x, y, z) =
+            \frac{
+                - y z (2 x^2 + y^2 + z^2)
+            }{
+                (x^2 + y^2)(x^2 + z^2)
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_eee(x, y, z, r)) # doctest: +NUMBER
+    0.18706595
+    """
+    return _kernel_iii(easting, northing, upward, radius)
+
+
+@jit(nopython=True)
+def kernel_nnn(easting, northing, upward, radius):
+    r"""
+    Northing-northing-northing kernel due to a prism.
+
+    Evaluates the integration kernel for the northing-northing-northing
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the northing-northing-northing
+        component of the grad tensor due to a rectangular prism evaluated on
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{yyy}(x, y, z) =
+            \frac{
+                - x z (x^2 + 2 y^2 + z^2)
+            }{
+                (x^2 + y^2)(y^2 + z^2)
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_nnn(x, y, z, r)) # doctest: +NUMBER
+    0.07574927
+    """
+    return _kernel_iii(northing, upward, easting, radius)
+
+
+@jit(nopython=True)
+def kernel_uuu(easting, northing, upward, radius):
+    r"""
+    Upward-upward-upward kernel due to a prism.
+
+    Evaluates the integration kernel for the upward-upward-upward
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the upward-upward-upward component of
+        the grad tensor due to a rectangular prism evaluated on a single
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{zzz}(x, y, z) =
+            \frac{
+                - x y (x^2 + y^2 + 2 z^2)
+            }{
+                (x^2 + z^2)(y^2 + z^2)
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_uuu(x, y, z, r)) # doctest: +NUMBER
+    -0.19440331
+    """
+    return _kernel_iii(upward, northing, easting, radius)
+
+
+@jit(nopython=True)
+def kernel_een(easting, northing, upward, radius):
+    r"""
+    Easting-easting-northing kernel due to a prism.
+
+    Evaluates the integration kernel for the easting-easting-northing
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the easting-easting-northing component
+        of the grad tensor due to a rectangular prism evaluated on a single
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{xxy}(x, y, z) =
+            \frac{
+                - x
+            }{
+                (z + \sqrt{x^2 + y^2 + z^2})
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_een(x, y, z, r)) # doctest: +NUMBER
+    -0.12214070
+    """
+    return _kernel_iij(easting, northing, upward, radius)
+
+
+@jit(nopython=True)
+def kernel_eeu(easting, northing, upward, radius):
+    r"""
+    Easting-easting-upward kernel due to a prism.
+
+    Evaluates the integration kernel for the easting-easting-upward
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the easting-easting-upward component
+        of the grad tensor due to a rectangular prism evaluated on a single
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{xxz}(x, y, z) =
+            \frac{
+                - x
+            }{
+                (y + \sqrt{x^2 + y^2 + z^2})
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_eeu(x, y, z, r)) # doctest: +NUMBER
+    -0.03837408
+    """
+    return _kernel_iij(easting, upward, northing, radius)
+
+
+@jit(nopython=True)
+def kernel_enn(easting, northing, upward, radius):
+    r"""
+    Easting-northing-northing kernel due to a prism.
+
+    Evaluates the integration kernel for the easting-northing-northing
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the easting-northing-northing
+        component of the grad tensor due to a rectangular prism evaluated on
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{xyy}(x, y, z) =
+            \frac{
+                - y
+            }{
+                (z + \sqrt{x^2 + y^2 + z^2})
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_enn(x, y, z, r)) # doctest: +NUMBER
+    -0.20488118
+    """
+    return _kernel_iij(northing, easting, upward, radius)
+
+
+@jit(nopython=True)
+def kernel_nnu(easting, northing, upward, radius):
+    r"""
+    Northing-northing-upward kernel due to a prism.
+
+    Evaluates the integration kernel for the northing-northing-upward
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the northing-northing-upward
+        component of the grad tensor due to a rectangular prism evaluated on
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{yyz}(x, y, z) =
+            \frac{
+                - y
+            }{
+                (x + \sqrt{x^2 + y^2 + z^2})
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_nnu(x, y, z, r)) # doctest: +NUMBER
+    -0.07808384
+    """
+    return _kernel_iij(northing, upward, easting, radius)
+
+
+@jit(nopython=True)
+def kernel_euu(easting, northing, upward, radius):
+    r"""
+    Easting-upward-upward kernel due to a prism.
+
+    Evaluates the integration kernel for the easting-upward-upward
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the easting-upward-upward
+        component of the grad tensor due to a rectangular prism evaluated on
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{xzz}(x, y, z) =
+            \frac{
+                - z
+            }{
+                (y + \sqrt{x^2 + y^2 + z^2})
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_euu(x, y, z, r)) # doctest: +NUMBER
+    0.03713621
+    """
+    return _kernel_iij(upward, easting, northing, radius)
+
+
+@jit(nopython=True)
+def kernel_nuu(easting, northing, upward, radius):
+    r"""
+    Northing-upward-upward kernel due to a prism.
+
+    Evaluates the integration kernel for the northing-upward-upward
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the northing-upward-upward
+        component of the grad tensor due to a rectangular prism evaluated on
+        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.
+        observation point is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{yzz}(x, y, z) =
+            \frac{
+                - z
+            }{
+                (x + \sqrt{x^2 + y^2 + z^2})
+                \sqrt{x^2 + y^2 + z^2}
+            }
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_nuu(x, y, z, r)) # doctest: +NUMBER
+    0.04504837
+    """
+    return _kernel_iij(upward, northing, easting, radius)
+
+
+@jit(nopython=True)
+def kernel_enu(easting, northing, upward, radius):
+    r"""
+    Easting-northing-upward kernel due to a prism.
+
+    Evaluates the integration kernel for the easting-northing-upward
+    component of the grad tensor generated by a prism [Nagy2000]_ on a single
+    vertex of the prism. The coordinates that must be passed are shifted
+    coordinates: the coordinates of the vertex from a Cartesian coordinate
+    system whose origin is located in the observation point.
+
+    Parameters
+    ----------
+    easting, northing, upward : float
+        Shifted easting, northing and upward coordinates of the vertex of the
+        prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``easting``, ``northing``
+        and ``upward`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function for the easting-northing-upward component
+        of the grad tensor due to a rectangular prism evaluated on a single
+        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point
+        is on the vertex).
+
+    Notes
+    -----
+    Computes the following numerical kernel on the passed *shifted
+    coordinates*:
+
+    .. math::
+
+        k_{xyz}(x, y, z) = \frac{-1}{\sqrt{x^2 + y^2 + z^2}}
+
+    Examples
+    --------
+    >>> x, y, z = 3.1, 5.2, -3.0
+    >>> r = np.sqrt(x**2 + y**2 + z**2)
+    >>> float(kernel_enu(x, y, z, r)) # doctest: +NUMBER
+    -0.1480061
+    """
+    if radius == 0.0:
+        return np.nan
+    return -1 / radius
+
+
+@jit(nopython=True)
+def _kernel_iii(x_i, x_j, x_k, radius):
+    r"""
+    Diagonal 3rd order kernels of a prism.
+
+    Evaluates the following integration kernel:
+
+    .. math::
+
+        k_{iii}(x_i, x_j, x_k) =
+            \frac{
+                - x_j x_k (2 x_i^2 + x_j^2 + x_k^2)
+            }{
+                (x_i^2 + x_j^2)(x_i^2 + x_k^2)
+                \sqrt{x_i^2 + x_j^2 + x_k^2}
+            }
+
+    This function allows us to evaluate the third order kernels
+    :math:`k_{xxx}(x, y, z)`, :math:`k_{yyy}(x, y, z)`, and :math:`k_{zzz}(x,
+    y, z)` by cycling through the coordinates of the nodes of the prism.
+
+    Parameters
+    ----------
+    x_i, x_j, x_k : float
+        Shifted coordinates of the vertex of the prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``x_i``, ``x_j``, and
+        ``x_k`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function. Return ``np.nan`` if ``radius`` is zero.
+
+    Examples
+    --------
+    Given the shifted coordinates of a prism vertex ``easting``, ``northing``
+    and ``upward``, we can use this function to compute the diagonal third
+    order kernels by cycling the order of the shifted coordinates of the
+    vertex:
+
+    >>> import numpy as np
+    >>> easting, northing, upward = 1.7, 2.8, 3.9
+    >>> radius = np.sqrt(easting**2 + northing**2 + upward**2)
+    >>> k_eee = _kernel_iii(easting, northing, upward, radius)
+    >>> k_nnn = _kernel_iii(northing, upward, easting, radius)
+    >>> k_uuu = _kernel_iii(upward, easting, northing, radius)
+    """
+    if radius == 0.0:
+        return np.nan
+    if (x_i == 0 and x_j == 0) or (x_i == 0 and x_k == 0):
+        return 0.0
+    x_i_sq, x_j_sq, x_k_sq = x_i**2, x_j**2, x_k**2
+    numerator = -x_j * x_k * (2 * x_i_sq + x_j_sq + x_k_sq)
+    denominator = (x_i_sq + x_j_sq) * (x_i_sq + x_k_sq) * radius
+    return numerator / denominator
+
+
+@jit(nopython=True)
+def _kernel_iij(x_i, x_j, x_k, radius):
+    r"""
+    Non-diagonal 3rd order kernels of a prism.
+
+    Evaluates the following integration kernel:
+
+    .. math::
+
+        easting / ((upward + radius) * radius)
+
+        k_{iij}(x_i, x_j, x_k) =
+            \frac{
+                - x_i
+            }{
+                (x_k + \sqrt{x_i^2 + x_j^2 + x_k^2})
+                \sqrt{x_i^2 + x_j^2 + x_k^2}
+            }
+
+    This function allows us to evaluate the non-diagonal third order kernels
+    :math:`k_{xxy}(x, y, z)`, :math:`k_{xxz}(x, y, z)`,
+    :math:`k_{xyy}(x, y, z)`, :math:`k_{yyz}(x, y, z)`,
+    :math:`k_{xzz}(x, y, z)`, and :math:`k_{yzz}(x, y, z)` by cycling
+    through the coordinates of the nodes of the prism.
+
+    Parameters
+    ----------
+    x_i, x_j, x_k : float
+        Shifted coordinates of the vertex of the prism. Must be in meters.
+    radius : float
+        Square root of the sum of the squares of the ``x_i``, ``x_j``, and
+        ``x_k`` shifted coordinates.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function. Return ``np.nan`` if ``radius`` is zero.
+
+    Examples
+    --------
+    Given the shifted coordinates of a prism vertex ``easting``, ``northing``
+    and ``upward``, we can use this function to compute the non-diagonal third
+    order kernels by changing the order of the shifted coordinates of the
+    vertex:
+
+    >>> import numpy as np
+    >>> easting, northing, upward = 1.7, 2.8, 3.9
+    >>> radius = np.sqrt(easting**2 + northing**2 + upward**2)
+    >>> k_een = _kernel_iij(easting, northing, upward, radius)
+    >>> k_eeu = _kernel_iij(easting, upward, northing, radius)
+    >>> k_enn = _kernel_iij(northing, easting, upward, radius)
+    >>> k_nnu = _kernel_iij(northing, upward, easting, radius)
+    >>> k_euu = _kernel_iij(upward, easting, northing, radius)
+    >>> k_nuu = _kernel_iij(upward, northing, upward, radius)
+    """
+    if radius == 0.0:
+        return np.nan
+    if x_i == 0 and x_j == 0:
+        return 0.0
+    return -x_i / ((x_k + radius) * radius)
