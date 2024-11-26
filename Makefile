@@ -54,8 +54,7 @@ check-style:
 	flake8 $(CHECK_STYLE)
 
 numpydoc:
-	# With numpydoc>=1.8.0 this line could be replaced by `numpydoc lint`
-	python -m numpydoc.hooks.validate_docstrings $(wildcard ${PROJECT}/**/*.py)
+	numpydoc lint $(wildcard ${PROJECT}/**/*.py)
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
