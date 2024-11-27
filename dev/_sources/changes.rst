@@ -3,6 +3,25 @@
 Changelog
 =========
 
+Version 0.3.1
+=============
+
+Released on: 2024/11/26
+
+doi: https://doi.org/10.5281/zenodo.14226707
+
+Bug fixes:
+
+-  Make 2nd and 3rd order prism kernels return ``np.nan`` on vertices (`#108 <https://github.com/fatiando/choclo/pull/108>`__)
+
+Documentation:
+
+-  Group similar parameters in docstrings (`#105 <https://github.com/fatiando/choclo/pull/105>`__)
+
+This release contains contributions from:
+
+-  Santiago Soler
+
 Version 0.3.0
 -------------
 

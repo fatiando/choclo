@@ -19,17 +19,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -39,10 +41,11 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=12168cd1" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
@@ -76,19 +79,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -96,7 +88,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -104,8 +95,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -123,7 +114,8 @@
       
         
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -153,15 +145,11 @@
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
@@ -251,6 +239,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing Choclo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../versions.html">Documentation for other versions</a></li>
 </ul>
@@ -368,24 +357,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 
 </div></div>
       
@@ -444,15 +425,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -539,15 +514,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -637,15 +606,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -735,15 +698,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -834,15 +791,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -852,6 +803,7 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-easting component of the</span>
 <span class="sd">        tensor due to a rectangular prism evaluated on a single vertex.</span>
+<span class="sd">        Return ``np.nan`` if ``radius`` is zero.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -880,6 +832,8 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">_safe_atan2</span><span class="p">(</span><span class="n">northing</span> <span class="o">*</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
@@ -902,15 +856,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -920,6 +868,7 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the northing-northing component of the</span>
 <span class="sd">        tensor due to a rectangular prism evaluated on a single vertex.</span>
+<span class="sd">        Return ``np.nan`` if ``radius`` is zero.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -948,6 +897,8 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">_safe_atan2</span><span class="p">(</span><span class="n">easting</span> <span class="o">*</span> <span class="n">upward</span><span class="p">,</span> <span class="n">northing</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
@@ -970,15 +921,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -988,6 +933,7 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the upward-upward component of the</span>
 <span class="sd">        tensor due to a rectangular prism evaluated on a single vertex.</span>
+<span class="sd">        Return ``np.nan`` if ``radius`` is zero.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1016,6 +962,8 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">_safe_atan2</span><span class="p">(</span><span class="n">easting</span> <span class="o">*</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
@@ -1038,15 +986,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1056,6 +998,7 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-northing component of the</span>
 <span class="sd">        tensor due to a rectangular prism evaluated on a single vertex.</span>
+<span class="sd">        Return ``np.nan`` if ``radius`` is zero.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1084,6 +1027,8 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
@@ -1106,15 +1051,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1124,6 +1063,7 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-upward component of the</span>
 <span class="sd">        tensor due to a rectangular prism evaluated on a single vertex.</span>
+<span class="sd">        Return ``np.nan`` if ``radius`` is zero.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1152,6 +1092,8 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
@@ -1174,15 +1116,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1192,6 +1128,7 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the northing-upward component of the</span>
 <span class="sd">        tensor due to a rectangular prism evaluated on a single vertex.</span>
+<span class="sd">        Return ``np.nan`` if ``radius`` is zero.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1220,6 +1157,8 @@ document.write(`
 <span class="sd">    - [Nagy2002]_</span>
 <span class="sd">    - [Fukushima2020]_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">return</span> <span class="n">_safe_log</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
 
@@ -1277,7 +1216,7 @@ document.write(`
 <span class="sd">    x : float</span>
 <span class="sd">        Shifted coordinate of the prism vertex that will be used for evaluating</span>
 <span class="sd">        the log.</span>
-<span class="sd">    y, z : floats</span>
+<span class="sd">    y, z : float</span>
 <span class="sd">        The other two shifted coordinates of the prism vertex. They are used to</span>
 <span class="sd">        determine if ``abs(x) == r`` with more accuracy, and to evaluate the</span>
 <span class="sd">        log function to avoid floating point errors when :math:`x &lt; 0` and</span>
@@ -1360,15 +1299,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1378,7 +1311,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-easting-easting component</span>
 <span class="sd">        of the grad tensor due to a rectangular prism evaluated on a single</span>
-<span class="sd">        vertex.</span>
+<span class="sd">        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point</span>
+<span class="sd">        is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1421,15 +1355,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1439,7 +1367,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the northing-northing-northing</span>
 <span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
-<span class="sd">        a single vertex.</span>
+<span class="sd">        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.</span>
+<span class="sd">        observation point is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1482,15 +1411,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1500,7 +1423,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the upward-upward-upward component of</span>
 <span class="sd">        the grad tensor due to a rectangular prism evaluated on a single</span>
-<span class="sd">        vertex.</span>
+<span class="sd">        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point</span>
+<span class="sd">        is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1543,15 +1467,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1561,7 +1479,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-easting-northing component</span>
 <span class="sd">        of the grad tensor due to a rectangular prism evaluated on a single</span>
-<span class="sd">        vertex.</span>
+<span class="sd">        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point</span>
+<span class="sd">        is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1604,15 +1523,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1622,7 +1535,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-easting-upward component</span>
 <span class="sd">        of the grad tensor due to a rectangular prism evaluated on a single</span>
-<span class="sd">        vertex.</span>
+<span class="sd">        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point</span>
+<span class="sd">        is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1665,15 +1579,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1683,7 +1591,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-northing-northing</span>
 <span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
-<span class="sd">        a single vertex.</span>
+<span class="sd">        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.</span>
+<span class="sd">        observation point is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1726,15 +1635,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1744,7 +1647,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the northing-northing-upward</span>
 <span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
-<span class="sd">        a single vertex.</span>
+<span class="sd">        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.</span>
+<span class="sd">        observation point is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1787,15 +1691,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1805,7 +1703,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-upward-upward</span>
 <span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
-<span class="sd">        a single vertex.</span>
+<span class="sd">        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.</span>
+<span class="sd">        observation point is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1848,15 +1747,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1866,7 +1759,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the northing-upward-upward</span>
 <span class="sd">        component of the grad tensor due to a rectangular prism evaluated on</span>
-<span class="sd">        a single vertex.</span>
+<span class="sd">        a single vertex. Return ``np.nan`` if ``radius`` is zero (i.e.</span>
+<span class="sd">        observation point is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1909,15 +1803,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    easting : float</span>
-<span class="sd">        Shifted easting coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    northing : float</span>
-<span class="sd">        Shifted northing coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
-<span class="sd">    upward : float</span>
-<span class="sd">        Shifted upward coordinate of the vertex of the prism. Must be in</span>
-<span class="sd">        meters.</span>
+<span class="sd">    easting, northing, upward : float</span>
+<span class="sd">        Shifted easting, northing and upward coordinates of the vertex of the</span>
+<span class="sd">        prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``easting``, ``northing``</span>
 <span class="sd">        and ``upward`` shifted coordinates.</span>
@@ -1927,7 +1815,8 @@ document.write(`
 <span class="sd">    kernel : float</span>
 <span class="sd">        Value of the kernel function for the easting-northing-upward component</span>
 <span class="sd">        of the grad tensor due to a rectangular prism evaluated on a single</span>
-<span class="sd">        vertex.</span>
+<span class="sd">        vertex. Return ``np.nan`` if ``radius`` is zero (i.e. observation point</span>
+<span class="sd">        is on the vertex).</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1945,6 +1834,8 @@ document.write(`
 <span class="sd">    &gt;&gt;&gt; float(kernel_enu(x, y, z, r)) # doctest: +NUMBER</span>
 <span class="sd">    -0.1480061</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="n">radius</span></div>
 
 
@@ -1972,7 +1863,7 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    x_i, x_j, x_k : floats</span>
+<span class="sd">    x_i, x_j, x_k : float</span>
 <span class="sd">        Shifted coordinates of the vertex of the prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``x_i``, ``x_j``, and</span>
@@ -1981,7 +1872,7 @@ document.write(`
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    kernel : float</span>
-<span class="sd">        Value of the kernel function.</span>
+<span class="sd">        Value of the kernel function. Return ``np.nan`` if ``radius`` is zero.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -1997,6 +1888,8 @@ document.write(`
 <span class="sd">    &gt;&gt;&gt; k_nnn = _kernel_iii(northing, upward, easting, radius)</span>
 <span class="sd">    &gt;&gt;&gt; k_uuu = _kernel_iii(upward, easting, northing, radius)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">x_i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x_j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x_i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x_k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">return</span> <span class="mf">0.0</span>
     <span class="n">x_i_sq</span><span class="p">,</span> <span class="n">x_j_sq</span><span class="p">,</span> <span class="n">x_k_sq</span> <span class="o">=</span> <span class="n">x_i</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x_j</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x_k</span><span class="o">**</span><span class="mi">2</span>
@@ -2032,7 +1925,7 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    x_i, x_j, x_k : floats</span>
+<span class="sd">    x_i, x_j, x_k : float</span>
 <span class="sd">        Shifted coordinates of the vertex of the prism. Must be in meters.</span>
 <span class="sd">    radius : float</span>
 <span class="sd">        Square root of the sum of the squares of the ``x_i``, ``x_j``, and</span>
@@ -2041,7 +1934,7 @@ document.write(`
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    kernel : float</span>
-<span class="sd">        Value of the kernel function.</span>
+<span class="sd">        Value of the kernel function. Return ``np.nan`` if ``radius`` is zero.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -2060,6 +1953,8 @@ document.write(`
 <span class="sd">    &gt;&gt;&gt; k_euu = _kernel_iij(upward, easting, northing, radius)</span>
 <span class="sd">    &gt;&gt;&gt; k_nuu = _kernel_iij(upward, northing, upward, radius)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">if</span> <span class="n">x_i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x_j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">0.0</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">x_i</span> <span class="o">/</span> <span class="p">((</span><span class="n">x_k</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
@@ -2106,7 +2001,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Oct 08, 2024.
+  Last updated on Nov 27, 2024.
   <br/>
 </p>
   </div>
@@ -2124,8 +2019,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
