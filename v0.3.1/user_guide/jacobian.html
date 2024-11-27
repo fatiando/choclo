@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    
+        <title>Building a Jacobian matrix | Choclo v0.3.1</title>
+    
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=12168cd1" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/jacobian';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="List of functions and classes (API)" href="../api/index.html" />
+    <link rel="prev" title="How to use Choclo" href="how-to-use.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Choclo <span class="project-version">v0.3.1</span></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="how-to-use.html">How to use Choclo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Building a Jacobian matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_pot.html">choclo.point.gravity_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_e.html">choclo.point.gravity_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_n.html">choclo.point.gravity_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_u.html">choclo.point.gravity_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_ee.html">choclo.point.gravity_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_nn.html">choclo.point.gravity_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_uu.html">choclo.point.gravity_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_en.html">choclo.point.gravity_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_eu.html">choclo.point.gravity_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.gravity_nu.html">choclo.point.gravity_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.dipole.magnetic_e.html">choclo.dipole.magnetic_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.dipole.magnetic_n.html">choclo.dipole.magnetic_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.dipole.magnetic_u.html">choclo.dipole.magnetic_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.dipole.magnetic_field.html">choclo.dipole.magnetic_field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_pot.html">choclo.point.kernel_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_e.html">choclo.point.kernel_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_n.html">choclo.point.kernel_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_u.html">choclo.point.kernel_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_ee.html">choclo.point.kernel_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_nn.html">choclo.point.kernel_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_uu.html">choclo.point.kernel_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_en.html">choclo.point.kernel_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_eu.html">choclo.point.kernel_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.point.kernel_nu.html">choclo.point.kernel_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_pot.html">choclo.prism.gravity_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_e.html">choclo.prism.gravity_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_n.html">choclo.prism.gravity_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_u.html">choclo.prism.gravity_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_ee.html">choclo.prism.gravity_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_nn.html">choclo.prism.gravity_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_uu.html">choclo.prism.gravity_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_en.html">choclo.prism.gravity_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_eu.html">choclo.prism.gravity_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.gravity_nu.html">choclo.prism.gravity_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_field.html">choclo.prism.magnetic_field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_e.html">choclo.prism.magnetic_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_n.html">choclo.prism.magnetic_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_u.html">choclo.prism.magnetic_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_ee.html">choclo.prism.magnetic_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_nn.html">choclo.prism.magnetic_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_uu.html">choclo.prism.magnetic_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_en.html">choclo.prism.magnetic_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_eu.html">choclo.prism.magnetic_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.magnetic_nu.html">choclo.prism.magnetic_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_pot.html">choclo.prism.kernel_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_e.html">choclo.prism.kernel_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_n.html">choclo.prism.kernel_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_u.html">choclo.prism.kernel_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_ee.html">choclo.prism.kernel_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_nn.html">choclo.prism.kernel_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_uu.html">choclo.prism.kernel_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_en.html">choclo.prism.kernel_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_eu.html">choclo.prism.kernel_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_nu.html">choclo.prism.kernel_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_eee.html">choclo.prism.kernel_eee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_nnn.html">choclo.prism.kernel_nnn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_uuu.html">choclo.prism.kernel_uuu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_een.html">choclo.prism.kernel_een</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_eeu.html">choclo.prism.kernel_eeu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_enn.html">choclo.prism.kernel_enn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_nnu.html">choclo.prism.kernel_nnu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_euu.html">choclo.prism.kernel_euu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_nuu.html">choclo.prism.kernel_nuu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.prism.kernel_enu.html">choclo.prism.kernel_enu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.utils.distance_cartesian.html">choclo.utils.distance_cartesian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.utils.distance_spherical.html">choclo.utils.distance_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.utils.distance_spherical_core.html">choclo.utils.distance_spherical_core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.constants.GRAVITATIONAL_CONST.html">choclo.constants.GRAVITATIONAL_CONST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/choclo.constants.VACUUM_MAGNETIC_PERMEABILITY.html">choclo.constants.VACUUM_MAGNETIC_PERMEABILITY</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing Choclo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Version compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">Documentation for other versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="http://contact.fatiando.org">Join the community</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo/blob/main/CONTRIBUTING.md">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://simpeg.xyz">SimPEG</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo/edit/main/doc/user_guide/jacobian.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo/issues/new?title=Issue%20on%20page%20%2Fuser_guide/jacobian.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/user_guide/jacobian.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Building a Jacobian matrix</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="building-a-jacobian-matrix">
+<h1>Building a Jacobian matrix<a class="headerlink" href="#building-a-jacobian-matrix" title="Link to this heading">#</a></h1>
+<p>In several applications, like 3D inversions, we need to build the <em>Jacobian
+matrix</em> (a.k.a <em>sensitivity matrix</em>) of our forward model for every observation
+point, i.e. how much does our field changes when I apply an infinitesimal
+change to the physical property of each source in the model.</p>
+<p>Let’s take for example the upward component of the gravity acceleration of
+prisms. Given <span class="math notranslate nohighlight">\(N\)</span> observation points and <span class="math notranslate nohighlight">\(M\)</span> prisms, the gravity
+field on the <span class="math notranslate nohighlight">\(i\)</span>-th observation point <span class="math notranslate nohighlight">\(\mathbf{p}_i\)</span> can be
+computed as:</p>
+<div class="math notranslate nohighlight">
+\[g_u(\mathbf{p}_i) = \sum\limits_{j=1}^M G \, \rho_j \, u_j(\mathbf{p}_i)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_j\)</span> is the density of the <span class="math notranslate nohighlight">\(j\)</span>-th prism, <span class="math notranslate nohighlight">\(G\)</span> is the
+Universal Gravitational Constant and <span class="math notranslate nohighlight">\(u_j(\mathbf{p}_i)\)</span> comprehends the
+analytical solution for the forward modelling of the <span class="math notranslate nohighlight">\(j\)</span>-th rectangular
+prisms on the <span class="math notranslate nohighlight">\(i\)</span>-th observation point:</p>
+<div class="math notranslate nohighlight">
+\[u_j(\mathbf{p}_i) =
+   \Bigg\lvert \Bigg\lvert \Bigg\lvert
+   k_z(x, y, z)
+   \Bigg\rvert_{X_1}^{X_2}
+   \Bigg\rvert_{Y_1}^{Y_2}
+   \Bigg\rvert_{Z_1}^{Z_2}\]</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See notes in <a class="reference internal" href="../api/generated/choclo.prism.gravity_u.html#choclo.prism.gravity_u" title="choclo.prism.gravity_u"><code class="xref py py-func docutils literal notranslate"><span class="pre">choclo.prism.gravity_u</span></code></a> for more details on the
+definition of the kernel function <span class="math notranslate nohighlight">\(k_z\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>,
+<span class="math notranslate nohighlight">\(z\)</span> coordinates.</p>
+</div>
+<p>The Jacobian matrix <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> is an <span class="math notranslate nohighlight">\(N \times M\)</span> matrix whose
+elements are the partial derivatives of <span class="math notranslate nohighlight">\(g_u(\mathbf{p_i})\)</span> with respect
+to the density of the <span class="math notranslate nohighlight">\(j\)</span>-th prism:</p>
+<div class="math notranslate nohighlight">
+\[J_{ij}
+   = \frac{\partial g_u(\mathbf{p}_i)}{\partial \rho_j}
+   = G \, u_j(\mathbf{p}_i)\]</div>
+<p>In most potential field cases, the forward model is linear on the physical
+property (density in this case), so the Jacobian elements are constant.</p>
+<p>In order to build the sensitivity matrix we must need to evaluate
+<span class="math notranslate nohighlight">\(u_j(\mathbf{p}_i)\)</span> on every observation point and for every prism.
+We can easily do so with Choclo forward modelling functions, considering that
+the prisms have unit density.</p>
+<p>Let’s write a function that can build a sensitivity matrix for a set of
+observation points and a set of prisms. Since this operation is as demanding as
+forward modelling our entire set of prisms on every observation point, we
+want it to run fast and optionally in parallel. Therefore, we are going to
+write a Numba function with parallelization enabled:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numba</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">choclo.prism</span> <span class="kn">import</span> <span class="n">gravity_u</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">build_jacobian</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build a sensitivity matrix for gravity_u of a prism</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Unpack coordinates of the observation points</span>
+    <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[:]</span>
+    <span class="c1"># Initialize an empty 2d array for the sensitivity matrix</span>
+    <span class="n">n_coords</span> <span class="o">=</span> <span class="n">easting</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">n_prisms</span> <span class="o">=</span> <span class="n">prisms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jacobian</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_coords</span><span class="p">,</span> <span class="n">n_prisms</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="c1"># Compute the gravity_u field that each prism generate on every observation</span>
+    <span class="c1"># point, considering that they have a unit density</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numba</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">easting</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prisms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">jacobian</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">gravity_u</span><span class="p">(</span>
+                <span class="n">easting</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">northing</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">upward</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                <span class="n">prisms</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                <span class="mf">1.0</span><span class="p">,</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">jacobian</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.empty.html#numpy.empty" title="(in NumPy v2.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.empty</span></code></a> function creates an <em>empty</em> array. This means it
+allocates the memory for this array, but it doesn’t write any values in it.
+Instead, the <code class="docutils literal notranslate"><span class="pre">jacobian</span></code> array is filled with garbage values after being
+initialized.</p>
+<p>By using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.empty.html#numpy.empty" title="(in NumPy v2.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.empty</span></code></a> we are saving some time, avoiding to fill the
+<code class="docutils literal notranslate"><span class="pre">jacobian</span></code> array with values that we will soon overwrite in the following
+for loops.</p>
+</div>
+<p>Let’s try this function by defining some prisms and observation points:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">easting</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">northing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">easting</span><span class="p">,</span> <span class="n">northing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">)</span>
+<span class="n">upward</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">easting</span><span class="p">)</span>
+
+<span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="n">easting</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">northing</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">upward</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prisms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">25.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">13.0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">12.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.0</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>And run it:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jacobian</span> <span class="o">=</span> <span class="n">build_jacobian</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">)</span>
+<span class="n">jacobian</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-4.49966911e-11, -4.76014375e-11, -3.80054986e-11,
+        -2.83231448e-11],
+       [-4.49659418e-11, -4.75828152e-11, -3.86898648e-11,
+        -2.90433576e-11],
+       [-4.48738920e-11, -4.75270202e-11, -3.93578743e-11,
+        -2.97540033e-11],
+       ...,
+       [-3.19387365e-11, -4.58884222e-11, -4.10526880e-11,
+        -4.48751701e-11],
+       [-3.12924999e-11, -4.52460654e-11, -4.11114162e-11,
+        -4.49880072e-11],
+       [-3.06338007e-11, -4.45849449e-11, -4.11310225e-11,
+        -4.50257165e-11]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Jacobian matrices can be very big. Large number of observation points and
+sources can lead to Jacobian matrices that cannot fit in the available
+memory of your system.</p>
+</div>
+<p>Now that we have defined our Jacobian matrix, we can use it to forward model
+the gravity field of our prisms on every observation point by just computing
+a dot product between it and the density vector of the prisms
+(<span class="math notranslate nohighlight">\(\mathbf{m}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{g_u}
+=
+\begin{bmatrix}
+g_u({\mathbf{p}_1}) \\
+\vdots \\
+g_u({\mathbf{p}_N}) \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+J_{11} &amp; \cdots &amp; J_{1M} \\
+\vdots &amp; \ddots &amp; \vdots \\
+J_{N1} &amp; \cdots &amp; J_{NM}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\rho_1 \\
+\vdots \\
+\rho_M \\
+\end{bmatrix}
+=
+\mathbf{J} \cdot \mathbf{m}\end{split}\]</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define densities for the prisms</span>
+<span class="n">densities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">200.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">400.0</span><span class="p">])</span>
+
+<span class="c1"># Compute result</span>
+<span class="n">g_u</span> <span class="o">=</span> <span class="n">jacobian</span> <span class="o">@</span> <span class="n">densities</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator performs a matrix product. It’s a shorthand of the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.matmul</span></code> function.</p>
+</div>
+<p>We can check that this result is right by comparing it with the output of the
+<code class="docutils literal notranslate"><span class="pre">gravity_u_parallel</span></code> function we defined in the <a class="reference internal" href="how-to-use.html#howtouse"><span class="std std-ref">How to use Choclo</span></a>:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expected</span> <span class="o">=</span> <span class="n">gravity_upward_parallel</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">prisms</span><span class="p">,</span> <span class="n">densities</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">g_u</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<a class="reference download internal" download="" href="../_downloads/21b045eb65658e7f0dbd75b01bedc72a/jacobian.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">script</span></code></a></div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<a class="reference download internal" download="" href="../_downloads/0cd804d4bb1b789ed7d110b2910079bf/jacobian.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook</span></code></a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="how-to-use.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How to use Choclo</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../api/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">List of functions and classes (API)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The Choclo Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 27, 2024.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

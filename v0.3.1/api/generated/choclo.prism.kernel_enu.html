@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    
+        <title>choclo.prism.kernel_enu | Choclo v0.3.1</title>
+    
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12168cd1" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/choclo.prism.kernel_enu';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="choclo.utils.distance_cartesian" href="choclo.utils.distance_cartesian.html" />
+    <link rel="prev" title="choclo.prism.kernel_nuu" href="choclo.prism.kernel_nuu.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Choclo <span class="project-version">v0.3.1</span></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/how-to-use.html">How to use Choclo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/jacobian.html">Building a Jacobian matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">List of functions and classes (API)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_pot.html">choclo.point.gravity_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_e.html">choclo.point.gravity_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_n.html">choclo.point.gravity_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_u.html">choclo.point.gravity_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_ee.html">choclo.point.gravity_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_nn.html">choclo.point.gravity_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_uu.html">choclo.point.gravity_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_en.html">choclo.point.gravity_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_eu.html">choclo.point.gravity_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.gravity_nu.html">choclo.point.gravity_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.dipole.magnetic_e.html">choclo.dipole.magnetic_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.dipole.magnetic_n.html">choclo.dipole.magnetic_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.dipole.magnetic_u.html">choclo.dipole.magnetic_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.dipole.magnetic_field.html">choclo.dipole.magnetic_field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_pot.html">choclo.point.kernel_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_e.html">choclo.point.kernel_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_n.html">choclo.point.kernel_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_u.html">choclo.point.kernel_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_ee.html">choclo.point.kernel_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_nn.html">choclo.point.kernel_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_uu.html">choclo.point.kernel_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_en.html">choclo.point.kernel_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_eu.html">choclo.point.kernel_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.point.kernel_nu.html">choclo.point.kernel_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_pot.html">choclo.prism.gravity_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_e.html">choclo.prism.gravity_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_n.html">choclo.prism.gravity_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_u.html">choclo.prism.gravity_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_ee.html">choclo.prism.gravity_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_nn.html">choclo.prism.gravity_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_uu.html">choclo.prism.gravity_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_en.html">choclo.prism.gravity_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_eu.html">choclo.prism.gravity_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.gravity_nu.html">choclo.prism.gravity_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_field.html">choclo.prism.magnetic_field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_e.html">choclo.prism.magnetic_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_n.html">choclo.prism.magnetic_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_u.html">choclo.prism.magnetic_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_ee.html">choclo.prism.magnetic_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_nn.html">choclo.prism.magnetic_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_uu.html">choclo.prism.magnetic_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_en.html">choclo.prism.magnetic_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_eu.html">choclo.prism.magnetic_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.magnetic_nu.html">choclo.prism.magnetic_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_pot.html">choclo.prism.kernel_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_e.html">choclo.prism.kernel_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_n.html">choclo.prism.kernel_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_u.html">choclo.prism.kernel_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_ee.html">choclo.prism.kernel_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_nn.html">choclo.prism.kernel_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_uu.html">choclo.prism.kernel_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_en.html">choclo.prism.kernel_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_eu.html">choclo.prism.kernel_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_nu.html">choclo.prism.kernel_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_eee.html">choclo.prism.kernel_eee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_nnn.html">choclo.prism.kernel_nnn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_uuu.html">choclo.prism.kernel_uuu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_een.html">choclo.prism.kernel_een</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_eeu.html">choclo.prism.kernel_eeu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_enn.html">choclo.prism.kernel_enn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_nnu.html">choclo.prism.kernel_nnu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_euu.html">choclo.prism.kernel_euu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.prism.kernel_nuu.html">choclo.prism.kernel_nuu</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">choclo.prism.kernel_enu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.utils.distance_cartesian.html">choclo.utils.distance_cartesian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.utils.distance_spherical.html">choclo.utils.distance_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.utils.distance_spherical_core.html">choclo.utils.distance_spherical_core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.constants.GRAVITATIONAL_CONST.html">choclo.constants.GRAVITATIONAL_CONST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choclo.constants.VACUUM_MAGNETIC_PERMEABILITY.html">choclo.constants.VACUUM_MAGNETIC_PERMEABILITY</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Choclo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Version compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">Documentation for other versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="http://contact.fatiando.org">Join the community</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo/blob/main/CONTRIBUTING.md">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://simpeg.xyz">SimPEG</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo/edit/main/doc/api/generated/choclo.prism.kernel_enu.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo/issues/new?title=Issue%20on%20page%20%2Fapi/generated/choclo.prism.kernel_enu.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/api/generated/choclo.prism.kernel_enu.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>choclo.prism.kernel_enu</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choclo.prism.kernel_enu"><code class="docutils literal notranslate"><span class="pre">kernel_enu</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="choclo-prism-kernel-enu">
+<h1>choclo.prism.kernel_enu<a class="headerlink" href="#choclo-prism-kernel-enu" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="choclo.prism.kernel_enu">
+<span class="sig-prename descclassname"><span class="pre">choclo.prism.</span></span><span class="sig-name descname"><span class="pre">kernel_enu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">easting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upward</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/choclo/prism/_kernels.html#kernel_enu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#choclo.prism.kernel_enu" title="Link to this definition">#</a></dt>
+<dd><p>Easting-northing-upward kernel due to a prism.</p>
+<p>Evaluates the integration kernel for the easting-northing-upward
+component of the grad tensor generated by a prism <a class="reference internal" href="../../references.html#nagy2000" id="id1"><span>[Nagy2000]</span></a> on a single
+vertex of the prism. The coordinates that must be passed are shifted
+coordinates: the coordinates of the vertex from a Cartesian coordinate
+system whose origin is located in the observation point.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>easting, northing, upward</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Shifted easting, northing and upward coordinates of the vertex of the
+prism. Must be in meters.</p>
+</dd>
+<dt><strong>radius</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Square root of the sum of the squares of the <code class="docutils literal notranslate"><span class="pre">easting</span></code>, <code class="docutils literal notranslate"><span class="pre">northing</span></code>
+and <code class="docutils literal notranslate"><span class="pre">upward</span></code> shifted coordinates.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>kernel</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Value of the kernel function for the easting-northing-upward component
+of the grad tensor due to a rectangular prism evaluated on a single
+vertex. Return <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> if <code class="docutils literal notranslate"><span class="pre">radius</span></code> is zero (i.e. observation point
+is on the vertex).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Computes the following numerical kernel on the passed <em>shifted
+coordinates</em>:</p>
+<div class="math notranslate nohighlight">
+\[k_{xyz}(x, y, z) = \frac{-1}{\sqrt{x^2 + y^2 + z^2}}\]</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">kernel_enu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span> 
+<span class="go">-0.1480061</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div style='clear:both'></div></section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="choclo.prism.kernel_nuu.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">choclo.prism.kernel_nuu</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="choclo.utils.distance_cartesian.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">choclo.utils.distance_cartesian</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choclo.prism.kernel_enu"><code class="docutils literal notranslate"><span class="pre">kernel_enu</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The Choclo Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 27, 2024.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
