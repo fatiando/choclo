@@ -3,7 +3,10 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
-#
+"""
+Magnetic forward modeling functions for a dipole.
+"""
+
 import numpy as np
 from numba import jit
 

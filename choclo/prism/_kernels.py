@@ -749,6 +749,18 @@ def _safe_atan2(y, x):
     of the prism. This modified function has been defined according to
     [Fukushima2020]_.
 
+    Parameters
+    ----------
+    y : float
+        Numerator for the arctan.
+    x : float
+        Denominator for the arctan.
+
+    Returns
+    -------
+    float
+        Evaluation of the :math:`\text{safe-arctan}(y / x)` to be used on kernels.
+
     Notes
     -----
 
@@ -804,11 +816,11 @@ def _safe_log(x, y, z, r):
     Returns
     -------
     float
-        Evaluation of the :math:`\ln{x + r}` to be used on kernels.
+        Evaluation of the :math:`\text{safe-ln}(x + r)` to be used on kernels.
 
     Notes
     -----
-    The :math:`\text{safe\_ln}(x, r)` function is defined as:
+    The :math:`\text{safe-ln}(x, r)` function is defined as:
 
     .. math::
 

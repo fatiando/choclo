@@ -1722,6 +1722,7 @@ def _calculate_component(
     Returns
     -------
     float
+        Magnetic field component.
 
     Notes
     -----
