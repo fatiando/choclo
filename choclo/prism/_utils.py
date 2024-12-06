@@ -251,7 +251,7 @@ def is_point_on_east_face(
     easting,
     northing,
     upward,
-    prism_west,  # noqa: U100
+    prism_west,  # noqa: ARG001
     prism_east,
     prism_south,
     prism_north,
@@ -296,7 +296,7 @@ def is_point_on_north_face(
     upward,
     prism_west,
     prism_east,
-    prism_south,  # noqa: U100
+    prism_south,  # noqa: ARG001
     prism_north,
     prism_bottom,
     prism_top,
@@ -341,7 +341,7 @@ def is_point_on_top_face(
     prism_east,
     prism_south,
     prism_north,
-    prism_bottom,  # noqa: U100
+    prism_bottom,  # noqa: ARG001
     prism_top,
 ):
     """
