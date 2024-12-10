@@ -32,4 +32,4 @@ jobs:
         run: python -m pip freeze
 
       - name: Lint GitHub Actions
-        run: make lint-actions
+        run: make check-actions
