@@ -174,7 +174,7 @@ jobs:
           # to get the right commit hash.
           message="Deploy $version from $(git rev-parse --short HEAD)"
 
-          cd deploy || exit
+          cd deploy || exit 1
 
           # Need to have this file so that Github doesn't try to run Jekyll
           touch .nojekyll
