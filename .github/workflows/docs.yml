@@ -183,7 +183,7 @@ jobs:
           echo -e "\nRemoving old files from previous builds of ${version}:"
           rm -rvf "${version}"
           echo -e "\nCopying HTML files to ${version}:"
-          cp -Rvf ../doc/_build/html/ "${version}"/
+          cp -Rvf ../doc/_build/html/ "${version}/"
 
           # If this is a new release, update the link from /latest to it
           if [[ "${version}" != "dev" ]]; then
