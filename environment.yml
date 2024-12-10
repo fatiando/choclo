@@ -38,3 +38,4 @@ dependencies:
   - pep8-naming
   - pip:
     - burocrata
+    - zizmor
