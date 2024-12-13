@@ -7,6 +7,7 @@
 """
 Test gravity forward modelling functions for point sources
 """
+
 import numpy as np
 import numpy.testing as npt
 import pytest
@@ -172,10 +173,10 @@ class TestSymmetryGravityE:
         Test if kernel_e is zero in the northing-upward plane
         """
         g_e = np.array(
-            list(
+            [
                 gravity_e(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_northing_upward_plane)
-            )
+            ]
         )
         assert (g_e <= 1e-30).all()
 
@@ -185,16 +186,16 @@ class TestSymmetryGravityE:
         """
         coords_1, coords_2 = mirrored_points
         g_e_1 = np.array(
-            list(
+            [
                 gravity_e(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_1)
-            )
+            ]
         )
         g_e_2 = np.array(
-            list(
+            [
                 gravity_e(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_2)
-            )
+            ]
         )
         npt.assert_allclose(g_e_1, -g_e_2)
 
@@ -249,10 +250,10 @@ class TestSymmetryGravityN:
         Test if kernel_e is zero in the northing-upward plane
         """
         g_n = np.array(
-            list(
+            [
                 gravity_n(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_easting_upward_plane)
-            )
+            ]
         )
         assert (g_n <= 1e-30).all()
 
@@ -262,16 +263,16 @@ class TestSymmetryGravityN:
         """
         coords_1, coords_2 = mirrored_points
         g_n_1 = np.array(
-            list(
+            [
                 gravity_n(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_1)
-            )
+            ]
         )
         g_n_2 = np.array(
-            list(
+            [
                 gravity_n(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_2)
-            )
+            ]
         )
         npt.assert_allclose(g_n_1, -g_n_2)
 
@@ -326,10 +327,10 @@ class TestSymmetryGravityU:
         Test if gravity_u is zero in the easting-upward plane
         """
         g_u = np.array(
-            list(
+            [
                 gravity_u(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_easting_northing_plane)
-            )
+            ]
         )
         assert (g_u <= 1e-30).all()
 
@@ -339,16 +340,16 @@ class TestSymmetryGravityU:
         """
         coords_1, coords_2 = mirrored_points
         g_u_1 = np.array(
-            list(
+            [
                 gravity_u(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_1)
-            )
+            ]
         )
         g_u_2 = np.array(
-            list(
+            [
                 gravity_u(*coords, *sample_point_source, sample_mass)
                 for coords in zip(*coords_2)
-            )
+            ]
         )
         npt.assert_allclose(g_u_1, -g_u_2)
 
@@ -718,7 +719,7 @@ class TestLaplacian:
         upward += sample_point_source[2]
         return (easting, northing, upward)
 
-    @pytest.mark.parametrize("first_component", ("g_ee", "g_nn", "g_uu"))
+    @pytest.mark.parametrize("first_component", ["g_ee", "g_nn", "g_uu"])
     def test_laplacian(
         self,
         sample_observation_points,
