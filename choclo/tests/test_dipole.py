@@ -7,6 +7,7 @@
 """
 Test magnetic forward modelling functions for a dipole
 """
+
 import numpy as np
 import numpy.testing as npt
 import pytest

@@ -7,6 +7,7 @@
 """
 Test magnetic forward modelling functions for rectangular prisms
 """
+
 import itertools
 
 import numpy as np

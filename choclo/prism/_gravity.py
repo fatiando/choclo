@@ -7,6 +7,7 @@
 """
 Gravity forward modelling functions for rectangular prisms
 """
+
 import numpy as np
 from numba import jit
 

@@ -7,6 +7,7 @@
 """
 Utility functions for forward modelling of prisms
 """
+
 from numba import jit
 
 

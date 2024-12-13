@@ -7,6 +7,7 @@
 """
 Utility functions for the kernel and forward modelling functions
 """
+
 import numpy as np
 from numba import jit
 

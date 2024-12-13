@@ -7,6 +7,7 @@
 """
 Forward modelling function for point sources
 """
+
 from numba import jit
 
 from ..constants import GRAVITATIONAL_CONST

@@ -7,6 +7,7 @@
 """
 Kernel functions for point sources
 """
+
 from numba import jit
 
 

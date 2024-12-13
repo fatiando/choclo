@@ -7,4 +7,5 @@
 """
 Kernels and forward modelling functions for magnetic dipoles
 """
+
 from ._forward import magnetic_e, magnetic_field, magnetic_n, magnetic_u
