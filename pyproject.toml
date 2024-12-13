@@ -109,3 +109,5 @@ ignore = [
 "__init__.py" = ["F401"]
 # disable unused arguments in kernel files
 "_kernels.py" = ["ARG001"]
+# Allow print statements in tests
+"choclo/tests/**" = ["T20"]
