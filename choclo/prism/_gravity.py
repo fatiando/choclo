@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Gravity forward modelling functions for rectangular prisms
+Gravity forward modelling functions for rectangular prisms.
 """
 
 import numpy as np
@@ -48,7 +48,7 @@ def gravity_pot(
     density,
 ):
     r"""
-    Gravitational potential field due to a rectangular prism
+    Gravitational potential field due to a rectangular prism.
 
     Returns the gravitational potential field produced by a single rectangular
     prism on a single computation point.
@@ -181,7 +181,7 @@ def gravity_e(
     density,
 ):
     r"""
-    Easting component of the gravitational acceleration due to a prism
+    Easting component of the gravitational acceleration due to a prism.
 
     Returns the easting component of the gravitational acceleration produced by
     a single rectangular prism on a single computation point.
@@ -315,7 +315,7 @@ def gravity_n(
     density,
 ):
     r"""
-    Northing component of the gravitational acceleration due to a prism
+    Northing component of the gravitational acceleration due to a prism.
 
     Returns the northing component of the gravitational acceleration produced
     by a single rectangular prism on a single computation point.
@@ -449,7 +449,7 @@ def gravity_u(
     density,
 ):
     r"""
-    Upward component of the gravitational acceleration due to a prism
+    Upward component of the gravitational acceleration due to a prism.
 
     Returns the upward component of the gravitational acceleration produced by
     a single rectangular prism on a single computation point.
@@ -589,7 +589,7 @@ def gravity_ee(
     density,
 ):
     r"""
-    Easting-easting component of the gravitational tensor due to a prism
+    Easting-easting component of the gravitational tensor due to a prism.
 
     Returns the easting-easting component of the gravitational tensor produced
     by a single rectangular prism on a single computation point.
@@ -747,7 +747,7 @@ def gravity_nn(
     density,
 ):
     r"""
-    Northing-northing component of the gravitational tensor due to a prism
+    Northing-northing component of the gravitational tensor due to a prism.
 
     Returns the northing-northing component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -905,7 +905,7 @@ def gravity_uu(
     density,
 ):
     r"""
-    Upward-upward component of the gravitational tensor due to a prism
+    Upward-upward component of the gravitational tensor due to a prism.
 
     Returns the northing-northing component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -1063,7 +1063,7 @@ def gravity_en(
     density,
 ):
     r"""
-    Easting-northing component of the gravitational tensor due to a prism
+    Easting-northing component of the gravitational tensor due to a prism.
 
     Returns the northing-northing component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -1197,7 +1197,7 @@ def gravity_eu(
     density,
 ):
     r"""
-    Easting-upward component of the gravitational tensor due to a prism
+    Easting-upward component of the gravitational tensor due to a prism.
 
     Returns the easting-upward component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -1332,7 +1332,7 @@ def gravity_nu(
     density,
 ):
     r"""
-    Northing-upward component of the gravitational tensor due to a prism
+    Northing-upward component of the gravitational tensor due to a prism.
 
     Returns the northing-upward component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -1467,7 +1467,7 @@ def _evaluate_kernel(
     kernel,
 ):
     r"""
-    Evaluate a kernel function on every shifted vertex of a prism
+    Evaluate a kernel function on every shifted vertex of a prism.
 
     Parameters
     ----------

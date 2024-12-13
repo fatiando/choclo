@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Kernel functions for point sources
+Kernel functions for point sources.
 """
 
 from numba import jit
@@ -16,7 +16,7 @@ def kernel_pot(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    The inverse of the distance between the two points
+    Compute the inverse of the distance between the two points.
 
     .. important ::
 
@@ -64,7 +64,7 @@ def kernel_e(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Easting component of the gradient of the inverse of the distance
+    Easting component of the gradient of the inverse of the distance.
 
     .. important ::
 
@@ -117,7 +117,7 @@ def kernel_n(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Northing component of the gradient of the inverse of the distance
+    Northing component of the gradient of the inverse of the distance.
 
     .. important ::
 
@@ -170,7 +170,7 @@ def kernel_u(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Upward component of the gradient of the inverse of the distance
+    Upward component of the gradient of the inverse of the distance.
 
     .. important ::
 
@@ -223,7 +223,7 @@ def kernel_ee(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the inverse of the distance along easting-easting
+    Second derivative of the inverse of the distance along easting-easting.
 
     .. important ::
 
@@ -281,7 +281,7 @@ def kernel_nn(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the inverse of the distance along northing-northing
+    Second derivative of the inverse of the distance along northing-northing.
 
     .. important ::
 
@@ -339,7 +339,7 @@ def kernel_uu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the inverse of the distance along upward-upward
+    Second derivative of the inverse of the distance along upward-upward.
 
     .. important ::
 
@@ -397,7 +397,7 @@ def kernel_en(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the inverse of the distance along easting-northing
+    Second derivative of the inverse of the distance along easting-northing.
 
     .. important ::
 
@@ -450,7 +450,7 @@ def kernel_eu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the inverse of the distance along easting-upward
+    Second derivative of the inverse of the distance along easting-upward.
 
     .. important ::
 
@@ -503,7 +503,7 @@ def kernel_nu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
     r"""
-    Second derivative of the inverse of the distance along northing-upward
+    Second derivative of the inverse of the distance along northing-upward.
 
     .. important ::
 

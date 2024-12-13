@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Magnetic forward modelling functions for rectangular prisms
+Magnetic forward modelling functions for rectangular prisms.
 """
 
 import numpy as np
@@ -55,7 +55,7 @@ def magnetic_field(
     magnetization_up,
 ):
     r"""
-    Magnetic field due to a rectangular prism
+    Magnetic field due to a rectangular prism.
 
     Returns the three components of the magnetic field due to a single
     rectangular prism on a single computation point.
@@ -358,7 +358,7 @@ def magnetic_e(
     magnetization_up,
 ):
     r"""
-    Easting component of the magnetic field due to a prism
+    Easting component of the magnetic field due to a prism.
 
     Returns the easting component of the magnetic field due to a single
     rectangular prism on a single computation point.
@@ -532,7 +532,7 @@ def magnetic_n(
     magnetization_up,
 ):
     r"""
-    Northing component of the magnetic field due to a prism
+    Northing component of the magnetic field due to a prism.
 
     Returns the northing component of the magnetic field due to a single
     rectangular prism on a single computation point.
@@ -706,7 +706,7 @@ def magnetic_u(
     magnetization_up,
 ):
     r"""
-    Upward component of the magnetic field due to a prism
+    Upward component of the magnetic field due to a prism.
 
     Returns the upward component of the magnetic field due to a single
     rectangular prism on a single computation point.

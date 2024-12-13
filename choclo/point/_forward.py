@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Forward modelling function for point sources
+Forward modelling function for point sources.
 """
 
 from numba import jit
@@ -29,7 +29,7 @@ from ._kernels import (
 @jit(nopython=True)
 def gravity_pot(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Gravitational potential field due to a point source
+    Gravitational potential field due to a point source.
 
     Returns the gravitational potential field produced by a single point source
     on a single computation point
@@ -77,7 +77,7 @@ def gravity_pot(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 @jit(nopython=True)
 def gravity_e(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Easting component of the gravitational acceleration due to a point source
+    Easting component of the gravitational acceleration due to a point source.
 
     Returns the easting component of the gravitational acceleration produced by
     a single point source on a single computation point
@@ -130,7 +130,7 @@ def gravity_e(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
 @jit(nopython=True)
 def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Northing component of the gravitational acceleration due to a point source
+    Northing component of the gravitational acceleration due to a point source.
 
     Returns the northing component of the gravitational acceleration produced
     by a single point source on a single computation point
@@ -183,7 +183,7 @@ def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
 @jit(nopython=True)
 def gravity_u(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Upward component of the gravitational acceleration due to a point source
+    Upward component of the gravitational acceleration due to a point source.
 
     Returns the upward component of the gravitational acceleration produced by
     a single point source on a single computation point
@@ -236,7 +236,7 @@ def gravity_u(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
 @jit(nopython=True)
 def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Easting-easting component of the gravitational tensor due to a point source
+    Easting-easting component of the gravitational tensor due to a point source.
 
     Returns the easting-easting component of the gravitational tensor produced
     by a single point source on a single computation point
@@ -296,7 +296,7 @@ def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 @jit(nopython=True)
 def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Northing-northing component of the gravitational tensor due to point source
+    Northing-northing component of the gravitational tensor due to point source.
 
     Returns the northing-northing component of the gravitational tensor
     produced by a single point source on a single computation point
@@ -356,7 +356,7 @@ def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 @jit(nopython=True)
 def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Upward-upward component of the gravitational tensor due to a point source
+    Upward-upward component of the gravitational tensor due to a point source.
 
     Returns the upward-upward component of the gravitational tensor
     produced by a single point source on a single computation point
@@ -416,7 +416,7 @@ def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 @jit(nopython=True)
 def gravity_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Easting-northing component of the gravitational tensor due to point source
+    Easting-northing component of the gravitational tensor due to point source.
 
     Returns the easting-northing component of the gravitational tensor
     produced by a single point source on a single computation point
@@ -471,7 +471,7 @@ def gravity_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 @jit(nopython=True)
 def gravity_eu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Easting-upward component of the gravitational tensor due to point source
+    Easting-upward component of the gravitational tensor due to point source.
 
     Returns the easting-upward component of the gravitational tensor
     produced by a single point source on a single computation point
@@ -526,7 +526,7 @@ def gravity_eu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
 @jit(nopython=True)
 def gravity_nu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
-    Northing-upward component of the gravitational tensor due to point source
+    Northing-upward component of the gravitational tensor due to point source.
 
     Returns the northing-upward component of the gravitational tensor
     produced by a single point source on a single computation point

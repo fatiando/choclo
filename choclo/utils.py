@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Utility functions for the kernel and forward modelling functions
+Utility functions for the kernel and forward modelling functions.
 """
 
 import numpy as np
@@ -17,7 +17,7 @@ def distance_cartesian(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
     r"""
-    Euclidean distance between two points given in Cartesian coordinates
+    Euclidean distance between two points given in Cartesian coordinates.
 
     .. warning::
 
@@ -60,7 +60,7 @@ def distance_spherical(
     longitude_p, latitude_p, radius_p, longitude_q, latitude_q, radius_q
 ):
     r"""
-    Euclidean distance between two points in spherical coordinates
+    Euclidean distance between two points in spherical coordinates.
 
     .. important::
 
@@ -131,7 +131,7 @@ def distance_spherical_core(
     longitude_p, cosphi_p, sinphi_p, radius_p, longitude_q, cosphi_q, sinphi_q, radius_q
 ):
     r"""
-    Core computation of distance between two points in spherical coordinates
+    Core computation of distance between two points in spherical coordinates.
 
     .. important::
 
