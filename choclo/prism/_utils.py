@@ -157,9 +157,7 @@ def is_point_on_easting_edge(
     in_easting = prism_west <= easting <= prism_east
     in_northing = northing in (prism_south, prism_north)
     in_upward = upward in (prism_bottom, prism_top)
-    if in_easting and in_northing and in_upward:
-        return True
-    return False
+    return bool(in_easting and in_northing and in_upward)
 
 
 @jit(nopython=True)
@@ -199,9 +197,7 @@ def is_point_on_northing_edge(
     in_easting = easting in (prism_west, prism_east)
     in_northing = prism_south <= northing <= prism_north
     in_upward = upward in (prism_bottom, prism_top)
-    if in_easting and in_northing and in_upward:
-        return True
-    return False
+    return bool(in_easting and in_northing and in_upward)
 
 
 @jit(nopython=True)
@@ -241,9 +237,7 @@ def is_point_on_upward_edge(
     in_easting = easting in (prism_west, prism_east)
     in_northing = northing in (prism_south, prism_north)
     in_upward = prism_bottom <= upward <= prism_top
-    if in_easting and in_northing and in_upward:
-        return True
-    return False
+    return bool(in_easting and in_northing and in_upward)
 
 
 @jit(nopython=True)
@@ -284,9 +278,7 @@ def is_point_on_east_face(
         and (prism_south < northing < prism_north)
         and (prism_bottom < upward < prism_top)
     )
-    if on_east_face:
-        return True
-    return False
+    return bool(on_east_face)
 
 
 @jit(nopython=True)
@@ -327,9 +319,7 @@ def is_point_on_north_face(
         and (northing == prism_north)
         and (prism_bottom < upward < prism_top)
     )
-    if on_north_face:
-        return True
-    return False
+    return bool(on_north_face)
 
 
 @jit(nopython=True)
@@ -369,6 +359,4 @@ def is_point_on_top_face(
         and (prism_south < northing < prism_north)
         and (upward == prism_top)
     )
-    if on_top_face:
-        return True
-    return False
+    return bool(on_top_face)

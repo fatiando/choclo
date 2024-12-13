@@ -254,24 +254,15 @@ def magnetic_field(
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
+        shift_east = prism_east - easting if i == 0 else prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
+            shift_north = prism_north - northing if j == 0 else prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
+                shift_upward = prism_top - upward if k == 0 else prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
@@ -1769,24 +1760,15 @@ def _calculate_component(
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
+        shift_east = prism_east - easting if i == 0 else prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
+            shift_north = prism_north - northing if j == 0 else prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
+                shift_upward = prism_top - upward if k == 0 else prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)

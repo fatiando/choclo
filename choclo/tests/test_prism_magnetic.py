@@ -125,10 +125,7 @@ def evaluate(forward_func, coordinates, prism, magnetization):
     """
     coordinates = tuple(c.ravel() for c in coordinates)
     result = np.array(
-        list(
-            forward_func(e, n, u, *prism, *magnetization)
-            for e, n, u in zip(*coordinates)
-        )
+        [forward_func(e, n, u, *prism, *magnetization) for e, n, u in zip(*coordinates)]
     )
     return result
 
@@ -169,7 +166,8 @@ def finite_differences(
     elif direction == "u":
         shifted_coords = (easting, northing, upward + delta)
     else:
-        ValueError(f"Invalid direction '{direction}'")
+        msg = f"Invalid direction '{direction}'"
+        raise ValueError(msg)
     # Compute field on original and shifted coordinates
     field = evaluate(forward_func, coordinates, prism, magnetization)
     field_shifted = evaluate(forward_func, shifted_coords, prism, magnetization)
@@ -184,7 +182,7 @@ class TestSymmetryBe:
     """
 
     atol = 1e-17  # absolute tolerance for values near zero
-    MAGNETIZATIONS = [
+    MAGNETIZATIONS = [  # noqa: RUF012
         (500, 0, 0),
         (-500, 0, 0),
         (0, 500, 0),
@@ -321,7 +319,7 @@ class TestSymmetryBn:
     """
 
     atol = 1e-17  # absolute tolerance for values near zero
-    MAGNETIZATIONS = [
+    MAGNETIZATIONS = [  # noqa: RUF012
         (500, 0, 0),
         (-500, 0, 0),
         (0, 500, 0),
@@ -458,7 +456,7 @@ class TestSymmetryBu:
     """
 
     atol = 1e-17  # absolute tolerance for values near zero
-    MAGNETIZATIONS = [
+    MAGNETIZATIONS = [  # noqa: RUF012
         (500, 0, 0),
         (-500, 0, 0),
         (0, 500, 0),
@@ -629,11 +627,11 @@ class TestDivergenceOfB:
         """
         Test div of B through magnetic gradiometry analytical functions.
         """
-        kwargs = dict(
-            coordinates=sample_3d_grid,
-            prism=sample_prism,
-            magnetization=sample_magnetization,
-        )
+        kwargs = {
+            "coordinates": sample_3d_grid,
+            "prism": sample_prism,
+            "magnetization": sample_magnetization,
+        }
         b_ee = evaluate(magnetic_ee, **kwargs)
         b_nn = evaluate(magnetic_nn, **kwargs)
         b_uu = evaluate(magnetic_uu, **kwargs)
@@ -647,12 +645,12 @@ class TestDivergenceOfB:
         Test div of B computing its derivatives through finite differences.
         """
         delta = 1e-6
-        kwargs = dict(
-            coordinates=sample_3d_grid,
-            prism=sample_prism,
-            magnetization=sample_magnetization,
-            delta=delta,
-        )
+        kwargs = {
+            "coordinates": sample_3d_grid,
+            "prism": sample_prism,
+            "magnetization": sample_magnetization,
+            "delta": delta,
+        }
         b_ee = finite_differences(direction="e", forward_func=magnetic_e, **kwargs)
         b_nn = finite_differences(direction="n", forward_func=magnetic_n, **kwargs)
         b_uu = finite_differences(direction="u", forward_func=magnetic_u, **kwargs)
@@ -689,7 +687,7 @@ class TestMagneticFieldSingularities:
         magnetic_uu,
     )
 
-    @pytest.fixture()
+    @pytest.fixture
     def sample_prism(self):
         """
         Return the boundaries of the sample prism
@@ -772,14 +770,14 @@ class TestMagneticFieldSingularities:
         """
         easting, northing, upward = self.get_vertices(sample_prism)
         magnetization = np.array([1.0, 1.0, 1.0])
-        results = list(
+        results = [
             forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
 
     @pytest.mark.parametrize("forward_func", COMPONENTS)
-    @pytest.mark.parametrize("direction", ("easting", "northing", "upward"))
+    @pytest.mark.parametrize("direction", ["easting", "northing", "upward"])
     def test_on_edges(self, sample_prism, direction, forward_func):
         """
         Test if magnetic field components are NaN on edges of the prism
@@ -788,10 +786,10 @@ class TestMagneticFieldSingularities:
         coordinates = getattr(self, f"get_{direction}_edges_center")(sample_prism)
         easting, northing, upward = coordinates
         magnetization = np.array([1.0, 1.0, 1.0])
-        results = list(
+        results = [
             forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
 
     @pytest.mark.parametrize("forward_func", COMPONENTS)
@@ -801,16 +799,16 @@ class TestMagneticFieldSingularities:
         """
         easting, northing, upward = self.get_interior_points(sample_prism)
         magnetization = np.array([1.0, 1.0, 1.0])
-        results = list(
+        results = [
             forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
 
     @pytest.mark.parametrize(
-        "forward_func", (magnetic_field, magnetic_e, magnetic_n, magnetic_u)
+        "forward_func", [magnetic_field, magnetic_e, magnetic_n, magnetic_u]
     )
-    @pytest.mark.parametrize("direction", ("easting", "northing", "upward"))
+    @pytest.mark.parametrize("direction", ["easting", "northing", "upward"])
     def test_symmetry_on_faces(self, sample_prism, direction, forward_func):
         """
         Tests symmetry of magnetic field components on the center of faces
@@ -824,29 +822,29 @@ class TestMagneticFieldSingularities:
         if forward_func == magnetic_field:
             component_mapping = {"easting": 0, "northing": 1, "upward": 2}
             index = component_mapping[direction]
-            results = list(
+            results = [
                 forward_func(e, n, u, *sample_prism, *magnetization)[index]
                 for (e, n, u) in zip(easting, northing, upward)
-            )
+            ]
         else:
-            results = list(
+            results = [
                 forward_func(e, n, u, *sample_prism, *magnetization)
                 for (e, n, u) in zip(easting, northing, upward)
-            )
+            ]
         npt.assert_allclose(results, results[0])
 
     @pytest.mark.parametrize(
         "forward_func",
-        (
+        [
             magnetic_ee,
             magnetic_nn,
             magnetic_uu,
             magnetic_en,
             magnetic_eu,
             magnetic_nu,
-        ),
+        ],
     )
-    @pytest.mark.parametrize("direction", ("easting", "northing", "upward"))
+    @pytest.mark.parametrize("direction", ["easting", "northing", "upward"])
     def test_gradiometry_symmetry_on_faces(self, sample_prism, direction, forward_func):
         """
         Tests symmetry of magnetic gradiometry components on the center of
@@ -857,10 +855,10 @@ class TestMagneticFieldSingularities:
         """
         easting, northing, upward = self.get_faces_centers(sample_prism, direction)
         magnetization = np.array([1.0, 1.0, 1.0])
-        results = list(
+        results = [
             forward_func(e, n, u, *sample_prism, *magnetization)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         npt.assert_allclose(-results[0], results[1:], atol=1e-23)
 
 
@@ -1020,7 +1018,7 @@ class TestBugfixKernelEvaluation:
         radius = np.sqrt(shifted_east**2 + shifted_north**2 + shifted_upward**2)
         return kernel(shifted_east, shifted_north, shifted_upward, radius)
 
-    @pytest.mark.parametrize("shift", ("easting", "northing"))
+    @pytest.mark.parametrize("shift", ["easting", "northing"])
     def test_kernel_en(self, prism, shift):
         """
         Test bugfix on kernel_en.
@@ -1048,7 +1046,7 @@ class TestBugfixKernelEvaluation:
         # These two differences should be close enough (not equal!)
         npt.assert_allclose(diff_above, diff_shifted, rtol=1e-7)
 
-    @pytest.mark.parametrize("shift", ("easting", "upward"))
+    @pytest.mark.parametrize("shift", ["easting", "upward"])
     def test_kernel_eu(self, prism, shift):
         """
         Test bugfix on kernel_eu.
@@ -1076,7 +1074,7 @@ class TestBugfixKernelEvaluation:
         # These two differences should be close enough (not equal!)
         npt.assert_allclose(diff_inline, diff_shifted, rtol=1e-7)
 
-    @pytest.mark.parametrize("shift", ("northing", "upward"))
+    @pytest.mark.parametrize("shift", ["northing", "upward"])
     def test_kernel_nu(self, prism, shift):
         """
         Test bugfix on kernel_nu.

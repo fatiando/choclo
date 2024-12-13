@@ -12,7 +12,7 @@ from .utils import dumb_spherical_distance
 
 
 @pytest.mark.parametrize(
-    "point_a, point_b, expected_distance",
+    ("point_a", "point_b", "expected_distance"),
     [
         ((1.1, 1.2, 1.3), (2.4, 1.2, 1.3), 1.3),
         ((1.1, 1.2, 1.3), (1.1, -0.2, 1.3), 1.4),
