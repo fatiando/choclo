@@ -11,11 +11,9 @@ import choclo
 # Project information
 # -----------------------------------------------------------------------------
 project = "Choclo"
-copyright = f"{datetime.date.today().year}, The {project} Developers"  # noqa: A001
-if len(choclo.__version__.split(".")) > 3:
-    version = "dev"
-else:
-    version = choclo.__version__
+copyright = f"{datetime.date.today().year}, The {project} Developers"
+is_dev_version = len(choclo.__version__.split(".")) > 3
+version = "dev" if is_dev_version else choclo.__version__
 
 # General configuration
 # -----------------------------------------------------------------------------
