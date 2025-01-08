@@ -5,8 +5,9 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Gravity forward modelling functions for rectangular prisms
+Gravity forward modelling functions for rectangular prisms.
 """
+
 import numpy as np
 from numba import jit
 
@@ -47,7 +48,7 @@ def gravity_pot(
     density,
 ):
     r"""
-    Gravitational potential field due to a rectangular prism
+    Gravitational potential field due to a rectangular prism.
 
     Returns the gravitational potential field produced by a single rectangular
     prism on a single computation point.
@@ -180,7 +181,7 @@ def gravity_e(
     density,
 ):
     r"""
-    Easting component of the gravitational acceleration due to a prism
+    Easting component of the gravitational acceleration due to a prism.
 
     Returns the easting component of the gravitational acceleration produced by
     a single rectangular prism on a single computation point.
@@ -314,7 +315,7 @@ def gravity_n(
     density,
 ):
     r"""
-    Northing component of the gravitational acceleration due to a prism
+    Northing component of the gravitational acceleration due to a prism.
 
     Returns the northing component of the gravitational acceleration produced
     by a single rectangular prism on a single computation point.
@@ -448,7 +449,7 @@ def gravity_u(
     density,
 ):
     r"""
-    Upward component of the gravitational acceleration due to a prism
+    Upward component of the gravitational acceleration due to a prism.
 
     Returns the upward component of the gravitational acceleration produced by
     a single rectangular prism on a single computation point.
@@ -588,7 +589,7 @@ def gravity_ee(
     density,
 ):
     r"""
-    Easting-easting component of the gravitational tensor due to a prism
+    Easting-easting component of the gravitational tensor due to a prism.
 
     Returns the easting-easting component of the gravitational tensor produced
     by a single rectangular prism on a single computation point.
@@ -746,7 +747,7 @@ def gravity_nn(
     density,
 ):
     r"""
-    Northing-northing component of the gravitational tensor due to a prism
+    Northing-northing component of the gravitational tensor due to a prism.
 
     Returns the northing-northing component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -904,7 +905,7 @@ def gravity_uu(
     density,
 ):
     r"""
-    Upward-upward component of the gravitational tensor due to a prism
+    Upward-upward component of the gravitational tensor due to a prism.
 
     Returns the northing-northing component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -1062,7 +1063,7 @@ def gravity_en(
     density,
 ):
     r"""
-    Easting-northing component of the gravitational tensor due to a prism
+    Easting-northing component of the gravitational tensor due to a prism.
 
     Returns the northing-northing component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -1196,7 +1197,7 @@ def gravity_eu(
     density,
 ):
     r"""
-    Easting-upward component of the gravitational tensor due to a prism
+    Easting-upward component of the gravitational tensor due to a prism.
 
     Returns the easting-upward component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -1331,7 +1332,7 @@ def gravity_nu(
     density,
 ):
     r"""
-    Northing-upward component of the gravitational tensor due to a prism
+    Northing-upward component of the gravitational tensor due to a prism.
 
     Returns the northing-upward component of the gravitational tensor
     produced by a single rectangular prism on a single computation point.
@@ -1466,7 +1467,7 @@ def _evaluate_kernel(
     kernel,
 ):
     r"""
-    Evaluate a kernel function on every shifted vertex of a prism
+    Evaluate a kernel function on every shifted vertex of a prism.
 
     Parameters
     ----------
@@ -1514,24 +1515,15 @@ def _evaluate_kernel(
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
+        shift_east = prism_east - easting if i == 0 else prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
+            shift_north = prism_north - northing if j == 0 else prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
+                shift_upward = prism_top - upward if k == 0 else prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)

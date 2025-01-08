@@ -5,8 +5,9 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Utility functions for forward modelling of prisms
+Utility functions for forward modelling of prisms.
 """
+
 from numba import jit
 
 
@@ -23,7 +24,7 @@ def is_interior_point(
     prism_top,
 ):
     """
-    Check if observation point falls inside the prism
+    Check if observation point falls inside the prism.
 
     Return True if the observation point falls inside the prism,
     not including vertices, edges or faces.
@@ -62,7 +63,7 @@ def is_point_on_edge(
     prism_top,
 ):
     """
-    Check if observation point falls on any edge of the prism
+    Check if observation point falls on any edge of the prism.
 
     Return True if the observation point falls in any one of the prism edges,
     including the prism vertices.
@@ -133,7 +134,7 @@ def is_point_on_easting_edge(
     prism_top,
 ):
     """
-    Check if observation point falls in a prism edge parallel to easting
+    Check if observation point falls in a prism edge parallel to easting.
 
     Return True if the observation point falls in one of the prism edges
     parallel to the easting direction or in any one of the vertices of the
@@ -157,9 +158,7 @@ def is_point_on_easting_edge(
     in_easting = prism_west <= easting <= prism_east
     in_northing = northing in (prism_south, prism_north)
     in_upward = upward in (prism_bottom, prism_top)
-    if in_easting and in_northing and in_upward:
-        return True
-    return False
+    return bool(in_easting and in_northing and in_upward)
 
 
 @jit(nopython=True)
@@ -175,7 +174,7 @@ def is_point_on_northing_edge(
     prism_top,
 ):
     """
-    Check if observation point falls in a prism edge parallel to northing
+    Check if observation point falls in a prism edge parallel to northing.
 
     Return True if the observation point falls in one of the prism edges
     parallel to the northing direction or in any one of the vertices of the
@@ -199,9 +198,7 @@ def is_point_on_northing_edge(
     in_easting = easting in (prism_west, prism_east)
     in_northing = prism_south <= northing <= prism_north
     in_upward = upward in (prism_bottom, prism_top)
-    if in_easting and in_northing and in_upward:
-        return True
-    return False
+    return bool(in_easting and in_northing and in_upward)
 
 
 @jit(nopython=True)
@@ -217,7 +214,7 @@ def is_point_on_upward_edge(
     prism_top,
 ):
     """
-    Check if observation point falls in a prism edge parallel to upward
+    Check if observation point falls in a prism edge parallel to upward.
 
     Return True if the observation point falls in one of the prism edges
     parallel to the upward direction or in any one of the vertices of the
@@ -241,9 +238,7 @@ def is_point_on_upward_edge(
     in_easting = easting in (prism_west, prism_east)
     in_northing = northing in (prism_south, prism_north)
     in_upward = prism_bottom <= upward <= prism_top
-    if in_easting and in_northing and in_upward:
-        return True
-    return False
+    return bool(in_easting and in_northing and in_upward)
 
 
 @jit(nopython=True)
@@ -251,7 +246,7 @@ def is_point_on_east_face(
     easting,
     northing,
     upward,
-    prism_west,  # noqa: U100
+    prism_west,  # noqa: ARG001
     prism_east,
     prism_south,
     prism_north,
@@ -259,7 +254,7 @@ def is_point_on_east_face(
     prism_top,
 ):
     """
-    Check if observation point falls in the eastern face of the prism
+    Check if observation point falls in the eastern face of the prism.
 
     Return True if the observation point falls in the eastern face of the
     prism, without including the vertices or the edges (the inside of the
@@ -284,9 +279,7 @@ def is_point_on_east_face(
         and (prism_south < northing < prism_north)
         and (prism_bottom < upward < prism_top)
     )
-    if on_east_face:
-        return True
-    return False
+    return bool(on_east_face)
 
 
 @jit(nopython=True)
@@ -296,13 +289,13 @@ def is_point_on_north_face(
     upward,
     prism_west,
     prism_east,
-    prism_south,  # noqa: U100
+    prism_south,  # noqa: ARG001
     prism_north,
     prism_bottom,
     prism_top,
 ):
     """
-    Check if observation point falls in the northern face of the prism
+    Check if observation point falls in the northern face of the prism.
 
     Return True if the observation point falls in the northern face of the
     prism, without including the vertices or the edges (the inside of the
@@ -327,9 +320,7 @@ def is_point_on_north_face(
         and (northing == prism_north)
         and (prism_bottom < upward < prism_top)
     )
-    if on_north_face:
-        return True
-    return False
+    return bool(on_north_face)
 
 
 @jit(nopython=True)
@@ -341,11 +332,11 @@ def is_point_on_top_face(
     prism_east,
     prism_south,
     prism_north,
-    prism_bottom,  # noqa: U100
+    prism_bottom,  # noqa: ARG001
     prism_top,
 ):
     """
-    Check if observation point falls in the top face of the prism
+    Check if observation point falls in the top face of the prism.
 
     Return True if the observation point falls in the top face of the prism,
     without including the vertices or the edges (the inside of the face).
@@ -369,6 +360,4 @@ def is_point_on_top_face(
         and (prism_south < northing < prism_north)
         and (upward == prism_top)
     )
-    if on_top_face:
-        return True
-    return False
+    return bool(on_top_face)

@@ -5,8 +5,9 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Kernels and forward modelling functions for rectangular prisms
+Kernels and forward modelling functions for rectangular prisms.
 """
+
 from ._gravity import (
     gravity_e,
     gravity_ee,

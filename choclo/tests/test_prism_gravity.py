@@ -7,6 +7,7 @@
 """
 Test gravity forward modelling functions for rectangular prisms
 """
+
 import numpy as np
 import numpy.testing as npt
 import pytest
@@ -77,13 +78,13 @@ class TestSymmetryPotential:
     Test the symmetry of gravity_pot of a rectangular prism
     """
 
-    scalers = {
+    scalers = {  # noqa: RUF012
         "inside": 0.8,
         "surface": 1.0,
         "outside": 1.2,
     }
 
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
+    @pytest.fixture(params=scalers.values(), ids=tuple(scalers.keys()))
     def coords_in_vertices(self, sample_prism_center, sample_prism_dimensions, request):
         """
         Return observation points located in the vertices of the prism
@@ -95,7 +96,7 @@ class TestSymmetryPotential:
         # Get scaler
         scaler = request.param
         # Build the vertices
-        vertices = list(
+        vertices = [
             [
                 easting + i * scaler * d_easting / 2,
                 northing + j * scaler * d_northing / 2,
@@ -104,10 +105,10 @@ class TestSymmetryPotential:
             for i in (-1, 1)
             for j in (-1, 1)
             for k in (-1, 1)
-        )
+        ]
         return vertices
 
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
+    @pytest.fixture(params=scalers.values(), ids=tuple(scalers.keys()))
     def coords_in_centers_of_easting_edges(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -122,7 +123,7 @@ class TestSymmetryPotential:
         # Get scaler
         scaler = request.param
         # Get the points in the symmetry group
-        edges_easting = list(
+        edges_easting = [
             [
                 easting + i * scaler * d_easting / 2,
                 northing,
@@ -130,10 +131,10 @@ class TestSymmetryPotential:
             ]
             for i in (-1, 1)
             for k in (-1, 1)
-        )
+        ]
         return edges_easting
 
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
+    @pytest.fixture(params=scalers.values(), ids=tuple(scalers.keys()))
     def coords_in_centers_of_northing_edges(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -148,7 +149,7 @@ class TestSymmetryPotential:
         # Get scaler
         scaler = request.param
         # Get the points in the symmetry group
-        edges_northing = list(
+        edges_northing = [
             [
                 easting,
                 northing + j * scaler * d_northing / 2,
@@ -156,10 +157,10 @@ class TestSymmetryPotential:
             ]
             for j in (-1, 1)
             for k in (-1, 1)
-        )
+        ]
         return edges_northing
 
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
+    @pytest.fixture(params=scalers.values(), ids=tuple(scalers.keys()))
     def coords_in_centers_of_upward_edges(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -174,7 +175,7 @@ class TestSymmetryPotential:
         # Get scaler
         scaler = request.param
         # Get the points in the symmetry group
-        edges_upward = list(
+        edges_upward = [
             [
                 easting + i * scaler * d_easting / 2,
                 northing + j * scaler * d_northing / 2,
@@ -182,10 +183,10 @@ class TestSymmetryPotential:
             ]
             for i in (-1, 1)
             for j in (-1, 1)
-        )
+        ]
         return edges_upward
 
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
+    @pytest.fixture(params=scalers.values(), ids=tuple(scalers.keys()))
     def coords_in_centers_of_easting_faces(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -206,7 +207,7 @@ class TestSymmetryPotential:
         ]
         return faces_normal_to_easting
 
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
+    @pytest.fixture(params=scalers.values(), ids=tuple(scalers.keys()))
     def coords_in_centers_of_northing_faces(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -227,7 +228,7 @@ class TestSymmetryPotential:
         ]
         return faces_normal_to_northing
 
-    @pytest.fixture(params=scalers.values(), ids=scalers.keys())
+    @pytest.fixture(params=scalers.values(), ids=tuple(scalers.keys()))
     def coords_in_centers_of_upward_faces(
         self, sample_prism_center, sample_prism_dimensions, request
     ):
@@ -253,10 +254,10 @@ class TestSymmetryPotential:
         Test if gravity_pot satisfies symmetry on vertices
         """
         # Compute gravity_pot on every observation point of the symmetry group
-        potential = list(
+        potential = [
             gravity_pot(e, n, u, *sample_prism, sample_density)
             for e, n, u in coords_in_vertices
-        )
+        ]
         npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_easting_edges(
@@ -267,10 +268,10 @@ class TestSymmetryPotential:
         parallel to the easting direction
         """
         # Compute gravity_pot on every observation point of the symmetry group
-        potential = list(
+        potential = [
             gravity_pot(e, n, u, *sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_easting_edges
-        )
+        ]
         npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_northing_edges(
@@ -281,10 +282,10 @@ class TestSymmetryPotential:
         parallel to the northing direction
         """
         # Compute gravity_pot on every observation point of the symmetry group
-        potential = list(
+        potential = [
             gravity_pot(e, n, u, *sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_northing_edges
-        )
+        ]
         npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_upward_edges(
@@ -295,10 +296,10 @@ class TestSymmetryPotential:
         parallel to the upward direction
         """
         # Compute gravity_pot on every observation point of the symmetry group
-        potential = list(
+        potential = [
             gravity_pot(e, n, u, *sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_upward_edges
-        )
+        ]
         npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_easting_faces(
@@ -309,10 +310,10 @@ class TestSymmetryPotential:
         centers of the faces normal to the easting direction
         """
         # Compute gravity_pot on every observation point of the symmetry group
-        potential = list(
+        potential = [
             gravity_pot(e, n, u, *sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_easting_faces
-        )
+        ]
         npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_northing_faces(
@@ -323,10 +324,10 @@ class TestSymmetryPotential:
         centers of the faces normal to the northing direction
         """
         # Compute gravity_pot on every observation point of the symmetry group
-        potential = list(
+        potential = [
             gravity_pot(e, n, u, *sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_northing_faces
-        )
+        ]
         npt.assert_allclose(potential[0], potential)
 
     def test_centers_of_upward_faces(
@@ -337,10 +338,10 @@ class TestSymmetryPotential:
         centers of the faces normal to the upward direction
         """
         # Compute gravity_pot on every observation point of the symmetry group
-        potential = list(
+        potential = [
             gravity_pot(e, n, u, *sample_prism, sample_density)
             for e, n, u in coords_in_centers_of_upward_faces
-        )
+        ]
         npt.assert_allclose(potential[0], potential)
 
 
@@ -349,7 +350,7 @@ class TestSymmetryGravityE:
     Test the symmetry of gravity_e of a rectangular prism
     """
 
-    @pytest.fixture()
+    @pytest.fixture
     def coords_in_northing_upward_plane(
         self, sample_prism_center, sample_prism_dimensions
     ):
@@ -416,10 +417,10 @@ class TestSymmetryGravityE:
         passes through its center.
         """
         # Compute gravity_e on every observation point of northing-upward plane
-        g_e = list(
+        g_e = [
             gravity_e(e, n, u, *sample_prism, sample_density)
             for e, n, u in zip(*coords_in_northing_upward_plane)
-        )
+        ]
         # Compute gravity_e on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
         easting, northing, upward = sample_prism_center
@@ -437,21 +438,21 @@ class TestSymmetryGravityE:
         west, east = mirrored_points
         # Compute gravity_e on every observation point of the two planes
         g_e_west = np.array(
-            list(
+            [
                 gravity_e(e, n, u, *sample_prism, sample_density)
                 for e, n, u in zip(*west)
-            )
+            ]
         )
         g_e_east = np.array(
-            list(
+            [
                 gravity_e(e, n, u, *sample_prism, sample_density)
                 for e, n, u in zip(*east)
-            )
+            ]
         )
         npt.assert_allclose(g_e_west, -g_e_east)
 
     @pytest.mark.parametrize(
-        "density", (-200, 200), ids=("negative_density", "positive_density")
+        "density", [-200, 200], ids=("negative_density", "positive_density")
     )
     def test_sign(self, sample_prism_center, sample_prism, density):
         """
@@ -502,7 +503,7 @@ class TestSymmetryGravityN:
     Test the symmetry of gravity_n of a rectangular prism
     """
 
-    @pytest.fixture()
+    @pytest.fixture
     def coords_in_easting_upward_plane(
         self, sample_prism_center, sample_prism_dimensions
     ):
@@ -569,10 +570,10 @@ class TestSymmetryGravityN:
         passes through its center.
         """
         # Compute gravity_n on every observation point of easting-upward plane
-        g_n = list(
+        g_n = [
             gravity_n(e, n, u, *sample_prism, sample_density)
             for e, n, u in zip(*coords_in_easting_upward_plane)
-        )
+        ]
         # Compute gravity_n on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
         easting, northing, upward = sample_prism_center
@@ -590,21 +591,21 @@ class TestSymmetryGravityN:
         south, north = mirrored_points
         # Compute gravity_n on every observation point of the two planes
         g_n_south = np.array(
-            list(
+            [
                 gravity_n(e, n, u, *sample_prism, sample_density)
                 for e, n, u in zip(*south)
-            )
+            ]
         )
         g_n_north = np.array(
-            list(
+            [
                 gravity_n(e, n, u, *sample_prism, sample_density)
                 for e, n, u in zip(*north)
-            )
+            ]
         )
         npt.assert_allclose(g_n_south, -g_n_north)
 
     @pytest.mark.parametrize(
-        "density", (-200, 200), ids=("negative_density", "positive_density")
+        "density", [-200, 200], ids=("negative_density", "positive_density")
     )
     def test_sign(self, sample_prism_center, sample_prism, density):
         """
@@ -655,7 +656,7 @@ class TestSymmetryGravityU:
     Test the symmetry of gravity_u of a rectangular prism
     """
 
-    @pytest.fixture()
+    @pytest.fixture
     def coords_in_easting_northing_plane(
         self, sample_prism_center, sample_prism_dimensions
     ):
@@ -723,10 +724,10 @@ class TestSymmetryGravityU:
         """
         # Compute gravity_u on every observation point of the easting-northing
         # plane
-        g_u = list(
+        g_u = [
             gravity_u(e, n, u, *sample_prism, sample_density)
             for e, n, u in zip(*coords_in_easting_northing_plane)
-        )
+        ]
         # Compute gravity_u on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
         easting, northing, upward = sample_prism_center
@@ -744,21 +745,18 @@ class TestSymmetryGravityU:
         top, bottom = mirrored_points
         # Compute gravity_u on every observation point of the two planes
         g_u_bottom = np.array(
-            list(
+            [
                 gravity_u(e, n, u, *sample_prism, sample_density)
                 for e, n, u in zip(*bottom)
-            )
+            ]
         )
         g_u_top = np.array(
-            list(
-                gravity_u(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*top)
-            )
+            [gravity_u(e, n, u, *sample_prism, sample_density) for e, n, u in zip(*top)]
         )
         npt.assert_allclose(g_u_bottom, -g_u_top)
 
     @pytest.mark.parametrize(
-        "density", (-200, 200), ids=("negative_density", "positive_density")
+        "density", [-200, 200], ids=("negative_density", "positive_density")
     )
     def test_sign(self, sample_prism_center, sample_prism, density):
         """
@@ -1089,7 +1087,7 @@ class TestLaplacian:
         upward += center_upward
         return easting, northing, upward
 
-    @pytest.mark.parametrize("left_component", ("g_ee", "g_nn", "g_uu"))
+    @pytest.mark.parametrize("left_component", ["g_ee", "g_nn", "g_uu"])
     def test_laplacian(
         self, sample_observation_points, sample_prism, sample_density, left_component
     ):
@@ -1153,8 +1151,8 @@ class TestNonDiagonalTensor:
     def density(self):
         return 400.0
 
-    @pytest.mark.parametrize("easting_boundary", (0, 1))
-    @pytest.mark.parametrize("northing_boundary", (2, 3))
+    @pytest.mark.parametrize("easting_boundary", [0, 1])
+    @pytest.mark.parametrize("northing_boundary", [2, 3])
     def test_g_en_above_vertices(
         self, prism, density, easting_boundary, northing_boundary
     ):
@@ -1167,7 +1165,8 @@ class TestNonDiagonalTensor:
         # and define a few observation points around it
         easting = np.linspace(vertex_easting - 3, vertex_easting + 3, 61)
         northing = np.linspace(vertex_northing - 3, vertex_northing + 3, 61)
-        assert vertex_easting in easting and vertex_northing in northing
+        assert vertex_easting in easting
+        assert vertex_northing in northing
         upward = prism[5] + 1  # locate the observation points above the prism
         g_en = np.array(
             [
@@ -1180,8 +1179,8 @@ class TestNonDiagonalTensor:
         signs = np.sign(g_en)
         npt.assert_allclose(signs[0], signs)
 
-    @pytest.mark.parametrize("easting_boundary", (0, 1))
-    @pytest.mark.parametrize("upward_boundary", (4, 5))
+    @pytest.mark.parametrize("easting_boundary", [0, 1])
+    @pytest.mark.parametrize("upward_boundary", [4, 5])
     def test_g_eu_north_vertices(
         self, prism, density, easting_boundary, upward_boundary
     ):
@@ -1194,7 +1193,8 @@ class TestNonDiagonalTensor:
         # the prism and define a few observation points around it
         easting = np.linspace(vertex_easting - 3, vertex_easting + 3, 61)
         upward = np.linspace(vertex_upward - 3, vertex_upward + 3, 61)
-        assert vertex_easting in easting and vertex_upward in upward
+        assert vertex_easting in easting
+        assert vertex_upward in upward
         northing = prism[3] + 1  # locate the observation points north the prism
         g_eu = np.array(
             [
@@ -1207,8 +1207,8 @@ class TestNonDiagonalTensor:
         signs = np.sign(g_eu)
         npt.assert_allclose(signs[0], signs)
 
-    @pytest.mark.parametrize("northing_boundary", (2, 3))
-    @pytest.mark.parametrize("upward_boundary", (4, 5))
+    @pytest.mark.parametrize("northing_boundary", [2, 3])
+    @pytest.mark.parametrize("upward_boundary", [4, 5])
     def test_g_nu_east_vertices(
         self, prism, density, northing_boundary, upward_boundary
     ):
@@ -1221,7 +1221,8 @@ class TestNonDiagonalTensor:
         # the prism and define a few observation points around it
         northing = np.linspace(vertex_northing - 3, vertex_northing + 3, 61)
         upward = np.linspace(vertex_upward - 3, vertex_upward + 3, 61)
-        assert vertex_northing in northing and vertex_upward in upward
+        assert vertex_northing in northing
+        assert vertex_upward in upward
         easting = prism[1] + 1  # locate the observation points north the prism
         g_nu = np.array(
             [
@@ -1274,8 +1275,10 @@ class TestNonDiagonalTensorSymmetry:
         # vertices)
         easting = np.linspace(-40, 40, 41)
         northing = np.linspace(-40, 40, 41)
-        assert west in easting and east in easting
-        assert south in northing and north in northing
+        assert west in easting
+        assert east in easting
+        assert south in northing
+        assert north in northing
         delta = 2
         g_en_top = np.array(
             [
@@ -1303,8 +1306,10 @@ class TestNonDiagonalTensorSymmetry:
         # vertices)
         easting = np.linspace(-40, 40, 41)
         upward = np.linspace(-40, 40, 41)
-        assert west in easting and east in easting
-        assert bottom in upward and top in upward
+        assert west in easting
+        assert east in easting
+        assert bottom in upward
+        assert top in upward
         delta = 2
         g_eu_north = np.array(
             [
@@ -1332,8 +1337,10 @@ class TestNonDiagonalTensorSymmetry:
         # vertices)
         northing = np.linspace(-40, 40, 41)
         upward = np.linspace(-40, 40, 41)
-        assert south in northing and north in northing
-        assert bottom in upward and top in upward
+        assert south in northing
+        assert north in northing
+        assert bottom in upward
+        assert top in upward
         delta = 2
         g_nu_north = np.array(
             [
@@ -1367,7 +1374,7 @@ class TestDiagonalTensorSingularities:
     we approach from outside of the prism.
     """
 
-    @pytest.fixture()
+    @pytest.fixture
     def prism_boundaries(self):
         """
         Return the boundaries of the sample prism
@@ -1375,7 +1382,7 @@ class TestDiagonalTensorSingularities:
         west, east, south, north, bottom, top = -5.4, 10.1, 43.2, 79.5, -53.7, -44.3
         return west, east, south, north, bottom, top
 
-    @pytest.mark.parametrize("function", (gravity_ee, gravity_nn, gravity_uu))
+    @pytest.mark.parametrize("function", [gravity_ee, gravity_nn, gravity_uu])
     def test_on_vertices(self, prism_boundaries, function):
         """
         Test if diagonal tensor components on vertices are equal to NaN
@@ -1386,9 +1393,9 @@ class TestDiagonalTensorSingularities:
         coordinates = tuple(
             a.ravel() for a in np.meshgrid([west, east], [south, north], [bottom, top])
         )
-        results = list(
+        results = [
             function(e, n, u, *prism, density) for (e, n, u) in zip(*coordinates)
-        )
+        ]
         assert np.isnan(results).all()
 
     def test_gee_on_edges(self, prism_boundaries):
@@ -1406,10 +1413,10 @@ class TestDiagonalTensorSingularities:
         northing = np.full_like(
             easting, (south + north) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_ee(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
         # Define observation points on edges parallel to upward
         easting, northing = tuple(
@@ -1418,10 +1425,10 @@ class TestDiagonalTensorSingularities:
         upward = np.full_like(
             easting, (bottom + top) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_ee(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
 
     def test_gnn_on_edges(self, prism_boundaries):
@@ -1439,10 +1446,10 @@ class TestDiagonalTensorSingularities:
         easting = np.full_like(
             northing, (west + east) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_nn(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
         # Define observation points on edges parallel to upward
         easting, northing = tuple(
@@ -1451,10 +1458,10 @@ class TestDiagonalTensorSingularities:
         upward = np.full_like(
             easting, (bottom + top) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_nn(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
 
     def test_guu_on_edges(self, prism_boundaries):
@@ -1472,10 +1479,10 @@ class TestDiagonalTensorSingularities:
         easting = np.full_like(
             northing, (west + east) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_uu(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
         # Define observation points on edges parallel to northing
         easting, upward = tuple(
@@ -1484,10 +1491,10 @@ class TestDiagonalTensorSingularities:
         northing = np.full_like(
             easting, (south + north) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_ee(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
 
     def test_gee_faces_symmetry(self, prism_boundaries):
@@ -1505,14 +1512,14 @@ class TestDiagonalTensorSingularities:
         northing, upward = tuple(c.ravel() for c in np.meshgrid(northing, upward))
         east_face = np.full_like(northing, east)
         west_face = np.full_like(northing, west)
-        result_east_face = list(
+        result_east_face = [
             gravity_ee(e, n, u, *prism, density)
             for (e, n, u) in zip(east_face, northing, upward)
-        )
-        result_west_face = list(
+        ]
+        result_west_face = [
             gravity_ee(e, n, u, *prism, density)
             for (e, n, u) in zip(west_face, northing, upward)
-        )
+        ]
         npt.assert_allclose(result_east_face, result_west_face)
 
     def test_gee_faces_limit(self, prism_boundaries):
@@ -1581,14 +1588,14 @@ class TestDiagonalTensorSingularities:
         easting, upward = tuple(c.ravel() for c in np.meshgrid(easting, upward))
         south_face = np.full_like(easting, south)
         north_face = np.full_like(easting, north)
-        result_north_face = list(
+        result_north_face = [
             gravity_nn(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, north_face, upward)
-        )
-        result_south_face = list(
+        ]
+        result_south_face = [
             gravity_nn(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, south_face, upward)
-        )
+        ]
         npt.assert_allclose(result_north_face, result_south_face)
 
     def test_guu_faces_symmetry(self, prism_boundaries):
@@ -1606,14 +1613,14 @@ class TestDiagonalTensorSingularities:
         easting, northing = tuple(c.ravel() for c in np.meshgrid(easting, northing))
         top_face = np.full_like(easting, top)
         bottom_face = np.full_like(easting, bottom)
-        result_top_face = list(
+        result_top_face = [
             gravity_uu(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, top_face)
-        )
-        result_bottom_face = list(
+        ]
+        result_bottom_face = [
             gravity_uu(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, bottom_face)
-        )
+        ]
         npt.assert_allclose(result_top_face, result_bottom_face)
 
 
@@ -1629,7 +1636,7 @@ class TestNonDiagonalTensorSingularities:
     In both cases, the forward modelling function should return ``np.nan``.
     """
 
-    @pytest.fixture()
+    @pytest.fixture
     def prism_boundaries(self):
         """
         Return the boundaries of the sample prism
@@ -1637,7 +1644,7 @@ class TestNonDiagonalTensorSingularities:
         west, east, south, north, bottom, top = -5.4, 10.1, 43.2, 79.5, -53.7, -44.3
         return west, east, south, north, bottom, top
 
-    @pytest.mark.parametrize("function", (gravity_en, gravity_eu, gravity_nu))
+    @pytest.mark.parametrize("function", [gravity_en, gravity_eu, gravity_nu])
     def test_on_vertices(self, prism_boundaries, function):
         """
         Test if non-diagonal tensor components on vertices are equal to NaN
@@ -1648,9 +1655,9 @@ class TestNonDiagonalTensorSingularities:
         coordinates = tuple(
             a.ravel() for a in np.meshgrid([west, east], [south, north], [bottom, top])
         )
-        results = list(
+        results = [
             function(e, n, u, *prism, density) for (e, n, u) in zip(*coordinates)
-        )
+        ]
         assert np.isnan(results).all()
 
     def test_gen_edges(self, prism_boundaries):
@@ -1668,10 +1675,10 @@ class TestNonDiagonalTensorSingularities:
         upward = np.full_like(
             easting, (bottom + top) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_en(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
 
     def test_geu_edges(self, prism_boundaries):
@@ -1689,10 +1696,10 @@ class TestNonDiagonalTensorSingularities:
         northing = np.full_like(
             easting, (south + north) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_eu(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()
 
     def test_gnu_edges(self, prism_boundaries):
@@ -1710,8 +1717,8 @@ class TestNonDiagonalTensorSingularities:
         easting = np.full_like(
             northing, (west + east) / 2
         )  # put points in the center of the edge
-        results = list(
+        results = [
             gravity_nu(e, n, u, *prism, density)
             for (e, n, u) in zip(easting, northing, upward)
-        )
+        ]
         assert np.isnan(results).all()

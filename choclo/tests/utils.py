@@ -7,6 +7,7 @@
 """
 Define utility functions for running the tests
 """
+
 import os
 
 import numpy as np
