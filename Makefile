@@ -4,6 +4,9 @@ TESTDIR=tmp-test-dir-with-unique-name
 PYTEST_ARGS=--cov-config=../.coveragerc --cov-report=term-missing --cov=$(PROJECT) --doctest-modules -v --pyargs
 NUMBATEST_ARGS=--doctest-modules -v --pyargs
 CHECK_STYLE=$(PROJECT) doc
+GITHUB_ACTIONS=.github/workflows
+
+.PHONY: build install test test_coverage test_numba format check check-format check_style check-actions clean
 
 help:
 	@echo "Commands:"
@@ -42,7 +45,7 @@ format:
 	ruff format $(CHECK_STYLE)
 	burocrata --extension=py $(CHECK_STYLE)
 
-check: check-format check-style
+check: check-format check-style check-actions
 
 check-format:
 	ruff format --check $(CHECK_STYLE)
@@ -50,6 +53,9 @@ check-format:
 
 check-style:
 	ruff check $(CHECK_STYLE)
+
+check-actions:
+	zizmor $(GITHUB_ACTIONS)
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
