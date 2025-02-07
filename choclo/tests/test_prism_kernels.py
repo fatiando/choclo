@@ -74,3 +74,47 @@ class TestThirdOrderKernelsOnVertex:
         radius = 0.0
         result = kernel(easting, northing, upward, radius)
         assert np.isnan(result)
+
+
+class TestKerneliij:
+    """
+    Test ``kernel_iij`` for numerical instabilities.
+
+    The previous implementation of ``kernel_iij`` suffered from numerical
+    instabilities when x_i and x_j are close to zero and x_k is negative:
+    adding the radius with x_k might lead to high float precision errors.
+    In the special case where radius is exactly equal to x_k (up to float point
+    precision, but x_i or x_j are not zero, it will lead to a division by zero
+    error.
+    """
+
+    def test_kernel_iij_division_by_zero(self):
+        """
+        Test if we don't get division by zero.
+
+        Evaluate ``kernel_iij`` on ``x > 0``, ``y=0``, ``z < 0`` and
+        ``x << |z|``. If we use the previous implementation of kernel_iij, this
+        test should fail.
+        """
+        x, y, z = 1e-12, 0, -500_000
+        radius = np.sqrt(x**2 + y**2 + z**2)
+        kernel_een(x, y, z, radius)
+
+    def test_instabilities(self):
+        """
+        Test numerical instabilities on ``kernel_iij``.
+
+        Let's evaluate the kernel_iij on a set of shifted coordinates:
+
+        - ``x``: values around zero, small enough to trigger potential
+          floating point errors with the other coordinates.
+        - ``y``: equal to zero.
+        - ``z``: constant negative value, significantly greater than ``x`` to
+          trigger trigger floating point errors.
+
+        Computing the difference between
+        The kernel_iij for these points should behave as a monotonic decreasing
+        function with x.
+        """
+        delta =
+        x = np.linspace(-1e4, 1e4)
