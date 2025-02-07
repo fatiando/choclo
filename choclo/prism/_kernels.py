@@ -1502,5 +1502,4 @@ def _kernel_iij(x_i, x_j, x_k, radius):
         return np.nan
     if x_i == 0 and x_j == 0:
         return 0.0
-    return -x_i / ((x_k + radius) * radius)
-    # return x_i * x_k / ((x_i**2 + x_j**2) * radius)
+    return x_i * x_k / ((x_i**2 + x_j**2) * radius)

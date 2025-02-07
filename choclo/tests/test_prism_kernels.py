@@ -29,6 +29,7 @@ from choclo.prism import (
     kernel_uu,
     kernel_uuu,
 )
+from choclo.prism._kernels import _kernel_iij
 
 
 class TestThirdOrderKernelsOnVertex:
@@ -98,10 +99,10 @@ class TestKerneliij:
         """
         x, y, z = 1e-12, 0, -500_000
         radius = np.sqrt(x**2 + y**2 + z**2)
-        kernel_een(x, y, z, radius)
+        _kernel_iij(x, y, z, radius)
 
-    def test_instabilities(self):
-        """
+    def test_accuracy_for_small_x(self):
+        r"""
         Test numerical instabilities on ``kernel_iij``.
 
         Let's evaluate the kernel_iij on a set of shifted coordinates:
@@ -109,12 +110,63 @@ class TestKerneliij:
         - ``x``: values around zero, small enough to trigger potential
           floating point errors with the other coordinates.
         - ``y``: equal to zero.
-        - ``z``: constant negative value, significantly greater than ``x`` to
-          trigger trigger floating point errors.
+        - ``z1`` and ``z2``: constant negative values, significantly greater
+          than ``x`` to trigger trigger floating point errors.
+          Assume ``z1 < z2``, where ``z1`` is bottom and ``z2`` is top (in
+          shifted coordinates).
 
-        Computing the difference between
-        The kernel_iij for these points should behave as a monotonic decreasing
-        function with x.
+        The numerical instabilities are very noticeable after computing the
+        difference between ``kernel_iij`` and ``z2`` and ``z1``.
+
+        For small values of ``x``, the difference between the kernel evaluated
+        on ``z2`` and ``z1`` can be approximated by first order Taylor series
+        expansion:
+
+        .. math::
+
+            \delta k(x) \simeq
+                \frac{1}{2} \frac{z_1^2 - z_2^2}{z_1^2 z_2^2} x
         """
-        delta =
-        x = np.linspace(-1e4, 1e4)
+        bottom, top = -5.0, -2.5
+        spacing = 1e-6
+        xmax = 1e-3
+        n = int(xmax / spacing) + 1
+        x = np.linspace(-xmax, xmax, n)
+        print(f"{n=}")
+        kernel_diff = evaluate_kernel_iij(x, 0, top) - evaluate_kernel_iij(x, 0, bottom)
+        kernel_diff_approx = approximate_kernel_diff(x, bottom, top)
+        # Check if the approximation is close enough
+        atol = kernel_diff_approx.max() * 1e-5
+        np.testing.assert_allclose(kernel_diff, kernel_diff_approx, atol=atol)
+
+
+def approximate_kernel_diff(x, z1, z2):
+    r"""
+    First order Taylor series expansion of ``kernel_iij`` difference.
+
+    Approximate the difference between ``kernel_iij(x, 0, z1)`` and
+    ``kernel_iij(x, 0, z2)`` with a first order Taylor series expansion:
+
+    .. math::
+
+        \delta k(x) \simeq
+            \frac{1}{2} \frac{z_1^2 - z_2^2}{z_1^2 z_2^2} x
+
+    Valid for ``z1 < z2 < 0``, ``|x| << |z2|``, and assuming ``y=0``.
+
+    """
+    # Make sure the argument values are correct
+    assert z1 < z2
+    assert z2 < 0
+    return 0.5 * (z1**2 - z2**2) / (z1**2 * z2**2) * x
+
+
+def evaluate_kernel_iij(x: np.ndarray, y: float, z: float):
+    """
+    Evaluate _kernel_iij on several x values, keeping y and z constant.
+    """
+    result = np.empty_like(x, dtype=np.float64)
+    for i in range(x.size):
+        radius = np.sqrt(x[i] ** 2 + y**2 + z**2)
+        result[i] = _kernel_iij(x[i], y, z, radius)
+    return result
