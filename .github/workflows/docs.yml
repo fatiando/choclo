@@ -26,7 +26,7 @@ defaults:
     # https://github.com/actions/setup-python/issues/132
     shell: bash -l {0}
 
-permissions: {}
+# permissions: {}
 
 jobs:
   #############################################################################
