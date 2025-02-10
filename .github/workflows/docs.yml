@@ -26,6 +26,8 @@ defaults:
     # https://github.com/actions/setup-python/issues/132
     shell: bash -l {0}
 
+permissions: {}
+
 jobs:
   #############################################################################
   # Build the docs
@@ -130,6 +132,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      contents: write
     if: github.event_name == 'release' || github.event_name == 'push'
 
     steps:
