@@ -1,0 +1,747 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    
+        <title>Changelog | Choclo v0.3.2</title>
+    
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=12168cd1" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/thebelab-helper.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'changes';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Version compatibility" href="compatibility.html" />
+    <link rel="prev" title="References" href="references.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Choclo <span class="project-version">v0.3.2</span></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="user_guide/how-to-use.html">How to use Choclo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/jacobian.html">Building a Jacobian matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_pot.html">choclo.point.gravity_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_e.html">choclo.point.gravity_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_n.html">choclo.point.gravity_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_u.html">choclo.point.gravity_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_ee.html">choclo.point.gravity_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_nn.html">choclo.point.gravity_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_uu.html">choclo.point.gravity_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_en.html">choclo.point.gravity_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_eu.html">choclo.point.gravity_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.gravity_nu.html">choclo.point.gravity_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.dipole.magnetic_e.html">choclo.dipole.magnetic_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.dipole.magnetic_n.html">choclo.dipole.magnetic_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.dipole.magnetic_u.html">choclo.dipole.magnetic_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.dipole.magnetic_field.html">choclo.dipole.magnetic_field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_pot.html">choclo.point.kernel_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_e.html">choclo.point.kernel_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_n.html">choclo.point.kernel_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_u.html">choclo.point.kernel_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_ee.html">choclo.point.kernel_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_nn.html">choclo.point.kernel_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_uu.html">choclo.point.kernel_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_en.html">choclo.point.kernel_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_eu.html">choclo.point.kernel_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.point.kernel_nu.html">choclo.point.kernel_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_pot.html">choclo.prism.gravity_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_e.html">choclo.prism.gravity_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_n.html">choclo.prism.gravity_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_u.html">choclo.prism.gravity_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_ee.html">choclo.prism.gravity_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_nn.html">choclo.prism.gravity_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_uu.html">choclo.prism.gravity_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_en.html">choclo.prism.gravity_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_eu.html">choclo.prism.gravity_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.gravity_nu.html">choclo.prism.gravity_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_field.html">choclo.prism.magnetic_field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_e.html">choclo.prism.magnetic_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_n.html">choclo.prism.magnetic_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_u.html">choclo.prism.magnetic_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_ee.html">choclo.prism.magnetic_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_nn.html">choclo.prism.magnetic_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_uu.html">choclo.prism.magnetic_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_en.html">choclo.prism.magnetic_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_eu.html">choclo.prism.magnetic_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.magnetic_nu.html">choclo.prism.magnetic_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_pot.html">choclo.prism.kernel_pot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_e.html">choclo.prism.kernel_e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_n.html">choclo.prism.kernel_n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_u.html">choclo.prism.kernel_u</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_ee.html">choclo.prism.kernel_ee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_nn.html">choclo.prism.kernel_nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_uu.html">choclo.prism.kernel_uu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_en.html">choclo.prism.kernel_en</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_eu.html">choclo.prism.kernel_eu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_nu.html">choclo.prism.kernel_nu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_eee.html">choclo.prism.kernel_eee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_nnn.html">choclo.prism.kernel_nnn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_uuu.html">choclo.prism.kernel_uuu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_een.html">choclo.prism.kernel_een</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_eeu.html">choclo.prism.kernel_eeu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_enn.html">choclo.prism.kernel_enn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_nnu.html">choclo.prism.kernel_nnu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_euu.html">choclo.prism.kernel_euu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_nuu.html">choclo.prism.kernel_nuu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.prism.kernel_enu.html">choclo.prism.kernel_enu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.utils.distance_cartesian.html">choclo.utils.distance_cartesian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.utils.distance_spherical.html">choclo.utils.distance_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.utils.distance_spherical_core.html">choclo.utils.distance_spherical_core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.constants.GRAVITATIONAL_CONST.html">choclo.constants.GRAVITATIONAL_CONST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/choclo.constants.VACUUM_MAGNETIC_PERMEABILITY.html">choclo.constants.VACUUM_MAGNETIC_PERMEABILITY</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Choclo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Version compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="versions.html">Documentation for other versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="http://contact.fatiando.org">Join the community</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo/blob/main/CONTRIBUTING.md">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/choclo">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://simpeg.xyz">SimPEG</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo/edit/main/doc/changes.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/choclo/issues/new?title=Issue%20on%20page%20%2Fchanges.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/changes.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Changelog</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-2">Version 0.3.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-1">Version 0.3.1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-0">Version 0.3.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-2-0">Version 0.2.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-1-0">Version 0.1.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-0-1">Version 0.0.1</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="changelog">
+<span id="changes"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
+<section id="version-0-3-2">
+<h2>Version 0.3.2<a class="headerlink" href="#version-0-3-2" title="Link to this heading">#</a></h2>
+<p>Released on: 2025/02/11</p>
+<p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.14852111">https://doi.org/10.5281/zenodo.14852111</a></p>
+<p>Bug Fixes:</p>
+<ul class="simple">
+<li><p>Fix bug in third order prism kernels <code class="docutils literal notranslate"><span class="pre">kernel_iij</span></code> that triggered division by zero errors and numerical instabilities (<a class="reference external" href="https://github.com/fatiando/choclo/pull/118">#118</a>)</p></li>
+</ul>
+<p>Maintenance:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">zizmor</span></code> to lint GitHub Actions for security vulnerabilities(<a class="reference external" href="https://github.com/fatiando/choclo/pull/114">#114</a>)</p></li>
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">zizmor</span></code> through <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/115">#115</a>)</p></li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">zizmor</span></code> error on <code class="docutils literal notranslate"><span class="pre">excessive-permissions</span></code> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/119">#119</a>)</p></li>
+<li><p>Fix deployment of docs after limiting lifetime of credentials in Action workflow (<a class="reference external" href="https://github.com/fatiando/choclo/pull/122">#122</a>)</p></li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">flake8</span></code>, <code class="docutils literal notranslate"><span class="pre">isort</span></code> and <code class="docutils literal notranslate"><span class="pre">black</span></code> for <code class="docutils literal notranslate"><span class="pre">ruff</span></code> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/112">#112</a>)</p></li>
+</ul>
+<p>This release contains contributions from:</p>
+<ul class="simple">
+<li><p>Santiago Soler</p></li>
+</ul>
+</section>
+<section id="version-0-3-1">
+<h2>Version 0.3.1<a class="headerlink" href="#version-0-3-1" title="Link to this heading">#</a></h2>
+<p>Released on: 2024/11/26</p>
+<p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.14226707">https://doi.org/10.5281/zenodo.14226707</a></p>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Make 2nd and 3rd order prism kernels return <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> on vertices (<a class="reference external" href="https://github.com/fatiando/choclo/pull/108">#108</a>)</p></li>
+</ul>
+<p>Documentation:</p>
+<ul class="simple">
+<li><p>Group similar parameters in docstrings (<a class="reference external" href="https://github.com/fatiando/choclo/pull/105">#105</a>)</p></li>
+</ul>
+<p>This release contains contributions from:</p>
+<ul class="simple">
+<li><p>Santiago Soler</p></li>
+</ul>
+</section>
+<section id="version-0-3-0">
+<h2>Version 0.3.0<a class="headerlink" href="#version-0-3-0" title="Link to this heading">#</a></h2>
+<p>Released on: 2024/10/08</p>
+<p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.13905447">https://doi.org/10.5281/zenodo.13905447</a></p>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Fix bug on <code class="docutils literal notranslate"><span class="pre">safe_log</span></code> and solves discontinuous magnetic fields (<a class="reference external" href="https://github.com/fatiando/choclo/pull/100">#100</a>)</p></li>
+</ul>
+<p>New features:</p>
+<ul class="simple">
+<li><p>Add forward modelling functions for the magnetic gradiometry components of prisms (<a class="reference external" href="https://github.com/fatiando/choclo/pull/97">#97</a>)</p></li>
+</ul>
+<p>Maintenance:</p>
+<ul class="simple">
+<li><p>Run tests with oldest dependencies on x86 macos (<a class="reference external" href="https://github.com/fatiando/choclo/pull/83">#83</a>)</p></li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">_version_generated.py</span></code> for <code class="docutils literal notranslate"><span class="pre">_version.py</span></code> in Makefile (<a class="reference external" href="https://github.com/fatiando/choclo/pull/82">#82</a>)</p></li>
+<li><p>Update how output variables are stored in Actions (<a class="reference external" href="https://github.com/fatiando/choclo/pull/90">#90</a>)</p></li>
+<li><p>Move push to codecov to its own job in Actions (<a class="reference external" href="https://github.com/fatiando/choclo/pull/88">#88</a>)</p></li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">build</span></code> for <code class="docutils literal notranslate"><span class="pre">python-build</span></code> in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/91">#91</a>)</p></li>
+<li><p>Simplify tests for prism magnetic forward funcs (<a class="reference external" href="https://github.com/fatiando/choclo/pull/96">#96</a>)</p></li>
+<li><p>Add some more tests for <code class="docutils literal notranslate"><span class="pre">_safe_log</span></code> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/101">#101</a>)</p></li>
+</ul>
+<p>Documentation:</p>
+<ul class="simple">
+<li><p>Replace Sphinx napoleon for numpydoc (<a class="reference external" href="https://github.com/fatiando/choclo/pull/84">#84</a>)</p></li>
+<li><p>Fix style errors in docstrings (<a class="reference external" href="https://github.com/fatiando/choclo/pull/85">#85</a>)</p></li>
+<li><p>Improve docstrings of <code class="docutils literal notranslate"><span class="pre">magnetic_field</span></code> functions (<a class="reference external" href="https://github.com/fatiando/choclo/pull/87">#87</a>)</p></li>
+</ul>
+<p>This release contains contributions from:</p>
+<ul class="simple">
+<li><p>Santiago Soler</p></li>
+</ul>
+</section>
+<section id="version-0-2-0">
+<h2>Version 0.2.0<a class="headerlink" href="#version-0-2-0" title="Link to this heading">#</a></h2>
+<p>Released on: 2024/04/09</p>
+<p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.10951580">https://doi.org/10.5281/zenodo.10951580</a></p>
+<p>New features:</p>
+<ul class="simple">
+<li><p>Restore kernel functions for forward modelling of point sources (<a class="reference external" href="https://github.com/fatiando/choclo/pull/58">#58</a>)</p></li>
+</ul>
+<p>Documentation:</p>
+<ul class="simple">
+<li><p>Update the versions of Sphinx and its plugins, including dark theme and minor
+changes to the style of the docs (<a class="reference external" href="https://github.com/fatiando/choclo/pull/64">#64</a>)</p></li>
+<li><p>Mention SimPEG’s support and collaboration in docs (<a class="reference external" href="https://github.com/fatiando/choclo/pull/65">#65</a>)</p></li>
+</ul>
+<p>Maintenance:</p>
+<ul class="simple">
+<li><p>Use pip instead of conda for the docs workflow (<a class="reference external" href="https://github.com/fatiando/choclo/pull/63">#63</a>)</p></li>
+<li><p>Use Burocrata to check/add license notices (<a class="reference external" href="https://github.com/fatiando/choclo/pull/66">#66</a>)</p></li>
+<li><p>Use Dependabot to manage GitHub Actions updates (<a class="reference external" href="https://github.com/fatiando/choclo/pull/68">#68</a>)</p></li>
+<li><p>Setup Trusted Publisher deployment to PyPI (<a class="reference external" href="https://github.com/fatiando/choclo/pull/67">#67</a>)</p></li>
+<li><p>Ditch setup.cfg and replace it with pyproject.toml (<a class="reference external" href="https://github.com/fatiando/choclo/pull/77">#77</a>)</p></li>
+<li><p>Replace <cite>_version_generated.py</cite> for <cite>_version.py</cite> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/80">#80</a>)</p></li>
+<li><p>Extend support for Python 3.12 (<a class="reference external" href="https://github.com/fatiando/choclo/pull/79">#79</a>)</p></li>
+<li><p>Drop support for Python 3.7 (<a class="reference external" href="https://github.com/fatiando/choclo/pull/78">#78</a>)</p></li>
+<li><p>Update Black formatting to version 24.2 (<a class="reference external" href="https://github.com/fatiando/choclo/pull/61">#61</a>)</p></li>
+</ul>
+<p>This release contains contributions from:</p>
+<ul class="simple">
+<li><p>Santiago Soler</p></li>
+<li><p>Leonardo Uieda</p></li>
+</ul>
+</section>
+<section id="version-0-1-0">
+<h2>Version 0.1.0<a class="headerlink" href="#version-0-1-0" title="Link to this heading">#</a></h2>
+<p>Released on: 2023/05/12</p>
+<p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.7931023">https://doi.org/10.5281/zenodo.7931023</a></p>
+<p>Breaking changes:</p>
+<ul class="simple">
+<li><p>Ditch kernel functions for point masses (<a class="reference external" href="https://github.com/fatiando/choclo/pull/42">#42</a>)</p></li>
+<li><p>Make Choclo functions to take only scalar inputs instead of array inputs (<a class="reference external" href="https://github.com/fatiando/choclo/pull/50">#50</a>)</p></li>
+<li><p>Update the value of the gravitational constant to the latest standard (<a class="reference external" href="https://github.com/fatiando/choclo/pull/56">#56</a>)</p></li>
+</ul>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Fix bug on non-diagonal tensor components of prisms (<a class="reference external" href="https://github.com/fatiando/choclo/pull/27">#27</a>)</p></li>
+</ul>
+<p>New features:</p>
+<ul class="simple">
+<li><p>Gravity and magnetic forward models for prisms return nan on singular points (<a class="reference external" href="https://github.com/fatiando/choclo/pull/30">#30</a>)</p></li>
+</ul>
+<p>Maintenance:</p>
+<ul class="simple">
+<li><p>Drop support for Python 3.6 (<a class="reference external" href="https://github.com/fatiando/choclo/pull/29">#29</a>)</p></li>
+<li><p>Add missing matplotlib to the dev environment (<a class="reference external" href="https://github.com/fatiando/choclo/pull/44">#44</a>)</p></li>
+</ul>
+<p>Documentation:</p>
+<ul class="simple">
+<li><p>Add installation instructions to the docs (<a class="reference external" href="https://github.com/fatiando/choclo/pull/35">#35</a>)</p></li>
+<li><p>Improve Overview page in docs: avoid printing huge arrays, and add plots (<a class="reference external" href="https://github.com/fatiando/choclo/pull/37">#37</a>)</p></li>
+<li><p>Add buttons to download user guide pages (<a class="reference external" href="https://github.com/fatiando/choclo/pull/39">#39</a>)</p></li>
+<li><p>Add User Guide with example for building jacobians (<a class="reference external" href="https://github.com/fatiando/choclo/pull/40">#40</a>)</p></li>
+<li><p>Move “How to use Choclo” to its own user guide page (<a class="reference external" href="https://github.com/fatiando/choclo/pull/41">#41</a>)</p></li>
+<li><p>Improve math in Jacobian matrix user guide page (<a class="reference external" href="https://github.com/fatiando/choclo/pull/43">#43</a>)</p></li>
+<li><p>Add Zenodo doi for all versions for citation (<a class="reference external" href="https://github.com/fatiando/choclo/pull/45">#45</a>)</p></li>
+<li><p>Add changelog and links to docs for other versions (<a class="reference external" href="https://github.com/fatiando/choclo/pull/46">#46</a>)</p></li>
+<li><p>Add a logo for Choclo, based on colorful corn variations from the Andes (<a class="reference external" href="https://github.com/fatiando/choclo/pull/48">#48</a>)</p></li>
+</ul>
+<p>This release contains contributions from:</p>
+<ul class="simple">
+<li><p>Santiago Soler</p></li>
+<li><p>Leonardo Uieda</p></li>
+</ul>
+</section>
+<section id="version-0-0-1">
+<h2>Version 0.0.1<a class="headerlink" href="#version-0-0-1" title="Link to this heading">#</a></h2>
+<p>Released on: 2022/11/19</p>
+<p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.7851748">https://doi.org/10.5281/zenodo.7851748</a></p>
+<p>First release of Choclo, including functions for gravity and magnetic forward
+modelling of point sources and right-rectangular prisms. This first release
+will serve as a test of the API concept as we trial the use Choclo in other
+projects.</p>
+<p>This release contains contributions from:</p>
+<ul class="simple">
+<li><p>Santiago Soler</p></li>
+<li><p>Leonardo Uieda</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="references.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">References</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="compatibility.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Version compatibility</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-2">Version 0.3.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-1">Version 0.3.1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-0">Version 0.3.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-2-0">Version 0.2.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-1-0">Version 0.1.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-0-1">Version 0.0.1</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, The Choclo Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Feb 11, 2025.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
