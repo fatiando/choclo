@@ -159,12 +159,14 @@ jobs:
           path: deploy
           # Download the entire history
           fetch-depth: 0
-          # The GitHub token is preserved by default but this job doesn't need
-          # to be able to push to GitHub.
-          persist-credentials: false
+          # We need to explicitly preserve the credentials for the GitHub token
+          # on this branch so we can push to it.
+          persist-credentials: true
 
       - name: Push the built HTML to gh-pages
         run: |
+          # Exit if any command exits with a non-zero status
+          set -e
           # Detect if this is a release or from the main branch
           if [[ "${{ github.event_name }}" == "release" ]]; then
             # Get the tag name without the "refs/tags/" part
