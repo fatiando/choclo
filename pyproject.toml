@@ -49,11 +49,6 @@ version_scheme =  "post-release"
 local_scheme =  "no-local-version"
 write_to =  "choclo/_version.py"
 
-# Make sure isort and Black are compatible
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-
 [tool.burocrata]
 notice = '''
 # Copyright (c) 2022 The Choclo Developers.
