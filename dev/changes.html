@@ -20,8 +20,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -31,10 +31,10 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
@@ -43,10 +43,10 @@
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=12168cd1" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
@@ -240,7 +240,6 @@
 <li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Choclo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Changelog</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="versions.html">Documentation for other versions</a></li>
 </ul>
@@ -260,9 +259,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -456,16 +460,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Changelog</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-1">Version 0.3.1</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-2">Version 0.3.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-1">Version 0.3.1</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-0">Version 0.3.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-2-0">Version 0.2.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-1-0">Version 0.1.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-0-1">Version 0.0.1</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -478,9 +479,29 @@
                   
   <section id="changelog">
 <span id="changes"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
+<section id="version-0-3-2">
+<h2>Version 0.3.2<a class="headerlink" href="#version-0-3-2" title="Link to this heading">#</a></h2>
+<p>Released on: 2025/02/11</p>
+<p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.14852111">https://doi.org/10.5281/zenodo.14852111</a></p>
+<p>Bug Fixes:</p>
+<ul class="simple">
+<li><p>Fix bug in third order prism kernels <code class="docutils literal notranslate"><span class="pre">kernel_iij</span></code> that triggered division by zero errors and numerical instabilities (<a class="reference external" href="https://github.com/fatiando/choclo/pull/118">#118</a>)</p></li>
+</ul>
+<p>Maintenance:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">zizmor</span></code> to lint GitHub Actions for security vulnerabilities(<a class="reference external" href="https://github.com/fatiando/choclo/pull/114">#114</a>)</p></li>
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">zizmor</span></code> through <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/115">#115</a>)</p></li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">zizmor</span></code> error on <code class="docutils literal notranslate"><span class="pre">excessive-permissions</span></code> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/119">#119</a>)</p></li>
+<li><p>Fix deployment of docs after limiting lifetime of credentials in Action workflow (<a class="reference external" href="https://github.com/fatiando/choclo/pull/122">#122</a>)</p></li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">flake8</span></code>, <code class="docutils literal notranslate"><span class="pre">isort</span></code> and <code class="docutils literal notranslate"><span class="pre">black</span></code> for <code class="docutils literal notranslate"><span class="pre">ruff</span></code> (<a class="reference external" href="https://github.com/fatiando/choclo/pull/112">#112</a>)</p></li>
+</ul>
+<p>This release contains contributions from:</p>
+<ul class="simple">
+<li><p>Santiago Soler</p></li>
+</ul>
 </section>
 <section id="version-0-3-1">
-<h1>Version 0.3.1<a class="headerlink" href="#version-0-3-1" title="Link to this heading">#</a></h1>
+<h2>Version 0.3.1<a class="headerlink" href="#version-0-3-1" title="Link to this heading">#</a></h2>
 <p>Released on: 2024/11/26</p>
 <p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.14226707">https://doi.org/10.5281/zenodo.14226707</a></p>
 <p>Bug fixes:</p>
@@ -495,6 +516,7 @@
 <ul class="simple">
 <li><p>Santiago Soler</p></li>
 </ul>
+</section>
 <section id="version-0-3-0">
 <h2>Version 0.3.0<a class="headerlink" href="#version-0-3-0" title="Link to this heading">#</a></h2>
 <p>Released on: 2024/10/08</p>
@@ -663,16 +685,13 @@ projects.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Changelog</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-1">Version 0.3.1</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-2">Version 0.3.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-1">Version 0.3.1</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-0">Version 0.3.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-2-0">Version 0.2.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-1-0">Version 0.1.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-0-1">Version 0.0.1</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
@@ -692,7 +711,7 @@ projects.</p>
 
   <p class="copyright">
     
-      © Copyright 2024, The Choclo Developers.
+      © Copyright 2025, The Choclo Developers.
       <br/>
     
   </p>
@@ -701,7 +720,7 @@ projects.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 27, 2024.
+  Last updated on Feb 11, 2025.
   <br/>
 </p>
   </div>
@@ -719,8 +738,8 @@ projects.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

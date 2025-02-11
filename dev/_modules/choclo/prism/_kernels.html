@@ -19,8 +19,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -30,10 +30,10 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=12168cd1" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
@@ -239,7 +239,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing Choclo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../versions.html">Documentation for other versions</a></li>
 </ul>
@@ -259,9 +258,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -400,18 +404,19 @@
 <span class="c1"># This code is part of the Fatiando a Terra project (https://www.fatiando.org)</span>
 <span class="c1">#</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Kernel functions for rectangular prisms</span>
+<span class="sd">Kernel functions for rectangular prisms.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span>
 
 
 <div class="viewcode-block" id="kernel_pot">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_pot.html#choclo.prism.kernel_pot">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_pot</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_pot</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for the potential field due to a rectangular prism</span>
+<span class="sd">    Kernel for the potential field due to a rectangular prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the potential field generated by</span>
 <span class="sd">    a prism [Nagy2000] on a single vertex of the prism. The coordinates that</span>
@@ -498,9 +503,9 @@
 <div class="viewcode-block" id="kernel_e">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_e.html#choclo.prism.kernel_e">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_e</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_e</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for easting component of the gradient due to a rectangular prism</span>
+<span class="sd">    Kernel for easting component of the gradient due to a rectangular prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the easting component of the gradient</span>
 <span class="sd">    of the potential field generated by a prism [Nagy2000]_ on a single vertex</span>
@@ -590,9 +595,9 @@
 <div class="viewcode-block" id="kernel_n">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_n.html#choclo.prism.kernel_n">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_n</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_n</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for northing component of the gradient due to a rectangular prism</span>
+<span class="sd">    Kernel for northing component of the gradient due to a rectangular prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the northing component of the gradient</span>
 <span class="sd">    of the potential field generated by a prism [Nagy2000]_ on a single vertex</span>
@@ -682,9 +687,9 @@
 <div class="viewcode-block" id="kernel_u">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_u.html#choclo.prism.kernel_u">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_u</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_u</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for upward component of the gradient due to a rectangular prism</span>
+<span class="sd">    Kernel for upward component of the gradient due to a rectangular prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the upward component of the gradient</span>
 <span class="sd">    of the potential field generated by a prism [Nagy2000]_ on a single vertex</span>
@@ -776,9 +781,9 @@
 <div class="viewcode-block" id="kernel_ee">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_ee.html#choclo.prism.kernel_ee">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_ee</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_ee</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for easting-easting component of the tensor due to a prism</span>
+<span class="sd">    Kernel for easting-easting component of the tensor due to a prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the easting-easting component of the</span>
 <span class="sd">    tensor generated by a prism [Nagy2000]_ on a single vertex of the prism.</span>
@@ -841,9 +846,9 @@
 <div class="viewcode-block" id="kernel_nn">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nn.html#choclo.prism.kernel_nn">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_nn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_nn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for northing-northing component of the tensor due to a prism</span>
+<span class="sd">    Kernel for northing-northing component of the tensor due to a prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the northing-northing component of the</span>
 <span class="sd">    tensor generated by a prism [Nagy2000]_ on a single vertex of the prism.</span>
@@ -906,9 +911,9 @@
 <div class="viewcode-block" id="kernel_uu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_uu.html#choclo.prism.kernel_uu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_uu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_uu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for upward-upward component of the tensor due to a prism</span>
+<span class="sd">    Kernel for upward-upward component of the tensor due to a prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the upward-upward component of the</span>
 <span class="sd">    tensor generated by a prism [Nagy2000]_ on a single vertex of the prism.</span>
@@ -971,9 +976,9 @@
 <div class="viewcode-block" id="kernel_en">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_en.html#choclo.prism.kernel_en">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_en</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_en</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for easting-northing component of the tensor due to a prism</span>
+<span class="sd">    Kernel for easting-northing component of the tensor due to a prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the easting-northing component of the</span>
 <span class="sd">    tensor generated by a prism [Nagy2000]_ on a single vertex of the prism.</span>
@@ -1036,9 +1041,9 @@
 <div class="viewcode-block" id="kernel_eu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_eu.html#choclo.prism.kernel_eu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_eu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_eu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for easting-upward component of the tensor due to a prism</span>
+<span class="sd">    Kernel for easting-upward component of the tensor due to a prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the easting-upward component of the</span>
 <span class="sd">    tensor generated by a prism [Nagy2000]_ on a single vertex of the prism.</span>
@@ -1101,9 +1106,9 @@
 <div class="viewcode-block" id="kernel_nu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nu.html#choclo.prism.kernel_nu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_nu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_nu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Kernel for northing-upward component of the tensor due to a prism</span>
+<span class="sd">    Kernel for northing-upward component of the tensor due to a prism.</span>
 
 <span class="sd">    Evaluates the integration kernel for the northing-upward component of the</span>
 <span class="sd">    tensor generated by a prism [Nagy2000]_ on a single vertex of the prism.</span>
@@ -1164,9 +1169,9 @@
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_safe_atan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_safe_atan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Principal value of the arctangent expressed as a two variable function</span>
+<span class="sd">    Principal value of the arctangent expressed as a two variable function.</span>
 
 <span class="sd">    This modification has to be made to the arctangent function so the</span>
 <span class="sd">    gravitational field of the prism satisfies the Poisson&#39;s equation.</span>
@@ -1203,7 +1208,7 @@
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_safe_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_safe_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Safe log function to use in the prism kernels.</span>
 
@@ -1287,7 +1292,7 @@
 <div class="viewcode-block" id="kernel_eee">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_eee.html#choclo.prism.kernel_eee">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_eee</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_eee</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Easting-easting-easting kernel due to a prism.</span>
 
@@ -1343,7 +1348,7 @@
 <div class="viewcode-block" id="kernel_nnn">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nnn.html#choclo.prism.kernel_nnn">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_nnn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_nnn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Northing-northing-northing kernel due to a prism.</span>
 
@@ -1399,7 +1404,7 @@
 <div class="viewcode-block" id="kernel_uuu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_uuu.html#choclo.prism.kernel_uuu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_uuu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_uuu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Upward-upward-upward kernel due to a prism.</span>
 
@@ -1455,7 +1460,7 @@
 <div class="viewcode-block" id="kernel_een">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_een.html#choclo.prism.kernel_een">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_een</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_een</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Easting-easting-northing kernel due to a prism.</span>
 
@@ -1491,9 +1496,9 @@
 
 <span class="sd">        k_{xxy}(x, y, z) =</span>
 <span class="sd">            \frac{</span>
-<span class="sd">                - x</span>
+<span class="sd">                x z</span>
 <span class="sd">            }{</span>
-<span class="sd">                (z + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                (x^2 + y^2)</span>
 <span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
 <span class="sd">            }</span>
 
@@ -1502,7 +1507,7 @@
 <span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
 <span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
 <span class="sd">    &gt;&gt;&gt; float(kernel_een(x, y, z, r)) # doctest: +NUMBER</span>
-<span class="sd">    -0.12214070</span>
+<span class="sd">    -0.03755680</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
@@ -1511,7 +1516,7 @@
 <div class="viewcode-block" id="kernel_eeu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_eeu.html#choclo.prism.kernel_eeu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_eeu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_eeu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Easting-easting-upward kernel due to a prism.</span>
 
@@ -1547,9 +1552,9 @@
 
 <span class="sd">        k_{xxz}(x, y, z) =</span>
 <span class="sd">            \frac{</span>
-<span class="sd">                - x</span>
+<span class="sd">                x y</span>
 <span class="sd">            }{</span>
-<span class="sd">                (y + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                (x^2 + z^2)</span>
 <span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
 <span class="sd">            }</span>
 
@@ -1558,7 +1563,7 @@
 <span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
 <span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
 <span class="sd">    &gt;&gt;&gt; float(kernel_eeu(x, y, z, r)) # doctest: +NUMBER</span>
-<span class="sd">    -0.03837408</span>
+<span class="sd">    0.128203025</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
@@ -1567,7 +1572,7 @@
 <div class="viewcode-block" id="kernel_enn">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_enn.html#choclo.prism.kernel_enn">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_enn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_enn</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Easting-northing-northing kernel due to a prism.</span>
 
@@ -1603,9 +1608,9 @@
 
 <span class="sd">        k_{xyy}(x, y, z) =</span>
 <span class="sd">            \frac{</span>
-<span class="sd">                - y</span>
+<span class="sd">                y z</span>
 <span class="sd">            }{</span>
-<span class="sd">                (z + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                (x^2 + y^2)</span>
 <span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
 <span class="sd">            }</span>
 
@@ -1614,7 +1619,7 @@
 <span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
 <span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
 <span class="sd">    &gt;&gt;&gt; float(kernel_enn(x, y, z, r)) # doctest: +NUMBER</span>
-<span class="sd">    -0.20488118</span>
+<span class="sd">    -0.06299850</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
@@ -1623,7 +1628,7 @@
 <div class="viewcode-block" id="kernel_nnu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nnu.html#choclo.prism.kernel_nnu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_nnu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_nnu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Northing-northing-upward kernel due to a prism.</span>
 
@@ -1659,9 +1664,9 @@
 
 <span class="sd">        k_{yyz}(x, y, z) =</span>
 <span class="sd">            \frac{</span>
-<span class="sd">                - y</span>
+<span class="sd">                x y</span>
 <span class="sd">            }{</span>
-<span class="sd">                (x + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                (y^2 + z^2)</span>
 <span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
 <span class="sd">            }</span>
 
@@ -1670,7 +1675,7 @@
 <span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
 <span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
 <span class="sd">    &gt;&gt;&gt; float(kernel_nnu(x, y, z, r)) # doctest: +NUMBER</span>
-<span class="sd">    -0.07808384</span>
+<span class="sd">    0.066200286</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
@@ -1679,7 +1684,7 @@
 <div class="viewcode-block" id="kernel_euu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_euu.html#choclo.prism.kernel_euu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_euu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_euu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Easting-upward-upward kernel due to a prism.</span>
 
@@ -1715,9 +1720,9 @@
 
 <span class="sd">        k_{xzz}(x, y, z) =</span>
 <span class="sd">            \frac{</span>
-<span class="sd">                - z</span>
+<span class="sd">                y z</span>
 <span class="sd">            }{</span>
-<span class="sd">                (y + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                (x^2 + z^2)</span>
 <span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
 <span class="sd">            }</span>
 
@@ -1726,7 +1731,7 @@
 <span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
 <span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
 <span class="sd">    &gt;&gt;&gt; float(kernel_euu(x, y, z, r)) # doctest: +NUMBER</span>
-<span class="sd">    0.03713621</span>
+<span class="sd">    -0.12406744</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
@@ -1735,7 +1740,7 @@
 <div class="viewcode-block" id="kernel_nuu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_nuu.html#choclo.prism.kernel_nuu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_nuu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_nuu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Northing-upward-upward kernel due to a prism.</span>
 
@@ -1771,9 +1776,9 @@
 
 <span class="sd">        k_{yzz}(x, y, z) =</span>
 <span class="sd">            \frac{</span>
-<span class="sd">                - z</span>
+<span class="sd">                x z</span>
 <span class="sd">            }{</span>
-<span class="sd">                (x + \sqrt{x^2 + y^2 + z^2})</span>
+<span class="sd">                (y^2 + z^2)</span>
 <span class="sd">                \sqrt{x^2 + y^2 + z^2}</span>
 <span class="sd">            }</span>
 
@@ -1782,7 +1787,7 @@
 <span class="sd">    &gt;&gt;&gt; x, y, z = 3.1, 5.2, -3.0</span>
 <span class="sd">    &gt;&gt;&gt; r = np.sqrt(x**2 + y**2 + z**2)</span>
 <span class="sd">    &gt;&gt;&gt; float(kernel_nuu(x, y, z, r)) # doctest: +NUMBER</span>
-<span class="sd">    0.04504837</span>
+<span class="sd">    -0.03819247</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_kernel_iij</span><span class="p">(</span><span class="n">upward</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">easting</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
 
@@ -1791,7 +1796,7 @@
 <div class="viewcode-block" id="kernel_enu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.kernel_enu.html#choclo.prism.kernel_enu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">kernel_enu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kernel_enu</span><span class="p">(</span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">upward</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Easting-northing-upward kernel due to a prism.</span>
 
@@ -1841,7 +1846,7 @@
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_kernel_iii</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_j</span><span class="p">,</span> <span class="n">x_k</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_kernel_iii</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_j</span><span class="p">,</span> <span class="n">x_k</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Diagonal 3rd order kernels of a prism.</span>
 
@@ -1899,7 +1904,7 @@
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_kernel_iij</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_j</span><span class="p">,</span> <span class="n">x_k</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_kernel_iij</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_j</span><span class="p">,</span> <span class="n">x_k</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Non-diagonal 3rd order kernels of a prism.</span>
 
@@ -1911,9 +1916,9 @@
 
 <span class="sd">        k_{iij}(x_i, x_j, x_k) =</span>
 <span class="sd">            \frac{</span>
-<span class="sd">                - x_i</span>
+<span class="sd">                x_i x_k</span>
 <span class="sd">            }{</span>
-<span class="sd">                (x_k + \sqrt{x_i^2 + x_j^2 + x_k^2})</span>
+<span class="sd">                (x_i^2 + x_j^2)</span>
 <span class="sd">                \sqrt{x_i^2 + x_j^2 + x_k^2}</span>
 <span class="sd">            }</span>
 
@@ -1957,7 +1962,7 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="k">if</span> <span class="n">x_i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x_j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">0.0</span>
-    <span class="k">return</span> <span class="o">-</span><span class="n">x_i</span> <span class="o">/</span> <span class="p">((</span><span class="n">x_k</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_i</span> <span class="o">*</span> <span class="n">x_k</span> <span class="o">/</span> <span class="p">((</span><span class="n">x_i</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x_j</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
 </pre></div>
 
                 </article>
@@ -1992,7 +1997,7 @@
 
   <p class="copyright">
     
-      © Copyright 2024, The Choclo Developers.
+      © Copyright 2025, The Choclo Developers.
       <br/>
     
   </p>
@@ -2001,7 +2006,7 @@
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 27, 2024.
+  Last updated on Feb 11, 2025.
   <br/>
 </p>
   </div>
@@ -2019,8 +2024,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

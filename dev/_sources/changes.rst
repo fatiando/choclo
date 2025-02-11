@@ -3,8 +3,32 @@
 Changelog
 =========
 
+Version 0.3.2
+-------------
+
+Released on: 2025/02/11
+
+doi: https://doi.org/10.5281/zenodo.14852111
+
+Bug Fixes:
+
+-  Fix bug in third order prism kernels ``kernel_iij`` that triggered division by zero errors and numerical instabilities (`#118 <https://github.com/fatiando/choclo/pull/118>`__)
+
+Maintenance:
+
+-  Use ``zizmor`` to lint GitHub Actions for security vulnerabilities(`#114 <https://github.com/fatiando/choclo/pull/114>`__)
+-  Install ``zizmor`` through ``conda-forge`` in ``environment.yml`` (`#115 <https://github.com/fatiando/choclo/pull/115>`__)
+-  Fix ``zizmor`` error on ``excessive-permissions`` (`#119 <https://github.com/fatiando/choclo/pull/119>`__)
+-  Fix deployment of docs after limiting lifetime of credentials in Action workflow (`#122 <https://github.com/fatiando/choclo/pull/122>`__)
+-  Replace ``flake8``, ``isort`` and ``black`` for ``ruff`` (`#112 <https://github.com/fatiando/choclo/pull/112>`__)
+
+This release contains contributions from:
+
+-  Santiago Soler
+
+
 Version 0.3.1
-=============
+-------------
 
 Released on: 2024/11/26
 

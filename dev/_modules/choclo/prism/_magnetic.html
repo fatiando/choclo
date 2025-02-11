@@ -19,8 +19,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -30,10 +30,10 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=12168cd1" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
@@ -239,7 +239,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../citing.html">Citing Choclo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changes.html">Changelog</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../versions.html">Documentation for other versions</a></li>
 </ul>
@@ -259,9 +258,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -400,13 +404,14 @@
 <span class="c1"># This code is part of the Fatiando a Terra project (https://www.fatiando.org)</span>
 <span class="c1">#</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Magnetic forward modelling functions for rectangular prisms</span>
+<span class="sd">Magnetic forward modelling functions for rectangular prisms.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
 
-<span class="kn">from</span> <span class="nn">..constants</span> <span class="kn">import</span> <span class="n">VACUUM_MAGNETIC_PERMEABILITY</span>
-<span class="kn">from</span> <span class="nn">._kernels</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">VACUUM_MAGNETIC_PERMEABILITY</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._kernels</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">kernel_ee</span><span class="p">,</span>
     <span class="n">kernel_eee</span><span class="p">,</span>
     <span class="n">kernel_een</span><span class="p">,</span>
@@ -424,7 +429,7 @@
     <span class="n">kernel_uu</span><span class="p">,</span>
     <span class="n">kernel_uuu</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._utils</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">is_interior_point</span><span class="p">,</span>
     <span class="n">is_point_on_east_face</span><span class="p">,</span>
     <span class="n">is_point_on_edge</span><span class="p">,</span>
@@ -436,7 +441,7 @@
 <div class="viewcode-block" id="magnetic_field">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_field.html#choclo.prism.magnetic_field">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_field</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_field</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -451,7 +456,7 @@
     <span class="n">magnetization_up</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Magnetic field due to a rectangular prism</span>
+<span class="sd">    Magnetic field due to a rectangular prism.</span>
 
 <span class="sd">    Returns the three components of the magnetic field due to a single</span>
 <span class="sd">    rectangular prism on a single computation point.</span>
@@ -651,24 +656,15 @@
     <span class="c1"># Iterate over the vertices of the prism</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
         <span class="c1"># Compute shifted easting coordinate</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_east</span> <span class="o">-</span> <span class="n">easting</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_west</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_east</span> <span class="o">-</span> <span class="n">easting</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">prism_west</span> <span class="o">-</span> <span class="n">easting</span>
         <span class="n">shift_east_sq</span> <span class="o">=</span> <span class="n">shift_east</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
             <span class="c1"># Compute shifted northing coordinate</span>
-            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_north</span> <span class="o">-</span> <span class="n">northing</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_south</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_north</span> <span class="o">-</span> <span class="n">northing</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">prism_south</span> <span class="o">-</span> <span class="n">northing</span>
             <span class="n">shift_north_sq</span> <span class="o">=</span> <span class="n">shift_north</span><span class="o">**</span><span class="mi">2</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
                 <span class="c1"># Compute shifted upward coordinate</span>
-                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_top</span> <span class="o">-</span> <span class="n">upward</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_bottom</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_top</span> <span class="o">-</span> <span class="n">upward</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">prism_bottom</span> <span class="o">-</span> <span class="n">upward</span>
                 <span class="n">shift_upward_sq</span> <span class="o">=</span> <span class="n">shift_upward</span><span class="o">**</span><span class="mi">2</span>
                 <span class="c1"># Compute the radius</span>
                 <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">shift_east_sq</span> <span class="o">+</span> <span class="n">shift_north_sq</span> <span class="o">+</span> <span class="n">shift_upward_sq</span><span class="p">)</span>
@@ -751,7 +747,7 @@
 <div class="viewcode-block" id="magnetic_e">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_e.html#choclo.prism.magnetic_e">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_e</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_e</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -766,7 +762,7 @@
     <span class="n">magnetization_up</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Easting component of the magnetic field due to a prism</span>
+<span class="sd">    Easting component of the magnetic field due to a prism.</span>
 
 <span class="sd">    Returns the easting component of the magnetic field due to a single</span>
 <span class="sd">    rectangular prism on a single computation point.</span>
@@ -928,7 +924,7 @@
 <div class="viewcode-block" id="magnetic_n">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_n.html#choclo.prism.magnetic_n">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_n</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_n</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -943,7 +939,7 @@
     <span class="n">magnetization_up</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Northing component of the magnetic field due to a prism</span>
+<span class="sd">    Northing component of the magnetic field due to a prism.</span>
 
 <span class="sd">    Returns the northing component of the magnetic field due to a single</span>
 <span class="sd">    rectangular prism on a single computation point.</span>
@@ -1105,7 +1101,7 @@
 <div class="viewcode-block" id="magnetic_u">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_u.html#choclo.prism.magnetic_u">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_u</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_u</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -1120,7 +1116,7 @@
     <span class="n">magnetization_up</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Upward component of the magnetic field due to a prism</span>
+<span class="sd">    Upward component of the magnetic field due to a prism.</span>
 
 <span class="sd">    Returns the upward component of the magnetic field due to a single</span>
 <span class="sd">    rectangular prism on a single computation point.</span>
@@ -1282,7 +1278,7 @@
 <div class="viewcode-block" id="magnetic_ee">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_ee.html#choclo.prism.magnetic_ee">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_ee</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_ee</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -1420,7 +1416,7 @@
 <div class="viewcode-block" id="magnetic_nn">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_nn.html#choclo.prism.magnetic_nn">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_nn</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_nn</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -1558,7 +1554,7 @@
 <div class="viewcode-block" id="magnetic_uu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_uu.html#choclo.prism.magnetic_uu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_uu</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_uu</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -1696,7 +1692,7 @@
 <div class="viewcode-block" id="magnetic_en">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_en.html#choclo.prism.magnetic_en">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_en</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_en</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -1834,7 +1830,7 @@
 <div class="viewcode-block" id="magnetic_eu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_eu.html#choclo.prism.magnetic_eu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_eu</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_eu</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -1972,7 +1968,7 @@
 <div class="viewcode-block" id="magnetic_nu">
 <a class="viewcode-back" href="../../../api/generated/choclo.prism.magnetic_nu.html#choclo.prism.magnetic_nu">[docs]</a>
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">magnetic_nu</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">magnetic_nu</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -2108,7 +2104,7 @@
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_calculate_component</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_calculate_component</span><span class="p">(</span>
     <span class="n">easting</span><span class="p">,</span>
     <span class="n">northing</span><span class="p">,</span>
     <span class="n">upward</span><span class="p">,</span>
@@ -2194,24 +2190,15 @@
     <span class="c1"># Iterate over the vertices of the prism</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
         <span class="c1"># Compute shifted easting coordinate</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_east</span> <span class="o">-</span> <span class="n">easting</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_west</span> <span class="o">-</span> <span class="n">easting</span>
+        <span class="n">shift_east</span> <span class="o">=</span> <span class="n">prism_east</span> <span class="o">-</span> <span class="n">easting</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">prism_west</span> <span class="o">-</span> <span class="n">easting</span>
         <span class="n">shift_east_sq</span> <span class="o">=</span> <span class="n">shift_east</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
             <span class="c1"># Compute shifted northing coordinate</span>
-            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_north</span> <span class="o">-</span> <span class="n">northing</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_south</span> <span class="o">-</span> <span class="n">northing</span>
+            <span class="n">shift_north</span> <span class="o">=</span> <span class="n">prism_north</span> <span class="o">-</span> <span class="n">northing</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">prism_south</span> <span class="o">-</span> <span class="n">northing</span>
             <span class="n">shift_north_sq</span> <span class="o">=</span> <span class="n">shift_north</span><span class="o">**</span><span class="mi">2</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
                 <span class="c1"># Compute shifted upward coordinate</span>
-                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_top</span> <span class="o">-</span> <span class="n">upward</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_bottom</span> <span class="o">-</span> <span class="n">upward</span>
+                <span class="n">shift_upward</span> <span class="o">=</span> <span class="n">prism_top</span> <span class="o">-</span> <span class="n">upward</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">prism_bottom</span> <span class="o">-</span> <span class="n">upward</span>
                 <span class="n">shift_upward_sq</span> <span class="o">=</span> <span class="n">shift_upward</span><span class="o">**</span><span class="mi">2</span>
                 <span class="c1"># Compute the radius</span>
                 <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">shift_east_sq</span> <span class="o">+</span> <span class="n">shift_north_sq</span> <span class="o">+</span> <span class="n">shift_upward_sq</span><span class="p">)</span>
@@ -2261,7 +2248,7 @@
 
   <p class="copyright">
     
-      © Copyright 2024, The Choclo Developers.
+      © Copyright 2025, The Choclo Developers.
       <br/>
     
   </p>
@@ -2270,7 +2257,7 @@
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 27, 2024.
+  Last updated on Feb 11, 2025.
   <br/>
 </p>
   </div>
@@ -2288,8 +2275,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
