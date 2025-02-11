@@ -1055,9 +1055,9 @@ def kernel_een(easting, northing, upward, radius):
 
         k_{xxy}(x, y, z) =
             \frac{
-                - x
+                x z
             }{
-                (z + \sqrt{x^2 + y^2 + z^2})
+                (x^2 + y^2)
                 \sqrt{x^2 + y^2 + z^2}
             }
 
@@ -1066,7 +1066,7 @@ def kernel_een(easting, northing, upward, radius):
     >>> x, y, z = 3.1, 5.2, -3.0
     >>> r = np.sqrt(x**2 + y**2 + z**2)
     >>> float(kernel_een(x, y, z, r)) # doctest: +NUMBER
-    -0.12214070
+    -0.03755680
     """
     return _kernel_iij(easting, northing, upward, radius)
 
@@ -1108,9 +1108,9 @@ def kernel_eeu(easting, northing, upward, radius):
 
         k_{xxz}(x, y, z) =
             \frac{
-                - x
+                x y
             }{
-                (y + \sqrt{x^2 + y^2 + z^2})
+                (x^2 + z^2)
                 \sqrt{x^2 + y^2 + z^2}
             }
 
@@ -1119,7 +1119,7 @@ def kernel_eeu(easting, northing, upward, radius):
     >>> x, y, z = 3.1, 5.2, -3.0
     >>> r = np.sqrt(x**2 + y**2 + z**2)
     >>> float(kernel_eeu(x, y, z, r)) # doctest: +NUMBER
-    -0.03837408
+    0.128203025
     """
     return _kernel_iij(easting, upward, northing, radius)
 
@@ -1161,9 +1161,9 @@ def kernel_enn(easting, northing, upward, radius):
 
         k_{xyy}(x, y, z) =
             \frac{
-                - y
+                y z
             }{
-                (z + \sqrt{x^2 + y^2 + z^2})
+                (x^2 + y^2)
                 \sqrt{x^2 + y^2 + z^2}
             }
 
@@ -1172,7 +1172,7 @@ def kernel_enn(easting, northing, upward, radius):
     >>> x, y, z = 3.1, 5.2, -3.0
     >>> r = np.sqrt(x**2 + y**2 + z**2)
     >>> float(kernel_enn(x, y, z, r)) # doctest: +NUMBER
-    -0.20488118
+    -0.06299850
     """
     return _kernel_iij(northing, easting, upward, radius)
 
@@ -1214,9 +1214,9 @@ def kernel_nnu(easting, northing, upward, radius):
 
         k_{yyz}(x, y, z) =
             \frac{
-                - y
+                x y
             }{
-                (x + \sqrt{x^2 + y^2 + z^2})
+                (y^2 + z^2)
                 \sqrt{x^2 + y^2 + z^2}
             }
 
@@ -1225,7 +1225,7 @@ def kernel_nnu(easting, northing, upward, radius):
     >>> x, y, z = 3.1, 5.2, -3.0
     >>> r = np.sqrt(x**2 + y**2 + z**2)
     >>> float(kernel_nnu(x, y, z, r)) # doctest: +NUMBER
-    -0.07808384
+    0.066200286
     """
     return _kernel_iij(northing, upward, easting, radius)
 
@@ -1267,9 +1267,9 @@ def kernel_euu(easting, northing, upward, radius):
 
         k_{xzz}(x, y, z) =
             \frac{
-                - z
+                y z
             }{
-                (y + \sqrt{x^2 + y^2 + z^2})
+                (x^2 + z^2)
                 \sqrt{x^2 + y^2 + z^2}
             }
 
@@ -1278,7 +1278,7 @@ def kernel_euu(easting, northing, upward, radius):
     >>> x, y, z = 3.1, 5.2, -3.0
     >>> r = np.sqrt(x**2 + y**2 + z**2)
     >>> float(kernel_euu(x, y, z, r)) # doctest: +NUMBER
-    0.03713621
+    -0.12406744
     """
     return _kernel_iij(upward, easting, northing, radius)
 
@@ -1320,9 +1320,9 @@ def kernel_nuu(easting, northing, upward, radius):
 
         k_{yzz}(x, y, z) =
             \frac{
-                - z
+                x z
             }{
-                (x + \sqrt{x^2 + y^2 + z^2})
+                (y^2 + z^2)
                 \sqrt{x^2 + y^2 + z^2}
             }
 
@@ -1331,7 +1331,7 @@ def kernel_nuu(easting, northing, upward, radius):
     >>> x, y, z = 3.1, 5.2, -3.0
     >>> r = np.sqrt(x**2 + y**2 + z**2)
     >>> float(kernel_nuu(x, y, z, r)) # doctest: +NUMBER
-    0.04504837
+    -0.03819247
     """
     return _kernel_iij(upward, northing, easting, radius)
 
@@ -1456,9 +1456,9 @@ def _kernel_iij(x_i, x_j, x_k, radius):
 
         k_{iij}(x_i, x_j, x_k) =
             \frac{
-                - x_i
+                x_i x_k
             }{
-                (x_k + \sqrt{x_i^2 + x_j^2 + x_k^2})
+                (x_i^2 + x_j^2)
                 \sqrt{x_i^2 + x_j^2 + x_k^2}
             }
 
@@ -1502,4 +1502,4 @@ def _kernel_iij(x_i, x_j, x_k, radius):
         return np.nan
     if x_i == 0 and x_j == 0:
         return 0.0
-    return -x_i / ((x_k + radius) * radius)
+    return x_i * x_k / ((x_i**2 + x_j**2) * radius)
