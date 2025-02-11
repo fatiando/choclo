@@ -132,7 +132,6 @@ class TestKerneliij:
         xmax = 1e-3
         n = int(xmax / spacing) + 1
         x = np.linspace(-xmax, xmax, n)
-        print(f"{n=}")
         kernel_diff = evaluate_kernel_iij(x, 0, top) - evaluate_kernel_iij(x, 0, bottom)
         kernel_diff_approx = approximate_kernel_diff(x, bottom, top)
         # Check if the approximation is close enough
