@@ -42,7 +42,7 @@ class TestSafeLogFixedX:
         return _safe_log(x_0, 0.0, z, r)
 
     @pytest.mark.parametrize(
-        "x_0", (-10.0, 0.0, 10.0), ids=("x_0=-10.0", "x_0=0.0", "x_0=10.0")
+        "x_0", [-10.0, 0.0, 10.0], ids=("x_0=-10.0", "x_0=0.0", "x_0=10.0")
     )
     def test_monotony_z_negative(self, x_0):
         """
@@ -58,7 +58,7 @@ class TestSafeLogFixedX:
         assert (results[1:] < results[:-1]).all()
 
     @pytest.mark.parametrize(
-        "x_0", (-10.0, 0.0, 10.0), ids=("x_0=-10.0", "x_0=0.0", "x_0=10.0")
+        "x_0", [-10.0, 0.0, 10.0], ids=("x_0=-10.0", "x_0=0.0", "x_0=10.0")
     )
     def test_monotony_z_positive(self, x_0):
         """
@@ -74,7 +74,7 @@ class TestSafeLogFixedX:
         assert (results[1:] > results[:-1]).all()
 
     @pytest.mark.parametrize(
-        "x_0", (-10.0, 0.0, 10.0), ids=("x_0=-10.0", "x_0=0.0", "x_0=10.0")
+        "x_0", [-10.0, 0.0, 10.0], ids=("x_0=-10.0", "x_0=0.0", "x_0=10.0")
     )
     def test_symmetry(self, x_0):
         """

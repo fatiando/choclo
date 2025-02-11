@@ -5,8 +5,9 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Kernels and forward modelling functions for point sources
+Kernels and forward modelling functions for point sources.
 """
+
 from ._forward import (
     gravity_e,
     gravity_ee,
