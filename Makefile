@@ -1,7 +1,7 @@
 # Build, package, test, and clean
 PROJECT=choclo
 TESTDIR=tmp-test-dir-with-unique-name
-PYTEST_ARGS=--cov-config=../.coveragerc --cov-report=term-missing --cov=$(PROJECT) --doctest-modules -v --pyargs
+PYTEST_ARGS=--cov-report=term-missing --cov=$(PROJECT) --doctest-modules -v --pyargs
 NUMBATEST_ARGS=--doctest-modules -v --pyargs
 CHECK_STYLE=$(PROJECT) doc
 GITHUB_ACTIONS=.github/workflows
