@@ -14,7 +14,7 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..prism import (
+from choclo.prism import (
     kernel_en,
     kernel_eu,
     kernel_nu,

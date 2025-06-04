@@ -9,24 +9,23 @@ maintainers = [
   {name = "Santiago Soler", email = "santisoler@fastmail.com"}
 ]
 readme = "README.md"
-license = {text = "BSD-3-Clause"}
+license = "BSD-3-Clause"
 keywords = ["geoscience", "geophysics"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
     "Intended Audience :: Education",
-    "License :: OSI Approved :: BSD License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "Topic :: Scientific/Engineering",
-    "Topic :: Software Development :: Libraries",
 ]
 requires-python = ">=3.9"
 dependencies = [
@@ -47,7 +46,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 version_scheme =  "post-release"
 local_scheme =  "no-local-version"
-write_to =  "choclo/_version.py"
+write_to =  "src/choclo/_version.py"
 
 [tool.burocrata]
 notice = '''
@@ -62,7 +61,7 @@ notice = '''
 line-length = 88
 exclude = [
     "doc/_build",
-    "choclo/_version.py",
+    "src/choclo/_version.py",
 ]
 
 [tool.ruff.lint]
@@ -104,7 +103,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # disable unused-imports errors on __init__.py
 "_kernels.py" = ["ARG001"]  # disable unused arguments in kernel files
-"choclo/tests/**" = [
+"test/**" = [
     "T20", # allow print statements in tests
     "D",   # ignore pydocstyle warnings in tests
 ]
@@ -114,11 +113,20 @@ ignore = [
 convention = "numpy"
 
 [tool.coverage.run]
-branch = true
+source = ["choclo"]
 omit = [
-    "*/tests/*",
-    "*/_version.py",
+    "**/_version.py",
     "**/__init__.py",
+]
+branch = true
+# Needed to combine coverage data from multiple OSs on CI
+relative_files = true
+
+[tool.coverage.paths]
+source = [
+    "src/choclo",
+    "*/choclo",
+    "*\\choclo",
 ]
 
 [tool.coverage.report]
