@@ -5,8 +5,9 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Magnetic forward modelling functions for rectangular prisms
+Magnetic forward modelling functions for rectangular prisms.
 """
+
 import numpy as np
 from numba import jit
 
@@ -54,7 +55,7 @@ def magnetic_field(
     magnetization_up,
 ):
     r"""
-    Magnetic field due to a rectangular prism
+    Magnetic field due to a rectangular prism.
 
     Returns the three components of the magnetic field due to a single
     rectangular prism on a single computation point.
@@ -254,24 +255,15 @@ def magnetic_field(
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
+        shift_east = prism_east - easting if i == 0 else prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
+            shift_north = prism_north - northing if j == 0 else prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
+                shift_upward = prism_top - upward if k == 0 else prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)
@@ -366,7 +358,7 @@ def magnetic_e(
     magnetization_up,
 ):
     r"""
-    Easting component of the magnetic field due to a prism
+    Easting component of the magnetic field due to a prism.
 
     Returns the easting component of the magnetic field due to a single
     rectangular prism on a single computation point.
@@ -540,7 +532,7 @@ def magnetic_n(
     magnetization_up,
 ):
     r"""
-    Northing component of the magnetic field due to a prism
+    Northing component of the magnetic field due to a prism.
 
     Returns the northing component of the magnetic field due to a single
     rectangular prism on a single computation point.
@@ -714,7 +706,7 @@ def magnetic_u(
     magnetization_up,
 ):
     r"""
-    Upward component of the magnetic field due to a prism
+    Upward component of the magnetic field due to a prism.
 
     Returns the upward component of the magnetic field due to a single
     rectangular prism on a single computation point.
@@ -1770,24 +1762,15 @@ def _calculate_component(
     # Iterate over the vertices of the prism
     for i in range(2):
         # Compute shifted easting coordinate
-        if i == 0:
-            shift_east = prism_east - easting
-        else:
-            shift_east = prism_west - easting
+        shift_east = prism_east - easting if i == 0 else prism_west - easting
         shift_east_sq = shift_east**2
         for j in range(2):
             # Compute shifted northing coordinate
-            if j == 0:
-                shift_north = prism_north - northing
-            else:
-                shift_north = prism_south - northing
+            shift_north = prism_north - northing if j == 0 else prism_south - northing
             shift_north_sq = shift_north**2
             for k in range(2):
                 # Compute shifted upward coordinate
-                if k == 0:
-                    shift_upward = prism_top - upward
-                else:
-                    shift_upward = prism_bottom - upward
+                shift_upward = prism_top - upward if k == 0 else prism_bottom - upward
                 shift_upward_sq = shift_upward**2
                 # Compute the radius
                 radius = np.sqrt(shift_east_sq + shift_north_sq + shift_upward_sq)

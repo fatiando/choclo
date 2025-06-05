@@ -6,7 +6,8 @@
 <a href="https://www.fatiando.org/choclo"><strong>Documentation</strong> (latest)</a> •
 <a href="https://www.fatiando.org/choclo/dev"><strong>Documentation</strong> (main branch)</a> •
 <a href="https://github.com/fatiando/choclo/blob/main/CONTRIBUTING.md"><strong>Contributing</strong></a> •
-<a href="https://www.fatiando.org/contact/"><strong>Contact</strong></a>
+<a href="https://www.fatiando.org/contact/"><strong>Contact</strong></a> •
+<a href="https://github.com/orgs/fatiando/discussions"><strong>Ask a question</strong></a>
 </p>
 
 <p align="center">

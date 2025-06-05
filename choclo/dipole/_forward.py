@@ -32,7 +32,7 @@ def magnetic_field(
     magnetic_moment_up,
 ):
     r"""
-    Magnetic field due to a dipole
+    Magnetic field due to a dipole.
 
     Returns the three components of the magnetic field due to a single dipole
     a single computation point.
@@ -124,7 +124,7 @@ def magnetic_e(
     magnetic_moment_up,
 ):
     r"""
-    Easting component of the magnetic field due to a dipole
+    Easting component of the magnetic field due to a dipole.
 
     Returns the easting component of the magnetic field by a single dipole on
     a single computation point
@@ -202,7 +202,7 @@ def magnetic_n(
     magnetic_moment_up,
 ):
     r"""
-    Northing component of the magnetic field due to a dipole
+    Northing component of the magnetic field due to a dipole.
 
     Returns the northing component of the magnetic field by a single dipole on
     a single computation point
@@ -280,7 +280,7 @@ def magnetic_u(
     magnetic_moment_up,
 ):
     r"""
-    Upward component of the magnetic field due to a dipole
+    Upward component of the magnetic field due to a dipole.
 
     Returns the upward component of the magnetic field by a single dipole on
     a single computation point
