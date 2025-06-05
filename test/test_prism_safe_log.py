@@ -12,7 +12,7 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..prism._kernels import _safe_log
+from choclo.prism._kernels import _safe_log
 
 
 class TestSafeLogFixedX:

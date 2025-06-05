@@ -12,7 +12,7 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..prism import (
+from choclo.prism import (
     gravity_e,
     gravity_ee,
     gravity_en,

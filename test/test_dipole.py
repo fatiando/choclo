@@ -12,7 +12,7 @@ import numpy as np
 import numpy.testing as npt
 import pytest
 
-from ..dipole import magnetic_e, magnetic_field, magnetic_n, magnetic_u
+from choclo.dipole import magnetic_e, magnetic_field, magnetic_n, magnetic_u
 
 
 @pytest.fixture(name="sample_dipole")
