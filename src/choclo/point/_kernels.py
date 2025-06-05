@@ -428,7 +428,7 @@ def kernel_en(
     .. math::
 
         k_{xy}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial x_p \partial y_p}
+        \frac{\partial^2}{\partial x_p \partial y_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -481,7 +481,7 @@ def kernel_eu(
     .. math::
 
         k_{xz}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial x_p \partial z_p}
+        \frac{\partial^2}{\partial x_p \partial z_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -534,7 +534,7 @@ def kernel_nu(
     .. math::
 
         k_{yz}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial y_p \partial z_p}
+        \frac{\partial^2}{\partial y_p \partial z_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
