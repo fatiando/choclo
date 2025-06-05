@@ -586,19 +586,143 @@ def kernel_eee(
 
     .. math::
 
-        k_{eee}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial y \partial z}
+        k_{xxx}(\mathbf{p}, \mathbf{q}) =
+        \frac{\partial^3}{\partial x_p^3}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
         =
         \frac{
-            3 (y_p - y_q) (z_p - z_q)
+            9 (x_p - x_q)
         }{
             \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
+        }
+        - \frac{
+            15 (x_p - x_q)^3
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^7
         }
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`).
     """
-    return 3 * (northing_p - northing_q) * (upward_p - upward_q) / distance**5
+    easting = easting_p - easting_q
+    return 9 * easting / distance**5 - 15 * easting**3 / distance**7
+
+
+@jit(nopython=True)
+def kernel_nnn(
+    easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+):
+    r"""
+    Third derivative of the inverse of the distance along north-north-north.
+
+    .. important ::
+
+        The coordinates of the two points must be in Cartesian coordinates and
+        have the same units.
+
+    Parameters
+    ----------
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
+    distance : float
+        Euclidean distance between points :math:`\mathbf{p}` and
+        :math:`\mathbf{q}`.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function.
+
+    Notes
+    -----
+    Given two points :math:`\mathbf{p} = (x_p, y_p, z_p)` and :math:`\mathbf{q}
+    = (x_q, y_q, z_q)` defined in a Cartesian coordinate system, compute the
+    following kernel function:
+
+    .. math::
+
+        k_{yyy}(\mathbf{p}, \mathbf{q}) =
+        \frac{\partial^3}{\partial y_p^3}
+        \left(
+            \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
+        \right)
+        =
+        \frac{
+            9 (y_p - y_q)
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
+        }
+        - \frac{
+            15 (y_p - y_q)^3
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^7
+        }
+
+    where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
+    Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`).
+    """
+    northing = northing_p - northing_q
+    return 9 * northing / distance**5 - 15 * northing**3 / distance**7
+
+
+@jit(nopython=True)
+def kernel_uuu(
+    easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+):
+    r"""
+    Third derivative of the inverse of the distance along up-up-up.
+
+    .. important ::
+
+        The coordinates of the two points must be in Cartesian coordinates and
+        have the same units.
+
+    Parameters
+    ----------
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
+    distance : float
+        Euclidean distance between points :math:`\mathbf{p}` and
+        :math:`\mathbf{q}`.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function.
+
+    Notes
+    -----
+    Given two points :math:`\mathbf{p} = (x_p, y_p, z_p)` and :math:`\mathbf{q}
+    = (x_q, y_q, z_q)` defined in a Cartesian coordinate system, compute the
+    following kernel function:
+
+    .. math::
+
+        k_{zzz}(\mathbf{p}, \mathbf{q}) =
+        \frac{\partial^3}{\partial z_p^3}
+        \left(
+            \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
+        \right)
+        =
+        \frac{
+            9 (z_p - z_q)
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
+        }
+        - \frac{
+            15 (z_p - z_q)^3
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^7
+        }
+
+    where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
+    Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`).
+    """
+    upward = upward_p - upward_q
+    return 9 * upward / distance**5 - 15 * upward**3 / distance**7

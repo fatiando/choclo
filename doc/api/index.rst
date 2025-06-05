@@ -65,6 +65,9 @@ These are derivatives of the inverse distance function :math:`\frac{1}{r}`.
     point.kernel_en
     point.kernel_eu
     point.kernel_nu
+    point.kernel_eee
+    point.kernel_nnn
+    point.kernel_uuu
 
 
 Rectangular Prisms

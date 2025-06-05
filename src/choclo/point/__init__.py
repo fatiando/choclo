@@ -23,13 +23,15 @@ from ._forward import (
 from ._kernels import (
     kernel_e,
     kernel_ee,
+    kernel_eee,
     kernel_en,
     kernel_eu,
     kernel_n,
     kernel_nn,
+    kernel_nnn,
     kernel_nu,
     kernel_pot,
     kernel_u,
     kernel_uu,
-    kernel_eee,
+    kernel_uuu,
 )
