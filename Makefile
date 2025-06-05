@@ -17,7 +17,6 @@ help:
 	@echo "  check     run code style and quality checks"
 	@echo "  build     build source and wheel distributions"
 	@echo "  clean     clean up build and generated files"
-	@echo "  numpydoc  validate docstrings using numpydoc"
 	@echo ""
 
 build:
