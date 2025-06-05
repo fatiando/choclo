@@ -11,8 +11,9 @@ Test gravity forward modelling functions for point sources
 import numpy as np
 import numpy.testing as npt
 import pytest
+from utils import NUMBA_IS_DISABLED
 
-from ..point import (
+from choclo.point import (
     gravity_e,
     gravity_ee,
     gravity_en,
@@ -24,7 +25,6 @@ from ..point import (
     gravity_u,
     gravity_uu,
 )
-from .utils import NUMBA_IS_DISABLED
 
 
 @pytest.fixture(name="sample_point_source")

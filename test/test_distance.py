@@ -6,9 +6,9 @@
 #
 import numpy.testing as npt
 import pytest
+from utils import dumb_spherical_distance
 
-from ..utils import distance_cartesian, distance_spherical
-from .utils import dumb_spherical_distance
+from choclo.utils import distance_cartesian, distance_spherical
 
 
 @pytest.mark.parametrize(
