@@ -31,4 +31,5 @@ from ._kernels import (
     kernel_pot,
     kernel_u,
     kernel_uu,
+    kernel_eee,
 )

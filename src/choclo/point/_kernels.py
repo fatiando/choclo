@@ -549,3 +549,56 @@ def kernel_nu(
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`).
     """
     return 3 * (northing_p - northing_q) * (upward_p - upward_q) / distance**5
+
+
+@jit(nopython=True)
+def kernel_eee(
+    easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
+):
+    r"""
+    Third derivative of the inverse of the distance along east-east-east.
+
+    .. important ::
+
+        The coordinates of the two points must be in Cartesian coordinates and
+        have the same units.
+
+    Parameters
+    ----------
+    easting_p, northing_p, upward_p : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{p}`.
+    easting_q, northing_q, upward_q : float
+        Easting, northing and upward coordinates of point :math:`\mathbf{q}`.
+    distance : float
+        Euclidean distance between points :math:`\mathbf{p}` and
+        :math:`\mathbf{q}`.
+
+    Returns
+    -------
+    kernel : float
+        Value of the kernel function.
+
+    Notes
+    -----
+    Given two points :math:`\mathbf{p} = (x_p, y_p, z_p)` and :math:`\mathbf{q}
+    = (x_q, y_q, z_q)` defined in a Cartesian coordinate system, compute the
+    following kernel function:
+
+    .. math::
+
+        k_{eee}(\mathbf{p}, \mathbf{q}) =
+        \frac{\partial}{\partial y \partial z}
+        \left(
+            \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
+        \right)
+        =
+        \frac{
+            3 (y_p - y_q) (z_p - z_q)
+        }{
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^5
+        }
+
+    where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
+    Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`).
+    """
+    return 3 * (northing_p - northing_q) * (upward_p - upward_q) / distance**5

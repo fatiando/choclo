@@ -50,6 +50,8 @@ Magnetic
 Kernels
 ^^^^^^^
 
+These are derivatives of the inverse distance function :math:`\frac{1}{r}`.
+
 .. autosummary::
    :toctree: generated/
 
