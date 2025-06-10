@@ -995,8 +995,8 @@ def kernel_nnu(
     Euclidean distance between :math:`\mathbf{p}` and :math:`\mathbf{q}`).
     """
     northing = northing_p - northing_q
-    easting = easting_p - easting_q
-    return 3 * easting / distance**5 - 15 * northing**2 * easting / distance**7
+    upward = upward_p - upward_q
+    return 3 * upward / distance**5 - 15 * northing**2 * upward / distance**7
 
 
 @jit(nopython=True)

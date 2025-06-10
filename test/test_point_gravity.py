@@ -24,7 +24,21 @@ from choclo.point import (
     gravity_pot,
     gravity_u,
     gravity_uu,
+    kernel_ee,
+    kernel_eee,
+    kernel_een,
+    kernel_eeu,
+    kernel_enu,
+    kernel_nn,
+    kernel_nne,
+    kernel_nnn,
+    kernel_nnu,
+    kernel_uu,
+    kernel_uue,
+    kernel_uun,
+    kernel_uuu,
 )
+from choclo.utils import distance_cartesian
 
 
 @pytest.fixture(name="sample_point_source")
@@ -758,3 +772,72 @@ class TestLaplacian:
             npt.assert_allclose(-g_nn, g_ee + g_uu, rtol=rtol, atol=atol)
         if first_component == "g_uu":
             npt.assert_allclose(-g_uu, g_ee + g_nn, rtol=rtol, atol=atol)
+
+    @pytest.mark.parametrize(
+        "components",
+        [
+            [kernel_ee, kernel_nn, kernel_uu],
+            [kernel_eee, kernel_nne, kernel_uue],
+            [kernel_een, kernel_nnn, kernel_uun],
+            [kernel_eeu, kernel_nnu, kernel_uuu],
+        ],
+        ids=[
+            "ee, nn, uu",
+            "eee, nne, uue",
+            "een, nnn, uun",
+            "eeu, nnu, uuu",
+        ],
+    )
+    def test_laplacian_kernels(
+        self,
+        sample_observation_points,
+        sample_point_source,
+        components,
+    ):
+        """
+        Test if kernel functions satisfy Laplace's equation
+        """
+        kernel_east, kernel_north, kernel_up = components
+        east = np.array(
+            [
+                kernel_east(
+                    e,
+                    n,
+                    u,
+                    *sample_point_source,
+                    distance_cartesian(e, n, u, *sample_point_source),
+                )
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        north = np.array(
+            [
+                kernel_north(
+                    e,
+                    n,
+                    u,
+                    *sample_point_source,
+                    distance_cartesian(e, n, u, *sample_point_source),
+                )
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        up = np.array(
+            [
+                kernel_up(
+                    e,
+                    n,
+                    u,
+                    *sample_point_source,
+                    distance_cartesian(e, n, u, *sample_point_source),
+                )
+                for e, n, u in zip(*sample_observation_points)
+            ]
+        )
+        # Set an atol to avoid getting failures when comparing values close to
+        # zero
+        atol = 1e-16
+        rtol = 1e-7
+        npt.assert_allclose(-east, north + up, rtol=rtol, atol=atol)
+        npt.assert_allclose(-north, east + up, rtol=rtol, atol=atol)
+        npt.assert_allclose(-up, east + north, rtol=rtol, atol=atol)
