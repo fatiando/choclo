@@ -24,15 +24,22 @@ from choclo.point import (
     gravity_pot,
     gravity_u,
     gravity_uu,
+    kernel_e,
     kernel_ee,
     kernel_eee,
     kernel_een,
     kernel_eeu,
+    kernel_en,
     kernel_enu,
+    kernel_eu,
+    kernel_n,
     kernel_nn,
     kernel_nne,
     kernel_nnn,
     kernel_nnu,
+    kernel_nu,
+    kernel_pot,
+    kernel_u,
     kernel_uu,
     kernel_uue,
     kernel_uun,
@@ -63,6 +70,32 @@ def fixture_sample_coordinate():
     Define a sample observation point
     """
     return (16.7, 13.2, 7.8)
+
+
+@pytest.fixture(name="sample_observation_points")
+def fixture_sample_observation_points(sample_point_source):
+    """
+    Define a 3D grid of observation points around the sample point source.
+    The grid doesn't contain an observation point located in the same
+    location as the point source.
+    """
+    # Build the observation points
+    easting = np.linspace(-10, 10, 21)
+    northing = np.linspace(-10, 10, 21)
+    upward = np.linspace(-10, 10, 21)
+    easting, northing, upward = tuple(
+        a.ravel() for a in np.meshgrid(easting, northing, upward)
+    )
+    # Remove the location of the sample point source
+    point_source_location = (easting == 0) & (northing == 0) & (upward == 0)
+    easting, northing, upward = tuple(
+        a[np.logical_not(point_source_location)] for a in (easting, northing, upward)
+    )
+    # Shift the coordinates
+    easting += sample_point_source[0]
+    northing += sample_point_source[1]
+    upward += sample_point_source[2]
+    return (easting, northing, upward)
 
 
 class TestSymmetryPotential:
@@ -706,33 +739,104 @@ class TestTensorFiniteDifferences:
         )
 
 
-class TestLaplacian:
-    @pytest.fixture
-    def sample_observation_points(self, sample_point_source):
-        """
-        Define a 3D grid of observation points around the sample point source.
-        The grid doesn't contain an observation point located in the same
-        location as the point source.
-        """
-        # Build the observation points
-        easting = np.linspace(-10, 10, 21)
-        northing = np.linspace(-10, 10, 21)
-        upward = np.linspace(-10, 10, 21)
-        easting, northing, upward = tuple(
-            a.ravel() for a in np.meshgrid(easting, northing, upward)
-        )
-        # Remove the location of the sample point source
-        point_source_location = (easting == 0) & (northing == 0) & (upward == 0)
-        easting, northing, upward = tuple(
-            a[np.logical_not(point_source_location)]
-            for a in (easting, northing, upward)
-        )
-        # Shift the coordinates
-        easting += sample_point_source[0]
-        northing += sample_point_source[1]
-        upward += sample_point_source[2]
-        return (easting, northing, upward)
+def compute_kernel_points(coordinates, source, kernel):
+    """
+    Evaluate the kernel on all given computation points.
+    """
+    result = np.array(
+        [
+            kernel(e, n, u, *source, distance_cartesian(e, n, u, *source))
+            for e, n, u in zip(*coordinates)
+        ]
+    )
+    return result
 
+
+class TestKernelFiniteDifferences:
+    """
+    Test the third-order kernels using finite differences.
+    """
+
+    # Define percentage for the finite difference displacement
+    delta_percentage = 1e-8
+
+    # Define expected error tolerance in the comparisons
+    rtol = 1e-5
+    atol = 1e-9
+
+    @pytest.mark.parametrize(
+        ("kernel", "original", "direction"),
+        [
+            (kernel_e, kernel_pot, 0),
+            (kernel_n, kernel_pot, 1),
+            (kernel_u, kernel_pot, 2),
+            (kernel_ee, kernel_e, 0),
+            (kernel_en, kernel_n, 0),
+            (kernel_en, kernel_e, 1),
+            (kernel_eu, kernel_u, 0),
+            (kernel_eu, kernel_e, 2),
+            (kernel_nn, kernel_n, 1),
+            (kernel_nu, kernel_u, 1),
+            (kernel_nu, kernel_n, 2),
+            (kernel_uu, kernel_u, 2),
+            (kernel_eee, kernel_ee, 0),
+            (kernel_nnn, kernel_nn, 1),
+            (kernel_uuu, kernel_uu, 2),
+            (kernel_een, kernel_en, 0),
+            (kernel_een, kernel_ee, 1),
+            (kernel_eeu, kernel_eu, 0),
+            (kernel_eeu, kernel_ee, 2),
+            (kernel_enu, kernel_nu, 0),
+            (kernel_enu, kernel_eu, 1),
+            (kernel_enu, kernel_en, 2),
+            (kernel_nne, kernel_nn, 0),
+            (kernel_nne, kernel_en, 1),
+            (kernel_nnu, kernel_nn, 2),
+            (kernel_nnu, kernel_nu, 1),
+            (kernel_uue, kernel_uu, 0),
+            (kernel_uue, kernel_eu, 2),
+            (kernel_uun, kernel_uu, 1),
+            (kernel_uun, kernel_nu, 2),
+        ],
+    )
+    def test_kernels(
+        self,
+        sample_observation_points,
+        sample_point_source,
+        kernel,
+        original,
+        direction,
+    ):
+        """
+        Test derivatives of kernels using finite-differences.
+        """
+        # Compute a small increment based on the smallest distance between
+        # observation points and the point source.
+        delta = self.delta_percentage * np.min(
+            sample_observation_points[direction] - sample_point_source[direction]
+        )
+        coordinates_plus = list(sample_observation_points)
+        coordinates_plus[direction] = coordinates_plus[direction] + 0.5 * delta
+        coordinates_minus = list(sample_observation_points)
+        coordinates_minus[direction] = coordinates_minus[direction] - 0.5 * delta
+        # Calculate through finite differences
+        fd_result = (
+            compute_kernel_points(coordinates_plus, sample_point_source, original)
+            - compute_kernel_points(coordinates_minus, sample_point_source, original)
+        ) / delta
+        # Calculate the kernel
+        result = compute_kernel_points(
+            sample_observation_points, sample_point_source, kernel
+        )
+        npt.assert_allclose(
+            result,
+            fd_result,
+            rtol=self.rtol,
+            atol=self.atol,
+        )
+
+
+class TestLaplacian:
     @pytest.mark.parametrize("first_component", ["g_ee", "g_nn", "g_uu"])
     def test_laplacian(
         self,
@@ -776,10 +880,10 @@ class TestLaplacian:
     @pytest.mark.parametrize(
         "components",
         [
-            [kernel_ee, kernel_nn, kernel_uu],
-            [kernel_eee, kernel_nne, kernel_uue],
-            [kernel_een, kernel_nnn, kernel_uun],
-            [kernel_eeu, kernel_nnu, kernel_uuu],
+            (kernel_ee, kernel_nn, kernel_uu),
+            (kernel_eee, kernel_nne, kernel_uue),
+            (kernel_een, kernel_nnn, kernel_uun),
+            (kernel_eeu, kernel_nnu, kernel_uuu),
         ],
         ids=[
             "ee, nn, uu",
@@ -798,41 +902,14 @@ class TestLaplacian:
         Test if kernel functions satisfy Laplace's equation
         """
         kernel_east, kernel_north, kernel_up = components
-        east = np.array(
-            [
-                kernel_east(
-                    e,
-                    n,
-                    u,
-                    *sample_point_source,
-                    distance_cartesian(e, n, u, *sample_point_source),
-                )
-                for e, n, u in zip(*sample_observation_points)
-            ]
+        east = compute_kernel_points(
+            sample_observation_points, sample_point_source, kernel_east
         )
-        north = np.array(
-            [
-                kernel_north(
-                    e,
-                    n,
-                    u,
-                    *sample_point_source,
-                    distance_cartesian(e, n, u, *sample_point_source),
-                )
-                for e, n, u in zip(*sample_observation_points)
-            ]
+        north = compute_kernel_points(
+            sample_observation_points, sample_point_source, kernel_north
         )
-        up = np.array(
-            [
-                kernel_up(
-                    e,
-                    n,
-                    u,
-                    *sample_point_source,
-                    distance_cartesian(e, n, u, *sample_point_source),
-                )
-                for e, n, u in zip(*sample_observation_points)
-            ]
+        up = compute_kernel_points(
+            sample_observation_points, sample_point_source, kernel_up
         )
         # Set an atol to avoid getting failures when comparing values close to
         # zero
