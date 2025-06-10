@@ -95,7 +95,7 @@ def kernel_e(
     .. math::
 
         k_x(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial x}
+        \frac{\partial}{\partial x_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -103,7 +103,7 @@ def kernel_e(
         - \frac{
             x_p - x_q
         }{
-            \lVert \mathbf{p} - \mathbf{q} \rVert_2
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^3
         }
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
@@ -148,7 +148,7 @@ def kernel_n(
     .. math::
 
         k_y(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial y}
+        \frac{\partial}{\partial y_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -156,7 +156,7 @@ def kernel_n(
         - \frac{
             y_p - y_q
         }{
-            \lVert \mathbf{p} - \mathbf{q} \rVert_2
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^3
         }
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
@@ -201,7 +201,7 @@ def kernel_u(
     .. math::
 
         k_z(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial z}
+        \frac{\partial}{\partial z_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -209,7 +209,7 @@ def kernel_u(
         - \frac{
             z_p - z_q
         }{
-            \lVert \mathbf{p} - \mathbf{q} \rVert_2
+            \lVert \mathbf{p} - \mathbf{q} \rVert_2^3
         }
 
     where :math:`\lVert \cdot \rVert_2` refer to the :math:`L_2` norm (the
@@ -254,7 +254,7 @@ def kernel_ee(
     .. math::
 
         k_{xx}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial^2}{\partial x^2}
+        \frac{\partial^2}{\partial x_p^2}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -312,7 +312,7 @@ def kernel_nn(
     .. math::
 
         k_{yy}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial^2}{\partial y^2}
+        \frac{\partial^2}{\partial y_p^2}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -370,7 +370,7 @@ def kernel_uu(
     .. math::
 
         k_{zz}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial^2}{\partial z^2}
+        \frac{\partial^2}{\partial z_p^2}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -430,8 +430,7 @@ def kernel_en(
     .. math::
 
         k_{xy}(\mathbf{p}, \mathbf{q}) =
-        k_{yx}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial x \partial y}
+        \frac{\partial^2}{\partial x_p \partial y_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -487,7 +486,7 @@ def kernel_eu(
 
         k_{xz}(\mathbf{p}, \mathbf{q}) =
         k_{zx}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial x \partial z}
+        \frac{\partial^2}{\partial x_p \partial z_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
@@ -542,7 +541,7 @@ def kernel_nu(
 
         k_{yz}(\mathbf{p}, \mathbf{q}) =
         k_{zy}(\mathbf{p}, \mathbf{q}) =
-        \frac{\partial}{\partial y \partial z}
+        \frac{\partial^2}{\partial y_p \partial z_p}
         \left(
             \frac{1}{\lVert \mathbf{p} - \mathbf{q} \rVert_2}
         \right)
