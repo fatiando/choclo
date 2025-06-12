@@ -50,6 +50,8 @@ Magnetic
 Kernels
 ^^^^^^^
 
+These are derivatives of the inverse distance function :math:`\frac{1}{r}`.
+
 .. autosummary::
    :toctree: generated/
 
@@ -63,6 +65,16 @@ Kernels
     point.kernel_en
     point.kernel_eu
     point.kernel_nu
+    point.kernel_eee
+    point.kernel_nnn
+    point.kernel_uuu
+    point.kernel_een
+    point.kernel_eeu
+    point.kernel_nne
+    point.kernel_nnu
+    point.kernel_uue
+    point.kernel_uun
+    point.kernel_enu
 
 
 Rectangular Prisms
@@ -118,16 +130,6 @@ Kernels
     prism.kernel_en
     prism.kernel_eu
     prism.kernel_nu
-    prism.kernel_eee
-    prism.kernel_nnn
-    prism.kernel_uuu
-    prism.kernel_een
-    prism.kernel_eeu
-    prism.kernel_enn
-    prism.kernel_nnu
-    prism.kernel_euu
-    prism.kernel_nuu
-    prism.kernel_enu
 
 
 Utilities
