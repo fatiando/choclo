@@ -35,7 +35,7 @@ format:
 	ruff format $(CHECK_STYLE)
 	burocrata --extension=py $(CHECK_STYLE)
 
-check: check-format check-style check-actions
+check: check-format check-style check-actions check-docstrings
 
 check-format:
 	ruff format --check $(CHECK_STYLE)
@@ -46,6 +46,9 @@ check-style:
 
 check-actions:
 	zizmor $(GITHUB_ACTIONS)
+
+check-docstrings:
+	numpydoc lint $(wildcard ${PROJECT}/**/*.py)
 
 clean:
 	find . -name "*.pyc" -exec rm -v "{}" \;
