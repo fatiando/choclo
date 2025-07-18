@@ -32,7 +32,7 @@ def gravity_pot(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     Gravitational potential field due to a point source.
 
     Returns the gravitational potential field produced by a single point source
-    on a single computation point
+    at a single computation point.
 
     Parameters
     ----------
@@ -80,7 +80,7 @@ def gravity_e(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     Easting component of the gravitational acceleration due to a point source.
 
     Returns the easting component of the gravitational acceleration produced by
-    a single point source on a single computation point
+    a single point source at a single computation point.
 
     Parameters
     ----------
@@ -133,7 +133,7 @@ def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     Northing component of the gravitational acceleration due to a point source.
 
     Returns the northing component of the gravitational acceleration produced
-    by a single point source on a single computation point
+    by a single point source at a single computation point.
 
     Parameters
     ----------
@@ -186,7 +186,7 @@ def gravity_u(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     Upward component of the gravitational acceleration due to a point source.
 
     Returns the upward component of the gravitational acceleration produced by
-    a single point source on a single computation point
+    a single point source at a single computation point.
 
     Parameters
     ----------
@@ -239,7 +239,7 @@ def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     Easting-easting component of the gravitational tensor due to a point source.
 
     Returns the easting-easting component of the gravitational tensor produced
-    by a single point source on a single computation point
+    by a single point source at a single computation point.
 
     Parameters
     ----------
@@ -299,7 +299,7 @@ def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     Northing-northing component of the gravitational tensor due to point source.
 
     Returns the northing-northing component of the gravitational tensor
-    produced by a single point source on a single computation point
+    produced by a single point source at a single computation point.
 
     Parameters
     ----------
@@ -359,7 +359,7 @@ def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     Upward-upward component of the gravitational tensor due to a point source.
 
     Returns the upward-upward component of the gravitational tensor
-    produced by a single point source on a single computation point
+    produced by a single point source at a single computation point.
 
     Parameters
     ----------
@@ -419,7 +419,7 @@ def gravity_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     Easting-northing component of the gravitational tensor due to point source.
 
     Returns the easting-northing component of the gravitational tensor
-    produced by a single point source on a single computation point
+    produced by a single point source at a single computation point.
 
     Parameters
     ----------
@@ -474,7 +474,7 @@ def gravity_eu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     Easting-upward component of the gravitational tensor due to point source.
 
     Returns the easting-upward component of the gravitational tensor
-    produced by a single point source on a single computation point
+    produced by a single point source at a single computation point.
 
     Parameters
     ----------
@@ -529,7 +529,7 @@ def gravity_nu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     Northing-upward component of the gravitational tensor due to point source.
 
     Returns the northing-upward component of the gravitational tensor
-    produced by a single point source on a single computation point
+    produced by a single point source at a single computation point.
 
     Parameters
     ----------
