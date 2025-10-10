@@ -147,6 +147,9 @@ class TestSymmetryPotential:
         npt.assert_allclose(potential_1, radius_2 / radius_1 * potential_2)
 
     @pytest.mark.skipif(not NUMBA_IS_DISABLED, reason="Numba is not disabled")
+    @pytest.mark.filterwarnings(
+        "ignore:divide by zero encountered in scalar divide:RuntimeWarning"
+    )
     def test_infinite_potential(self, sample_mass):
         """
         Test if we get an infinite kernel if the computation point is in the
