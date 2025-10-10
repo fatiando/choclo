@@ -132,14 +132,6 @@ jobs:
       - name: Convert coverage report to XML for codecov
         run: coverage xml
 
-      # - name: Upload coverage report
-      #   uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     # Fail the job so we know coverage isn't being updated. Otherwise it
-      #     # can silently drop and we won't know.
-      #     fail_ci_if_error: true
-
       - name: Upload coverage as artifact
         uses: actions/upload-artifact@v4
         with:
