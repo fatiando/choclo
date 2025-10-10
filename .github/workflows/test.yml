@@ -129,8 +129,8 @@ jobs:
       - name: Run the tests
         run: make test
 
-      # - name: Convert coverage report to XML for codecov
-      #   run: coverage xml
+      - name: Convert coverage report to XML for codecov
+        run: coverage xml
 
       # - name: Upload coverage report
       #   uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
@@ -144,8 +144,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage_${{ matrix.os }}_${{ matrix.dependencies }}
-          path: ./.coverage
-          include-hidden-files: true
+          path: ./coverage.xml
 
 
   #############################################################################
@@ -184,7 +183,7 @@ jobs:
         uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
         with:
           # Upload all coverage report files
-          files: ./coverage_*/.coverage
+          files: ./coverage_*/coverage.xml
           # Fail the job so we know coverage isn't being updated. Otherwise it
           # can silently drop and we won't know.
           fail_ci_if_error: true
