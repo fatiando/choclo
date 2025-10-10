@@ -113,7 +113,7 @@ ignore = [
 convention = "numpy"
 
 [tool.coverage.run]
-source = ["choclo"]
+source = ["src/choclo"]
 omit = [
     "**/_version.py",
     "**/__init__.py",
