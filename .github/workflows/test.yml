@@ -144,7 +144,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage_${{ matrix.os }}_${{ matrix.dependencies }}
-          path: ./.coverage.*
+          path: ./.coverage
           include-hidden-files: true
 
 
@@ -176,7 +176,6 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           pattern: coverage_*
-          merge-multiple: true
 
       - name: List all downloaded artifacts
         run: ls -l -R .
@@ -185,7 +184,7 @@ jobs:
         uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
         with:
           # Upload all coverage report files
-          files: ./.coverage*
+          files: ./coverage_*/.coverage
           # Fail the job so we know coverage isn't being updated. Otherwise it
           # can silently drop and we won't know.
           fail_ci_if_error: true
