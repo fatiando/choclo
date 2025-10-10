@@ -137,6 +137,7 @@ jobs:
         with:
           name: coverage_${{ matrix.os }}_${{ matrix.dependencies }}
           path: ./coverage.xml
+          include-hidden-files: true
 
 
   #############################################################################
@@ -155,6 +156,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           pattern: coverage_*
+          merge-multiple: true
 
       - name: List all downloaded artifacts
         run: ls -l -R .
