@@ -137,15 +137,24 @@ jobs:
         with:
           name: coverage_${{ matrix.os }}_${{ matrix.dependencies }}
           path: ./coverage.xml
+          include-hidden-files: true
 
 
   #############################################################################
-  # Upload coverage report to codecov
-  codecov-upload:
+  # Generate HTML coverage report
+  # Reference: https://hynek.me/articles/ditch-codecov-python
+  coverage:
+    name: Combine & check coverage
+    if: always()
+    needs: tests
     runs-on: ubuntu-latest
-    needs: test
 
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          # Use latest Python, so it understands all syntax.
+          python-version: "3.13"
 
       - name: Download coverage report artifacts
         # Download coverage reports from every runner.
@@ -155,17 +164,24 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           pattern: coverage_*
+          merge-multiple: true
 
-      - name: List all downloaded artifacts
-        run: ls -l -R .
+      - name: Combine coverage & fail if it's <100%
+        run: |
+          python -Im pip install --upgrade coverage[toml]
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
+          python -Im coverage combine
+          python -Im coverage html --skip-covered --skip-empty
+
+          # Report and write to summary.
+          python -Im coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
+
+          # Report again and fail if under 100%.
+          python -Im coverage report --fail-under=100
+
+      - name: Upload HTML report if check failed
+        uses: actions/upload-artifact@v4
         with:
-          # Upload all coverage report files
-          files: ./coverage_*/coverage.xml
-          # Fail the job so we know coverage isn't being updated. Otherwise it
-          # can silently drop and we won't know.
-          fail_ci_if_error: true
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          name: html-report
+          path: htmlcov
+        if: ${{ failure() }}
