@@ -817,7 +817,6 @@ class TestAccelerationFiniteDifferences:
         Compute gravity_e through finite differences of the gravity_pot
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        west, east = sample_prism[:2]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + self.delta, northing_p, upward_p)
         # Calculate g_e through finite differences
@@ -833,7 +832,6 @@ class TestAccelerationFiniteDifferences:
         Compute gravity_n through finite differences of the gravity_pot
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        south, north = sample_prism[2:4]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + self.delta, upward_p)
         # Calculate g_n through finite differences
@@ -849,7 +847,6 @@ class TestAccelerationFiniteDifferences:
         Compute gravity_u through finite differences of the gravity_pot
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        bottom, top = sample_prism[-2:]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + self.delta)
         # Calculate g_u through finite differences
@@ -905,7 +902,6 @@ class TestTensorFiniteDifferences:
         Compute gravity_ee through finite differences of the gravity_e
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        west, east = sample_prism[:2]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p + self.delta, northing_p, upward_p)
         # Calculate g_ee through finite differences
@@ -921,7 +917,6 @@ class TestTensorFiniteDifferences:
         Compute gravity_nn through finite differences of the gravity_n
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        south, north = sample_prism[2:4]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + self.delta, upward_p)
         # Calculate g_nn through finite differences
@@ -937,7 +932,6 @@ class TestTensorFiniteDifferences:
         Compute gravity_uu through finite differences of the gravity_u
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        bottom, top = sample_prism[-2:]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + self.delta)
         # Calculate g_u through finite differences
@@ -953,7 +947,6 @@ class TestTensorFiniteDifferences:
         Compute gravity_en through finite differences of the gravity_e
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        west, east = sample_prism[:2]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p + self.delta, upward_p)
         # Calculate g_en through finite differences
@@ -969,7 +962,6 @@ class TestTensorFiniteDifferences:
         Compute gravity_eu through finite differences of the gravity_e
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        west, east = sample_prism[:2]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + self.delta)
         # Calculate g_en through finite differences
@@ -985,7 +977,6 @@ class TestTensorFiniteDifferences:
         Compute gravity_nu through finite differences of the gravity_n
         """
         easting_p, northing_p, upward_p = sample_coordinate
-        west, east = sample_prism[:2]
         # Compute shifted coordinate
         shifted_coordinate = (easting_p, northing_p, upward_p + self.delta)
         # Calculate g_en through finite differences
