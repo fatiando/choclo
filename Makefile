@@ -2,6 +2,8 @@
 PROJECT=choclo
 CHECK_STYLE=src/$(PROJECT) doc test
 GITHUB_ACTIONS=.github/workflows
+PYTEST_ARGS=--verbose --doctest-modules
+PYTEST_COV_ARGS=--cov-report=term-missing --cov $(PYTEST_ARGS)
 
 .PHONY: build install test test-coverage test-numba format check check-format check_style check-actions clean
 
@@ -25,10 +27,10 @@ install:
 test: test-numba test-coverage
 
 test-coverage:
-	NUMBA_DISABLE_JIT=1 pytest --cov-report=term-missing --cov --doctest-modules --verbose test src/$(PROJECT)
+	NUMBA_DISABLE_JIT=1 pytest $(PYTEST_COV_ARGS) test src/$(PROJECT)
 
 test-numba:
-	NUMBA_DISABLE_JIT=0 pytest --cov-report=term-missing --cov --doctest-modules --verbose test src/$(PROJECT)
+	NUMBA_DISABLE_JIT=0 pytest $(PYTEST_ARGS) test src/$(PROJECT)
 
 format:
 	ruff check --select I --fix $(CHECK_STYLE) # fix isort errors
