@@ -146,7 +146,7 @@ jobs:
   coverage:
     name: Combine & check coverage
     if: always()
-    needs: tests
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
