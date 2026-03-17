@@ -58,7 +58,7 @@ jobs:
       # We pin the commit hash corresponding to v0.5.0, and not pinning the tag
       # because we are giving full access through the github.token.
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@3155a141048f8f89c06b4cdae32e7853e97536bc
+        uses: styfle/cancel-workflow-action@d07a454dad7609a92316b57b23c9ccfd4f59af66
         with:
           access_token: ${{ github.token }}
 
@@ -143,6 +143,7 @@ jobs:
   # Upload coverage report to codecov
   codecov-upload:
     runs-on: ubuntu-latest
+    environment: codecov
     needs: test
 
     steps:
@@ -164,7 +165,7 @@ jobs:
         # Maximum coverage is achieved by combining reports from every runner.
         # Each coverage file will live in its own folder with the same name as
         # the artifact.
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           pattern: coverage_*
 
