@@ -50,9 +50,6 @@ jobs:
 
     env:
       REQUIREMENTS: env/requirements-build.txt env/requirements-test.txt
-      # Used to tag codecov submissions
-      OS: ${{ matrix.os }}
-      PYTHON: ${{ matrix.python }}
 
     steps:
       # Cancel any previous run of the test job
