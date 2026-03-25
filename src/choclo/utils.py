@@ -206,3 +206,9 @@ def distance_spherical_core(
         (radius_p - radius_q) ** 2 + 2 * radius_p * radius_q * (1 - cospsi)
     )
     return distance, cospsi, coslambda
+
+
+def untested_function(x):
+    if x == 0:
+        return None
+    return x**2
