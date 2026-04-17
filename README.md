@@ -1,6 +1,6 @@
-<img src="https://github.com/fatiando/choclo/raw/main/doc/_static/readme-banner.png" alt="Choclo">
+<h1><img src="https://github.com/fatiando/choclo/raw/main/doc/_static/readme-banner.png" alt="Choclo"></h1>
 
-<h2 align="center">Kernel functions for your geophysical models</h2>
+<p align="center"><strong>Kernel functions for your geophysical models</strong></p>
 
 <p align="center">
 <a href="https://www.fatiando.org/choclo"><strong>Documentation</strong> (latest)</a> •
