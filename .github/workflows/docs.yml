@@ -90,11 +90,7 @@ jobs:
         run: python -m pip freeze
 
       - name: Build source and wheel distributions
-        run: |
-          make build
-          echo ""
-          echo "Generated files:"
-          ls -lh dist/
+        run: make build
 
       - name: Install the package
         run: python -m pip install --no-deps dist/*.whl
