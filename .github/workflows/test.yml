@@ -116,6 +116,9 @@ jobs:
       - name: Build source and wheel distributions
         run: make build
 
+      - name: List generated files
+        run: ls -lh dist/
+
       - name: Check the archives
         run: twine check dist/*
 
