@@ -10,7 +10,6 @@ on:
   release:
     types:
       - published
-  pull_request:
 
 
 permissions: {}
@@ -109,9 +108,7 @@ jobs:
           persist-credentials: true
 
       - name: Push the built HTML to gh-pages
-        if: success() && (github.event_name == 'push' || github.event_name == 'release')
         run: |
-          exit 1
           # Detect if this is a release or from the main branch
           if [[ "${{ github.event_name }}" == "release" ]]; then
             # Get the tag name without the "refs/tags/" part
@@ -172,7 +169,7 @@ jobs:
 
       - name: Publish to Test PyPI
         # Only publish to TestPyPI when a PR is merged (pushed to main)
-        if: success() && github.event_name == 'pull_request'
+        if: success() && github.event_name == 'push'
         uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b
         with:
           repository-url: https://test.pypi.org/legacy/
