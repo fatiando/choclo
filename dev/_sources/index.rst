@@ -137,5 +137,6 @@ of developing a common engine for running gravity and magnetic forward models.
     How to contribute <https://github.com/fatiando/choclo/blob/main/CONTRIBUTING.md>
     Code of Conduct <https://github.com/fatiando/choclo/blob/main/CODE_OF_CONDUCT.md>
     Source code on GitHub <https://github.com/fatiando/choclo>
+    Authors <https://github.com/fatiando/choclo/blob/main/AUTHORS.md>
     The Fatiando a Terra project <https://www.fatiando.org>
     SimPEG <https://simpeg.xyz>
