@@ -26,5 +26,4 @@ dependencies:
   # Style
   - ruff
   - zizmor
-  - pip:
-    - burocrata
+  - burocrata
