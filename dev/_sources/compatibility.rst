@@ -16,6 +16,8 @@ Choclo uses `semantic versioning <https://semver.org/>`__ (i.e.,
 * Bug fix releases fix errors in a previous release without adding new
   functionality. Users can upgrade minor versions without changing their code.
 
+**We aim for Choclo to be backwards compatible whenever possible and will make
+major releases sparingly and with ample warning.**
 We will add ``FutureWarning`` messages about deprecations ahead of making any
 breaking changes to give users a chance to upgrade.
 
@@ -23,8 +25,9 @@ breaking changes to give users a chance to upgrade.
 
     The above does not apply to versions < ``1.0.0``. All ``0.*`` versions may
     deprecate, remove, or change functionality between releases. Proper
-    warnings will be raised and any breaking changes will be marked as such in
+    warnings may be raised, and any breaking changes will be marked as such in
     the :ref:`changes`.
+
 
 .. _dependency-versions:
 
@@ -42,12 +45,18 @@ older ones are still working without causing problems.
 Whenever support for a version is dropped, we will include a note in the
 :ref:`changes`.
 
+.. seealso::
+
+    Exact version constraints on our dependencies can be found in the
+    `pyproject.toml file <https://github.com/fatiando/choclo/blob/main/pyproject.toml>`__.
+
 
 .. _python-versions:
 
 Supported Python versions
 -------------------------
 
+Choclo supports Python versions greater than the ones listed below.
 If you require support for older Python versions, please pin Choclo to the
 following releases to ensure compatibility:
 
@@ -58,3 +67,5 @@ following releases to ensure compatibility:
       - **Last compatible release**
     * - 3.7
       - 0.1.0
+    * - 3.8
+      - 0.3.2

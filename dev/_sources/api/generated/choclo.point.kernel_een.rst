@@ -1,7 +1,7 @@
-choclo.prism.kernel\_een
+choclo.point.kernel\_een
 ========================
 
-.. currentmodule:: choclo.prism
+.. currentmodule:: choclo.point
 
 .. autofunction:: kernel_een
 
