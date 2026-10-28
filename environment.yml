@@ -24,6 +24,6 @@ dependencies:
   - jupyter-sphinx==0.5.*
   - matplotlib
   # Style
-  - ruff
-  - zizmor
-  - burocrata
+  - ruff==0.16.*
+  - burocrata==0.2.*
+  - zizmor==1.30.*
