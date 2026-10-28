@@ -13,15 +13,6 @@ on:
 
 permissions: {}
 
-# Use bash by default in all jobs
-defaults:
-  run:
-    # Using "-l {0}" is necessary for conda environments to be activated
-    # But this breaks on MacOS if using actions/setup-python:
-    # https://github.com/actions/setup-python/issues/132
-    # -e makes sure jobs fail if any command fails
-    shell: bash -e -o pipefail -l {0}
-
 jobs:
   #############################################################################
   # Run tests
