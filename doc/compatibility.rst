@@ -69,3 +69,7 @@ following releases to ensure compatibility:
       - 0.1.0
     * - 3.8
       - 0.3.2
+    * - 3.9
+      - 0.3.2
+    * - 3.10
+      - 0.3.2
