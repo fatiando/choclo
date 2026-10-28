@@ -28,7 +28,7 @@ classifiers = [
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.1",
-    "numba>=0.59.1",
+    "numba>=0.60",
 ]
 
 [project.urls]
