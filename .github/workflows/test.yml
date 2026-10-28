@@ -20,7 +20,7 @@ defaults:
     # But this breaks on MacOS if using actions/setup-python:
     # https://github.com/actions/setup-python/issues/132
     # -e makes sure jobs fail if any command fails
-    shell: bash -e -o pipefail -l {0}
+    shell: bash -o pipefail -e {0}
 
 jobs:
   #############################################################################
