@@ -27,7 +27,7 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "numpy>=1.23",
+    "numpy>=1.26",
     "numba>=0.58",
 ]
 
