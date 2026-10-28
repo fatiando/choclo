@@ -11,9 +11,7 @@ on:
     branches:
       - main
 
-permissions:
-  # Required for the setup-python action
-  contents: read
+permissions: {}
 
 # Use bash by default in all jobs
 defaults:
