@@ -129,3 +129,8 @@ source = [
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "error:Class-scoped fixture defined as instance method is deprecated:pytest.PytestRemovedIn10Warning",
+]
