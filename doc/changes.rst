@@ -3,6 +3,68 @@
 Changelog
 =========
 
+Version 0.4.0
+-------------
+
+Released on: 2026/10/29
+
+New features:
+
+- Add third derivatives of the inverse distance function (`#134 <https://github.com/fatiando/choclo/pull/134>`__)
+- Extend support to Python 3.15 (`#191 <https://github.com/fatiando/choclo/pull/191>`__)
+
+Documentation:
+
+- Add a link to the Fatiando Forum in the README (`#126 <https://github.com/fatiando/choclo/pull/126>`__)
+- Fix equations in docstring of point mass kernels (`#133 <https://github.com/fatiando/choclo/pull/133>`__)
+- Fix notation on dipole magnetic field docstrings (`#132 <https://github.com/fatiando/choclo/pull/132>`__)
+- Remove level 2 headings from API docs (`#135 <https://github.com/fatiando/choclo/pull/135>`__)
+- Make the README banner the h1 element (`#167 <https://github.com/fatiando/choclo/pull/167>`__)
+- General improvements to install and version compatibility pages (`#168 <https://github.com/fatiando/choclo/pull/168>`__)
+- Add link to the AUTHORS file in the docs navigation (`#169 <https://github.com/fatiando/choclo/pull/169>`__)
+- Add a link to the AI policy of Fatiando ecosystem (`#183 <https://github.com/fatiando/choclo/pull/183>`__)
+
+
+Breaking changes:
+
+- Drop support for Python 3.8 and add Python 3.13 (`#131 <https://github.com/fatiando/choclo/pull/131>`__)
+- Drop support for Python 3.9 and 3.10 (`#187 <https://github.com/fatiando/choclo/pull/187>`__)
+
+Maintenance:
+
+- Use ``-e`` option globally in ``docs.yml`` (`#127 <https://github.com/fatiando/choclo/pull/127>`__)
+- Move coverage.py configuration to pyproject.toml (`#128 <https://github.com/fatiando/choclo/pull/128>`__)
+- Pin third-party GitHub Actions to a commit hash (`#129 <https://github.com/fatiando/choclo/pull/129>`__)
+- Move to a src layout (`#130 <https://github.com/fatiando/choclo/pull/130>`__)
+- Update pypi-publish GitHub Action to v1.13.0 (`#140 <https://github.com/fatiando/choclo/pull/140>`__)
+- Remove unused variables in test functions (`#144 <https://github.com/fatiando/choclo/pull/144>`__)
+- Use ``src/choclo`` as source in coverage configuration (`#145 <https://github.com/fatiando/choclo/pull/145>`__)
+- Ignore division by zero warning in point test (`#143 <https://github.com/fatiando/choclo/pull/143>`__)
+- Fix upload of coverage report to codecov (`#147 <https://github.com/fatiando/choclo/pull/147>`__)
+- Allow zizmor’s ref-pinning of first-party actions (`#156 <https://github.com/fatiando/choclo/pull/156>`__)
+- Use ``codecov`` environment in GitHub Action (`#160 <https://github.com/fatiando/choclo/pull/160>`__)
+- Replace Codecov for custom HTML report in Actions (`#162 <https://github.com/fatiando/choclo/pull/162>`__)
+- Remove the ``.codecov.yml`` file (`#163 <https://github.com/fatiando/choclo/pull/163>`__)
+- Remove CITATION.rst of the main page (`#170 <https://github.com/fatiando/choclo/pull/170>`__)
+- Add Arthur as an author of the project (`#171 <https://github.com/fatiando/choclo/pull/171>`__)
+- Fix cache poisoning vulnerability in GitHub Actions (`#172 <https://github.com/fatiando/choclo/pull/172>`__)
+- Fix Ruff complain about use of ``datetime.date.today()`` (`#178 <https://github.com/fatiando/choclo/pull/178>`__)
+- Pin linters and update them through dependabot (`#181 <https://github.com/fatiando/choclo/pull/181>`__)
+- Add Arthur in the author’s list (`#184 <https://github.com/fatiando/choclo/pull/184>`__)
+- Fix variable type in dependabot configuration (`#182 <https://github.com/fatiando/choclo/pull/182>`__)
+- Fix bash configuration in Action workflows (`#188 <https://github.com/fatiando/choclo/pull/188>`__)
+- Autofix Ruff warnings (`#189 <https://github.com/fatiando/choclo/pull/189>`__)
+- Address deprecation warning for pytest class scope (`#190 <https://github.com/fatiando/choclo/pull/190>`__)
+- Let dependabot manage linters in ``environment.yml`` (`#186 <https://github.com/fatiando/choclo/pull/186>`__)
+
+
+This release contains contributions from:
+
+- Santiago Soler
+- Leonardo Uieda
+- Arthur Siqueira-Macedo
+
+
 Version 0.3.2
 -------------
 
