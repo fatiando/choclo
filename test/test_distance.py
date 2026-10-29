@@ -32,14 +32,14 @@ class TestDistanceSpherical:
     Tests for distance_spherical
     """
 
-    @pytest.fixture(scope="class")
+    @pytest.fixture
     def point_equator(self):
         """
         Define a point in the equator of a sphere of radius 2
         """
         return (45, 0, 2)
 
-    @pytest.fixture(scope="class", params=[90, -90])
+    @pytest.fixture(params=[90, -90])
     def point_pole(self, request):
         """
         Define a point in the equator of a sphere of radius 2
@@ -47,14 +47,14 @@ class TestDistanceSpherical:
         latitude = request.param
         return (45, latitude, 2)
 
-    @pytest.fixture(scope="class")
+    @pytest.fixture
     def point_a(self):
         """
         Define a sample point in spherical coordinates
         """
         return 35.6, -40.8, 10.3
 
-    @pytest.fixture(scope="class")
+    @pytest.fixture
     def point_b(self):
         """
         Define a sample point in spherical coordinates
