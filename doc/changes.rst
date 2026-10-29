@@ -63,6 +63,7 @@ This release contains contributions from:
 - Santiago Soler
 - Leonardo Uieda
 - Arthur Siqueira-Macedo
+- Alejandro Vargas
 
 
 Version 0.3.2
