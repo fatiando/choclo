@@ -95,7 +95,7 @@ class TestSymmetryBe:
             [
                 magnetic_e(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_top.ravel()
+                    easting.ravel(), northing.ravel(), upward_top.ravel(), strict=False
                 )
             ]
         )
@@ -103,7 +103,10 @@ class TestSymmetryBe:
             [
                 magnetic_e(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_bottom.ravel()
+                    easting.ravel(),
+                    northing.ravel(),
+                    upward_bottom.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -145,7 +148,10 @@ class TestSymmetryBe:
             [
                 magnetic_e(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing_north.ravel(), upward.ravel()
+                    easting.ravel(),
+                    northing_north.ravel(),
+                    upward.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -153,7 +159,10 @@ class TestSymmetryBe:
             [
                 magnetic_e(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing_south.ravel(), upward.ravel()
+                    easting.ravel(),
+                    northing_south.ravel(),
+                    upward.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -195,7 +204,7 @@ class TestSymmetryBe:
             [
                 magnetic_e(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting_east.ravel(), northing.ravel(), upward.ravel()
+                    easting_east.ravel(), northing.ravel(), upward.ravel(), strict=False
                 )
             ]
         )
@@ -203,7 +212,7 @@ class TestSymmetryBe:
             [
                 magnetic_e(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting_west.ravel(), northing.ravel(), upward.ravel()
+                    easting_west.ravel(), northing.ravel(), upward.ravel(), strict=False
                 )
             ]
         )
@@ -231,13 +240,13 @@ class TestSymmetryBe:
         b_e_east = np.array(
             [
                 magnetic_e(e, n, u, *sample_dipole, *magnetic_moment_east)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         b_e_west = np.array(
             [
                 magnetic_e(e, n, u, *sample_dipole, *magnetic_moment_west)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         # Check if the sign gets inverted
@@ -283,7 +292,7 @@ class TestSymmetryBn:
             [
                 magnetic_n(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_top.ravel()
+                    easting.ravel(), northing.ravel(), upward_top.ravel(), strict=False
                 )
             ]
         )
@@ -291,7 +300,10 @@ class TestSymmetryBn:
             [
                 magnetic_n(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_bottom.ravel()
+                    easting.ravel(),
+                    northing.ravel(),
+                    upward_bottom.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -333,7 +345,10 @@ class TestSymmetryBn:
             [
                 magnetic_n(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing_north.ravel(), upward.ravel()
+                    easting.ravel(),
+                    northing_north.ravel(),
+                    upward.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -341,7 +356,10 @@ class TestSymmetryBn:
             [
                 magnetic_n(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing_south.ravel(), upward.ravel()
+                    easting.ravel(),
+                    northing_south.ravel(),
+                    upward.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -383,7 +401,7 @@ class TestSymmetryBn:
             [
                 magnetic_n(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting_east.ravel(), northing.ravel(), upward.ravel()
+                    easting_east.ravel(), northing.ravel(), upward.ravel(), strict=False
                 )
             ]
         )
@@ -391,7 +409,7 @@ class TestSymmetryBn:
             [
                 magnetic_n(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting_west.ravel(), northing.ravel(), upward.ravel()
+                    easting_west.ravel(), northing.ravel(), upward.ravel(), strict=False
                 )
             ]
         )
@@ -419,13 +437,13 @@ class TestSymmetryBn:
         b_n_north = np.array(
             [
                 magnetic_n(e, n, u, *sample_dipole, *magnetic_moment_north)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         b_n_south = np.array(
             [
                 magnetic_n(e, n, u, *sample_dipole, *magnetic_moment_south)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         # Check if the sign gets inverted
@@ -471,7 +489,7 @@ class TestSymmetryBu:
             [
                 magnetic_u(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_top.ravel()
+                    easting.ravel(), northing.ravel(), upward_top.ravel(), strict=False
                 )
             ]
         )
@@ -479,7 +497,10 @@ class TestSymmetryBu:
             [
                 magnetic_u(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing.ravel(), upward_bottom.ravel()
+                    easting.ravel(),
+                    northing.ravel(),
+                    upward_bottom.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -521,7 +542,10 @@ class TestSymmetryBu:
             [
                 magnetic_u(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing_north.ravel(), upward.ravel()
+                    easting.ravel(),
+                    northing_north.ravel(),
+                    upward.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -529,7 +553,10 @@ class TestSymmetryBu:
             [
                 magnetic_u(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting.ravel(), northing_south.ravel(), upward.ravel()
+                    easting.ravel(),
+                    northing_south.ravel(),
+                    upward.ravel(),
+                    strict=False,
                 )
             ]
         )
@@ -571,7 +598,7 @@ class TestSymmetryBu:
             [
                 magnetic_u(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting_east.ravel(), northing.ravel(), upward.ravel()
+                    easting_east.ravel(), northing.ravel(), upward.ravel(), strict=False
                 )
             ]
         )
@@ -579,7 +606,7 @@ class TestSymmetryBu:
             [
                 magnetic_u(e, n, u, *sample_dipole, *magnetic_moment)
                 for e, n, u in zip(
-                    easting_west.ravel(), northing.ravel(), upward.ravel()
+                    easting_west.ravel(), northing.ravel(), upward.ravel(), strict=False
                 )
             ]
         )
@@ -607,13 +634,13 @@ class TestSymmetryBu:
         b_u_up = np.array(
             [
                 magnetic_u(e, n, u, *sample_dipole, *magnetic_moment_up)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         b_u_down = np.array(
             [
                 magnetic_u(e, n, u, *sample_dipole, *magnetic_moment_down)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         # Check if the sign gets inverted
@@ -639,7 +666,7 @@ class TestMagneticField:
         b = np.array(
             [
                 magnetic_field(e, n, u, *sample_dipole, *sample_magnetic_moment)
-                for e, n, u in zip(*sample_3d_grid)
+                for e, n, u in zip(*sample_3d_grid, strict=False)
             ]
         )
         b_e, b_n, b_u = tuple(b[:, i] for i in range(3))
@@ -647,19 +674,19 @@ class TestMagneticField:
         b_e_expected = np.array(
             [
                 magnetic_e(e, n, u, *sample_dipole, *sample_magnetic_moment)
-                for e, n, u in zip(*sample_3d_grid)
+                for e, n, u in zip(*sample_3d_grid, strict=False)
             ]
         )
         b_n_expected = np.array(
             [
                 magnetic_n(e, n, u, *sample_dipole, *sample_magnetic_moment)
-                for e, n, u in zip(*sample_3d_grid)
+                for e, n, u in zip(*sample_3d_grid, strict=False)
             ]
         )
         b_u_expected = np.array(
             [
                 magnetic_u(e, n, u, *sample_dipole, *sample_magnetic_moment)
-                for e, n, u in zip(*sample_3d_grid)
+                for e, n, u in zip(*sample_3d_grid, strict=False)
             ]
         )
         npt.assert_allclose(b_e, b_e_expected)
@@ -689,13 +716,13 @@ class TestDivergenceOfB:
         b_e = np.array(
             [
                 magnetic_e(e, n, u, *dipole, *magnetic_moment)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         b_e_shifted = np.array(
             [
                 magnetic_e(e, n, u, *dipole, *magnetic_moment)
-                for e, n, u in zip(easting_shifted, northing, upward)
+                for e, n, u in zip(easting_shifted, northing, upward, strict=False)
             ]
         )
         # Compute b_ee
@@ -714,13 +741,13 @@ class TestDivergenceOfB:
         b_n = np.array(
             [
                 magnetic_n(e, n, u, *dipole, *magnetic_moment)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         b_n_shifted = np.array(
             [
                 magnetic_n(e, n, u, *dipole, *magnetic_moment)
-                for e, n, u in zip(easting, northing_shifted, upward)
+                for e, n, u in zip(easting, northing_shifted, upward, strict=False)
             ]
         )
         # Compute b_nn
@@ -739,13 +766,13 @@ class TestDivergenceOfB:
         b_u = np.array(
             [
                 magnetic_u(e, n, u, *dipole, *magnetic_moment)
-                for e, n, u in zip(easting, northing, upward)
+                for e, n, u in zip(easting, northing, upward, strict=False)
             ]
         )
         b_u_shifted = np.array(
             [
                 magnetic_u(e, n, u, *dipole, *magnetic_moment)
-                for e, n, u in zip(easting, northing, upward_shifted)
+                for e, n, u in zip(easting, northing, upward_shifted, strict=False)
             ]
         )
         # Compute b_uu
