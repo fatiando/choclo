@@ -419,7 +419,7 @@ class TestSymmetryGravityE:
         # Compute gravity_e on every observation point of northing-upward plane
         g_e = [
             gravity_e(e, n, u, *sample_prism, sample_density)
-            for e, n, u in zip(*coords_in_northing_upward_plane)
+            for e, n, u in zip(*coords_in_northing_upward_plane, strict=False)
         ]
         # Compute gravity_e on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
@@ -440,13 +440,13 @@ class TestSymmetryGravityE:
         g_e_west = np.array(
             [
                 gravity_e(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*west)
+                for e, n, u in zip(*west, strict=False)
             ]
         )
         g_e_east = np.array(
             [
                 gravity_e(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*east)
+                for e, n, u in zip(*east, strict=False)
             ]
         )
         npt.assert_allclose(g_e_west, -g_e_east)
@@ -572,7 +572,7 @@ class TestSymmetryGravityN:
         # Compute gravity_n on every observation point of easting-upward plane
         g_n = [
             gravity_n(e, n, u, *sample_prism, sample_density)
-            for e, n, u in zip(*coords_in_easting_upward_plane)
+            for e, n, u in zip(*coords_in_easting_upward_plane, strict=False)
         ]
         # Compute gravity_n on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
@@ -593,13 +593,13 @@ class TestSymmetryGravityN:
         g_n_south = np.array(
             [
                 gravity_n(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*south)
+                for e, n, u in zip(*south, strict=False)
             ]
         )
         g_n_north = np.array(
             [
                 gravity_n(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*north)
+                for e, n, u in zip(*north, strict=False)
             ]
         )
         npt.assert_allclose(g_n_south, -g_n_north)
@@ -726,7 +726,7 @@ class TestSymmetryGravityU:
         # plane
         g_u = [
             gravity_u(e, n, u, *sample_prism, sample_density)
-            for e, n, u in zip(*coords_in_easting_northing_plane)
+            for e, n, u in zip(*coords_in_easting_northing_plane, strict=False)
         ]
         # Compute gravity_u on a point slightly shifted from the prism center
         # (it will be our control for non-zero field)
@@ -747,11 +747,14 @@ class TestSymmetryGravityU:
         g_u_bottom = np.array(
             [
                 gravity_u(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*bottom)
+                for e, n, u in zip(*bottom, strict=False)
             ]
         )
         g_u_top = np.array(
-            [gravity_u(e, n, u, *sample_prism, sample_density) for e, n, u in zip(*top)]
+            [
+                gravity_u(e, n, u, *sample_prism, sample_density)
+                for e, n, u in zip(*top, strict=False)
+            ]
         )
         npt.assert_allclose(g_u_bottom, -g_u_top)
 
@@ -1088,19 +1091,19 @@ class TestLaplacian:
         g_ee = np.array(
             [
                 gravity_ee(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*sample_observation_points)
+                for e, n, u in zip(*sample_observation_points, strict=False)
             ]
         )
         g_nn = np.array(
             [
                 gravity_nn(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*sample_observation_points)
+                for e, n, u in zip(*sample_observation_points, strict=False)
             ]
         )
         g_uu = np.array(
             [
                 gravity_uu(e, n, u, *sample_prism, sample_density)
-                for e, n, u in zip(*sample_observation_points)
+                for e, n, u in zip(*sample_observation_points, strict=False)
             ]
         )
         if left_component == "g_ee":
@@ -1385,7 +1388,8 @@ class TestDiagonalTensorSingularities:
             a.ravel() for a in np.meshgrid([west, east], [south, north], [bottom, top])
         )
         results = [
-            function(e, n, u, *prism, density) for (e, n, u) in zip(*coordinates)
+            function(e, n, u, *prism, density)
+            for (e, n, u) in zip(*coordinates, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -1406,7 +1410,7 @@ class TestDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_ee(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
         # Define observation points on edges parallel to upward
@@ -1418,7 +1422,7 @@ class TestDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_ee(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -1439,7 +1443,7 @@ class TestDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_nn(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
         # Define observation points on edges parallel to upward
@@ -1451,7 +1455,7 @@ class TestDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_nn(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -1472,7 +1476,7 @@ class TestDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_uu(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
         # Define observation points on edges parallel to northing
@@ -1484,7 +1488,7 @@ class TestDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_ee(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -1505,11 +1509,11 @@ class TestDiagonalTensorSingularities:
         west_face = np.full_like(northing, west)
         result_east_face = [
             gravity_ee(e, n, u, *prism, density)
-            for (e, n, u) in zip(east_face, northing, upward)
+            for (e, n, u) in zip(east_face, northing, upward, strict=False)
         ]
         result_west_face = [
             gravity_ee(e, n, u, *prism, density)
-            for (e, n, u) in zip(west_face, northing, upward)
+            for (e, n, u) in zip(west_face, northing, upward, strict=False)
         ]
         npt.assert_allclose(result_east_face, result_west_face)
 
@@ -1581,11 +1585,11 @@ class TestDiagonalTensorSingularities:
         north_face = np.full_like(easting, north)
         result_north_face = [
             gravity_nn(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, north_face, upward)
+            for (e, n, u) in zip(easting, north_face, upward, strict=False)
         ]
         result_south_face = [
             gravity_nn(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, south_face, upward)
+            for (e, n, u) in zip(easting, south_face, upward, strict=False)
         ]
         npt.assert_allclose(result_north_face, result_south_face)
 
@@ -1606,11 +1610,11 @@ class TestDiagonalTensorSingularities:
         bottom_face = np.full_like(easting, bottom)
         result_top_face = [
             gravity_uu(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, top_face)
+            for (e, n, u) in zip(easting, northing, top_face, strict=False)
         ]
         result_bottom_face = [
             gravity_uu(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, bottom_face)
+            for (e, n, u) in zip(easting, northing, bottom_face, strict=False)
         ]
         npt.assert_allclose(result_top_face, result_bottom_face)
 
@@ -1647,7 +1651,8 @@ class TestNonDiagonalTensorSingularities:
             a.ravel() for a in np.meshgrid([west, east], [south, north], [bottom, top])
         )
         results = [
-            function(e, n, u, *prism, density) for (e, n, u) in zip(*coordinates)
+            function(e, n, u, *prism, density)
+            for (e, n, u) in zip(*coordinates, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -1668,7 +1673,7 @@ class TestNonDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_en(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -1689,7 +1694,7 @@ class TestNonDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_eu(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -1710,6 +1715,6 @@ class TestNonDiagonalTensorSingularities:
         )  # put points in the center of the edge
         results = [
             gravity_nu(e, n, u, *prism, density)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()

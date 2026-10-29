@@ -128,7 +128,7 @@ class TestSymmetryPotential:
         # Evaluate gravity_pot on every observation point
         potential = tuple(
             gravity_pot(*coords, *sample_point_source, sample_mass)
-            for coords in zip(*observation_points)
+            for coords in zip(*observation_points, strict=False)
         )
         # Check if all values are equal
         npt.assert_allclose(potential[0], potential)
@@ -225,7 +225,7 @@ class TestSymmetryGravityE:
         g_e = np.array(
             [
                 gravity_e(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_northing_upward_plane)
+                for coords in zip(*coords_northing_upward_plane, strict=False)
             ]
         )
         assert (g_e <= 1e-30).all()
@@ -238,13 +238,13 @@ class TestSymmetryGravityE:
         g_e_1 = np.array(
             [
                 gravity_e(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_1)
+                for coords in zip(*coords_1, strict=False)
             ]
         )
         g_e_2 = np.array(
             [
                 gravity_e(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_2)
+                for coords in zip(*coords_2, strict=False)
             ]
         )
         npt.assert_allclose(g_e_1, -g_e_2)
@@ -302,7 +302,7 @@ class TestSymmetryGravityN:
         g_n = np.array(
             [
                 gravity_n(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_easting_upward_plane)
+                for coords in zip(*coords_easting_upward_plane, strict=False)
             ]
         )
         assert (g_n <= 1e-30).all()
@@ -315,13 +315,13 @@ class TestSymmetryGravityN:
         g_n_1 = np.array(
             [
                 gravity_n(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_1)
+                for coords in zip(*coords_1, strict=False)
             ]
         )
         g_n_2 = np.array(
             [
                 gravity_n(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_2)
+                for coords in zip(*coords_2, strict=False)
             ]
         )
         npt.assert_allclose(g_n_1, -g_n_2)
@@ -379,7 +379,7 @@ class TestSymmetryGravityU:
         g_u = np.array(
             [
                 gravity_u(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_easting_northing_plane)
+                for coords in zip(*coords_easting_northing_plane, strict=False)
             ]
         )
         assert (g_u <= 1e-30).all()
@@ -392,13 +392,13 @@ class TestSymmetryGravityU:
         g_u_1 = np.array(
             [
                 gravity_u(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_1)
+                for coords in zip(*coords_1, strict=False)
             ]
         )
         g_u_2 = np.array(
             [
                 gravity_u(*coords, *sample_point_source, sample_mass)
-                for coords in zip(*coords_2)
+                for coords in zip(*coords_2, strict=False)
             ]
         )
         npt.assert_allclose(g_u_1, -g_u_2)
@@ -749,7 +749,7 @@ def compute_kernel_points(coordinates, source, kernel):
     result = np.array(
         [
             kernel(e, n, u, *source, distance_cartesian(e, n, u, *source))
-            for e, n, u in zip(*coordinates)
+            for e, n, u in zip(*coordinates, strict=False)
         ]
     )
     return result
@@ -854,19 +854,19 @@ class TestLaplacian:
         g_ee = np.array(
             [
                 gravity_ee(e, n, u, *sample_point_source, sample_mass)
-                for e, n, u in zip(*sample_observation_points)
+                for e, n, u in zip(*sample_observation_points, strict=False)
             ]
         )
         g_nn = np.array(
             [
                 gravity_nn(e, n, u, *sample_point_source, sample_mass)
-                for e, n, u in zip(*sample_observation_points)
+                for e, n, u in zip(*sample_observation_points, strict=False)
             ]
         )
         g_uu = np.array(
             [
                 gravity_uu(e, n, u, *sample_point_source, sample_mass)
-                for e, n, u in zip(*sample_observation_points)
+                for e, n, u in zip(*sample_observation_points, strict=False)
             ]
         )
         # Set an atol to avoid getting failures when comparing values close to
