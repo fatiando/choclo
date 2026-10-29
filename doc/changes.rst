@@ -8,6 +8,8 @@ Version 0.4.0
 
 Released on: 2026/10/29
 
+doi: https://doi.org/10.5281/zenodo.23780112
+
 New features:
 
 - Add third derivatives of the inverse distance function (`#134 <https://github.com/fatiando/choclo/pull/134>`__)
