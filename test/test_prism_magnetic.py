@@ -126,7 +126,10 @@ def evaluate(forward_func, coordinates, prism, magnetization):
     """
     coordinates = tuple(c.ravel() for c in coordinates)
     result = np.array(
-        [forward_func(e, n, u, *prism, *magnetization) for e, n, u in zip(*coordinates)]
+        [
+            forward_func(e, n, u, *prism, *magnetization)
+            for e, n, u in zip(*coordinates, strict=False)
+        ]
     )
     return result
 
@@ -773,7 +776,7 @@ class TestMagneticFieldSingularities:
         magnetization = np.array([1.0, 1.0, 1.0])
         results = [
             forward_func(e, n, u, *sample_prism, *magnetization)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -789,7 +792,7 @@ class TestMagneticFieldSingularities:
         magnetization = np.array([1.0, 1.0, 1.0])
         results = [
             forward_func(e, n, u, *sample_prism, *magnetization)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -802,7 +805,7 @@ class TestMagneticFieldSingularities:
         magnetization = np.array([1.0, 1.0, 1.0])
         results = [
             forward_func(e, n, u, *sample_prism, *magnetization)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         assert np.isnan(results).all()
 
@@ -825,12 +828,12 @@ class TestMagneticFieldSingularities:
             index = component_mapping[direction]
             results = [
                 forward_func(e, n, u, *sample_prism, *magnetization)[index]
-                for (e, n, u) in zip(easting, northing, upward)
+                for (e, n, u) in zip(easting, northing, upward, strict=False)
             ]
         else:
             results = [
                 forward_func(e, n, u, *sample_prism, *magnetization)
-                for (e, n, u) in zip(easting, northing, upward)
+                for (e, n, u) in zip(easting, northing, upward, strict=False)
             ]
         npt.assert_allclose(results, results[0])
 
@@ -858,7 +861,7 @@ class TestMagneticFieldSingularities:
         magnetization = np.array([1.0, 1.0, 1.0])
         results = [
             forward_func(e, n, u, *sample_prism, *magnetization)
-            for (e, n, u) in zip(easting, northing, upward)
+            for (e, n, u) in zip(easting, northing, upward, strict=False)
         ]
         npt.assert_allclose(-results[0], results[1:], atol=1e-23)
 
