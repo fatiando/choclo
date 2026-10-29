@@ -12,8 +12,7 @@ import choclo
 # -----------------------------------------------------------------------------
 project = "Choclo"
 copyright = (
-    f"{datetime.datetime.now(tz=datetime.timezone.utc).date().year}, "
-    f"The {project} Developers"
+    f"{datetime.datetime.now(tz=datetime.UTC).date().year}, The {project} Developers"
 )
 is_dev_version = len(choclo.__version__.split(".")) > 3
 version = "dev" if is_dev_version else choclo.__version__
