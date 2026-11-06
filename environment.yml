@@ -2,7 +2,7 @@ name: choclo
 channels:
   - conda-forge
 dependencies:
-  - python==3.12
+  - python==3.15
   - pip
   - make
   # Run
@@ -16,11 +16,11 @@ dependencies:
   - pytest-cov
   - coverage
   # Documentation
-  - sphinx==7.2.*
-  - numpydoc==1.7.*
-  - sphinx-book-theme==1.1.*
+  - sphinx==9.2.*
+  - numpydoc==1.11.*
+  - sphinx-book-theme==1.4.0
   - sphinx-copybutton==0.5.*
-  - sphinx-design==0.5.*
+  - sphinx-design==0.7.*
   - jupyter-sphinx==0.5.*
   - matplotlib
   # Style
