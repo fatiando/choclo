@@ -45,7 +45,6 @@ def distance_cartesian(
     .. math::
 
         d = \sqrt{(x_p - x_q)^2 + (y_p - y_q)^2 + (z_p - z_q)^2}
-
     """
     distance = np.sqrt(
         (easting_p - easting_q) ** 2

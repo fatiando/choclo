@@ -750,6 +750,18 @@ def _safe_atan2(y, x):
     of the prism. This modified function has been defined according to
     [Fukushima2020]_.
 
+    Parameters
+    ----------
+    y : float
+        The numerator of the arc-tangent.
+    x : float
+        The denominator of the arc-tangent.
+
+    Returns
+    -------
+    atan : float
+        The arc-tangent of y/x.
+
     Notes
     -----
 
