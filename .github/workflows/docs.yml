@@ -2,14 +2,16 @@
 
 name: docs
 
-# Only build on PRs and pushes to the main branch. Pushes to branches will only
-# be built when a PR is opened. This avoids duplicated buids in PRs comming
-# from branches in the origin repository (1 for PR and 1 for push).
+# Don't build on pushes to main because publish.yml will already do it.
 on:
   pull_request:
-  push:
-    branches:
-      - main
+    paths:
+      - doc/**
+      - src/**
+      - pyproject.toml
+      - env/requirements-build.txt
+      - env/requirements-docs.txt
+      - .github/workflows/docs.yml
 
 # Use bash by default in all jobs
 defaults:
