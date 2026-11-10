@@ -25,5 +25,5 @@ dependencies:
   - matplotlib
   # Style
   - ruff==0.16.*
-  - burocrata==0.2.*
+  - burocrata==0.3.*
   - zizmor==1.30.*
