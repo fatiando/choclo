@@ -2,11 +2,16 @@
 
 name: test
 
-# Only test on PRs and pushes to the main branch. Pushes to branches will only
-# be built when a PR is opened. This avoids duplicated buids in PRs comming
-# from branches in the origin repository (1 for PR and 1 for push).
+# Only run on main or when relevant sources where edited in PRs.
 on:
   pull_request:
+    paths:
+      - src/**
+      - test/**
+      - pyproject.toml
+      - env/requirements-build.txt
+      - env/requirements-test.txt
+      - .github/workflows/test.yml
   push:
     branches:
       - main
