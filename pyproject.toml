@@ -112,6 +112,23 @@ ignore = [
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
 
+[tool.numpydoc_validation]
+checks = [
+    "all",   # report on all checks, except the below
+    "EX01",  # mandatory examples section
+    "SA01",  # mandatory see also section
+    "YD01",  # mandatory yields section
+    "RT02",  # first line of returns should have only the type
+    "ES01",  # mandatory extended summary
+]
+exclude = [  # don't report on objects that match any of these regex
+    '\.__str__$',
+    '\.__repr__$',
+]
+exclude_files = [ # don't process filepaths that match these regex
+    'src.*_version.py',
+]
+
 [tool.coverage.run]
 source = ["src/choclo"]
 omit = [
