@@ -17,7 +17,7 @@ Gravity
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     point.gravity_pot
     point.gravity_e
@@ -34,7 +34,7 @@ Magnetic
 ^^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     dipole.magnetic_e
     dipole.magnetic_n
@@ -47,7 +47,7 @@ Kernels
 These are derivatives of the inverse distance function :math:`\frac{1}{r}`.
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     point.kernel_pot
     point.kernel_e
@@ -81,7 +81,7 @@ Gravity
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.gravity_pot
     prism.gravity_e
@@ -98,7 +98,7 @@ Magnetic
 ^^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.magnetic_field
     prism.magnetic_e
@@ -115,7 +115,7 @@ Kernels
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.kernel_pot
     prism.kernel_e
@@ -128,6 +128,18 @@ Kernels
     prism.kernel_eu
     prism.kernel_nu
 
+Legendre functions
+~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+    :toctree: generated/
+
+    legendre.associated_function
+    legendre.associated_function_derivative
+    legendre.associated_function_schmidt
+    legendre.associated_function_schmidt_derivative
+    legendre.associated_function_fully
+    legendre.associated_function_fully_derivative
 
 Euclidean distances
 ~~~~~~~~~~~~~~~~~~~
@@ -136,7 +148,7 @@ Functions to compute Euclidean distance in Cartesian and spherical
 coordinates:
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     utils.distance_cartesian
     utils.distance_spherical
@@ -149,7 +161,7 @@ Universal Constants
 Universal physical constants given in SI units:
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     constants.GRAVITATIONAL_CONST
     constants.VACUUM_MAGNETIC_PERMEABILITY
