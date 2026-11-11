@@ -27,6 +27,9 @@ updates:
       - dependency-name: "burocrata"
         update-types:
           - "version-update:semver-minor"
+      - dependency-name: "numpydoc"
+        update-types:
+          - "version-update:semver-minor"
 
   - package-ecosystem: "conda"
     directory: "/"
@@ -42,5 +45,8 @@ updates:
         update-types:
           - "version-update:semver-minor"
       - dependency-name: "burocrata"
+        update-types:
+          - "version-update:semver-minor"
+      - dependency-name: "numpydoc"
         update-types:
           - "version-update:semver-minor"
