@@ -138,9 +138,9 @@ coordinates:
 .. autosummary::
    :toctree: generated/
 
-    utils.distance_cartesian
-    utils.distance_spherical
-    utils.distance_spherical_core
+    distance.distance_cartesian
+    distance.distance_spherical
+    distance.distance_spherical_core
 
 
 Universal Constants

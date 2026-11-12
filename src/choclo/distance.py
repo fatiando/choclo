@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Utility functions for the kernel and forward modelling functions.
+Functions to compute Euclidean distance in Cartesian and spherical coordinates.
 """
 
 import numpy as np
