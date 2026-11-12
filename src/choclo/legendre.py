@@ -94,49 +94,6 @@ def associated_function(x, max_degree, p):
     References
     ----------
     [Alken2022]_
-
-    Examples
-    --------
-    Let's calculate and plot the function up to degree 3:
-
-    .. jupyter-execute::
-
-        import numpy as np
-        import matplotlib.pyplot as plt
-        from choclo import legendre
-
-        x = np.linspace(-1, 1, 50)
-        max_degree = 3
-
-    Since our function calculates :math:`P_n^m` for a single :math:`x`, we can
-    make a 3D array with the first dimension representing x and fill it out in
-    a loop:
-
-    .. jupyter-execute::
-
-        p = np.zeros((x.size, max_degree + 1, max_degree + 1))
-        for i, value in enumerate(x):
-            legendre.associated_function(value, max_degree, p[i])
-
-    Now we can plot the functions by slicing them at the desired degree and
-    order:
-
-    .. jupyter-execute::
-
-        plt.figure(figsize=(8, 4), layout="constrained")
-        for n in range(max_degree + 1):
-            for m in range(n + 1):
-                plt.plot(x, p[:, n, m], label=f"$P_{n}^{m}$")
-        plt.legend(ncols=3)
-        plt.xlabel("x")
-        plt.xlim(-1, 1)
-        maxabs = np.abs(p).max()
-        plt.ylim(-maxabs, maxabs)
-        plt.grid()
-        plt.show()
-
-    Notice how the amplitude of the function tends to increase with the degree
-    :math:`n`. This is why we recommend using the normalized functions instead.
     """
     u = np.sqrt((1 - x) * (1 + x))
     p[0, 0] = 1
@@ -291,19 +248,19 @@ def associated_function_derivative(max_degree, p, dp):
 
 @numba.jit(nopython=True)
 def associated_function_schmidt(x, max_degree, p):
-    """
+    r"""
     Schmidt-normalized associated Legendre functions up to a maximum degree.
 
     The associated Legendre functions functions :math:`P_n^m(x)` are solutions
-    to Legendre's equation. Here, :math:`n` is the degree and :math:`m` is the
-    order. The Schmidt normalization is applied to the functions to constrain
-    their value range and avoid overflows. This normalization if often used in
-    geomagnetic field models.
+    to Legendre's equation, with :math:`n` (the degree) and :math:`m` (the
+    order) being integers and :math:`0 \le m \le n`. The Schmidt normalization
+    is applied to the functions to constrain their value range and avoid
+    overflows. This normalization if often used in geomagnetic field models.
 
     We calculate their values using the recursive relations defined in
-    [Alken2022]_. Hence, it's not possible to calculate only the values for a
-    specific degree and order. All values up to the desired degree are always
-    calculated.
+    [Alken2022]_. Being recursive, it's not possible to calculate only the
+    values for a specific degree and order. All values up to the desired degree
+    are always calculated.
 
     Parameters
     ----------
@@ -320,10 +277,40 @@ def associated_function_schmidt(x, max_degree, p):
 
     Notes
     -----
-    Does not implement the Condon-Shortly phase element.
+    The functions :math:`P_n^m(x)` are solutions to Legendre's differential
+    equation
 
-    This function uses the scaling scheme of [Holmes2002]_ and produces accurate
-    results until degree and order 2800.
+    .. math::
+
+        \frac{d}{d x} \left[ \left(1 - x^2\right) \frac{d}{d x} P_n^m(x) \right]
+        + \left[ n (n + 1) - \frac{m^2}{1 - x^2} \right] P_n^m(x) = 0,
+
+    which has non-trivial and non-singular solutions in the [-1, 1] range when
+    :math:`n` and :math:`m` are integers and :math:`0 \le m \le n`.
+
+    In practice, their amplitudes tend to increase dramatically with the degree
+    :math:`n`, and so normalization techniques are often employed to keep
+    amplitudes to reasonable values. In geomagnetism, it's common to employ
+    Schmidt normalization
+
+    .. math::
+
+        S_n^m = \sqrt{(2 - \delta_{m,0})\dfrac{(n - m)!}{(n + m)!}},
+
+    in which :math:`\delta_{m,0}` is the `Kronecker delta function
+    <https://en.wikipedia.org/wiki/Kronecker_delta>`__. The normalization factor
+    :math:`S_n^m` multiplies the :math:`P_n^m`. In practice, the equation above
+    is not used. Instead, the Legendre function is evaluated using recursive
+    equations specifically for the normalized version.
+
+    .. note::
+
+        Does not implement the Condon-Shortly phase element.
+
+    .. note::
+
+        This function uses the scaling scheme of [Holmes2002]_ and produces accurate
+        results until degree and order 2800.
 
     References
     ----------
