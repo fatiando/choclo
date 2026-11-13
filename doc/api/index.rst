@@ -16,7 +16,7 @@ Gravity
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     point.gravity_pot
     point.gravity_e
@@ -35,7 +35,7 @@ Kernels
 These are derivatives of the inverse distance function :math:`\frac{1}{r}`.
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     point.kernel_pot
     point.kernel_e
@@ -65,7 +65,7 @@ Dipoles in Cartesian coordinates
 .. currentmodule:: choclo
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     dipole.magnetic_e
     dipole.magnetic_n
@@ -83,7 +83,7 @@ Gravity
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.gravity_pot
     prism.gravity_e
@@ -100,7 +100,7 @@ Magnetic
 ^^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.magnetic_field
     prism.magnetic_e
@@ -117,7 +117,7 @@ Kernels
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.kernel_pot
     prism.kernel_e
@@ -130,6 +130,21 @@ Kernels
     prism.kernel_eu
     prism.kernel_nu
 
+Legendre functions
+~~~~~~~~~~~~~~~~~~
+
+.. automodule:: choclo.legendre
+.. currentmodule:: choclo
+
+.. autosummary::
+    :toctree: generated/
+
+    legendre.associated_function
+    legendre.associated_function_derivative
+    legendre.associated_function_schmidt
+    legendre.associated_function_schmidt_derivative
+    legendre.associated_function_fully
+    legendre.associated_function_fully_derivative
 
 Euclidean distances
 ~~~~~~~~~~~~~~~~~~~
@@ -138,7 +153,7 @@ Euclidean distances
 .. currentmodule:: choclo
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     distance.distance_cartesian
     distance.distance_spherical
@@ -152,7 +167,7 @@ Universal Constants
 .. currentmodule:: choclo
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     constants.GRAVITATIONAL_CONST
     constants.VACUUM_MAGNETIC_PERMEABILITY

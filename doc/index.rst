@@ -151,6 +151,7 @@ provided in
 
     user_guide/how-to-use.rst
     user_guide/jacobian.rst
+    user_guide/legendre.rst
 
 .. toctree::
     :maxdepth: 1
