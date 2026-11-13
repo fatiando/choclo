@@ -12,6 +12,7 @@ on:
       - env/requirements-build.txt
       - env/requirements-docs.txt
       - .github/workflows/docs.yml
+      - Makefile
 
 # Use bash by default in all jobs
 defaults:

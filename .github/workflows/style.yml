@@ -16,6 +16,7 @@ on:
       - pyproject.toml
       - env/requirements-style.txt
       - .github/workflows/style.yml
+      - Makefile
   push:
     branches:
       - main

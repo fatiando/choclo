@@ -12,6 +12,7 @@ on:
       - env/requirements-build.txt
       - env/requirements-test.txt
       - .github/workflows/test.yml
+      - Makefile
   push:
     branches:
       - main
