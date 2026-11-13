@@ -65,7 +65,7 @@ Dipoles in Cartesian coordinates
 .. currentmodule:: choclo
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     dipole.magnetic_e
     dipole.magnetic_n
@@ -132,6 +132,9 @@ Kernels
 
 Legendre functions
 ~~~~~~~~~~~~~~~~~~
+
+.. automodule:: choclo.legendre
+.. currentmodule:: choclo
 
 .. autosummary::
     :toctree: generated/

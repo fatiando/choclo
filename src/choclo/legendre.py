@@ -121,11 +121,13 @@ def associated_function_derivative(max_degree, p, dp):
 
     of the associated Legendre function :math:`P_n^m(\cos\theta)`, with
     :math:`n` (the degree) and :math:`m` (the order) being integers and :math:`0
-    \le m \le n`. Implements the recursive relations defined in [Alken2022]_,
-    which use calculated values of :math:`P_n^m` to calculate its derivatives.
-    Since the calculations are recursive, it's not possible to calculate only
-    the values for a specific degree and order. All values up to the desired
-    degree are always calculated.
+    \le m \le n`.
+
+    Implements the recursive relations defined in [Alken2022]_, which use
+    calculated values of :math:`P_n^m` to calculate its derivatives. Since the
+    calculations are recursive, it's not possible to calculate only the values
+    for a specific degree and order. All values up to the desired degree are
+    always calculated.
 
     Higher-order derivatives can be calculated by passing the output of this
     function as the ``p`` argument in a subsequent call.
@@ -150,7 +152,7 @@ def associated_function_derivative(max_degree, p, dp):
         of :math:`P_n^m(\cos\theta)`. The rows of the array correspond to the
         degree :math:`n` and the columns to the order :math:`m`. Thus, ``p[n,
         m]`` corresponds to :math:`P_n^m(\cos\theta)`. Elements where ``m > n``
-        are ignored.
+        are ignored. See :func:`choclo.legendre.associated_function`.
     dp : numpy.array
         A 2D array with shape ``(max_degree + 1, max_degree + 1)`` that will be
         filled in place with the output values. The rows of the array correspond
@@ -186,53 +188,6 @@ def associated_function_derivative(max_degree, p, dp):
     References
     ----------
     [Alken2022]_
-
-    Examples
-    --------
-    Let's calculate and plot the derivative up to degree 3:
-
-    .. jupyter-execute::
-
-        import numpy as np
-        import matplotlib.pyplot as plt
-        from choclo import legendre
-
-        theta = np.linspace(0, 180, 50)
-        x = np.cos(np.radians(theta))
-        max_degree = 3
-
-    To calculate the derivative, we need to first calculate the :math:`P_n^m`.
-    Since our function calculates :math:`P_n^m` and its derivative for a single
-    :math:`x`, we can make a 3D array with the first dimension representing x
-    and fill it out in a loop:
-
-    .. jupyter-execute::
-
-        p = np.zeros((x.size, max_degree + 1, max_degree + 1))
-        dp = np.zeros((x.size, max_degree + 1, max_degree + 1))
-        for i, value in enumerate(x):
-            legendre.associated_function(value, max_degree, p[i])
-            legendre.associated_function_derivative(max_degree, p[i], dp[i])
-
-    Now we can plot the derivatives by slicing them at the desired degree and
-    order:
-
-    .. jupyter-execute::
-
-        plt.figure(figsize=(8, 4), layout="constrained")
-        for n in range(max_degree + 1):
-            for m in range(n + 1):
-                plt.plot(theta, dp[:, n, m], label=f"$P'_{n}^{m}$")
-        plt.legend(ncols=3)
-        plt.xlabel("theta (degrees)")
-        plt.xlim(0, 180)
-        maxabs = np.abs(dp).max()
-        plt.ylim(-maxabs, maxabs)
-        plt.grid()
-        plt.show()
-
-    Notice how the amplitude of the function tends to increase with the degree
-    :math:`n`. This is why we recommend using the normalized functions instead.
     """
     dp[0, 0] = 0
     for n in range(1, max_degree + 1):
@@ -349,45 +304,97 @@ def associated_function_schmidt(x, max_degree, p):
 @numba.jit(nopython=True)
 def associated_function_schmidt_derivative(max_degree, p, dp):
     r"""
-    Theta derivatives of Schmidt normalized associated Legendre functions.
+    Theta derivatives of the Schmidt-normalized associated Legendre functions.
 
-    Calculates the derivative:
+    Calculates the derivative
 
     .. math::
 
-        \\dfrac{\\partial P_n^m}{\\partial \\theta}(\\cos \\theta)
+        \dfrac{\partial P_n^m}{\partial\theta}(\cos\theta),
 
-    using the recursive relations defined in [Alken2022]_.
+    of the associated Legendre function :math:`P_n^m(\cos\theta)`, with
+    :math:`n` (the degree) and :math:`m` (the order) being integers and :math:`0
+    \le m \le n`. Assumes that the Legendre function is Schmidt-normalized.
+
+    Implements the recursive relations defined in [Alken2022]_, which use
+    calculated values of :math:`P_n^m` to calculate its derivatives. Since the
+    calculations are recursive, it's not possible to calculate only the values
+    for a specific degree and order. All values up to the desired degree are
+    always calculated.
 
     Higher-order derivatives can be calculated by passing the output of this
-    function as the ``p`` argument.
+    function as the ``p`` argument in a subsequent call.
+
+    The output is filled in place in the parameter ``dp`` so that the users
+    can control the memory allocation. In spherical harmonics, this function if
+    often called in a loop and so reusing memory can save computation time.
+
+    Parameters
+    ----------
+    max_degree : int
+        The maximum degree :math:`n` for the calculation.
+    p : numpy.ndarray
+        A 2D array with shape ``(max_degree + 1, max_degree + 1)`` with
+        values of the Schmidt-normalized :math:`P_n^m(\cos\theta)`. The
+        rows of the array correspond to the degree :math:`n` and the
+        columns to the order :math:`m`. Thus, ``p[n, m]`` corresponds to
+        :math:`P_n^m(\cos\theta)`. Elements where ``m > n`` are ignored. See
+        :func:`choclo.legendre.associated_function_schmidt`.
+    dp : numpy.array
+        A 2D array with shape ``(max_degree + 1, max_degree + 1)`` that will be
+        filled in place with the output values. The rows of the array correspond
+        to the degree :math:`n` and the columns to the order :math:`m`. Thus,
+        ``dp[n, m]`` corresponds to
+        :math:`\partial P_n^m(\cos\theta) / \partial\theta`. Elements
+        where ``m > n`` are not filled out and will retain their original
+        values.
+
+    Notes
+    -----
+    The functions :math:`P_n^m(x)` are solutions to Legendre's differential
+    equation
+
+    .. math::
+
+        \frac{d}{d x} \left[ \left(1 - x^2\right) \frac{d}{d x} P_n^m(x) \right]
+        + \left[ n (n + 1) - \frac{m^2}{1 - x^2} \right] P_n^m(x) = 0,
+
+    which has non-trivial and non-singular solutions in the [-1, 1] range when
+    :math:`n` and :math:`m` are integers and :math:`0 \le m \le n`.
+
+    In spherical harmonics, these functions are usually evaluated as
+    :math:`P_n^m(\cos\theta)`, in which :math:`\theta` is the geocentric
+    colatitude with range [0, 180] degrees. It's often required to know the
+    derivative of the :math:`P_n^m` with respect to :math:`\theta`, which is
+    what this function calculates.
+
+    In practice, their amplitudes tend to increase dramatically with the degree
+    :math:`n`, and so normalization techniques are often employed to keep
+    amplitudes to reasonable values. In geomagnetism, it's common to employ
+    Schmidt normalization
+
+    .. math::
+
+        S_n^m = \sqrt{(2 - \delta_{m,0})\dfrac{(n - m)!}{(n + m)!}},
+
+    in which :math:`\delta_{m,0}` is the `Kronecker delta function
+    <https://en.wikipedia.org/wiki/Kronecker_delta>`__. In practice, the
+    equation above is not used. Instead, the derivative is evaluated using
+    recursive equations specifically for the normalized version.
 
     .. note::
 
-        This function does not include the Condon-Shortly phase.
+        Does not implement the Condon-Shortly phase element.
 
     .. note::
 
         First and second order derivatives are tested against the Legendre
         differential equation and produce accurate results until degree and
-        order 2800.
-
-    Parameters
-    ----------
-    max_degree : int
-        The maximum degree for the calculation.
-    p : numpy.ndarray
-        A 2D array with the Schmidt normalized associated Legendre functions
-        calculated for :math:`\\cos\\theta`.
-    dp : numpy.array
-        An 2D array with shape ``(max_degree + 1, max_degree + 1)`` that will
-        be filled with the output values.
+        order 2800. Higher order derivatives have not been tested.
 
     References
     ----------
-    Alken, Patrick (2022). GSL Technical Report #1 - GSL-TR-001-20220827 -
-      Implementation of associated Legendre functions in GSL.
-      https://www.gnu.org/software/gsl/tr/tr001.pdf
+    [Alken2022]_
     """
     # Pre-compute square roots of integers used in the loops
     sqrt = np.sqrt(np.arange(2 * (max_degree + 1)))
@@ -410,37 +417,74 @@ def associated_function_schmidt_derivative(max_degree, p, dp):
 
 @numba.jit(nopython=True)
 def associated_function_fully(x, max_degree, p):
-    """
-    Fully normalized associated Legendre functions up to maximum degree.
+    r"""
+    Fully-normalized associated Legendre functions up to maximum degree.
 
-    The functions :math:`P_n^m` are solutions to Legendre's equation. The full
-    normalization is applied to the functions to constrain their value range.
-    This normalization if often used in gravity field models. We calculate
-    their values using the recursive relations defined in [Alken2022]_ but with
-    the definition of the normalization from Hofmann-Wellenhof and Moritz
-    (2006).
+    The associated Legendre functions functions :math:`P_n^m(x)` are solutions
+    to Legendre's equation, with :math:`n` (the degree) and :math:`m` (the
+    order) being integers and :math:`0 \le m \le n`. The full normalization
+    is applied to the functions to constrain their value range and avoid
+    overflows. This normalization if often used in gravity field models.
 
-    .. note::
-
-        This function does not include the Condon-Shortly phase.
+    We calculate their values using the recursive relations defined
+    in [Alken2022]_ but with the definition of the normalization from
+    [Hofmann-Wellenhof2006]_. Being recursive, it's not possible to calculate
+    only the values for a specific degree and order. All values up to the
+    desired degree are always calculated.
 
     Parameters
     ----------
     x : float
         The argument of :math:`P_n^m(x)`. Must be in the range [-1, 1].
     max_degree : int
-        The maximum degree for the calculation.
+        The maximum degree :math:`n` for the calculation.
     p : numpy.array
         A 2D array with shape ``(max_degree + 1, max_degree + 1)`` that will be
-        filled with the output values.
+        filled in place with the output values. The rows of the array correspond
+        to the degree :math:`n` and the columns to the order :math:`m`. Thus,
+        ``p[n, m]`` corresponds to :math:`P_n^m(x)`. Elements where ``m > n``
+        are not filled out and will retain their original values.
+
+    Notes
+    -----
+    The functions :math:`P_n^m(x)` are solutions to Legendre's differential
+    equation
+
+    .. math::
+
+        \frac{d}{d x} \left[ \left(1 - x^2\right) \frac{d}{d x} P_n^m(x) \right]
+        + \left[ n (n + 1) - \frac{m^2}{1 - x^2} \right] P_n^m(x) = 0,
+
+    which has non-trivial and non-singular solutions in the [-1, 1] range when
+    :math:`n` and :math:`m` are integers and :math:`0 \le m \le n`.
+
+    In practice, their amplitudes tend to increase dramatically with the degree
+    :math:`n`, and so normalization techniques are often employed to keep
+    amplitudes to reasonable values. In gravimetry and geodesy, it's common to
+    employ full normalization
+
+    .. math::
+
+        F_n^m = \sqrt{2(2n + 1)\dfrac{(n - m)!}{(n + m)!}},
+
+    The normalization factor :math:`F_n^m` multiplies the :math:`P_n^m`. In
+    practice, the equation above is not used. Instead, the Legendre function is
+    evaluated using recursive equations specifically for the normalized version.
+
+    .. note::
+
+        Does not implement the Condon-Shortly phase element.
+
+    .. note::
+
+        This function uses the scaling scheme of [Holmes2002]_ and produces accurate
+        results until degree and order 2800.
 
     References
     ----------
-    Alken, Patrick (2022). GSL Technical Report #1 - GSL-TR-001-20220827 -
-      Implementation of associated Legendre functions in GSL.
-      https://www.gnu.org/software/gsl/tr/tr001.pdf
-    Hofmann-Wellenhof, B., & Moritz, H. (2006). Physical Geodesy (2nd, corr.
-      ed. 2006 edition ed.). Wien; New York: Springer.
+    [Alken2022]_
+    [Holmes2002]_
+    [Hofmann-Wellenhof2006]_
     """
     u = np.sqrt((1 - x) * (1 + x))
     # Pre-compute square roots of integers used in the loops
@@ -479,38 +523,98 @@ def associated_function_fully(x, max_degree, p):
 @numba.jit(nopython=True)
 def associated_function_fully_derivative(max_degree, p, dp):
     r"""
-    Theta derivative of fully normalized associated Legendre functions.
+    Theta derivative of the fully-normalized associated Legendre functions.
 
-    Calculates the derivative:
+    Calculates the derivative
 
     .. math::
 
-        \\dfrac{\\partial P_n^m}{\\partial \\theta}(\\cos \\theta)
+        \dfrac{\partial P_n^m}{\partial\theta}(\cos\theta),
 
-    Uses the recursive relations defined in [Alken2022]_ but with the
-    definition of the normalization from Hofmann-Wellenhof and Moritz (2006).
+    of the associated Legendre function :math:`P_n^m(\cos\theta)`, with
+    :math:`n` (the degree) and :math:`m` (the order) being integers and :math:`0
+    \le m \le n`. Assumes that the Legendre function is fully-normalized.
+
+    Implements the recursive relations defined in [Alken2022]_ but with the
+    definition of the normalization from [Hofmann-Wellenhof2006]_, which use
+    calculated values of :math:`P_n^m` to calculate its derivatives. Since the
+    calculations are recursive, it's not possible to calculate only the values
+    for a specific degree and order. All values up to the desired degree are
+    always calculated.
 
     Higher-order derivatives can be calculated by passing the output of this
-    function as the ``p`` argument.
+    function as the ``p`` argument in a subsequent call.
 
-    .. note::
-
-        This function does not include the Condon-Shortly phase.
+    The output is filled in place in the parameter ``dp`` so that the users
+    can control the memory allocation. In spherical harmonics, this function if
+    often called in a loop and so reusing memory can save computation time.
 
     Parameters
     ----------
     max_degree : int
-        The maximum degree for the calculation.
+        The maximum degree :math:`n` for the calculation.
     p : numpy.ndarray
-        A 2D array with the fully normalized associated Legendre functions
-        calculated for :math:`\\cos\\theta`.
+        A 2D array with shape ``(max_degree + 1, max_degree + 1)`` with
+        values of the fully-normalized :math:`P_n^m(\cos\theta)`. The
+        rows of the array correspond to the degree :math:`n` and the
+        columns to the order :math:`m`. Thus, ``p[n, m]`` corresponds to
+        :math:`P_n^m(\cos\theta)`. Elements where ``m > n`` are ignored. See
+        :func:`choclo.legendre.associated_function_fully`.
     dp : numpy.array
         A 2D array with shape ``(max_degree + 1, max_degree + 1)`` that will be
-        filled with the output values.
+        filled in place with the output values. The rows of the array correspond
+        to the degree :math:`n` and the columns to the order :math:`m`. Thus,
+        ``dp[n, m]`` corresponds to
+        :math:`\partial P_n^m(\cos\theta) / \partial\theta`. Elements
+        where ``m > n`` are not filled out and will retain their original
+        values.
+
+    Notes
+    -----
+    The functions :math:`P_n^m(x)` are solutions to Legendre's differential
+    equation
+
+    .. math::
+
+        \frac{d}{d x} \left[ \left(1 - x^2\right) \frac{d}{d x} P_n^m(x) \right]
+        + \left[ n (n + 1) - \frac{m^2}{1 - x^2} \right] P_n^m(x) = 0,
+
+    which has non-trivial and non-singular solutions in the [-1, 1] range when
+    :math:`n` and :math:`m` are integers and :math:`0 \le m \le n`.
+
+    In spherical harmonics, these functions are usually evaluated as
+    :math:`P_n^m(\cos\theta)`, in which :math:`\theta` is the geocentric
+    colatitude with range [0, 180] degrees. It's often required to know the
+    derivative of the :math:`P_n^m` with respect to :math:`\theta`, which is
+    what this function calculates.
+
+    In practice, their amplitudes tend to increase dramatically with the degree
+    :math:`n`, and so normalization techniques are often employed to keep
+    amplitudes to reasonable values. In gravimetry and geodesy, it's common to
+    employ full normalization
+
+    .. math::
+
+        F_n^m = \sqrt{2(2n + 1)\dfrac{(n - m)!}{(n + m)!}},
+
+    The normalization factor :math:`F_n^m` multiplies the :math:`P_n^m`.
+    In practice, the equation above is not used. Instead, the derivative is
+    evaluated using recursive equations specifically for the normalized version.
+
+    .. note::
+
+        Does not implement the Condon-Shortly phase element.
+
+    .. note::
+
+        First and second order derivatives are tested against the Legendre
+        differential equation and produce accurate results until degree and
+        order 2800. Higher order derivatives have not been tested.
 
     References
     ----------
     [Alken2022]_
+    [Holmes2002]_
     [Hofmann-Wellenhof2006]_
     """
     # Pre-compute square roots of integers used in the loops
