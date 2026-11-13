@@ -13,6 +13,7 @@ import numpy.testing as npt
 import pytest
 from utils import NUMBA_IS_DISABLED
 
+from choclo.distance import distance_cartesian
 from choclo.point import (
     gravity_e,
     gravity_ee,
@@ -45,7 +46,6 @@ from choclo.point import (
     kernel_uun,
     kernel_uuu,
 )
-from choclo.utils import distance_cartesian
 
 
 @pytest.fixture(name="sample_point_source")

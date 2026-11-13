@@ -11,7 +11,7 @@ Forward modelling function for point sources.
 from numba import jit
 
 from ..constants import GRAVITATIONAL_CONST
-from ..utils import distance_cartesian
+from ..distance import distance_cartesian
 from ._kernels import (
     kernel_e,
     kernel_ee,

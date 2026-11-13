@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Kernels and forward modelling functions for magnetic dipoles.
+Forward modeling functions for magnetic dipoles in Cartesian coordinates.
 """
 
 from ._forward import magnetic_e, magnetic_field, magnetic_n, magnetic_u

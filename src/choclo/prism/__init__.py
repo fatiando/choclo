@@ -5,7 +5,11 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Kernels and forward modelling functions for rectangular prisms.
+Kernels and forward modeling functions for rectangular prisms.
+
+Includes both gravitational and magnetic fields and their derivatives for the
+right rectangular prism in Cartesian coordinates. The kernel functions used to
+model both types of field are also includes.
 """
 
 from ._gravity import (

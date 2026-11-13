@@ -4,14 +4,13 @@ List of functions and classes (API)
 ===================================
 
 .. automodule:: choclo
-
 .. currentmodule:: choclo
 
-Point sources and dipoles
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Point sources in Cartesian coordinates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Forward modeling and kernel functions for point sources and dipoles in
-**Cartesian coordinates**.
+.. automodule:: choclo.point
+.. currentmodule:: choclo
 
 Gravity
 ^^^^^^^
@@ -29,17 +28,6 @@ Gravity
     point.gravity_en
     point.gravity_eu
     point.gravity_nu
-
-Magnetic
-^^^^^^^^
-
-.. autosummary::
-    :toctree: generated/
-
-    dipole.magnetic_e
-    dipole.magnetic_n
-    dipole.magnetic_u
-    dipole.magnetic_field
 
 Kernels
 ^^^^^^^
@@ -70,12 +58,26 @@ These are derivatives of the inverse distance function :math:`\frac{1}{r}`.
     point.kernel_uun
     point.kernel_enu
 
+Dipoles in Cartesian coordinates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: choclo.dipole
+.. currentmodule:: choclo
+
+.. autosummary::
+   :toctree: generated/
+
+    dipole.magnetic_e
+    dipole.magnetic_n
+    dipole.magnetic_u
+    dipole.magnetic_field
+
 
 Rectangular Prisms
 ~~~~~~~~~~~~~~~~~~
 
-Forward modeling and kernel functions for right-rectangular prisms in
-**Cartesian coordinates**.
+.. automodule:: choclo.prism
+.. currentmodule:: choclo
 
 Gravity
 ^^^^^^^
@@ -144,21 +146,22 @@ Legendre functions
 Euclidean distances
 ~~~~~~~~~~~~~~~~~~~
 
-Functions to compute Euclidean distance in Cartesian and spherical
-coordinates:
+.. automodule:: choclo.distance
+.. currentmodule:: choclo
 
 .. autosummary::
     :toctree: generated/
 
-    utils.distance_cartesian
-    utils.distance_spherical
-    utils.distance_spherical_core
+    distance.distance_cartesian
+    distance.distance_spherical
+    distance.distance_spherical_core
 
 
 Universal Constants
 ~~~~~~~~~~~~~~~~~~~
 
-Universal physical constants given in SI units:
+.. automodule:: choclo.constants
+.. currentmodule:: choclo
 
 .. autosummary::
     :toctree: generated/
