@@ -12,8 +12,8 @@ They are solutions to Legendre's differential equation
 
 which has non-trivial and non-singular solutions in the [-1, 1] range when
 :math:`n` (the degree) and :math:`m` (the order) are integers and :math:`0 \le m
-\le n`. It's common in spherical harmonics for the Legendre functions receive
-the cossine of the colatitude :math:`\theta` as input
+\le n`. It's common in spherical harmonics for the Legendre functions to receive
+the cosine of the colatitude :math:`\theta` as input
 
 .. math::
 
@@ -55,7 +55,7 @@ calculated.
 Our functions provide their output values in an array passed as the last
 argument of the function. This removes the memory allocation of the output
 array from inside the function and allows users to control when the allocation
-happens. In spherical harmonics, it's common to calculate ALFs inside a loop
+happens. In spherical harmonics, it's common to calculate ALFs inside a loop,
 and reducing the number of unnecessary memory allocations can greatly speed up
 the implementation.
 
@@ -152,7 +152,7 @@ ALFs. The choice is more about convention between different disciplines.
 Derivatives
 -----------
 
-For spherical harmonics, the ALFs are usually functions of the cossine of the
+For spherical harmonics, the ALFs are usually functions of the cosine of the
 colatitude :math:`\theta`. For some field components, the spherical harmonic
 synthesis requires the derivative
 
@@ -190,7 +190,7 @@ order:
     plt.title("Schmidt-normalized ALF derivatives")
     for n in range(max_degree + 1):
         for m in range(n + 1):
-            plt.plot(theta, dp[:, n, m], label=f"$P'_{n}^{m}$")
+            plt.plot(theta, dp[:, n, m], label=f"$\partial_\theta P_{n}^{m}$")
     plt.legend(ncols=3)
     plt.xlabel("theta (degrees)")
     plt.xlim(0, 180)
