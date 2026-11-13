@@ -5,7 +5,11 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Kernels and forward modelling functions for point sources.
+Kernels and gravity forward modeling functions for point sources.
+
+These functions are defined in Cartesian coordinates and calculate the
+gravitational fields of point masses and the associated derivatives of the
+inverse distance function.
 """
 
 from ._forward import (
