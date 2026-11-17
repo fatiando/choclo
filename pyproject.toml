@@ -153,3 +153,8 @@ show_missing = true
 filterwarnings = [
     "error:Class-scoped fixture defined as instance method is deprecated:pytest.PytestRemovedIn10Warning",
 ]
+addopts = "--cov --doctest-modules --verbose"
+testpaths = [
+    "test",
+    "src",
+]

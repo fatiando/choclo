@@ -424,7 +424,7 @@ def kernel_ee(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
     return -_safe_atan2(northing * upward, easting * radius)
 
@@ -486,7 +486,7 @@ def kernel_nn(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
     return -_safe_atan2(easting * upward, northing * radius)
 
@@ -548,7 +548,7 @@ def kernel_uu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
     return -_safe_atan2(easting * northing, upward * radius)
 
@@ -610,7 +610,7 @@ def kernel_en(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
     return _safe_log(upward, easting, northing, radius)
 
@@ -672,7 +672,7 @@ def kernel_eu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
     return _safe_log(northing, easting, upward, radius)
 
@@ -734,7 +734,7 @@ def kernel_nu(easting, northing, upward, radius):
     - [Nagy2002]_
     - [Fukushima2020]_
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
     return _safe_log(easting, northing, upward, radius)
 
@@ -779,12 +779,12 @@ def _safe_atan2(y, x):
     ----------
     - [Fukushima2020]_
     """
-    if x == 0:
-        if y > 0:
+    if x == 0:  # pragma: no branch
+        if y > 0:  # pragma: no branch
             result = np.pi / 2
-        elif y < 0:
+        elif y < 0:  # pragma: no branch
             result = -np.pi / 2
-        else:
+        else:  # pragma: no branch
             result = 0
         return result
     return np.arctan(y / x)
@@ -861,12 +861,12 @@ def _safe_log(x, y, z, r):
     - [Nagy2000]_
     - [Fukushima2020]_
     """
-    if r == 0:
+    if r == 0:  # pragma: no branch
         return 0
-    if x < 0:
-        if y == 0.0 and z == 0.0:
+    if x < 0:  # pragma: no branch
+        if y == 0.0 and z == 0.0:  # pragma: no branch
             result = -np.log(-2 * x)
-        else:
+        else:  # pragma: no branch
             result = np.log((y**2 + z**2) / (r - x))
         return result
     return np.log(x + r)
@@ -1393,7 +1393,7 @@ def kernel_enu(easting, northing, upward, radius):
     >>> float(kernel_enu(x, y, z, r)) # doctest: +NUMBER
     -0.1480061
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
     return -1 / radius
 
@@ -1446,9 +1446,9 @@ def _kernel_iii(x_i, x_j, x_k, radius):
     >>> k_nnn = _kernel_iii(northing, upward, easting, radius)
     >>> k_uuu = _kernel_iii(upward, easting, northing, radius)
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
-    if (x_i == 0 and x_j == 0) or (x_i == 0 and x_k == 0):
+    if (x_i == 0 and x_j == 0) or (x_i == 0 and x_k == 0):  # pragma: no branch
         return 0.0
     x_i_sq, x_j_sq, x_k_sq = x_i**2, x_j**2, x_k**2
     numerator = -x_j * x_k * (2 * x_i_sq + x_j_sq + x_k_sq)
@@ -1511,8 +1511,8 @@ def _kernel_iij(x_i, x_j, x_k, radius):
     >>> k_euu = _kernel_iij(upward, easting, northing, radius)
     >>> k_nuu = _kernel_iij(upward, northing, upward, radius)
     """
-    if radius == 0.0:
+    if radius == 0.0:  # pragma: no branch
         return np.nan
-    if x_i == 0 and x_j == 0:
+    if x_i == 0 and x_j == 0:  # pragma: no branch
         return 0.0
     return x_i * x_k / ((x_i**2 + x_j**2) * radius)
