@@ -175,11 +175,11 @@ Let's use the Schmidt-normalized ALF from
 
 .. jupyter-execute::
 
-    p = np.zeros((x.size, max_degree + 1, max_degree + 1))
-    dp = np.zeros((x.size, max_degree + 1, max_degree + 1))
+    p = np.zeros((max_degree + 1, max_degree + 1))
+    p_deriv = np.zeros((x.size, max_degree + 1, max_degree + 1))
     for i, value in enumerate(x):
-        legendre.associated_function_schmidt(value, max_degree, p[i])
-        legendre.associated_function_schmidt_derivative(max_degree, p[i], dp[i])
+        legendre.associated_function_schmidt(value, max_degree, p)
+        legendre.associated_function_schmidt_derivative(max_degree, p, p_deriv[i])
 
 Now we can plot the derivatives by slicing them at the desired degree and
 order:
@@ -190,14 +190,60 @@ order:
     plt.title("Schmidt-normalized ALF derivatives")
     for n in range(max_degree + 1):
         for m in range(n + 1):
-            plt.plot(theta, dp[:, n, m], label=f"$\partial_\theta P_{n}^{m}$")
+            plt.plot(theta, p_deriv[:, n, m], label=fr"$\partial_{{\theta}} P_{n}^{m}$")
     plt.legend(ncols=3)
-    plt.xlabel("theta (degrees)")
+    plt.xlabel(r"colatitude $\theta$ (degrees)")
     plt.xlim(0, 180)
-    maxabs = 1.1 * np.abs(dp).max()
+    maxabs = 1.1 * np.abs(p_deriv).max()
     plt.ylim(-maxabs, maxabs)
     plt.grid()
     plt.show()
 
 Here, we used the Schmidt-normalized ALFs as an example but the exact same
 procedure could be done for any other version of the ALFs.
+
+Higher order derivatives can also be calculated by passing the derivative as input to
+:func:`choclo.legendre.associated_function_schmidt_derivative` and the like.
+Let's calculate second order derivatives:
+
+.. jupyter-execute::
+
+    p_deriv2 = np.zeros((x.size, max_degree + 1, max_degree + 1))
+    for i, value in enumerate(x):
+        legendre.associated_function_schmidt_derivative(max_degree, p_deriv[i], p_deriv2[i])
+
+    plt.figure(figsize=(8, 4), layout="constrained")
+    plt.title("Schmidt-normalized ALF 2nd order derivatives")
+    for n in range(max_degree + 1):
+        for m in range(n + 1):
+            plt.plot(theta, p_deriv2[:, n, m], label=fr"$\partial_{{\theta}}^2 P_{n}^{m}$")
+    plt.legend(ncols=3)
+    plt.xlabel(r"colatitude $\theta$ (degrees)")
+    plt.xlim(0, 180)
+    maxabs = 1.1 * np.abs(p_deriv2).max()
+    plt.ylim(-maxabs, maxabs)
+    plt.grid()
+    plt.show()
+
+And third order derivatives:
+
+.. jupyter-execute::
+
+    p_deriv3 = np.zeros((x.size, max_degree + 1, max_degree + 1))
+    for i, value in enumerate(x):
+        legendre.associated_function_schmidt_derivative(max_degree, p_deriv2[i], p_deriv3[i])
+
+    plt.figure(figsize=(8, 4), layout="constrained")
+    plt.title("Schmidt-normalized ALF 3rd order derivatives")
+    for n in range(max_degree + 1):
+        for m in range(n + 1):
+            plt.plot(theta, p_deriv3[:, n, m], label=fr"$\partial_{{\theta}}^3 P_{n}^{m}$")
+    plt.legend(ncols=3)
+    plt.xlabel(r"colatitude $\theta$ (degrees)")
+    plt.xlim(0, 180)
+    maxabs = 1.1 * np.abs(p_deriv3).max()
+    plt.ylim(-maxabs, maxabs)
+    plt.grid()
+    plt.show()
+
+Once again, the same thing could be done for other normalizations.
