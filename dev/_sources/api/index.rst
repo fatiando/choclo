@@ -4,20 +4,19 @@ List of functions and classes (API)
 ===================================
 
 .. automodule:: choclo
-
 .. currentmodule:: choclo
 
-Point sources and dipoles
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Point sources in Cartesian coordinates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Forward modeling and kernel functions for point sources and dipoles in
-**Cartesian coordinates**.
+.. automodule:: choclo.point
+.. currentmodule:: choclo
 
 Gravity
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     point.gravity_pot
     point.gravity_e
@@ -30,24 +29,13 @@ Gravity
     point.gravity_eu
     point.gravity_nu
 
-Magnetic
-^^^^^^^^
-
-.. autosummary::
-   :toctree: generated/
-
-    dipole.magnetic_e
-    dipole.magnetic_n
-    dipole.magnetic_u
-    dipole.magnetic_field
-
 Kernels
 ^^^^^^^
 
 These are derivatives of the inverse distance function :math:`\frac{1}{r}`.
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     point.kernel_pot
     point.kernel_e
@@ -70,18 +58,32 @@ These are derivatives of the inverse distance function :math:`\frac{1}{r}`.
     point.kernel_uun
     point.kernel_enu
 
+Dipoles in Cartesian coordinates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: choclo.dipole
+.. currentmodule:: choclo
+
+.. autosummary::
+    :toctree: generated/
+
+    dipole.magnetic_e
+    dipole.magnetic_n
+    dipole.magnetic_u
+    dipole.magnetic_field
+
 
 Rectangular Prisms
 ~~~~~~~~~~~~~~~~~~
 
-Forward modeling and kernel functions for right-rectangular prisms in
-**Cartesian coordinates**.
+.. automodule:: choclo.prism
+.. currentmodule:: choclo
 
 Gravity
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.gravity_pot
     prism.gravity_e
@@ -98,7 +100,7 @@ Magnetic
 ^^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.magnetic_field
     prism.magnetic_e
@@ -115,7 +117,7 @@ Kernels
 ^^^^^^^
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     prism.kernel_pot
     prism.kernel_e
@@ -128,28 +130,44 @@ Kernels
     prism.kernel_eu
     prism.kernel_nu
 
+Legendre functions
+~~~~~~~~~~~~~~~~~~
+
+.. automodule:: choclo.legendre
+.. currentmodule:: choclo
+
+.. autosummary::
+    :toctree: generated/
+
+    legendre.associated_function
+    legendre.associated_function_derivative
+    legendre.associated_function_schmidt
+    legendre.associated_function_schmidt_derivative
+    legendre.associated_function_fully
+    legendre.associated_function_fully_derivative
 
 Euclidean distances
 ~~~~~~~~~~~~~~~~~~~
 
-Functions to compute Euclidean distance in Cartesian and spherical
-coordinates:
+.. automodule:: choclo.distance
+.. currentmodule:: choclo
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
-    utils.distance_cartesian
-    utils.distance_spherical
-    utils.distance_spherical_core
+    distance.distance_cartesian
+    distance.distance_spherical
+    distance.distance_spherical_core
 
 
 Universal Constants
 ~~~~~~~~~~~~~~~~~~~
 
-Universal physical constants given in SI units:
+.. automodule:: choclo.constants
+.. currentmodule:: choclo
 
 .. autosummary::
-   :toctree: generated/
+    :toctree: generated/
 
     constants.GRAVITATIONAL_CONST
     constants.VACUUM_MAGNETIC_PERMEABILITY

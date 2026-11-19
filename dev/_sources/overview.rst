@@ -11,7 +11,7 @@ way to calculate these fields for a wide range of applications, like forward
 modellings, sensitivity matrices calculations, equivalent sources
 implementations and more.
 
-These functions are not designed to be used by final users. Instead they are
+These functions are not designed to be used by final users. Instead, they are
 meant to be part of the underlying engine of a higher level codebase, like
 `Harmonica <https://www.fatiando.org/harmonica>`__ and `SimPEG
 <https://docs.simpeg.xyz>`__.
@@ -31,7 +31,7 @@ Before you jump into Choclo's functions, it's worth noting some conventions
 that will be kept along its codebase:
 
 - The functions assume a right-handed coordinate system. We avoid using names
-  like "x", "y" and "z" for the coordinates. Instead we use "easting",
+  like "x", "y" and "z" for the coordinates. Instead, we use "easting",
   "northing" and "upward" to make extra clear the direction of each axis.
 - We use the first letter of the *easting*, *northing* and *upward* axis to
   indicate direction of derivatives. For example, a function ``gravity_e`` will
@@ -51,15 +51,16 @@ that will be kept along its codebase:
 The library
 -----------
 
-Choclo is divided in a few different submodules, each with different goals. The
-three main modules are the ones that host the forward and kernel functions for
-the different geometries supported by Choclo: ``point``, ``dipole`` and
-``prism``. Inside each one of these modules we will find forward modelling
-functions and potentially some kernel functions. The names of the forward
-modelling functions follow a simple pattern of ``{field}_{type}``. For
-example, :func:`choclo.prism.gravity_e` computes the easting component of the
-gravitational acceleration of a prism, while :func:`choclo.prism.gravity_ee`
-computes the easting-easting gravity tensor component.
+Choclo is divided in a few different submodules, each with different goals.
+The three main modules are the ones that host the forward and kernel functions
+for the different geometries supported by Choclo: :mod:`choclo.point`,
+:mod:`choclo.dipole` and :mod:`choclo.prism`. Inside each one of these
+modules we will find forward modelling functions and potentially some kernel
+functions. The names of the forward modelling functions follow a simple pattern
+of ``{field}_{type}``. For example, :func:`choclo.prism.gravity_e` computes
+the easting component of the gravitational acceleration of a prism, while
+:func:`choclo.prism.gravity_ee` computes the easting-easting gravity tensor
+component.
 
 Gravity forward modelling
 ~~~~~~~~~~~~~~~~~~~~~~~~~
