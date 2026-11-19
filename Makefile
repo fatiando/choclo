@@ -1,9 +1,7 @@
 # Build, package, test, and clean
-PROJECT=choclo
-CHECK_STYLE=src/$(PROJECT) doc test
-GITHUB_ACTIONS=.github/workflows
+CHECK_STYLE=src doc test
 
-.PHONY: build install test format check check-format check_style check-actions clean
+.PHONY: build install test format check check-format check-style check-actions clean
 
 help:
 	@echo "Commands:"
@@ -40,7 +38,7 @@ check-style:
 	ruff check $(CHECK_STYLE)
 
 check-actions:
-	zizmor $(GITHUB_ACTIONS)
+	zizmor .github/workflows
 
 check-docstrings:
 	numpydoc lint `find src -name "*.py"`
