@@ -236,20 +236,20 @@ def magnetic_field(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return (np.nan, np.nan, np.nan)
     # Initialize magnetic field vector components
     b_e, b_n, b_u = 0.0, 0.0, 0.0
     # Iterate over the vertices of the prism
-    for i in range(2):
+    for i in range(2):  # pragma: no branch
         # Compute shifted easting coordinate
         shift_east = prism_east - easting if i == 0 else prism_west - easting
         shift_east_sq = shift_east**2
-        for j in range(2):
+        for j in range(2):  # pragma: no branch
             # Compute shifted northing coordinate
             shift_north = prism_north - northing if j == 0 else prism_south - northing
             shift_north_sq = shift_north**2
-            for k in range(2):
+            for k in range(2):  # pragma: no branch
                 # Compute shifted upward coordinate
                 shift_upward = prism_top - upward if k == 0 else prism_bottom - upward
                 shift_upward_sq = shift_upward**2
@@ -293,7 +293,7 @@ def magnetic_field(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         b_e += 4 * np.pi * magnetization_east
     # Add 4 pi to Bn if computing on the northmost face, to correctly evaluate
     # the limit approaching from outside (approaching from the north)
@@ -307,7 +307,7 @@ def magnetic_field(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         b_n += 4 * np.pi * magnetization_north
     # Add 4 pi to Bu if computing on the north face, to correctly evaluate the
     # limit approaching from outside (approaching from the top)
@@ -321,7 +321,7 @@ def magnetic_field(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         b_u += 4 * np.pi * magnetization_up
     c_m = VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi
     b_e *= c_m
@@ -455,7 +455,7 @@ def magnetic_e(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic field vector component
     b_e = _calculate_component(
@@ -487,7 +487,7 @@ def magnetic_e(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         b_e += 4 * np.pi * magnetization_east
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_e
 
@@ -617,7 +617,7 @@ def magnetic_n(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic field vector component
     b_n = _calculate_component(
@@ -649,7 +649,7 @@ def magnetic_n(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         b_n += 4 * np.pi * magnetization_north
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_n
 
@@ -779,7 +779,7 @@ def magnetic_u(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic field vector component
     b_u = _calculate_component(
@@ -811,7 +811,7 @@ def magnetic_u(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         b_u += 4 * np.pi * magnetization_up
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_u
 
@@ -916,7 +916,7 @@ def magnetic_ee(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic gradiometry component
     b_ee = _calculate_component(
@@ -1039,7 +1039,7 @@ def magnetic_nn(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic gradiometry component
     b_nn = _calculate_component(
@@ -1162,7 +1162,7 @@ def magnetic_uu(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic gradiometry component
     b_uu = _calculate_component(
@@ -1285,7 +1285,7 @@ def magnetic_en(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic gradiometry component
     b_en = _calculate_component(
@@ -1408,7 +1408,7 @@ def magnetic_eu(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic gradiometry component
     b_eu = _calculate_component(
@@ -1531,7 +1531,7 @@ def magnetic_nu(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Compute magnetic gradiometry component
     b_nu = _calculate_component(
@@ -1640,15 +1640,15 @@ def _calculate_component(
     """
     result = 0.0
     # Iterate over the vertices of the prism
-    for i in range(2):
+    for i in range(2):  # pragma: no branch
         # Compute shifted easting coordinate
         shift_east = prism_east - easting if i == 0 else prism_west - easting
         shift_east_sq = shift_east**2
-        for j in range(2):
+        for j in range(2):  # pragma: no branch
             # Compute shifted northing coordinate
             shift_north = prism_north - northing if j == 0 else prism_south - northing
             shift_north_sq = shift_north**2
-            for k in range(2):
+            for k in range(2):  # pragma: no branch
                 # Compute shifted upward coordinate
                 shift_upward = prism_top - upward if k == 0 else prism_bottom - upward
                 shift_upward_sq = shift_upward**2

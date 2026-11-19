@@ -11,7 +11,6 @@ Test gravity forward modelling functions for point sources
 import numpy as np
 import numpy.testing as npt
 import pytest
-from utils import NUMBA_IS_DISABLED
 
 from choclo.distance import distance_cartesian
 from choclo.point import (
@@ -146,30 +145,13 @@ class TestSymmetryPotential:
         # Check if all values are equal
         npt.assert_allclose(potential_1, radius_2 / radius_1 * potential_2)
 
-    @pytest.mark.skipif(not NUMBA_IS_DISABLED, reason="Numba is not disabled")
-    @pytest.mark.filterwarnings(
-        "ignore:divide by zero encountered in scalar divide:RuntimeWarning"
-    )
-    def test_infinite_potential(self, sample_mass):
-        """
-        Test if we get an infinite kernel if the computation point is in the
-        same location as the observation point.
-
-        This test should be run only with Numba disabled.
-        """
-        point = (4.6, -8.9, -50.3)
-        assert np.isinf(gravity_pot(*point, *point, sample_mass))
-
-    @pytest.mark.skipif(NUMBA_IS_DISABLED, reason="Numba is disabled")
     def test_division_by_zero(self, sample_mass):
         """
         Test if we get a division by zero if the computation point is in the
         same location as the observation point.
-
-        This test should be run only with Numba enabled.
         """
         point = (4.6, -8.9, -50.3)
-        with pytest.raises(ZeroDivisionError):
+        with pytest.raises(ZeroDivisionError, match="division by zero"):
             gravity_pot(*point, *point, sample_mass)
 
 

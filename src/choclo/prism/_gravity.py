@@ -701,7 +701,7 @@ def gravity_ee(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Evaluate kernel function on each vertex of the prism
     result = _evaluate_kernel(
@@ -728,7 +728,7 @@ def gravity_ee(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         result += 4 * np.pi
     return GRAVITATIONAL_CONST * density * result
 
@@ -859,7 +859,7 @@ def gravity_nn(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Evaluate kernel function on each vertex of the prism
     result = _evaluate_kernel(
@@ -886,7 +886,7 @@ def gravity_nn(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         result += 4 * np.pi
     return GRAVITATIONAL_CONST * density * result
 
@@ -1017,7 +1017,7 @@ def gravity_uu(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     # Evaluate kernel function on each vertex of the prism
     result = _evaluate_kernel(
@@ -1044,7 +1044,7 @@ def gravity_uu(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         result += 4 * np.pi
     return GRAVITATIONAL_CONST * density * result
 
@@ -1163,7 +1163,7 @@ def gravity_en(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     return (
         GRAVITATIONAL_CONST
@@ -1298,7 +1298,7 @@ def gravity_eu(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     return (
         GRAVITATIONAL_CONST
@@ -1433,7 +1433,7 @@ def gravity_nu(
         prism_north,
         prism_bottom,
         prism_top,
-    ):
+    ):  # pragma: no branch
         return np.nan
     return (
         GRAVITATIONAL_CONST
@@ -1513,15 +1513,15 @@ def _evaluate_kernel(
     # Initialize result float to zero
     result = 0
     # Iterate over the vertices of the prism
-    for i in range(2):
+    for i in range(2):  # pragma: no branch
         # Compute shifted easting coordinate
         shift_east = prism_east - easting if i == 0 else prism_west - easting
         shift_east_sq = shift_east**2
-        for j in range(2):
+        for j in range(2):  # pragma: no branch
             # Compute shifted northing coordinate
             shift_north = prism_north - northing if j == 0 else prism_south - northing
             shift_north_sq = shift_north**2
-            for k in range(2):
+            for k in range(2):  # pragma: no branch
                 # Compute shifted upward coordinate
                 shift_upward = prism_top - upward if k == 0 else prism_bottom - upward
                 shift_upward_sq = shift_upward**2

@@ -1,11 +1,7 @@
 # Build, package, test, and clean
-PROJECT=choclo
-CHECK_STYLE=src/$(PROJECT) doc test
-GITHUB_ACTIONS=.github/workflows
-PYTEST_ARGS=--verbose --doctest-modules
-PYTEST_COV_ARGS=--cov-report=term-missing --cov $(PYTEST_ARGS)
+CHECK_STYLE=src doc test
 
-.PHONY: build install test test-coverage test-numba format check check-format check_style check-actions clean
+.PHONY: build install test format check check-format check-style check-actions clean
 
 help:
 	@echo "Commands:"
@@ -24,13 +20,8 @@ build:
 install:
 	python -m pip install --no-deps --editable .
 
-test: test-numba test-coverage
-
-test-coverage:
-	NUMBA_DISABLE_JIT=1 pytest $(PYTEST_COV_ARGS) test src/$(PROJECT)
-
-test-numba:
-	NUMBA_DISABLE_JIT=0 pytest $(PYTEST_ARGS) test src/$(PROJECT)
+test:
+	NUMBA_JIT_COVERAGE=1 pytest
 
 format:
 	ruff check --select I --fix $(CHECK_STYLE) # fix isort errors
@@ -47,7 +38,7 @@ check-style:
 	ruff check $(CHECK_STYLE)
 
 check-actions:
-	zizmor $(GITHUB_ACTIONS)
+	zizmor .github/workflows
 
 check-docstrings:
 	numpydoc lint `find src -name "*.py"`
