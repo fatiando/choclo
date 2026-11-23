@@ -68,11 +68,11 @@ def distance_spherical(
     Parameters
     ----------
     longitude_p, latitude_p, radius_p : float
-        Longitude, latitude and radial coordinates of point :math:`\mathbf{p}`.
+        Longitude, latitude, and radial coordinates of point :math:`\mathbf{p}`.
         Longitude and latitude must be in degrees. Radial coordinate should be
         in meters.
     longitude_q, latitude_q, radius_q : float
-        Longitude, latitude and radial coordinates of point :math:`\mathbf{q}`.
+        Longitude, latitude, and radial coordinates of point :math:`\mathbf{q}`.
         Longitude and latitude must be in degrees. Radial coordinate should be
         in meters.
 
@@ -134,11 +134,11 @@ def distance_spherical_core(
 
     .. important::
 
-        All longitudinal angles must be in degrees.
+        All longitudinal angles must be in radians.
 
     It computes the Euclidean distance between two points defined in spherical
     coordinates given precomputed quantities related to the coordinates of both
-    points: the ``longitude`` in radians, the sine and cosine of the
+    points: the ``longitude`` in radians, the sine, and cosine of the
     ``latitude``, and the ``radius`` in meters. Precomputing this quantities
     may save computation time on some cases.
 
@@ -168,7 +168,7 @@ def distance_spherical_core(
     cospsi : float
         Cosine of the psi angle.
     coslambda : float
-        Cosine of the diference between the longitudes of both points.
+        Cosine of the difference between the longitudes of both points.
 
     Notes
     -----
