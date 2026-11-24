@@ -138,7 +138,7 @@ def distance_spherical_core(
 
     It computes the Euclidean distance between two points defined in spherical
     coordinates given precomputed quantities related to the coordinates of both
-    points: the ``longitude`` in radians, the sine, and cosine of the
+    points: the ``longitude`` in radians, the sine and cosine of the
     ``latitude``, and the ``radius`` in meters. Precomputing this quantities
     may save computation time on some cases.
 
