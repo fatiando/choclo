@@ -8,8 +8,8 @@
 Magnetic forward modelling functions for rectangular prisms.
 """
 
+import numba
 import numpy as np
-from numba import jit
 
 from ..constants import VACUUM_MAGNETIC_PERMEABILITY
 from ._kernels import (
@@ -39,7 +39,7 @@ from ._utils import (
 )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_field(
     easting,
     northing,
@@ -330,7 +330,7 @@ def magnetic_field(
     return b_e, b_n, b_u
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_e(
     easting,
     northing,
@@ -492,7 +492,7 @@ def magnetic_e(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_e
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_n(
     easting,
     northing,
@@ -654,7 +654,7 @@ def magnetic_n(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_n
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_u(
     easting,
     northing,
@@ -816,7 +816,7 @@ def magnetic_u(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_u
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_ee(
     easting,
     northing,
@@ -939,7 +939,7 @@ def magnetic_ee(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_ee
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_nn(
     easting,
     northing,
@@ -1062,7 +1062,7 @@ def magnetic_nn(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_nn
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_uu(
     easting,
     northing,
@@ -1185,7 +1185,7 @@ def magnetic_uu(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_uu
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_en(
     easting,
     northing,
@@ -1308,7 +1308,7 @@ def magnetic_en(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_en
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_eu(
     easting,
     northing,
@@ -1431,7 +1431,7 @@ def magnetic_eu(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_eu
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_nu(
     easting,
     northing,
@@ -1554,7 +1554,7 @@ def magnetic_nu(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * b_nu
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def _calculate_component(
     easting,
     northing,

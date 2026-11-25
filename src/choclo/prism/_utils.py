@@ -8,10 +8,10 @@
 Utility functions for forward modelling of prisms.
 """
 
-from numba import jit
+import numba
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def is_interior_point(
     easting,
     northing,
@@ -50,7 +50,7 @@ def is_interior_point(
     return in_easting and in_northing and in_upward
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def is_point_on_edge(
     easting,
     northing,
@@ -121,7 +121,7 @@ def is_point_on_edge(
     return result
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def is_point_on_easting_edge(
     easting,
     northing,
@@ -161,7 +161,7 @@ def is_point_on_easting_edge(
     return bool(in_easting and in_northing and in_upward)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def is_point_on_northing_edge(
     easting,
     northing,
@@ -201,7 +201,7 @@ def is_point_on_northing_edge(
     return bool(in_easting and in_northing and in_upward)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def is_point_on_upward_edge(
     easting,
     northing,
@@ -241,7 +241,7 @@ def is_point_on_upward_edge(
     return bool(in_easting and in_northing and in_upward)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def is_point_on_east_face(
     easting,
     northing,
@@ -282,7 +282,7 @@ def is_point_on_east_face(
     return bool(on_east_face)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def is_point_on_north_face(
     easting,
     northing,
@@ -323,7 +323,7 @@ def is_point_on_north_face(
     return bool(on_north_face)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def is_point_on_top_face(
     easting,
     northing,

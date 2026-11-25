@@ -8,13 +8,13 @@
 Magnetic fields of dipoles.
 """
 
+import numba
 import numpy as np
-from numba import jit
 
 from ..constants import VACUUM_MAGNETIC_PERMEABILITY
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_field(
     easting_p,
     northing_p,
@@ -109,7 +109,7 @@ def magnetic_field(
     return b_e, b_n, b_u
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_e(
     easting_p,
     northing_p,
@@ -190,7 +190,7 @@ def magnetic_e(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_n(
     easting_p,
     northing_p,
@@ -271,7 +271,7 @@ def magnetic_n(
     return VACUUM_MAGNETIC_PERMEABILITY / 4 / np.pi * result
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def magnetic_u(
     easting_p,
     northing_p,

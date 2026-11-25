@@ -8,11 +8,11 @@
 Kernel functions for rectangular prisms.
 """
 
+import numba
 import numpy as np
-from numba import jit
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_pot(easting, northing, upward, radius):
     r"""
     Kernel for the potential field due to a rectangular prism.
@@ -98,7 +98,7 @@ def kernel_pot(easting, northing, upward, radius):
     return kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_e(easting, northing, upward, radius):
     r"""
     Kernel for easting component of the gradient due to a rectangular prism.
@@ -187,7 +187,7 @@ def kernel_e(easting, northing, upward, radius):
     return kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_n(easting, northing, upward, radius):
     r"""
     Kernel for northing component of the gradient due to a rectangular prism.
@@ -276,7 +276,7 @@ def kernel_n(easting, northing, upward, radius):
     return kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_u(easting, northing, upward, radius):
     r"""
     Kernel for upward component of the gradient due to a rectangular prism.
@@ -367,7 +367,7 @@ def kernel_u(easting, northing, upward, radius):
     return kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_ee(easting, northing, upward, radius):
     r"""
     Kernel for easting-easting component of the tensor due to a prism.
@@ -429,7 +429,7 @@ def kernel_ee(easting, northing, upward, radius):
     return -_safe_atan2(northing * upward, easting * radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nn(easting, northing, upward, radius):
     r"""
     Kernel for northing-northing component of the tensor due to a prism.
@@ -491,7 +491,7 @@ def kernel_nn(easting, northing, upward, radius):
     return -_safe_atan2(easting * upward, northing * radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_uu(easting, northing, upward, radius):
     r"""
     Kernel for upward-upward component of the tensor due to a prism.
@@ -553,7 +553,7 @@ def kernel_uu(easting, northing, upward, radius):
     return -_safe_atan2(easting * northing, upward * radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_en(easting, northing, upward, radius):
     r"""
     Kernel for easting-northing component of the tensor due to a prism.
@@ -615,7 +615,7 @@ def kernel_en(easting, northing, upward, radius):
     return _safe_log(upward, easting, northing, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_eu(easting, northing, upward, radius):
     r"""
     Kernel for easting-upward component of the tensor due to a prism.
@@ -677,7 +677,7 @@ def kernel_eu(easting, northing, upward, radius):
     return _safe_log(northing, easting, upward, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nu(easting, northing, upward, radius):
     r"""
     Kernel for northing-upward component of the tensor due to a prism.
@@ -739,7 +739,7 @@ def kernel_nu(easting, northing, upward, radius):
     return _safe_log(easting, northing, upward, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def _safe_atan2(y, x):
     r"""
     Principal value of the arctangent expressed as a two variable function.
@@ -790,7 +790,7 @@ def _safe_atan2(y, x):
     return np.arctan(y / x)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def _safe_log(x, y, z, r):
     r"""
     Safe log function to use in the prism kernels.
@@ -872,7 +872,7 @@ def _safe_log(x, y, z, r):
     return np.log(x + r)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_eee(easting, northing, upward, radius):
     r"""
     Easting-easting-easting kernel due to a prism.
@@ -925,7 +925,7 @@ def kernel_eee(easting, northing, upward, radius):
     return _kernel_iii(easting, northing, upward, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nnn(easting, northing, upward, radius):
     r"""
     Northing-northing-northing kernel due to a prism.
@@ -978,7 +978,7 @@ def kernel_nnn(easting, northing, upward, radius):
     return _kernel_iii(northing, upward, easting, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_uuu(easting, northing, upward, radius):
     r"""
     Upward-upward-upward kernel due to a prism.
@@ -1031,7 +1031,7 @@ def kernel_uuu(easting, northing, upward, radius):
     return _kernel_iii(upward, northing, easting, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_een(easting, northing, upward, radius):
     r"""
     Easting-easting-northing kernel due to a prism.
@@ -1084,7 +1084,7 @@ def kernel_een(easting, northing, upward, radius):
     return _kernel_iij(easting, northing, upward, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_eeu(easting, northing, upward, radius):
     r"""
     Easting-easting-upward kernel due to a prism.
@@ -1137,7 +1137,7 @@ def kernel_eeu(easting, northing, upward, radius):
     return _kernel_iij(easting, upward, northing, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_enn(easting, northing, upward, radius):
     r"""
     Easting-northing-northing kernel due to a prism.
@@ -1190,7 +1190,7 @@ def kernel_enn(easting, northing, upward, radius):
     return _kernel_iij(northing, easting, upward, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nnu(easting, northing, upward, radius):
     r"""
     Northing-northing-upward kernel due to a prism.
@@ -1243,7 +1243,7 @@ def kernel_nnu(easting, northing, upward, radius):
     return _kernel_iij(northing, upward, easting, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_euu(easting, northing, upward, radius):
     r"""
     Easting-upward-upward kernel due to a prism.
@@ -1296,7 +1296,7 @@ def kernel_euu(easting, northing, upward, radius):
     return _kernel_iij(upward, easting, northing, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nuu(easting, northing, upward, radius):
     r"""
     Northing-upward-upward kernel due to a prism.
@@ -1349,7 +1349,7 @@ def kernel_nuu(easting, northing, upward, radius):
     return _kernel_iij(upward, northing, easting, radius)
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_enu(easting, northing, upward, radius):
     r"""
     Easting-northing-upward kernel due to a prism.
@@ -1398,7 +1398,7 @@ def kernel_enu(easting, northing, upward, radius):
     return -1 / radius
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def _kernel_iii(x_i, x_j, x_k, radius):
     r"""
     Diagonal 3rd order kernels of a prism.
@@ -1456,7 +1456,7 @@ def _kernel_iii(x_i, x_j, x_k, radius):
     return numerator / denominator
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def _kernel_iij(x_i, x_j, x_k, radius):
     r"""
     Non-diagonal 3rd order kernels of a prism.
