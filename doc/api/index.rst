@@ -158,6 +158,8 @@ Euclidean distances
     distance.distance_cartesian
     distance.distance_spherical
     distance.distance_spherical_core
+    distance.distance_geodetic
+    distance.distance_geodetic_core
 
 
 Universal Constants

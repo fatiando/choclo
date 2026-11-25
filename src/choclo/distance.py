@@ -288,6 +288,7 @@ def distance_geodetic(
     return distance
 
 
+@numba.jit(nopython=True)
 def geodetic_distance_core(
     longitude_p,
     cosphi_p,

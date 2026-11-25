@@ -4,11 +4,13 @@
 #
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
+import boule as bl
+import numpy as np
 import numpy.testing as npt
 import pytest
 from utils import dumb_spherical_distance
 
-from choclo.distance import distance_cartesian, distance_spherical
+from choclo.distance import distance_cartesian, distance_geodetic, distance_spherical
 
 
 @pytest.mark.parametrize(
@@ -78,3 +80,88 @@ class TestDistanceSpherical:
             distance_spherical(*point_a, *point_b),
             dumb_spherical_distance(point_a, point_b),
         )
+
+
+@pytest.mark.parametrize(
+    "ellipsoid", [bl.WGS84, bl.GRS80, bl.EGM96, bl.Mars2009, bl.Ceres2018, bl.Vesta2017]
+)
+def test_distance_geodetic(ellipsoid):
+    """
+    Test if distance_geodetic works as expected
+    """
+    point_a = (-71.3, 33.5, 1e4)
+    point_b = (-71.3, 33.5, 1e4 + 100)
+    npt.assert_allclose(
+        distance_geodetic(
+            *point_a, *point_b, ellipsoid.semimajor_axis, ellipsoid.flattening
+        ),
+        100,
+        rtol=1e-6,
+    )
+
+
+@pytest.mark.parametrize(
+    "ellipsoid", [bl.WGS84, bl.Mars2009, bl.Ceres2018, bl.Vesta2017]
+)
+def test_distance_geodetic_poles(ellipsoid):
+    """
+    Test if distance_geodetic works as expected when points are across the poles
+    """
+    point_a = (0, 90, 0)
+    point_b = (0, -90, 0)
+    npt.assert_allclose(
+        distance_geodetic(
+            *point_a, *point_b, ellipsoid.semimajor_axis, ellipsoid.flattening
+        ),
+        2 * ellipsoid.semiminor_axis,
+        rtol=1e-6,
+    )
+
+
+@pytest.mark.parametrize(
+    "ellipsoid", [bl.WGS84, bl.Mars2009, bl.Ceres2018, bl.Vesta2017]
+)
+@pytest.mark.parametrize(
+    "longitudes", [(0, 180), (90, 270), (-180, 0), (360, -180), (-90, 90)]
+)
+def test_distance_geodetic_equator(ellipsoid, longitudes):
+    """
+    Test if distance_geodetic works as expected when points are across the equator
+    """
+    point_a = (longitudes[0], 0, 0)
+    point_b = (longitudes[1], 0, 0)
+    npt.assert_allclose(
+        distance_geodetic(
+            *point_a, *point_b, ellipsoid.semimajor_axis, ellipsoid.flattening
+        ),
+        2 * ellipsoid.semimajor_axis,
+        rtol=1e-6,
+    )
+
+
+@pytest.mark.parametrize(
+    "ellipsoid", [bl.WGS84, bl.Mars2009, bl.Ceres2018, bl.Vesta2017]
+)
+def test_distance_geodetic_equator_to_pole(ellipsoid):
+    """
+    Test if distance_geodetic works as expected when points are on the pole and equator
+    """
+    expected_distance = np.sqrt(
+        ellipsoid.semimajor_axis**2 + ellipsoid.semiminor_axis**2
+    )
+    for latitude in (-90, 90):
+        for longitude in np.linspace(0, 360, 36):
+            npt.assert_allclose(
+                distance_geodetic(
+                    longitude,
+                    0,
+                    0,
+                    0,
+                    latitude,
+                    0,
+                    ellipsoid.semimajor_axis,
+                    ellipsoid.flattening,
+                ),
+                expected_distance,
+                rtol=1e-6,
+            )
