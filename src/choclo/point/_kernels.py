@@ -8,10 +8,10 @@
 Kernel functions for point sources.
 """
 
-from numba import jit
+import numba
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_pot(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -59,7 +59,7 @@ def kernel_pot(
     return 1 / distance
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_e(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -112,7 +112,7 @@ def kernel_e(
     return -(easting_p - easting_q) / distance**3
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_n(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -165,7 +165,7 @@ def kernel_n(
     return -(northing_p - northing_q) / distance**3
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_u(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -218,7 +218,7 @@ def kernel_u(
     return -(upward_p - upward_q) / distance**3
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_ee(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -276,7 +276,7 @@ def kernel_ee(
     return 3 * (easting_p - easting_q) ** 2 / distance**5 - 1 / distance**3
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nn(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -334,7 +334,7 @@ def kernel_nn(
     return 3 * (northing_p - northing_q) ** 2 / distance**5 - 1 / distance**3
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_uu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -392,7 +392,7 @@ def kernel_uu(
     return 3 * (upward_p - upward_q) ** 2 / distance**5 - 1 / distance**3
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_en(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -447,7 +447,7 @@ def kernel_en(
     return 3 * (easting_p - easting_q) * (northing_p - northing_q) / distance**5
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_eu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -503,7 +503,7 @@ def kernel_eu(
     return 3 * (easting_p - easting_q) * (upward_p - upward_q) / distance**5
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -558,7 +558,7 @@ def kernel_nu(
     return 3 * (northing_p - northing_q) * (upward_p - upward_q) / distance**5
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_eee(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -617,7 +617,7 @@ def kernel_eee(
     return 9 * easting / distance**5 - 15 * easting**3 / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nnn(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -676,7 +676,7 @@ def kernel_nnn(
     return 9 * northing / distance**5 - 15 * northing**3 / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_uuu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -735,7 +735,7 @@ def kernel_uuu(
     return 9 * upward / distance**5 - 15 * upward**3 / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_een(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -801,7 +801,7 @@ def kernel_een(
     return 3 * northing / distance**5 - 15 * easting**2 * northing / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_eeu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -866,7 +866,7 @@ def kernel_eeu(
     return 3 * upward / distance**5 - 15 * easting**2 * upward / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nne(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -932,7 +932,7 @@ def kernel_nne(
     return 3 * easting / distance**5 - 15 * northing**2 * easting / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_nnu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -998,7 +998,7 @@ def kernel_nnu(
     return 3 * upward / distance**5 - 15 * northing**2 * upward / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_uue(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -1063,7 +1063,7 @@ def kernel_uue(
     return 3 * easting / distance**5 - 15 * upward**2 * easting / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_uun(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):
@@ -1128,7 +1128,7 @@ def kernel_uun(
     return 3 * northing / distance**5 - 15 * upward**2 * northing / distance**7
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def kernel_enu(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, distance
 ):

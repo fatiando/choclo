@@ -8,8 +8,8 @@
 Gravity forward modelling functions for rectangular prisms.
 """
 
+import numba
 import numpy as np
-from numba import jit
 
 from ..constants import GRAVITATIONAL_CONST
 from ._kernels import (
@@ -34,7 +34,7 @@ from ._utils import (
 )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_pot(
     easting,
     northing,
@@ -167,7 +167,7 @@ def gravity_pot(
     )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_e(
     easting,
     northing,
@@ -301,7 +301,7 @@ def gravity_e(
     )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_n(
     easting,
     northing,
@@ -435,7 +435,7 @@ def gravity_n(
     )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_u(
     easting,
     northing,
@@ -575,7 +575,7 @@ def gravity_u(
     )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_ee(
     easting,
     northing,
@@ -733,7 +733,7 @@ def gravity_ee(
     return GRAVITATIONAL_CONST * density * result
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_nn(
     easting,
     northing,
@@ -891,7 +891,7 @@ def gravity_nn(
     return GRAVITATIONAL_CONST * density * result
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_uu(
     easting,
     northing,
@@ -1049,7 +1049,7 @@ def gravity_uu(
     return GRAVITATIONAL_CONST * density * result
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_en(
     easting,
     northing,
@@ -1183,7 +1183,7 @@ def gravity_en(
     )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_eu(
     easting,
     northing,
@@ -1318,7 +1318,7 @@ def gravity_eu(
     )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_nu(
     easting,
     northing,
@@ -1453,7 +1453,7 @@ def gravity_nu(
     )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def _evaluate_kernel(
     easting,
     northing,

@@ -8,11 +8,11 @@
 Functions to compute Euclidean distance in Cartesian and spherical coordinates.
 """
 
+import numba
 import numpy as np
-from numba import jit
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def distance_cartesian(
     easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
 ):
@@ -54,7 +54,7 @@ def distance_cartesian(
     return distance
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def distance_spherical(
     longitude_p, latitude_p, radius_p, longitude_q, latitude_q, radius_q
 ):
@@ -125,7 +125,7 @@ def distance_spherical(
     return distance
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def distance_spherical_core(
     longitude_p, cosphi_p, sinphi_p, radius_p, longitude_q, cosphi_q, sinphi_q, radius_q
 ):

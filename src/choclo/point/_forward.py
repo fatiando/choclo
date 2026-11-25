@@ -8,7 +8,7 @@
 Forward modelling function for point sources.
 """
 
-from numba import jit
+import numba
 
 from ..constants import GRAVITATIONAL_CONST
 from ..distance import distance_cartesian
@@ -26,7 +26,7 @@ from ._kernels import (
 )
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_pot(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Gravitational potential field due to a point source.
@@ -74,7 +74,7 @@ def gravity_pot(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_e(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Easting component of the gravitational acceleration due to a point source.
@@ -127,7 +127,7 @@ def gravity_e(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Northing component of the gravitational acceleration due to a point source.
@@ -180,7 +180,7 @@ def gravity_n(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_u(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Upward component of the gravitational acceleration due to a point source.
@@ -233,7 +233,7 @@ def gravity_u(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, 
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Easting-easting component of the gravitational tensor due to a point source.
@@ -293,7 +293,7 @@ def gravity_ee(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Northing-northing component of the gravitational tensor due to point source.
@@ -353,7 +353,7 @@ def gravity_nn(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Upward-upward component of the gravitational tensor due to a point source.
@@ -413,7 +413,7 @@ def gravity_uu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Easting-northing component of the gravitational tensor due to point source.
@@ -468,7 +468,7 @@ def gravity_en(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_eu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Easting-upward component of the gravitational tensor due to point source.
@@ -523,7 +523,7 @@ def gravity_eu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q,
     return GRAVITATIONAL_CONST * mass * kernel
 
 
-@jit(nopython=True)
+@numba.jit(nopython=True)
 def gravity_nu(easting_p, northing_p, upward_p, easting_q, northing_q, upward_q, mass):
     r"""
     Northing-upward component of the gravitational tensor due to point source.
