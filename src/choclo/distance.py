@@ -5,7 +5,7 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Functions to compute Euclidean distance in Cartesian and spherical coordinates.
+Functions to compute Euclidean distance in different coordinate systems.
 """
 
 import numba
@@ -205,3 +205,144 @@ def distance_spherical_core(
         (radius_p - radius_q) ** 2 + 2 * radius_p * radius_q * (1 - cospsi)
     )
     return distance, cospsi, coslambda
+
+
+@numba.jit(nopython=True)
+def distance_geodetic(
+    longitude_p,
+    latitude_p,
+    height_p,
+    longitude_q,
+    latitude_q,
+    height_q,
+    semimajor_axis,
+    flattening,
+):
+    """
+    Calculate the distance between two points in geodetic coordinates.
+
+    Computes the Euclidean distance between two points given in geodetic
+    coordinates using the closed-form formula given by [Vajda2004]_.
+    All angles must be in degrees and height above the ellipsoid in meters.
+
+    Parameters
+    ----------
+    point_p : tuple or 1d-array
+        Tuple or array containing the coordinates of the first point in the
+        following order: (``longitude``, ``latitude`` and ``height``).
+        Both ``longitude`` and ``latitude`` must be in degrees, while
+        ``height`` in meters.
+    point_q : tuple or 1d-array
+        Tuple or array containing the coordinates of the second point in the
+        following order: (``longitude``, ``latitude`` and ``height``).
+        Both ``longitude`` and ``latitude`` must be in degrees, while
+        ``height`` in meters.
+    ellipsoid : :class:`boule.Ellipsoid`
+        Reference ellipsoid for the geodetic coordinates of points ``point_p``
+        and ``point_q``. Must be a instance of :class:`boule.Ellipsoid`.
+
+    Returns
+    -------
+    distance : float
+        Euclidean distance between ``point_p`` and ``point_q``.
+
+    Example
+    -------
+
+    >>> import boule as bl
+    >>> ellipsoid = bl.WGS84
+    >>> point_p = (-72.3, -33.3, 644)
+    >>> point_q = (-70.1, -31.6, 1024)
+    >>> distance = distance_geodetic(point_p, point_q, ellipsoid)
+    >>> print("{:.2f} m".format(distance))
+    279878.84 m
+
+    """
+    # Convert angles to radians
+    longitude_p, latitude_p = np.radians(longitude_p), np.radians(latitude_p)
+    longitude_q, latitude_q = np.radians(longitude_q), np.radians(latitude_q)
+    # Compute trigonometric quantities
+    cosphi_p = np.cos(latitude_p)
+    sinphi_p = np.sin(latitude_p)
+    cosphi_q = np.cos(latitude_q)
+    sinphi_q = np.sin(latitude_q)
+    # Calculate the ellipsoid's first eccentricity
+    eccentricity = np.sqrt(2 * flattening - flattening**2)
+    # Compute prime vertical radii for both points
+    prime_radius_p = semimajor_axis / np.sqrt(1 - eccentricity**2 * sinphi_p**2)
+    prime_radius_q = semimajor_axis / np.sqrt(1 - eccentricity**2 * sinphi_q**2)
+    # Compute the Euclidean distance using the close-form formula
+    distance = geodetic_distance_core(
+        longitude_p,
+        cosphi_p,
+        sinphi_p,
+        height_p,
+        longitude_q,
+        cosphi_q,
+        sinphi_q,
+        height_q,
+        prime_radius_p,
+        prime_radius_q,
+        eccentricity,
+    )
+    return distance
+
+
+def geodetic_distance_core(
+    longitude_p,
+    cosphi_p,
+    sinphi_p,
+    height_p,
+    longitude_q,
+    cosphi_q,
+    sinphi_q,
+    height_q,
+    prime_radius_p,
+    prime_radius_q,
+    eccentricity,
+):
+    """
+    Core computation of distance between two points in geodetic coordinates.
+
+    Parameters
+    ----------
+    cosphi, sinphi : floats
+        Cosine and sine of the latitude angle for the first point
+    height : float
+        Height over ellipsoid of the first point (in meters).
+    cosphi_p, sinphi_p : floats
+        Cosine and sine of the latitude angle for the second point
+    height_p : float
+        Height over ellipsoid of the second point (in meters).
+    coslambda : float
+        Cosine of the difference between longitudes angles of both points.
+    prime_vertical_radius : float
+        Prime vertical radius for the latitude angle of the first point.
+    prime_vertical_radius_p : float
+        Prime vertical radius for the latitude angle of the second point.
+    ecc_sq : float
+        Square of ellipsoid first eccentricity.
+
+    Returns
+    -------
+    distance : float
+        Euclidean distance between both points.
+    """
+    upward_sum_p = prime_radius_p + height_p
+    upward_sum_q = prime_radius_q + height_q
+    coslambda = np.cos(longitude_q - longitude_p)
+    distance = np.sqrt(
+        upward_sum_p**2 * cosphi_p**2
+        + upward_sum_q**2 * cosphi_q**2
+        - 2 * upward_sum_q * upward_sum_p * cosphi_q * cosphi_p * coslambda
+        + (upward_sum_p - eccentricity**2 * prime_radius_p) ** 2 * sinphi_p**2
+        + (upward_sum_q - eccentricity**2 * prime_radius_q) ** 2 * sinphi_q**2
+        - (
+            2
+            * (upward_sum_p - eccentricity**2 * prime_radius_p)
+            * (upward_sum_q - eccentricity**2 * prime_radius_q)
+            * sinphi_q
+            * sinphi_p
+        )
+    )
+    return distance
