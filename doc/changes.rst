@@ -3,12 +3,57 @@
 Changelog
 =========
 
+Version 0.5.0
+-------------
+
+Released on: 2026/11/26
+
+doi: https://doi.org/10.5281/zenodo.24561442
+
+Breaking changes:
+
+- Rename the ``utils`` module to ``distance`` since it only contains distance calculation functions (`#207 <https://github.com/fatiando/choclo/pull/207>`__)
+
+New features:
+
+- Add associated Legendre function calculations, including Schmidt-normalized and fully normalized versions and their derivatives in new module ``choclo.legendre`` (`#206 <https://github.com/fatiando/choclo/pull/206>`__)
+- Add functions Euclidian distance calculations in geodetic coordinates (`#216 <https://github.com/fatiando/choclo/pull/216>`__)
+
+Documentation:
+
+- Small fixes to documentation of distance functions (`#212 <https://github.com/fatiando/choclo/pull/212>`__)
+- Add example of higher-order Legendre function derivatives (`#210 <https://github.com/fatiando/choclo/pull/210>`__)
+- Add links to submodules in the API documentation (`#209 <https://github.com/fatiando/choclo/pull/209>`__)
+- Update documentation requirements and front page (`#198 <https://github.com/fatiando/choclo/pull/198>`__)
+
+Maintenance:
+
+- Use the numba namespace when importing the package (`#215 <https://github.com/fatiando/choclo/pull/215>`__)
+- Measure test coverage of numba jit-compiled functions (`#211 <https://github.com/fatiando/choclo/pull/211>`__)
+- Pin coverage version to prevent bug with numba coverage (`#213 <https://github.com/fatiando/choclo/pull/213>`__)
+- Add the Makefile as a trigger for GitHub Actions (`#208 <https://github.com/fatiando/choclo/pull/208>`__)
+- Update Burocrata to v0.3.0 (`#197 <https://github.com/fatiando/choclo/pull/197>`__)
+- Don’t version pin first party GitHub Actions (`#194 <https://github.com/fatiando/choclo/pull/194>`__)
+- Run a single job for linting in GitHub Actions (`#195 <https://github.com/fatiando/choclo/pull/195>`__)
+- Set file triggers for GitHub Actions to avoid waste (`#196 <https://github.com/fatiando/choclo/pull/196>`__)
+- Check docstring style using numpydoc (`#199 <https://github.com/fatiando/choclo/pull/199>`__)
+
+This release contains contributions from:
+
+- Santiago Soler
+- Leonardo Uieda
+
 Version 0.4.0
 -------------
 
 Released on: 2026/10/29
 
 doi: https://doi.org/10.5281/zenodo.23780112
+
+Breaking changes:
+
+- Drop support for Python 3.8 and add Python 3.13 (`#131 <https://github.com/fatiando/choclo/pull/131>`__)
+- Drop support for Python 3.9 and 3.10 (`#187 <https://github.com/fatiando/choclo/pull/187>`__)
 
 New features:
 
@@ -25,12 +70,6 @@ Documentation:
 - General improvements to install and version compatibility pages (`#168 <https://github.com/fatiando/choclo/pull/168>`__)
 - Add link to the AUTHORS file in the docs navigation (`#169 <https://github.com/fatiando/choclo/pull/169>`__)
 - Add a link to the AI policy of Fatiando ecosystem (`#183 <https://github.com/fatiando/choclo/pull/183>`__)
-
-
-Breaking changes:
-
-- Drop support for Python 3.8 and add Python 3.13 (`#131 <https://github.com/fatiando/choclo/pull/131>`__)
-- Drop support for Python 3.9 and 3.10 (`#187 <https://github.com/fatiando/choclo/pull/187>`__)
 
 Maintenance:
 
