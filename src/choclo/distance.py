@@ -68,41 +68,38 @@ def distance_spherical(
     Parameters
     ----------
     longitude_p, latitude_p, radius_p : float
-        Longitude, latitude, and radial coordinates of point :math:`\mathbf{p}`.
-        Longitude and latitude must be in degrees. Radial coordinate should be
-        in meters.
+        Longitude, geocentric latitude, and radial coordinates of point
+        :math:`\mathbf{p}`. Longitude and latitude must be in degrees. Radial
+        coordinate should be in meters.
     longitude_q, latitude_q, radius_q : float
-        Longitude, latitude, and radial coordinates of point :math:`\mathbf{q}`.
-        Longitude and latitude must be in degrees. Radial coordinate should be
-        in meters.
+        Longitude, geocentric latitude, and radial coordinates of point
+        :math:`\mathbf{q}`. Longitude and latitude must be in degrees. Radial
+        coordinate should be in meters.
 
     Returns
     -------
     distance : float
         Euclidean distance between point :math:`\mathbf{p}` and point
-        :math:`\mathbf{q}`.
+        :math:`\mathbf{q}` in meters.
 
     Notes
     -----
-    Given two points :math:`\mathbf{p} = (\lambda_p, \phi_p, r_p)` and
-    :math:`\mathbf{q} = (\lambda_q, \phi_q, r_q)` defined in a spherical
-    coordinate system :math:`(\lambda, \phi, r)`, return the Euclidean (L2)
-    distance between them:
+    Consider two points :math:`\mathbf{p} = (\lambda_p, \phi_p, r_p)` and
+    :math:`\mathbf{q} = (\lambda_q, \phi_q, r_q)`. Both are defined on a
+    geocentric spherical coordinate system (:math:`\lambda` is the longitude,
+    :math:`\phi` is the geocentric latitude, and :math:`r` is the radius). The
+    Euclidean (L2) distance between them is:
 
     .. math::
 
-        d = \sqrt{ (r_p - r_q) ^ 2 + 2 r_p r_q (1 - \cos\psi)}
+        d = \sqrt{ (r_p - r_q) ^ 2 + 2 r_p r_q (1 - \cos\psi)},
 
     where
 
     .. math::
 
-        \cos\psi =
-        \sin\phi_p \sin\phi_q
-        + \cos\phi_p \cos\phi_q \cos(\lambda_p - \lambda_q)
-
-    and :math:`\lambda` is the longitude angle, :math:`\phi` the spherical
-    latitude angle an :math:`r` is the radial coordinate.
+        \cos\psi = \sin\phi_p \sin\phi_q
+            + \cos\phi_p \cos\phi_q \cos(\lambda_p - \lambda_q).
     """
     # Convert angles to radians
     longitude_p, latitude_p = np.radians(longitude_p), np.radians(latitude_p)
@@ -132,72 +129,63 @@ def distance_spherical_core(
     r"""
     Core computation of distance between two points in spherical coordinates.
 
+    Computes the Euclidean distance between two points defined in spherical
+    coordinates given precomputed quantities related to the coordinates of both
+    points: the longitude in radians, the sine and cosine of the geocentric
+    latitude, and the radius in meters. Precomputing this quantities may save
+    computation time in some cases.
+
     .. important::
 
-        All longitudinal angles must be in radians.
-
-    It computes the Euclidean distance between two points defined in spherical
-    coordinates given precomputed quantities related to the coordinates of both
-    points: the ``longitude`` in radians, the sine and cosine of the
-    ``latitude``, and the ``radius`` in meters. Precomputing this quantities
-    may save computation time on some cases.
+        All longitudinal angles must be in radians and radii in meters.
 
     Parameters
     ----------
     longitude_p : float
         Longitude coordinate of the first point. Must be in radians.
     cosphi_p : float
-        Cosine of the latitude coordinate of the first point.
+        Cosine of the geocentric latitude coordinate of the first point.
     sinphi_p : float
-        Sine of the latitude coordinate of the first point.
+        Sine of the geocentric latitude coordinate of the first point.
     radius_p : float
         Radial coordinate of the first point.
     longitude_q : float
         Longitude coordinate of the second point. Must be in radians.
     cosphi_q : float
-        Cosine of the latitude coordinate of the second point.
+        Cosine of the geocentric latitude coordinate of the second point.
     sinphi_q : float
-        Sine of the latitude coordinate of the second point.
+        Sine of the geocentric latitude coordinate of the second point.
     radius_q : float
         Radial coordinate of the second point.
 
     Returns
     -------
     distance : float
-        Distance between the two points.
+        Euclidean distance between point :math:`\mathbf{p}` and point
+        :math:`\mathbf{q}` in meters.
     cospsi : float
-        Cosine of the psi angle.
+        Cosine of the psi angle (see below).
     coslambda : float
         Cosine of the difference between the longitudes of both points.
 
     Notes
     -----
-    Given two points :math:`\mathbf{p} = (\lambda_p, \phi_p, r_p)` and
-    :math:`\mathbf{q} = (\lambda_q, \phi_q, r_q)` defined in a spherical
-    coordinate system :math:`(\lambda, \phi, r)`, return the Euclidean (L2)
-    distance between them:
+    Consider two points :math:`\mathbf{p} = (\lambda_p, \phi_p, r_p)` and
+    :math:`\mathbf{q} = (\lambda_q, \phi_q, r_q)`. Both are defined on a
+    geocentric spherical coordinate system (:math:`\lambda` is the longitude,
+    :math:`\phi` is the geocentric latitude, and :math:`r` is the radius). The
+    Euclidean (L2) distance between them is:
 
     .. math::
 
         d = \sqrt{ (r_p - r_q) ^ 2 + 2 r_p r_q (1 - \cos\psi)},
 
-    the cosine of the :math:`\psi` angle:
+    where
 
     .. math::
 
-        \cos\psi =
-        \sin\phi_p \sin\phi_q
-        + \cos\phi_p \cos\phi_q \cos(\lambda_p - \lambda_q)
-
-    and the cosine of the difference between the longitude angles of the
-    observation and source points:
-
-    .. math::
-
-        \cos(\lambda_p - \lambda_q),
-
-    where :math:`\lambda` is the longitude angle, :math:`\phi` the spherical
-    latitude angle an :math:`r` is the radial coordinate.
+        \cos\psi = \sin\phi_p \sin\phi_q
+            + \cos\phi_p \cos\phi_q \cos(\lambda_p - \lambda_q).
     """
     coslambda = np.cos(longitude_q - longitude_p)
     cospsi = sinphi_q * sinphi_p + cosphi_q * cosphi_p * coslambda
@@ -218,45 +206,42 @@ def distance_geodetic(
     semimajor_axis,
     flattening,
 ):
-    """
-    Calculate the distance between two points in geodetic coordinates.
+    r"""
+    Euclidean distance between two points in geodetic coordinates.
 
     Computes the Euclidean distance between two points given in geodetic
     coordinates using the closed-form formula given by [Vajda2004]_.
-    All angles must be in degrees and height above the ellipsoid in meters.
+
+    .. important::
+
+        All angles must be in degrees and heights in meters.
+
+    .. hint::
+
+        Use :mod:`boule` to obtain the necessary ellipsoid parameters.
 
     Parameters
     ----------
-    point_p : tuple or 1d-array
-        Tuple or array containing the coordinates of the first point in the
-        following order: (``longitude``, ``latitude`` and ``height``).
-        Both ``longitude`` and ``latitude`` must be in degrees, while
-        ``height`` in meters.
-    point_q : tuple or 1d-array
-        Tuple or array containing the coordinates of the second point in the
-        following order: (``longitude``, ``latitude`` and ``height``).
-        Both ``longitude`` and ``latitude`` must be in degrees, while
-        ``height`` in meters.
-    ellipsoid : :class:`boule.Ellipsoid`
-        Reference ellipsoid for the geodetic coordinates of points ``point_p``
-        and ``point_q``. Must be a instance of :class:`boule.Ellipsoid`.
+    longitude_p, latitude_p, height_p : float
+        Longitude, geodetic latitude, and height above the ellipsoid coordinates
+        of point :math:`\mathbf{p}`. Longitude and latitude must be in degrees,
+        height should be in meters.
+    longitude_q, latitude_q, height_q : float
+        Longitude, geodetic latitude, and height above the ellipsoid coordinates
+        of point :math:`\mathbf{q}`. Longitude and latitude must be in degrees,
+        height should be in meters.
+    semimajor_axis : float
+        The semimajor (equatorial) axis of the reference ellipsoid in meters.
+    flattening : float
+        The flattening of the ellipsoid :math:`f = (a - b)/a`, in which
+        :math:`a` is the semimajor axis and :math:`b` is the semiminor axis of
+        the ellipsoid.
 
     Returns
     -------
     distance : float
-        Euclidean distance between ``point_p`` and ``point_q``.
-
-    Example
-    -------
-
-    >>> import boule as bl
-    >>> ellipsoid = bl.WGS84
-    >>> point_p = (-72.3, -33.3, 644)
-    >>> point_q = (-70.1, -31.6, 1024)
-    >>> distance = distance_geodetic(point_p, point_q, ellipsoid)
-    >>> print("{:.2f} m".format(distance))
-    279878.84 m
-
+        Euclidean distance between point :math:`\mathbf{p}` and point
+        :math:`\mathbf{q}` in meters.
     """
     # Convert angles to radians
     longitude_p, latitude_p = np.radians(longitude_p), np.radians(latitude_p)
@@ -272,7 +257,7 @@ def distance_geodetic(
     prime_radius_p = semimajor_axis / np.sqrt(1 - eccentricity**2 * sinphi_p**2)
     prime_radius_q = semimajor_axis / np.sqrt(1 - eccentricity**2 * sinphi_q**2)
     # Compute the Euclidean distance using the close-form formula
-    distance = geodetic_distance_core(
+    distance = distance_geodetic_core(
         longitude_p,
         cosphi_p,
         sinphi_p,
@@ -289,7 +274,7 @@ def distance_geodetic(
 
 
 @numba.jit(nopython=True)
-def geodetic_distance_core(
+def distance_geodetic_core(
     longitude_p,
     cosphi_p,
     sinphi_p,
@@ -302,32 +287,58 @@ def geodetic_distance_core(
     prime_radius_q,
     eccentricity,
 ):
-    """
+    r"""
     Core computation of distance between two points in geodetic coordinates.
+
+    Computes the Euclidean distance between two points defined in geodetic
+    coordinates given precomputed quantities related to the coordinates of
+    both points: the longitude in radians, the sine and cosine of the geodetic
+    latitude, and geometric properties of the ellipsoid. Precomputing this
+    quantities may save computation time in some cases.
+
+    .. important::
+
+        All longitudinal angles must be in radians and heights in meters.
+
+    .. hint::
+
+        Use :mod:`boule` to obtain the necessary ellipsoid parameters.
 
     Parameters
     ----------
-    cosphi, sinphi : floats
-        Cosine and sine of the latitude angle for the first point
-    height : float
-        Height over ellipsoid of the first point (in meters).
-    cosphi_p, sinphi_p : floats
-        Cosine and sine of the latitude angle for the second point
+    longitude_p : float
+        Longitude coordinate of the first point. Must be in radians.
+    cosphi_p : float
+        Cosine of the geodetic latitude coordinate of the first point.
+    sinphi_p : float
+        Sine of the geodetic latitude coordinate of the first point.
     height_p : float
-        Height over ellipsoid of the second point (in meters).
-    coslambda : float
-        Cosine of the difference between longitudes angles of both points.
-    prime_vertical_radius : float
-        Prime vertical radius for the latitude angle of the first point.
-    prime_vertical_radius_p : float
-        Prime vertical radius for the latitude angle of the second point.
-    ecc_sq : float
-        Square of ellipsoid first eccentricity.
+        Height above the ellipsoid of the first point in meters.
+    longitude_q : float
+        Longitude coordinate of the second point. Must be in radians.
+    cosphi_q : float
+        Cosine of the geodetic latitude coordinate of the second point.
+    sinphi_q : float
+        Sine of the geodetic latitude coordinate of the second point.
+    height_q : float
+        Height above the ellipsoid of the second point in meters.
+    prime_radius_p : float
+        Prime vertical radius for the latitude of the first point
+        :math:`N(\phi) = \frac{a}{\sqrt{1 - e^2 \sin^2(\phi)}}` in which
+        :math:`a` is the semimajor axis and :math:`e` is the eccentricity of
+        the ellipsoid. Must be in meters.
+    prime_radius_q : float
+        Prime vertical radius for the latitude of the second point. Must be
+        in meters.
+    eccentricity : float
+        The first eccentricity of the ellipsoid :math:`e = \sqrt{2f - f^2}`, in
+        which :math:`f` is the flattening.
 
     Returns
     -------
     distance : float
-        Euclidean distance between both points.
+        Euclidean distance between point :math:`\mathbf{p}` and point
+        :math:`\mathbf{q}` in meters.
     """
     upward_sum_p = prime_radius_p + height_p
     upward_sum_q = prime_radius_q + height_q
